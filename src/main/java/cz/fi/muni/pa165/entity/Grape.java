@@ -35,8 +35,7 @@ public class Grape {
     private Integer quantity;
 
     @ElementCollection
-    @NotNull
-    @Column(nullable = false)
+    @Column
     private List<Disease> diseases = new ArrayList<>();
 
     @OneToMany
@@ -108,6 +107,7 @@ public class Grape {
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", diseases='" + diseases + '\'' +
+                ", diseases='" + harvests + '\'' +
                 '}';
     }
 }
