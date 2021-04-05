@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,10 @@ public class Wine {
     @NotNull
     @Column(nullable = false)
     private List<Ingredient> ingredients = new ArrayList<>();
+
+    @OneToMany
+    private List<Feedback> feedbacks = new ArrayList<>();
+
 
     public Wine() {}
 
@@ -106,22 +111,27 @@ public class Wine {
         this.ingredients = ingredients;
     }
 
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Wine wine = (Wine) o;
-        return name.equals(wine.name) &&
-                stocked.equals(wine.stocked) &&
-                sold.equals(wine.sold) &&
-                type.equals(wine.type) &&
-                ingredients.equals(wine.ingredients);
+        return name.equals(wine.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, stocked, sold, type, ingredients);
+        return Objects.hash(name);
     }
+
 
     @Override
     public String toString() {
@@ -132,6 +142,7 @@ public class Wine {
                 ", sold=" + sold +
                 ", type=" + type +
                 ", ingredients=" + ingredients +
+                ", feedbacks=" + feedbacks +
                 '}';
     }
 }
