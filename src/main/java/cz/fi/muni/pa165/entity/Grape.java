@@ -35,7 +35,8 @@ public class Grape {
     private Integer quantity;
 
     @ElementCollection
-    @Column
+    @NotNull
+    @Column(nullable = false)
     private List<Disease> diseases = new ArrayList<>();
 
     @OneToMany
