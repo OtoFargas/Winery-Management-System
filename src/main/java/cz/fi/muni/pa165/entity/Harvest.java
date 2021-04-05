@@ -77,21 +77,34 @@ public class Harvest {
         this.quantity = quantity;
     }
 
+    public Wine getWine() {
+        return wine;
+    }
+
+    public void setWine(Wine wine) {
+        this.wine = wine;
+    }
+
+    public Grape getGrape() {
+        return grape;
+    }
+
+    public void setGrape(Grape grape) {
+        this.grape = grape;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Harvest harvest = (Harvest) o;
-        return year.equals(harvest.year)
-            && quality == harvest.quality
-            && quantity.equals(harvest.quantity)
-            && wine.equals(harvest.wine)
-            && grape.equals(harvest.grape);
+        return year.equals(harvest.year) && grape.equals(harvest.grape);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(year, quality, quantity, wine, grape);
+        return Objects.hash(year, grape);
     }
 
     @Override
