@@ -102,12 +102,13 @@ public class Feedback {
         return author.equals(feedback.author)
             && rating.equals(feedback.rating)
             && content.equals(feedback.content)
-            && date.equals(feedback.date);
+            && date.equals(feedback.date)
+            && wine.equals(feedback.wine);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(author, rating, content, date);
+        return Objects.hash(author, rating, content, date, wine);
     }
 
     @Override
@@ -118,6 +119,7 @@ public class Feedback {
                 ", rating=" + rating +
                 ", content='" + content + '\'' +
                 ", date=" + date +
+                ", wine=" + wine +
                 '}';
     }
 }

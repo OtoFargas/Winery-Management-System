@@ -33,6 +33,12 @@ public class Harvest {
     @Column(nullable = false)
     private Integer quantity;
 
+    @ManyToOne
+    private Wine wine;
+
+    @ManyToOne
+    private Grape grape;
+
     public Harvest() {}
 
     public Harvest(Long harvestId) {
@@ -71,7 +77,22 @@ public class Harvest {
         this.quantity = quantity;
     }
 
-    // TODO hash a equals ale potrebujeme pravdepodobne foreign key
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Harvest harvest = (Harvest) o;
+        return year.equals(harvest.year)
+            && quality == harvest.quality
+            && quantity.equals(harvest.quantity)
+            && wine.equals(harvest.wine)
+            && grape.equals(harvest.grape);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(year, quality, quantity, wine, grape);
+    }
 
     @Override
     public String toString() {
@@ -80,6 +101,8 @@ public class Harvest {
                 ", year=" + year +
                 ", quality=" + quality +
                 ", quantity=" + quantity +
+                ", wine=" + wine +
+                ", grape=" + grape +
                 '}';
     }
 }
