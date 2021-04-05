@@ -33,6 +33,9 @@ public class Feedback {
     @Column(nullable = false)
     private java.util.Date date;
 
+    @ManyToOne
+    private Wine wine;
+
     public Feedback() {
 
     }
@@ -43,6 +46,10 @@ public class Feedback {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long feedbackId) {
+        this.id = feedbackId;
     }
 
     public String getAuthor() {
@@ -77,6 +84,14 @@ public class Feedback {
         this.date = date;
     }
 
+    public Wine getWine() {
+        return wine;
+    }
+
+    public void setWine(Wine wine) {
+        this.wine = wine;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -84,8 +99,7 @@ public class Feedback {
         if (o == null || getClass() != o.getClass())
             return false;
         Feedback feedback = (Feedback) o;
-        return id.equals(feedback.id)
-            && author.equals(feedback.author)
+        return author.equals(feedback.author)
             && rating.equals(feedback.rating)
             && content.equals(feedback.content)
             && date.equals(feedback.date);
@@ -93,7 +107,7 @@ public class Feedback {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, rating, content, date);
+        return Objects.hash(author, rating, content, date);
     }
 
     @Override

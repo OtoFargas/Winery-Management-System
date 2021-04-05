@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.entity;
 
-import cz.fi.muni.pa165.enums.Color;
 import cz.fi.muni.pa165.enums.Disease;
 import cz.fi.muni.pa165.enums.GrapeColor;
 

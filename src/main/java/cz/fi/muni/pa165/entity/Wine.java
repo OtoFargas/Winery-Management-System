@@ -3,7 +3,7 @@ package cz.fi.muni.pa165.entity;
 
 import cz.fi.muni.pa165.enums.Ingredient;
 import cz.fi.muni.pa165.enums.Taste;
-import cz.fi.muni.pa165.enums.Color;
+import cz.fi.muni.pa165.enums.WineColor;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -44,7 +44,7 @@ public class Wine {
 
     @NotNull
     @Column(nullable = false)
-    private Pair<Color, Taste> type;
+    private Pair<WineColor, Taste> type;
 
     @ElementCollection
     @NotNull
@@ -90,11 +90,11 @@ public class Wine {
         this.sold = sold;
     }
 
-    public Pair<Color, Taste> getType() {
+    public Pair<WineColor, Taste> getType() {
         return type;
     }
 
-    public void setType(Pair<Color, Taste> type) {
+    public void setType(Pair<WineColor, Taste> type) {
         this.type = type;
     }
 
