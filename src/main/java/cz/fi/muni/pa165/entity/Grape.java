@@ -23,7 +23,7 @@ public class Grape {
     private Long id;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @NotNull
@@ -93,12 +93,12 @@ public class Grape {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grape grape = (Grape) o;
-        return name.equals(grape.name) && color.equals(grape.color);
+        return name.equals(grape.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, color);
+        return Objects.hash(name);
     }
 
     @Override
