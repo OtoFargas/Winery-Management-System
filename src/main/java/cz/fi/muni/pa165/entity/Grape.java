@@ -39,6 +39,9 @@ public class Grape {
     @Column(nullable = false)
     private List<Disease> diseases = new ArrayList<>();
 
+    @OneToMany
+    private List<Harvest> harvests = new ArrayList<>();
+
     public Grape() {}
 
     public Grape(Long grapeId) {
