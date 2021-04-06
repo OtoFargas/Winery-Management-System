@@ -53,11 +53,4 @@ public interface WineDao {
      * @param wine to be updated
      */
     void update(Wine wine);
-
-    /**
-     * Removes wine from database while managing stocked and sold wine counts
-     *
-     * @param wine to be managed (sold)
-     */
-    void sell(Wine wine);
 }
