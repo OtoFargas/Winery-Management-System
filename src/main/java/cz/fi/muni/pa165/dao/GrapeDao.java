@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Grape;
-import cz.fi.muni.pa165.entity.Wine;
+import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.enums.GrapeColor;
 
 import java.util.List;

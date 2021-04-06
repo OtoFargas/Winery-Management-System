@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Wine;
+import cz.fi.muni.pa165.entities.Wine;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

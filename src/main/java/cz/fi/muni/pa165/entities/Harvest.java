@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.entities;
 
 import cz.fi.muni.pa165.enums.Quality;
 
@@ -11,7 +11,6 @@ import javax.validation.constraints.Positive;
  *
  * @author Lukáš Fudor
  */
-
 @Entity
 public class Harvest {
 
@@ -38,6 +37,7 @@ public class Harvest {
     private Wine wine;
 
     @ManyToOne
+    @Column(nullable = false)
     private Grape grape;
 
     public Harvest() {}
