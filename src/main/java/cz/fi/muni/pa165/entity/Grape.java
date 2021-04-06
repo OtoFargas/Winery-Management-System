@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Entity class Grape representing the grape plants.
@@ -93,14 +92,16 @@ public class Grape {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Grape)) return false;
+
         Grape grape = (Grape) o;
-        return name.equals(grape.name);
+
+        return getName().equals(grape.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return getName().hashCode();
     }
 
     @Override
