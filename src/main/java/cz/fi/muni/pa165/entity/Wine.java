@@ -6,7 +6,9 @@ import cz.fi.muni.pa165.enums.Taste;
 import cz.fi.muni.pa165.enums.WineColor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +26,17 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String name;
 
     @NotNull
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer stocked;
 
     @NotNull
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer sold;
 
