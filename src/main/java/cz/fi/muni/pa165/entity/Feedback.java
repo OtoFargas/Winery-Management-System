@@ -23,6 +23,7 @@ public class Feedback {
     @Column(nullable = false)
     private String author;
 
+    @NotNull
     @PositiveOrZero
     @Column(nullable = false)
     private Integer rating;
