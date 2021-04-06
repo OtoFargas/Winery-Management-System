@@ -26,6 +26,7 @@ public class Harvest {
     private Integer year;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Quality quality;
 
