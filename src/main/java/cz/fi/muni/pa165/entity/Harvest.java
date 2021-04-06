@@ -4,9 +4,6 @@ import cz.fi.muni.pa165.enums.Quality;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
 
 /**
  * Entity class Harvest representing the yearly harvest of grapes.
@@ -94,18 +91,22 @@ public class Harvest {
         this.grape = grape;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Harvest)) return false;
+
         Harvest harvest = (Harvest) o;
-        return year.equals(harvest.year) && grape.equals(harvest.grape);
+
+        if (!getYear().equals(harvest.getYear())) return false;
+        return getGrape().equals(harvest.getGrape());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(year, grape);
+        int result = getYear().hashCode();
+        result = 31 * result + getGrape().hashCode();
+        return result;
     }
 
     @Override

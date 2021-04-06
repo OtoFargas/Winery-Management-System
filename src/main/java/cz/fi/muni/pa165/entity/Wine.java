@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javafx.util.Pair;
 
@@ -118,16 +117,17 @@ public class Wine {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Wine)) return false;
+
         Wine wine = (Wine) o;
-        return name.equals(wine.name);
+
+        return getName().equals(wine.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return getName().hashCode();
     }
-
 
     @Override
     public String toString() {

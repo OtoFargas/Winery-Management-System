@@ -2,8 +2,7 @@ package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.Objects;
+import java.time.LocalDate;
 
 /**
  * Entity class for feedback
@@ -31,7 +30,7 @@ public class Feedback {
 
     @NotNull
     @Column(nullable = false)
-    private java.util.Date date;
+    private LocalDate date;
 
     @ManyToOne
     private Wine wine;
@@ -76,11 +75,11 @@ public class Feedback {
         this.content = content;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -94,21 +93,26 @@ public class Feedback {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (!(o instanceof Feedback)) return false;
+
         Feedback feedback = (Feedback) o;
-        return author.equals(feedback.author)
-            && rating.equals(feedback.rating)
-            && content.equals(feedback.content)
-            && date.equals(feedback.date)
-            && wine.equals(feedback.wine);
+
+        if (!getAuthor().equals(feedback.getAuthor())) return false;
+        if (!getRating().equals(feedback.getRating())) return false;
+        if (!getContent().equals(feedback.getContent())) return false;
+        if (!getDate().equals(feedback.getDate())) return false;
+        return getWine().equals(feedback.getWine());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(author, rating, content, date, wine);
+        int result = getAuthor().hashCode();
+        result = 31 * result + getRating().hashCode();
+        result = 31 * result + getContent().hashCode();
+        result = 31 * result + getDate().hashCode();
+        result = 31 * result + getWine().hashCode();
+        return result;
     }
 
     @Override
