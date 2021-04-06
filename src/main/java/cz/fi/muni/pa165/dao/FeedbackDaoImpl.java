@@ -41,6 +41,11 @@ public class FeedbackDaoImpl implements FeedbackDao {
     }
 
     @Override
+    public void update(Feedback feedback) {
+        em.merge(feedback);
+    }
+
+    @Override
     public void remove(Feedback feedback) {
         em.remove(feedback);
     }

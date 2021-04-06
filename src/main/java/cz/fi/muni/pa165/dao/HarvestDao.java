@@ -42,6 +42,13 @@ public interface HarvestDao {
     List<Harvest> findByYear(Integer year);
 
     /**
+     * Updates Harvest entity
+     *
+     * @param harvest to be updated
+     */
+    void update(Harvest harvest);
+
+    /**
      * Removes harvest from database
      *
      * @param harvest to be deleted

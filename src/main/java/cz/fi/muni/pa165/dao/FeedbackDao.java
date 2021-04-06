@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Feedback;
+import cz.fi.muni.pa165.entity.Harvest;
 
 import java.util.List;
 
@@ -40,6 +41,13 @@ public interface FeedbackDao {
      * @return list of found feedbacks
      */
     List<Feedback> findByAuthor(String author);
+
+    /**
+     * Updates Feedback entity
+     *
+     * @param feedback to be updated
+     */
+    void update(Feedback feedback);
 
     /**
      * Removes feedback from database

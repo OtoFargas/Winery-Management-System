@@ -39,6 +39,11 @@ public class HarvestDaoImpl implements HarvestDao {
     }
 
     @Override
+    public void update(Harvest harvest) {
+        em.merge(harvest);
+    }
+
+    @Override
     public void remove(Harvest harvest) {
         em.remove(harvest);
     }
