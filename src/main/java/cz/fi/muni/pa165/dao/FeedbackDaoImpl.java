@@ -35,7 +35,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
 
     @Override
     public List<Feedback> findByAuthor(String author) {
-        return em.createQuery("select f from Feedback f where author = :author", Feedback.class)
+        return em.createQuery("select f from Feedback f where author=:author", Feedback.class)
                 .setParameter("author", author)
                 .getResultList();
     }
