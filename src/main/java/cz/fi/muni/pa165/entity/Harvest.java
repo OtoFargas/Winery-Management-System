@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.enums.Quality;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 /**
  * Entity class Harvest representing the yearly harvest of grapes.
@@ -19,6 +20,7 @@ public class Harvest {
     private Long id;
 
     @NotNull
+    @Positive
     @Column(nullable = false)
     private Integer year;
 
@@ -28,6 +30,7 @@ public class Harvest {
     private Quality quality;
 
     @NotNull
+    @Positive
     @Column(nullable = false)
     private Integer quantity;
 

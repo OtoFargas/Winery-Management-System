@@ -4,7 +4,9 @@ import cz.fi.muni.pa165.enums.Disease;
 import cz.fi.muni.pa165.enums.GrapeColor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class Grape {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String name;
 
@@ -31,6 +33,7 @@ public class Grape {
     private GrapeColor color;
 
     @NotNull
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer quantity;
 
