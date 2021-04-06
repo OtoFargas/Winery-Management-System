@@ -27,6 +27,7 @@ public class Grape {
     private String name;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private GrapeColor color;
 
@@ -37,6 +38,7 @@ public class Grape {
     @ElementCollection
     @NotNull
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private List<Disease> diseases = new ArrayList<>();
 
     @OneToMany
