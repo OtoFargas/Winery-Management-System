@@ -48,6 +48,13 @@ public interface WineDao {
     void remove(Wine wine);
 
     /**
+     * Updates Wine entity
+     *
+     * @param wine to be updated
+     */
+    void update(Wine wine);
+
+    /**
      * Removes wine from database while managing stocked and sold wine counts
      *
      * @param wine to be managed (sold)

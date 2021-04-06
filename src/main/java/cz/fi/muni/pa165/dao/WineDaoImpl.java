@@ -45,12 +45,17 @@ public class WineDaoImpl implements WineDao {
     }
 
     @Override
+    public void update(Wine wine) {
+        em.merge(wine);
+    }
+
+    @Override
     public void sell(Wine wine) {
         Integer stocked = wine.getStocked();
         Integer sold = wine.getSold();
 
         wine.setStocked(++stocked);
         wine.setSold(++sold);
-        em.merge(wine);
+        this.update(wine);
     }
 }
