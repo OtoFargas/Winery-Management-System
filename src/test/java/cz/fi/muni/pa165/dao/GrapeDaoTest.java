@@ -1,12 +1,10 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceApplicationContext;
-import cz.fi.muni.pa165.entities.Feedback;
 import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.entities.Harvest;
 import cz.fi.muni.pa165.enums.Disease;
 import cz.fi.muni.pa165.enums.GrapeColor;
-
 import cz.fi.muni.pa165.enums.Quality;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +15,10 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +32,6 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private GrapeDao grapeDao;
-
-    @Autowired
-    private HarvestDao harvestDao;
 
     private Grape grape1;
     private Grape grape2;
@@ -109,12 +102,27 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(grapeDao.findById(grape1.getId()), grape1);
     }
 
+    @Test(expectedExceptions= ConstraintViolationException.class)
+    public void nullColorNotAllowed() {
+        Grape nullColorGrape = new Grape();
+        nullColorGrape.setQuantity(105);
+        nullColorGrape.setName("Riesling");
+        grapeDao.create(nullColorGrape);
+    }
+
+    @Test(expectedExceptions= ConstraintViolationException.class)
+    public void negativeQuantityNotAllowed() {
+        Grape negativeQuantityGrape = new Grape();
+        negativeQuantityGrape.setQuantity(-50);
+        negativeQuantityGrape.setName("Riesling");
+        negativeQuantityGrape.setColor(GrapeColor.WHITE);
+        grapeDao.create(negativeQuantityGrape);
+    }
+
     @Test
     public void testRemove() {
-
         Grape foundGrape = grapeDao.findById(grape2.getId());
         grapeDao.remove(foundGrape);
-
         Assert.assertNull(grapeDao.findById(grape2.getId()));
     }
 }
