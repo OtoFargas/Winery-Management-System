@@ -13,12 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,21 +46,21 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
     private Harvest harvest1;
     private Harvest harvest2;
 
-    @BeforeClass
+    @BeforeMethod
     public void init() {
         harvest1 = new Harvest();
         harvest1.setQuality(Quality.HIGH);
         harvest1.setQuantity(333);
-        harvest1.setYear(2017);
+        harvest1.setHarvestYear(2017);
 
         harvest2 = new Harvest();
         harvest2.setQuality(Quality.MEDIUM);
         harvest2.setQuantity(200);
-        harvest2.setYear(2015);
+        harvest2.setHarvestYear(2015);
 
         grape1 = new Grape();
         grape1.setName("Merlot");
-        grape1.setDiseases(List.of(Disease.ANTHRACNOSE, Disease.CROWN_GALL));
+        grape1.setDiseases(new ArrayList<>(List.of(Disease.ANTHRACNOSE, Disease.CROWN_GALL)));
         grape1.setQuantity(99);
         grape1.setColor(GrapeColor.RED);
         harvest1.setGrape(grape1);
@@ -68,8 +72,8 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         grape2.setName("Cabernet Sauvignon");
         grape2.setColor(GrapeColor.RED);
         grape2.setQuantity(118);
-        grape2.addHarvest(harvest2);
         harvest2.setGrape(grape2);
+        grape2.addHarvest(harvest2);
         grapeDao.create(grape2);
     }
 
