@@ -1,8 +1,8 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Grape;
-import cz.fi.muni.pa165.entity.Wine;
+import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.enums.GrapeColor;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @author Lukáš Fudor
  */
+@Repository
 public class GrapeDaoImpl implements GrapeDao {
 
     @PersistenceContext
