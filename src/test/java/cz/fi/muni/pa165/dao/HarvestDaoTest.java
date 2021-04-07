@@ -43,9 +43,6 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public HarvestDao harvestDao;
 
-    @Autowired
-    public GrapeDao grapeDao;
-
     private Harvest h1;
     private Harvest h2;
     private Harvest h3;
@@ -67,7 +64,7 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h1.setYear(2013);
         h2.setYear(2012);
         h3.setYear(2017);
-        h4.setYear(2015);
+        h4.setYear(2013);
         h5.setYear(2019);
 
         h1.setQuantity(350);
@@ -115,6 +112,30 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         harvestDao.create(h5);
     }
 
+    @Test
+    public void findAll() {
+        List<Harvest> harvestList = harvestDao.findAll();
+        Assert.assertEquals(harvestList.size(), 5);
+    }
 
+    @Test
+    public void findByYear() {
+        Assert.assertEquals( harvestDao.findByYear(2013).size(), 2);
+        Assert.assertEquals( harvestDao.findByYear(2017).size(), 1);
+        Assert.assertEquals( harvestDao.findByYear(2017).get(0).getGrape().getName(), "Nebbiolo");
+    }
+
+    @Test
+    public void remove() {
+        Assert.assertNotNull(harvestDao.findById(h1.getId()));
+        harvestDao.remove(h1);
+        Assert.assertNull(harvestDao.findById(h1.getId()));
+    }
+
+    @Test
+    public void findById() {
+        Long id = h2.getId();
+        Assert.assertEquals(h2, harvestDao.findById(id));
+    }
 }
 
