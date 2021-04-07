@@ -35,9 +35,9 @@ public class HarvestDaoImpl implements HarvestDao {
     }
 
     @Override
-    public List<Harvest> findByYear(Integer year) {
-        return em.createQuery("select h from Harvest h where year=:year", Harvest.class)
-                .setParameter("year", year)
+    public List<Harvest> findByYear(Integer harvestYear) {
+        return em.createQuery("select h from Harvest h where harvestYear=:harvestYear", Harvest.class)
+                .setParameter("harvestYear", harvestYear)
                 .getResultList();
     }
 

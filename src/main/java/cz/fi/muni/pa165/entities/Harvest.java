@@ -21,7 +21,7 @@ public class Harvest {
     @NotNull
     @Positive
     @Column(nullable = false)
-    private Integer year;
+    private Integer harvestYear;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -33,11 +33,10 @@ public class Harvest {
     @Column(nullable = false)
     private Integer quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Wine wine;
 
-    @ManyToOne
-    @Column(nullable = false)
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Grape grape;
 
     public Harvest() {}
@@ -54,12 +53,12 @@ public class Harvest {
         this.id = id;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getHarvestYear() {
+        return harvestYear;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setHarvestYear(Integer harvestYear) {
+        this.harvestYear = harvestYear;
     }
 
     public Quality getQuality() {
@@ -101,13 +100,13 @@ public class Harvest {
 
         Harvest harvest = (Harvest) o;
 
-        if (!getYear().equals(harvest.getYear())) return false;
+        if (!getHarvestYear().equals(harvest.getHarvestYear())) return false;
         return getGrape().equals(harvest.getGrape());
     }
 
     @Override
     public int hashCode() {
-        int result = getYear().hashCode();
+        int result = getHarvestYear().hashCode();
         result = 31 * result + getGrape().hashCode();
         return result;
     }
@@ -116,7 +115,7 @@ public class Harvest {
     public String toString() {
         return "Harvest{" +
                 "id=" + id +
-                ", year=" + year +
+                ", harvestYear=" + harvestYear +
                 ", quality=" + quality +
                 ", quantity=" + quantity +
                 ", wine=" + wine +

@@ -37,8 +37,7 @@ public class Feedback {
     @Column(nullable = false)
     private LocalDate date;
 
-    @ManyToOne
-    @Column(nullable = false)
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Wine wine;
 
     public Feedback() {
