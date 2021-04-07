@@ -53,10 +53,10 @@ public class Wine {
     @Enumerated(EnumType.STRING)
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    @OneToMany(mappedBy = "wine")
+    @OneToMany(mappedBy = "wine", cascade = {CascadeType.ALL})
     private Set<Feedback> feedbacks = new HashSet<>();
 
-    @OneToMany(mappedBy = "wine")
+    @OneToMany(mappedBy = "wine", cascade = {CascadeType.ALL})
     private Set<Harvest> harvests = new HashSet<>();
 
     public Wine() {}
