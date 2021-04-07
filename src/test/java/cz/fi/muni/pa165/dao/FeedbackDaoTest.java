@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.fi.muni.pa165.PersistenceApplicationContext;
@@ -11,7 +12,6 @@ import cz.fi.muni.pa165.enums.Taste;
 import cz.fi.muni.pa165.enums.WineColor;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -21,6 +21,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.validation.ConstraintViolationException;
 
 
 @ContextConfiguration(classes= PersistenceApplicationContext.class)
@@ -47,21 +48,15 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
     @BeforeMethod
     public void setup() {
         // Create test wines
-        testWine1 = new Wine();
-        testWine1.setSold(3);
-        testWine1.setStocked(250);
-        testWine1.setIngredients(List.of(Ingredient.GRAPE_JUICE, Ingredient.CALCIUM, Ingredient.OAK));
-        testWine1.setName("Muskat");
-        testWine1.setType(new Pair<>(WineColor.RED, Taste.SWEET));
-
-
-        testWine2 = new Wine();
-
+        List<Ingredient> ingredients1 = new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.CALCIUM, Ingredient.OAK));
+        List<Ingredient> ingredients2 = new ArrayList<>(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS));
+        testWine1 = createWine(3, 250, ingredients1, "Muskat", new Pair<>(WineColor.RED, Taste.SWEET));
+        testWine2 = createWine(25, 100, ingredients2, "Orech", new Pair<>(WineColor.ROSE, Taste.SEMI_SWEET));
 
         // Create test feedbacks
         testFeedback1 = createFeedback("Oto Fargas", "Very good wine", LocalDate.now(), 7, testWine1);
-        testFeedback2 = createFeedback("Lukas Fudor", "Tastes like sh*t, wanted to throw up", LocalDate.now().plusDays(1), 1, testWine2);
-        testFeedback3 = createFeedback("Oto Fargas", "Pretty nice taste, the touch of vanilla makes all the difference", LocalDate.now().minusDays(1), 10, testWine2);
+        testFeedback2 = createFeedback("Lukas Fudor", "Tastes like sh*t, wanted to throw up", LocalDate.now(), 1, testWine2);
+        testFeedback3 = createFeedback("Oto Fargas", "Pretty nice taste, the touch of vanilla makes all the difference", LocalDate.now(), 10, testWine2);
     }
 
     private void createAllWines() {
@@ -77,11 +72,11 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
 
     private Wine createWine(Integer sold, Integer stocked, List<Ingredient> ingredients, String name, Pair<WineColor, Taste> type) {
         Wine wine = new Wine();
-        wine.setSold(25);
-        wine.setStocked(100);
-        wine.setIngredients(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS));
-        wine.setName("Orech");
-        wine.setType(new Pair<>(WineColor.ROSE, Taste.SEMI_SWEET));
+        wine.setSold(sold);
+        wine.setStocked(stocked);
+        wine.setIngredients(ingredients);
+        wine.setName(name);
+        wine.setType(type);
         return wine;
     }
 
@@ -115,7 +110,7 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
 
         feedbackLukasAssert.setAuthor("Lukas Fudor");
         feedbackLukasAssert.setContent("Tastes like sh*t, wanted to throw up");
-        feedbackLukasAssert.setDate(LocalDate.now().plusDays(1));
+        feedbackLukasAssert.setDate(LocalDate.now());
         feedbackLukasAssert.setRating(1);
         feedbackLukasAssert.setWine(testWine2);
 
@@ -123,58 +118,79 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         Assert.assertTrue(feedbacks.contains(feedbackLukasAssert));
     }
 
-//    @Test(expectedExceptions=ConstraintViolationException.class)
-//    public void nullCategoryNameNotAllowed(){
-//        Category cat = new Category();
-//        cat.setName(null);
-//        categoryDao.create(cat);
-//    }
-//
-//    @Test(expectedExceptions=DataAccessException.class)
-//    public void nameIsUnique(){
-//        Category cat = new Category();
-//        cat.setName("Electronics");
-//        categoryDao.create(cat);
-//        cat = new Category();
-//        cat.setName("Electronics");
-//        categoryDao.create(cat);
-//    }
-//
-//    @Test()
-//    public void savesName(){
-//        Category cat = new Category();
-//        cat.setName("Electronics");
-//        categoryDao.create(cat);
-//        Assert.assertEquals(categoryDao.findById(cat.getId()).getName(),"Electronics");
-//    }
-//
-//    /**
-//     * Checks that null DAO object will return null for non existent ID and also that delete operation works.
-//     */
-//    @Test()
-//    public void delete(){
-//        Category cat = new Category();
-//        cat.setName("Electronics");
-//        categoryDao.create(cat);
-//        Assert.assertNotNull(categoryDao.findById(cat.getId()));
-//        categoryDao.delete(cat);
-//        Assert.assertNull(categoryDao.findById(cat.getId()));
-//    }
-//
-//    /**
-//     * Testing that collections on Category is being loaded as expected
-//     */
-//    @Test
-//    public void productsInCategory(){
-//        Category categoryElectro = new Category();
-//        categoryElectro.setName("Electronics");
-//        categoryDao.create(categoryElectro);
-//        Product p = new Product();
-//        p.setName("TV");
-//        productDao.create(p);
-//        p.addCategory(categoryElectro);
-//        Category found = categoryDao.findById(categoryElectro.getId());
-//        Assert.assertEquals(found.getProducts().size(), 1);
-//        Assert.assertEquals(found.getProducts().iterator().next().getName(), "TV");
-//    }
+    @Test(expectedExceptions= ConstraintViolationException.class)
+    public void nullAuthorNotAllowed() {
+        Feedback nullAuthorFeedback = createFeedback(null, "Very good wine", LocalDate.now(), 7, testWine1);
+        feedbackDao.create(nullAuthorFeedback);
+    }
+
+    @Test(expectedExceptions= ConstraintViolationException.class)
+    public void emptyStringAuthorNotAllowed() {
+        Feedback emptyStringAuthorFeedback = createFeedback("", "Very good wine", LocalDate.now(), 7, testWine1);
+        feedbackDao.create(emptyStringAuthorFeedback);
+    }
+
+    @Test(expectedExceptions= ConstraintViolationException.class)
+    public void negativeRatingNotAllowed() {
+        Feedback negativeRatingFeedback = createFeedback("Oto Fargas", "Very good wine", LocalDate.now(), -2, testWine1);
+        feedbackDao.create(negativeRatingFeedback);
+    }
+
+    @Test(expectedExceptions= ConstraintViolationException.class)
+    public void futureDateNotAllowed() {
+        Feedback futureDateFeedback = createFeedback("Oto Fargas", "Very good wine", LocalDate.now().plusMonths(1), 7, testWine1);
+        feedbackDao.create(futureDateFeedback);
+    }
+
+    @Test
+    public void authorCanBeTheSame() {
+        testFeedback2.setAuthor(testFeedback1.getAuthor());
+
+        feedbackDao.create(testFeedback1);
+        feedbackDao.create(testFeedback2);
+    }
+
+    @Test
+    public void findById() {
+        feedbackDao.create(testFeedback1);
+        feedbackDao.create(testFeedback2);
+
+        Feedback foundFeedback = feedbackDao.findById(testFeedback1.getId());
+        Assert.assertEquals(foundFeedback, testFeedback1);
+    }
+
+    @Test
+    public void findByAuthor() {
+        feedbackDao.create(testFeedback1);
+        feedbackDao.create(testFeedback2);
+        feedbackDao.create(testFeedback3);
+
+        List<Feedback> foundFeedbacks = feedbackDao.findByAuthor(testFeedback1.getAuthor());
+        Assert.assertEquals(foundFeedbacks.size(), 2);
+        Assert.assertTrue(foundFeedbacks.contains(testFeedback1));
+        Assert.assertTrue(foundFeedbacks.contains(testFeedback3));
+    }
+
+    @Test
+    public void updateAuthor() {
+        feedbackDao.create(testFeedback1);
+
+        testFeedback1.setAuthor("Vladimir Visnovsky");
+        feedbackDao.update(testFeedback1);
+
+        List<Feedback> feedbacks = feedbackDao.findByAuthor("Vladimir Visnovsky");
+        Assert.assertEquals(feedbacks.size(), 1);
+        Assert.assertTrue(feedbacks.contains(testFeedback1));
+    }
+
+    @Test
+    public void removeFeedback() {
+        feedbackDao.create(testFeedback1);
+
+        Feedback foundFeedback = feedbackDao.findById(testFeedback1.getId());
+        feedbackDao.remove(foundFeedback);
+
+        foundFeedback = feedbackDao.findById(testFeedback1.getId());
+        Assert.assertNull(foundFeedback);
+    }
 }
