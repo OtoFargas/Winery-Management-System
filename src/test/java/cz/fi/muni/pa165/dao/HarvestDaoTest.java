@@ -3,13 +3,8 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.PersistenceApplicationContext;
 import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.entities.Harvest;
-import cz.fi.muni.pa165.entities.Wine;
 import cz.fi.muni.pa165.enums.GrapeColor;
-import cz.fi.muni.pa165.enums.Ingredient;
 import cz.fi.muni.pa165.enums.Quality;
-import cz.fi.muni.pa165.enums.Taste;
-import cz.fi.muni.pa165.enums.WineColor;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -22,7 +17,6 @@ import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,11 +55,11 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h4 = new Harvest();
         h5 = new Harvest();
 
-        h1.setYear(2013);
-        h2.setYear(2012);
-        h3.setYear(2017);
-        h4.setYear(2013);
-        h5.setYear(2019);
+        h1.setHarvestYear(2013);
+        h2.setHarvestYear(2012);
+        h3.setHarvestYear(2017);
+        h4.setHarvestYear(2013);
+        h5.setHarvestYear(2019);
 
         h1.setQuantity(350);
         h2.setQuantity(180);
@@ -120,9 +114,9 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByYear() {
-        Assert.assertEquals( harvestDao.findByYear(2013).size(), 2);
-        Assert.assertEquals( harvestDao.findByYear(2017).size(), 1);
-        Assert.assertEquals( harvestDao.findByYear(2017).get(0).getGrape().getName(), "Nebbiolo");
+        Assert.assertEquals(harvestDao.findByYear(2013).size(), 2);
+        Assert.assertEquals(harvestDao.findByYear(2017).size(), 1);
+        Assert.assertEquals(harvestDao.findByYear(2017).get(0).getGrape().getName(), "Nebbiolo");
     }
 
     @Test
@@ -134,8 +128,14 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findById() {
-        Long id = h2.getId();
-        Assert.assertEquals(h2, harvestDao.findById(id));
+        Assert.assertEquals(h2, harvestDao.findById(h2.getId()));
+    }
+
+    @Test
+    public void harvestAttributesTest() {
+        Assert.assertEquals(h3.getQuality(), harvestDao.findById(h3.getId()).getQuality());
+        Assert.assertEquals(h4.getQuantity(), harvestDao.findById(h4.getId()).getQuantity());
+        Assert.assertEquals(h5.getGrape(), harvestDao.findById(h5.getId()).getGrape());
     }
 }
 

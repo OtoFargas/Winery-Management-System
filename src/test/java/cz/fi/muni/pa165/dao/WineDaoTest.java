@@ -131,5 +131,12 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         Long id = w2.getId();
         Assert.assertEquals(w2, wineDao.findById(id));
     }
+
+    @Test
+    public void wineAttributesTest() {
+        Assert.assertEquals(w3.getName(), wineDao.findById(w3.getId()).getName());
+        Assert.assertEquals(w4.getIngredients(), wineDao.findById(w4.getId()).getIngredients());
+        Assert.assertEquals(w5.getSold(), wineDao.findById(w5.getId()).getSold());
+    }
 }
 
