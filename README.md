@@ -4,7 +4,9 @@ Winery management system is an information system that will allow a person to ma
 
 ## Team
 467814 - Vladimír Višňovský - Team leader
+
 469403 - Oto Fargaš
+
 469222 - Lukáš Fudor
 
 ## Use case diagram
