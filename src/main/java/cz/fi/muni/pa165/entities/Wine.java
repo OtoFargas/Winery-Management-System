@@ -45,7 +45,6 @@ public class Wine {
 
     @NotNull
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Pair<WineColor, Taste> type;
 
     @ElementCollection
@@ -66,7 +65,6 @@ public class Wine {
         this.id = wineId;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
