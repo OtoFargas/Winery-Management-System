@@ -10,7 +10,8 @@ Oto Fargaš (469403)
 Lukáš Fudor (469222)
 
 ## Use case diagram
-![winery_use_case](https://user-images.githubusercontent.com/80093856/113472032-88556080-9460-11eb-8cd7-92bbcf49ffb9.png)
+![Winery_use_case_diagram](https://user-images.githubusercontent.com/80093856/113914243-a2cf6700-97dd-11eb-81d7-4a8974110f86.png)
 
 ## Class diagram
-![winery_class_diagram](https://user-images.githubusercontent.com/80093856/113472030-87bcca00-9460-11eb-9267-f15396544c62.png)
+![Winery_class_diagram (1)](https://user-images.githubusercontent.com/80093856/113914268-ab27a200-97dd-11eb-8624-1cbddb971e12.png)
+
