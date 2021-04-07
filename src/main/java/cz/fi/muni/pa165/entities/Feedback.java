@@ -1,7 +1,10 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 /**
@@ -16,23 +19,26 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty
     @Column(nullable = false)
     private String author;
 
     @NotNull
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer rating;
 
-    @NotNull
+    @NotEmpty
     @Column(nullable = false)
     private String content;
 
     @NotNull
+    @PastOrPresent
     @Column(nullable = false)
     private LocalDate date;
 
     @ManyToOne
+    @Column(nullable = false)
     private Wine wine;
 
     public Feedback() {
