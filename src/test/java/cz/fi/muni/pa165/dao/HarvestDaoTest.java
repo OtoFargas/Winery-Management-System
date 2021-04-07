@@ -3,8 +3,13 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.PersistenceApplicationContext;
 import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.entities.Harvest;
+import cz.fi.muni.pa165.entities.Wine;
 import cz.fi.muni.pa165.enums.GrapeColor;
+import cz.fi.muni.pa165.enums.Ingredient;
 import cz.fi.muni.pa165.enums.Quality;
+import cz.fi.muni.pa165.enums.Taste;
+import cz.fi.muni.pa165.enums.WineColor;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -136,6 +141,34 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(h3.getQuality(), harvestDao.findById(h3.getId()).getQuality());
         Assert.assertEquals(h4.getQuantity(), harvestDao.findById(h4.getId()).getQuantity());
         Assert.assertEquals(h5.getGrape(), harvestDao.findById(h5.getId()).getGrape());
+    }
+
+    @Test
+    public void update() {
+        h1.setHarvestYear(2014);
+        harvestDao.update(h1);
+        Assert.assertEquals(h1, harvestDao.findById(h1.getId()));
+        Assert.assertEquals(h1.getHarvestYear(), harvestDao.findById(h1.getId()).getHarvestYear());
+
+        Harvest newHarvest = new Harvest();
+        newHarvest.setQuality(Quality.HIGH);
+        newHarvest.setQuantity(142);
+        newHarvest.setHarvestYear(2020);
+
+        Grape newGrape = new Grape();
+        newGrape.setColor(GrapeColor.RED);
+        newGrape.setDiseases(new ArrayList<>());
+        newGrape.setQuantity(63);
+        newGrape.setName("Red Globe");
+
+        newHarvest.setGrape(newGrape);
+        newGrape.addHarvest(newHarvest);
+        harvestDao.create(newHarvest);
+
+        newHarvest.setQuantity(85);
+        harvestDao.update(newHarvest);
+        Assert.assertEquals(newHarvest, harvestDao.findById(newHarvest.getId()));
+        Assert.assertEquals(newHarvest.getQuantity(), harvestDao.findById(newHarvest.getId()).getQuantity());
     }
 }
 
