@@ -1,8 +1,12 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceApplicationContext;
+import cz.fi.muni.pa165.entities.Grape;
+import cz.fi.muni.pa165.entities.Harvest;
 import cz.fi.muni.pa165.entities.Wine;
+import cz.fi.muni.pa165.enums.GrapeColor;
 import cz.fi.muni.pa165.enums.Ingredient;
+import cz.fi.muni.pa165.enums.Quality;
 import cz.fi.muni.pa165.enums.Taste;
 import cz.fi.muni.pa165.enums.WineColor;
 import javafx.util.Pair;
@@ -137,6 +141,45 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(w3.getName(), wineDao.findById(w3.getId()).getName());
         Assert.assertEquals(w4.getIngredients(), wineDao.findById(w4.getId()).getIngredients());
         Assert.assertEquals(w5.getSold(), wineDao.findById(w5.getId()).getSold());
+    }
+
+    @Test
+    public void update() {
+        w1.setSold(44);
+        wineDao.update(w1);
+        Assert.assertEquals(w1, wineDao.findById(w1.getId()));
+        Assert.assertEquals(w1.getSold(), wineDao.findById(w1.getId()).getSold());
+
+        Wine newWine = new Wine();
+        newWine.setName("Riesling");
+        newWine.setStocked(86);
+        newWine.setSold(69);
+        newWine.setType(new Pair<>(WineColor.DESSERT, Taste.SEMI_DRY));
+        List<Ingredient> newWineIngredientList = new ArrayList<>();
+        newWineIngredientList.add(Ingredient.GRAPE_JUICE);
+        newWine.setIngredients(newWineIngredientList);
+
+        Harvest newHarvest = new Harvest();
+        newHarvest.setQuality(Quality.HIGH);
+        newHarvest.setQuantity(142);
+        newHarvest.setHarvestYear(2020);
+
+        Grape newGrape = new Grape();
+        newGrape.setColor(GrapeColor.RED);
+        newGrape.setDiseases(new ArrayList<>());
+        newGrape.setQuantity(63);
+        newGrape.setName("Red Globe");
+
+        newHarvest.setGrape(newGrape);
+        newGrape.addHarvest(newHarvest);
+        newHarvest.setWine(newWine);
+        newWine.addHarvest(newHarvest);
+        wineDao.create(newWine);
+
+        newWine.setSold(85);
+        wineDao.update(newWine);
+        Assert.assertEquals(newWine, wineDao.findById(newWine.getId()));
+        Assert.assertEquals(newWine.getSold(), wineDao.findById(newWine.getId()).getSold());
     }
 }
 
