@@ -1,17 +1,19 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Wine;
+import cz.fi.muni.pa165.entities.Wine;
+import org.springframework.stereotype.Repository;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-
 
 /**
  * Implementation of DAO interface Wine
  *
  * @author Vladimir Visnovsky
  */
+@Repository
 public class WineDaoImpl implements WineDao {
 
     @PersistenceContext

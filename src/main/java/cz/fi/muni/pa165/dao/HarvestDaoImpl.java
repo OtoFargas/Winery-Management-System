@@ -1,16 +1,19 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Harvest;
+import cz.fi.muni.pa165.entities.Harvest;
+import org.springframework.stereotype.Repository;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- *
+ * Implementation of DAO interface Harvest
  *
  * @author Oto Fargas
  */
+@Repository
 public class HarvestDaoImpl implements HarvestDao {
 
     @PersistenceContext

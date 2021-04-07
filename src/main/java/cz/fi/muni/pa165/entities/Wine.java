@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.entities;
 
 
 import cz.fi.muni.pa165.enums.Ingredient;
@@ -6,9 +6,14 @@ import cz.fi.muni.pa165.enums.Taste;
 import cz.fi.muni.pa165.enums.WineColor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.util.Pair;
 
@@ -24,21 +29,22 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String name;
 
     @NotNull
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer stocked;
 
     @NotNull
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer sold;
 
     @NotNull
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Pair<WineColor, Taste> type;
 
     @ElementCollection
@@ -47,9 +53,11 @@ public class Wine {
     @Enumerated(EnumType.STRING)
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    @OneToMany
-    private List<Feedback> feedbacks = new ArrayList<>();
+    @OneToMany(mappedBy = "wine")
+    private Set<Feedback> feedbacks = new HashSet<>();
 
+    @OneToMany(mappedBy = "wine")
+    private Set<Harvest> harvests = new HashSet<>();
 
     public Wine() {}
 
@@ -57,7 +65,6 @@ public class Wine {
         this.id = wineId;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
@@ -106,13 +113,22 @@ public class Wine {
         this.ingredients = ingredients;
     }
 
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
+    public Set<Feedback> getFeedbacks() {
+        return Collections.unmodifiableSet(feedbacks);
     }
 
-    public void setFeedbacks(List<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
+    public void addFeedback(Feedback feedback) {
+        this.feedbacks.add(feedback);
     }
+
+    public Set<Harvest> getHarvests() {
+        return Collections.unmodifiableSet(harvests);
+    }
+
+    public void addHarvest(Harvest harvest) {
+        this.harvests.add(harvest);
+    }
+
 
     @Override
     public boolean equals(Object o) {

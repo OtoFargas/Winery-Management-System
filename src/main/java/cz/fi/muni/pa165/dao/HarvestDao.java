@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Harvest;
+import cz.fi.muni.pa165.entities.Harvest;
 
 import java.util.List;
 
