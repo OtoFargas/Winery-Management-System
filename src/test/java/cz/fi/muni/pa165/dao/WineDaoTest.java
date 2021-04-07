@@ -1,13 +1,23 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.PersistenceApplicationContext;
 import cz.fi.muni.pa165.entity.Wine;
 import cz.fi.muni.pa165.enums.Ingredient;
 import cz.fi.muni.pa165.enums.Taste;
 import cz.fi.muni.pa165.enums.WineColor;
 import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +27,22 @@ import java.util.List;
  * @author Lukáš Fudor
  */
 
+@ContextConfiguration(classes = PersistenceApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class WineDaoTest extends AbstractTestNGSpringContextTests {
+
+    @PersistenceContext
+    public EntityManager em;
+
+    @Autowired
+    public WineDao wineDao;
 
     private Wine w1;
     private Wine w2;
     private Wine w3;
     private Wine w4;
     private Wine w5;
-
 
     @BeforeMethod
     public void createWines() {
@@ -81,5 +99,36 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w4.setIngredients(w4IngredientList);
         w5.setIngredients(w5IngredientList);
 
+        wineDao.create(w1);
+        wineDao.create(w2);
+        wineDao.create(w3);
+        wineDao.create(w4);
+        wineDao.create(w5);
+    }
+
+    @Test
+    public void findAll() {
+        List<Wine> wineList = wineDao.findAll();
+        Assert.assertEquals(wineList.size(), 5);
+    }
+
+    @Test
+    public void findByName() {
+        Assert.assertEquals(w3, wineDao.findByName("Merlot"));
+        Assert.assertEquals(w4, wineDao.findByName("Muscat"));
+        Assert.assertEquals(w5, wineDao.findByName("Pinot Blanc"));
+    }
+
+    @Test
+    public void remove() {
+        Assert.assertNotNull(wineDao.findById(w1.getId()));
+        wineDao.remove(w1);
+        Assert.assertNull(wineDao.findById(w1.getId()));
+    }
+
+    @Test
+    public void findById() {
+        Long id = w2.getId();
+        Assert.assertEquals(w2, wineDao.findById(id));
     }
 }
