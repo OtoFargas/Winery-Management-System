@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.entities;
 
 import cz.fi.muni.pa165.enums.Disease;
 import cz.fi.muni.pa165.enums.GrapeColor;
@@ -8,7 +8,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Entity class Grape representing the grape plants.
@@ -43,8 +46,8 @@ public class Grape {
     @Enumerated(EnumType.STRING)
     private List<Disease> diseases = new ArrayList<>();
 
-    @OneToMany
-    private List<Harvest> harvests = new ArrayList<>();
+    @OneToMany(mappedBy = "grape")
+    private Set<Harvest> harvests = new HashSet<>();
 
     public Grape() {}
 
@@ -90,6 +93,14 @@ public class Grape {
 
     public void setDiseases(List<Disease> diseases) {
         this.diseases = diseases;
+    }
+
+    public Set<Harvest> getHarvests() {
+        return Collections.unmodifiableSet(harvests);
+    }
+
+    public void addHarvest(Harvest harvest) {
+        this.harvests.add(harvest);
     }
 
     @Override

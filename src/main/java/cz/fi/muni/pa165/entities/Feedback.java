@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,6 +38,7 @@ public class Feedback {
     private LocalDate date;
 
     @ManyToOne
+    @Column(nullable = false)
     private Wine wine;
 
     public Feedback() {

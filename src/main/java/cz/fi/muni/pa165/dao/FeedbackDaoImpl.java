@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Feedback;
+import cz.fi.muni.pa165.entities.Feedback;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
