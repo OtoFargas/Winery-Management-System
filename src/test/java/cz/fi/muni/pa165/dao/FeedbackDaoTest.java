@@ -21,6 +21,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 
 
@@ -29,11 +31,11 @@ import javax.validation.ConstraintViolationException;
 @Transactional
 public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
 
-    @Autowired
-    private FeedbackDao feedbackDao;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
-    private WineDao wineDao;
+    private FeedbackDao feedbackDao;
 
     private Wine testWine1;
 
@@ -57,17 +59,13 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         testFeedback1 = createFeedback("Oto Fargas", "Very good wine", LocalDate.now(), 7, testWine1);
         testFeedback2 = createFeedback("Lukas Fudor", "Tastes like sh*t, wanted to throw up", LocalDate.now(), 1, testWine2);
         testFeedback3 = createFeedback("Oto Fargas", "Pretty nice taste, the touch of vanilla makes all the difference", LocalDate.now(), 10, testWine2);
-    }
 
-    private void createAllWines() {
-        wineDao.create(testWine1);
-        wineDao.create(testWine2);
-    }
+        em.persist(testWine1);
+        em.persist(testWine2);
 
-    private void createAllFeedbacks() {
-        feedbackDao.create(testFeedback1);
-        feedbackDao.create(testFeedback2);
-        feedbackDao.create(testFeedback3);
+        em.persist(testFeedback1);
+        em.persist(testFeedback2);
+        em.persist(testFeedback3);
     }
 
     private Wine createWine(Integer sold, Integer stocked, List<Ingredient> ingredients, String name, Pair<WineColor, Taste> type) {
@@ -91,10 +89,15 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void findAll(){
-        createAllWines();
-        createAllFeedbacks();
+    public void createTest() {
+        Feedback newFeedback = createFeedback("Fudas Ludor", "Test content", LocalDate.now(), 7, testWine1);
+        feedbackDao.create(newFeedback);
 
+        Assert.assertEquals(em.createQuery("select f from Feedback f", Feedback.class).getResultList().size(), 4);
+    }
+
+    @Test
+    public void findAllTest(){
         List<Feedback> feedbacks = feedbackDao.findAll();
 
         Assert.assertEquals(feedbacks.size(), 3);
@@ -119,52 +122,43 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
-    public void nullAuthorNotAllowed() {
+    public void nullAuthorNotAllowedTest() {
         Feedback nullAuthorFeedback = createFeedback(null, "Very good wine", LocalDate.now(), 7, testWine1);
         feedbackDao.create(nullAuthorFeedback);
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
-    public void emptyStringAuthorNotAllowed() {
+    public void emptyStringAuthorNotAllowedTest() {
         Feedback emptyStringAuthorFeedback = createFeedback("", "Very good wine", LocalDate.now(), 7, testWine1);
         feedbackDao.create(emptyStringAuthorFeedback);
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
-    public void negativeRatingNotAllowed() {
+    public void negativeRatingNotAllowedTest() {
         Feedback negativeRatingFeedback = createFeedback("Oto Fargas", "Very good wine", LocalDate.now(), -2, testWine1);
         feedbackDao.create(negativeRatingFeedback);
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
-    public void futureDateNotAllowed() {
+    public void futureDateNotAllowedTest() {
         Feedback futureDateFeedback = createFeedback("Oto Fargas", "Very good wine", LocalDate.now().plusMonths(1), 7, testWine1);
         feedbackDao.create(futureDateFeedback);
     }
 
     @Test
-    public void authorCanBeTheSame() {
-        testFeedback2.setAuthor(testFeedback1.getAuthor());
-
+    public void authorCanBeTheSameTest() {
+        testFeedback1.setAuthor(testFeedback2.getAuthor());
         feedbackDao.create(testFeedback1);
-        feedbackDao.create(testFeedback2);
     }
 
     @Test
-    public void findById() {
-        feedbackDao.create(testFeedback1);
-        feedbackDao.create(testFeedback2);
-
+    public void findByIdTest() {
         Feedback foundFeedback = feedbackDao.findById(testFeedback1.getId());
         Assert.assertEquals(foundFeedback, testFeedback1);
     }
 
     @Test
-    public void findByAuthor() {
-        feedbackDao.create(testFeedback1);
-        feedbackDao.create(testFeedback2);
-        feedbackDao.create(testFeedback3);
-
+    public void findByAuthorTest() {
         List<Feedback> foundFeedbacks = feedbackDao.findByAuthor(testFeedback1.getAuthor());
         Assert.assertEquals(foundFeedbacks.size(), 2);
         Assert.assertTrue(foundFeedbacks.contains(testFeedback1));
@@ -172,25 +166,22 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void updateAuthor() {
-        feedbackDao.create(testFeedback1);
-
+    public void updateAuthorTest() {
         testFeedback1.setAuthor("Vladimir Visnovsky");
         feedbackDao.update(testFeedback1);
 
-        List<Feedback> feedbacks = feedbackDao.findByAuthor("Vladimir Visnovsky");
+        List<Feedback> feedbacks = em.createQuery("select f from Feedback f where author=:author", Feedback.class)
+                .setParameter("author", "Vladimir Visnovsky")
+                .getResultList();
         Assert.assertEquals(feedbacks.size(), 1);
         Assert.assertTrue(feedbacks.contains(testFeedback1));
     }
 
     @Test
-    public void removeFeedback() {
-        feedbackDao.create(testFeedback1);
+    public void removeFeedbackTest() {
+        Long id = testFeedback1.getId();
+        feedbackDao.remove(testFeedback1);
 
-        Feedback foundFeedback = feedbackDao.findById(testFeedback1.getId());
-        feedbackDao.remove(foundFeedback);
-
-        foundFeedback = feedbackDao.findById(testFeedback1.getId());
-        Assert.assertNull(foundFeedback);
+        Assert.assertNull(em.find(Feedback.class, id));
     }
 }
