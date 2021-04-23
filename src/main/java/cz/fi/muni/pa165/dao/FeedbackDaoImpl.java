@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- *
+ * Implementation of DAO interface Feedback
  *
  * @author Oto Fargas
  */

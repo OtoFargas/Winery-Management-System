@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Test class for GrapeDao class
+ *
  * @author Oto Fargas
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
@@ -66,8 +68,6 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         grape1.addHarvest(harvest1);
         em.persist(grape1);
 
-
-
         grape2 = new Grape();
         grape2.setName("Cabernet Sauvignon");
         grape2.setColor(GrapeColor.RED);
@@ -83,9 +83,14 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         grape.setQuantity(105);
         grape.setName("Riesling");
         grape.setColor(GrapeColor.WHITE);
+
+        List<Grape> grapes = em.createQuery("select g from Grape g", Grape.class).getResultList();
+        Assert.assertEquals(grapes.size(), 2);
+
         grapeDao.create(grape);
 
-        Assert.assertEquals(grapeDao.findById(grape.getId()), grape);
+        grapes = em.createQuery("select g from Grape g", Grape.class).getResultList();
+        Assert.assertEquals(grapes.size(), 3);
     }
 
     @Test
@@ -120,7 +125,12 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
     public void testUpdate() {
         grape1.setName("Pinot Grigio");
         grapeDao.update(grape1);
-        Assert.assertEquals(grapeDao.findById(grape1.getId()), grape1);
+
+        List<Grape> grapes = em.createQuery("select g from Grape g where name=:name", Grape.class)
+                            .setParameter("name", "Pinot Grigio")
+                            .getResultList();
+        Assert.assertEquals(grapes.size(), 1);
+        Assert.assertTrue(grapes.contains(grape1));
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
@@ -142,8 +152,8 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testRemove() {
-        Grape foundGrape = grapeDao.findById(grape2.getId());
-        grapeDao.remove(foundGrape);
-        Assert.assertNull(grapeDao.findById(grape2.getId()));
+        Long id = grape2.getId();
+        grapeDao.remove(grape2);
+        Assert.assertNull(em.find(Grape.class, id));
     }
 }
