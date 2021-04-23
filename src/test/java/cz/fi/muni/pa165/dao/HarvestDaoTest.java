@@ -122,6 +122,7 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
 
         List<Harvest> harvestList = harvestDao.findAll();
         Assert.assertEquals(harvestList.size(), 6);
+        Assert.assertEquals(h, harvestDao.findById(h.getId()));
     }
 
     @Test
