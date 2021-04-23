@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceApplicationContext;
+import cz.fi.muni.pa165.entities.Feedback;
 import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.entities.Harvest;
 import cz.fi.muni.pa165.enums.Disease;
@@ -18,6 +19,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,9 @@ import java.util.List;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
+
+    @PersistenceContext
+    public EntityManager em;
 
     @Autowired
     private GrapeDao grapeDao;
@@ -58,7 +64,8 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         grape1.setColor(GrapeColor.RED);
         harvest1.setGrape(grape1);
         grape1.addHarvest(harvest1);
-        grapeDao.create(grape1);
+        em.persist(grape1);
+
 
 
         grape2 = new Grape();
@@ -67,7 +74,7 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         grape2.setQuantity(118);
         harvest2.setGrape(grape2);
         grape2.addHarvest(harvest2);
-        grapeDao.create(grape2);
+        em.persist(grape2);
     }
 
     @Test
@@ -85,6 +92,20 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
     public void testFindById() {
         Grape foundGrape = grapeDao.findById(grape1.getId());
         Assert.assertEquals(grape1.getId(), foundGrape.getId());
+    }
+
+    @Test
+    public void testFindByName() {
+        Grape foundGrape = grapeDao.findByName(grape1.getName());
+        Assert.assertEquals(grape1.getName(), foundGrape.getName());
+    }
+
+    @Test
+    public void testFindByColor() {
+        List<Grape> foundGrapes = grapeDao.findByColor(grape1.getColor());
+        Assert.assertEquals(foundGrapes.size(), 2);
+        Assert.assertTrue(foundGrapes.contains(grape1));
+        Assert.assertTrue(foundGrapes.contains(grape2));
     }
 
     @Test
