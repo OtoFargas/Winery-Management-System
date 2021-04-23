@@ -120,9 +120,8 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h.setGrape(g);
         harvestDao.create(h);
 
-        List<Harvest> harvestList = harvestDao.findAll();
+        List<Harvest> harvestList = em.createQuery("select h from Harvest h", Harvest.class).getResultList();
         Assert.assertEquals(harvestList.size(), 6);
-        Assert.assertEquals(h, harvestDao.findById(h.getId()));
     }
 
     @Test

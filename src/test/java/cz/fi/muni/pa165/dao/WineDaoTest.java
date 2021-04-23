@@ -123,9 +123,8 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w.setIngredients(wIngredientList);
         wineDao.create(w);
 
-        List<Wine> wineList = wineDao.findAll();
+        List<Wine> wineList = em.createQuery("select w from Wine w", Wine.class).getResultList();
         Assert.assertEquals(wineList.size(), 6);
-        Assert.assertEquals(w, wineDao.findById(w.getId()));
     }
 
     @Test
