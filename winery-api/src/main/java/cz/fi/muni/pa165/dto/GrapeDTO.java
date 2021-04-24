@@ -4,8 +4,10 @@ import cz.fi.muni.pa165.enums.Disease;
 import cz.fi.muni.pa165.enums.GrapeColor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * DTO class for Grape entity.
@@ -20,6 +22,7 @@ public class GrapeDTO {
     private GrapeColor color;
     private Integer quantity;
     private List<Disease> diseases = new ArrayList<>();
+    private Set<HarvestDTO> harvests = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,6 +62,14 @@ public class GrapeDTO {
 
     public void setDiseases(List<Disease> diseases) {
         this.diseases = diseases;
+    }
+
+    public Set<HarvestDTO> getHarvests() {
+        return harvests;
+    }
+
+    public void setHarvests(Set<HarvestDTO> harvests) {
+        this.harvests = harvests;
     }
 
     @Override

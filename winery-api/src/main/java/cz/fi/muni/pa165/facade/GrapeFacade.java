@@ -41,4 +41,16 @@ public interface GrapeFacade {
      * @return id of newly created GrapeDTO
      */
     Long createGrape(GrapeCreateDTO grapeCreateDTO);
+
+    /**
+     * @param harvestID of harvest to be added
+     * @param GrapeID of grape to receive harvest
+     */
+    void addHarvest(Long harvestID, Long GrapeID);
+
+    /**
+     * @param harvestID of harvest to be removed
+     * @param GrapeID of grape to remove from
+     */
+    void removeHarvest(Long harvestID, Long GrapeID);
 }
