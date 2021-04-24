@@ -69,9 +69,9 @@ public class GrapeCreateDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GrapeCreateDTO that = (GrapeCreateDTO) o;
-        return name.equals(that.name);
+        if (!(o instanceof GrapeCreateDTO)) return false;
+        GrapeCreateDTO grapeCreateDTO = (GrapeCreateDTO) o;
+        return getName().equals(grapeCreateDTO.getName());
     }
 
     @Override
