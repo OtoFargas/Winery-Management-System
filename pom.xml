@@ -14,7 +14,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Group project</name>
+	<name>Winery management system</name>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -88,5 +88,7 @@
 
 	<modules>
 		<module>winery-persistence</module>
+		<module>winery-api</module>
+		<module>winery-service</module>
 	</modules>
 </project>
