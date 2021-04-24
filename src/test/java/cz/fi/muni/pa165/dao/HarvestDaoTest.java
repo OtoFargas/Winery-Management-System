@@ -3,13 +3,8 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.PersistenceApplicationContext;
 import cz.fi.muni.pa165.entities.Grape;
 import cz.fi.muni.pa165.entities.Harvest;
-import cz.fi.muni.pa165.entities.Wine;
 import cz.fi.muni.pa165.enums.GrapeColor;
-import cz.fi.muni.pa165.enums.Ingredient;
 import cz.fi.muni.pa165.enums.Quality;
-import cz.fi.muni.pa165.enums.Taste;
-import cz.fi.muni.pa165.enums.WineColor;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -53,7 +48,7 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
     private Grape g3;
 
     @BeforeMethod
-    public void createHarvests() {
+    public void setup() {
         h1 = new Harvest();
         h2 = new Harvest();
         h3 = new Harvest();
@@ -104,11 +99,29 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h4.setGrape(g2);
         h5.setGrape(g3);
 
-        harvestDao.create(h1);
-        harvestDao.create(h2);
-        harvestDao.create(h3);
-        harvestDao.create(h4);
-        harvestDao.create(h5);
+        em.persist(h1);
+        em.persist(h2);
+        em.persist(h3);
+        em.persist(h4);
+        em.persist(h5);
+    }
+
+    @Test
+    public void createTest() {
+        Harvest h = new Harvest();
+        h.setHarvestYear(2013);
+        h.setQuantity(350);
+        h.setQuality(Quality.LOW);
+        Grape g = new Grape();
+        g.setName("CreateTestGrape");
+        g.setQuantity(150);
+        g.setDiseases(new ArrayList<>());
+        g.setColor(GrapeColor.RED);
+        h.setGrape(g);
+        harvestDao.create(h);
+
+        List<Harvest> harvestList = em.createQuery("select h from Harvest h", Harvest.class).getResultList();
+        Assert.assertEquals(harvestList.size(), 6);
     }
 
     @Test

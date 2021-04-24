@@ -103,11 +103,28 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w4.setIngredients(w4IngredientList);
         w5.setIngredients(w5IngredientList);
 
-        wineDao.create(w1);
-        wineDao.create(w2);
-        wineDao.create(w3);
-        wineDao.create(w4);
-        wineDao.create(w5);
+        em.persist(w1);
+        em.persist(w2);
+        em.persist(w3);
+        em.persist(w4);
+        em.persist(w5);
+    }
+
+    @Test
+    public void createTest() {
+        Wine w = new Wine();
+        w.setName("CreateTestWine");
+        w.setStocked(112);
+        w.setSold(84);
+        w.setType(new Pair<>(WineColor.DESSERT, Taste.SEMI_DRY));
+        List<Ingredient> wIngredientList = new ArrayList<>();
+        wIngredientList.add(Ingredient.POTASSIUM);
+        wIngredientList.add(Ingredient.SUGAR);
+        w.setIngredients(wIngredientList);
+        wineDao.create(w);
+
+        List<Wine> wineList = em.createQuery("select w from Wine w", Wine.class).getResultList();
+        Assert.assertEquals(wineList.size(), 6);
     }
 
     @Test

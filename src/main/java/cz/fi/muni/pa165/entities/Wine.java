@@ -153,8 +153,6 @@ public class Wine {
                 ", stocked=" + stocked +
                 ", sold=" + sold +
                 ", type=" + type +
-                ", ingredients=" + ingredients +
-                ", feedbacks=" + feedbacks +
                 '}';
     }
 }

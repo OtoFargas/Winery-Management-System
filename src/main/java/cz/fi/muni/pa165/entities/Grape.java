@@ -125,7 +125,6 @@ public class Grape {
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", diseases='" + diseases + '\'' +
-                ", diseases='" + harvests + '\'' +
                 '}';
     }
 }
