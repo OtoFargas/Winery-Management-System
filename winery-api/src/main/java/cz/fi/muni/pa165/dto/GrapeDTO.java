@@ -1,0 +1,76 @@
+package cz.fi.muni.pa165.dto;
+
+import cz.fi.muni.pa165.enums.Disease;
+import cz.fi.muni.pa165.enums.GrapeColor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * DTO class for Grape entity.
+ *
+ * @author Lukáš Fudor
+ */
+
+public class GrapeDTO {
+
+    private Long id;
+    private String name;
+    private GrapeColor color;
+    private Integer quantity;
+    private List<Disease> diseases = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public GrapeColor getColor() {
+        return color;
+    }
+
+    public void setColor(GrapeColor color) {
+        this.color = color;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public List<Disease> getDiseases() {
+        return diseases;
+    }
+
+    public void setDiseases(List<Disease> diseases) {
+        this.diseases = diseases;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GrapeDTO grapeDTO = (GrapeDTO) o;
+        return name.equals(grapeDTO.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+}
