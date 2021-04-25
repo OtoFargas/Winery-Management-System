@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.dao.GrapeDao;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
+import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -146,6 +148,19 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
         diseases = grapeDao.findById(1L).getDiseases();
         assertThat(diseases).isEmpty();
         verify(grapeDao, times(2)).update(grape1);
+    }
+
+    @Test
+    public void testCureNullDisease() {
+        when(grapeDao.findById(1L)).thenReturn(grape1);
+        // cure first disease
+        grapeService.cureDisease(grape1, null);
+    }
+
+    @Test
+    public void testCureNonExistingDisease() {
+        assertThatThrownBy(() -> grapeService.cureDisease(grape1, Disease.ANTHRACNOSE))
+                .isInstanceOf(WineryServiceException.class);
     }
 
     @Test
