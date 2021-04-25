@@ -39,6 +39,11 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
+    public void update(Feedback feedback) {
+        feedbackDao.update(feedback);
+    }
+
+    @Override
     public void remove(Feedback feedback) {
         feedbackDao.remove(feedback);
     }

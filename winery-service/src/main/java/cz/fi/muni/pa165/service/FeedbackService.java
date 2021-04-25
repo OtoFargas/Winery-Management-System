@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.entities.Feedback;
+
 import java.util.List;
 
 /**
@@ -31,6 +32,11 @@ public interface FeedbackService {
      * @return list of found feedbacks
      */
     List<Feedback> findByAuthor(String author);
+
+    /**
+     * @param feedback to be updated
+     */
+    void update(Feedback feedback);
 
     /**
      * @param feedback to be removed

@@ -40,6 +40,11 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
+    public void update(Wine wine) {
+        wineDao.update(wine);
+    }
+
+    @Override
     public void remove(Wine wine) {
         wineDao.remove(wine);
     }

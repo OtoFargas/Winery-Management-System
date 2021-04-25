@@ -23,7 +23,6 @@ public interface WineService {
     List<Wine> findAll();
 
     /**
-     *
      * @param id of desired wine
      * @return fond wine
      */
@@ -34,6 +33,11 @@ public interface WineService {
      * @return found wine
      */
     Wine findByName(String name);
+
+    /**
+     * @param wine to be updated
+     */
+    void update(Wine wine);
 
     /**
      * @param wine to be removed
