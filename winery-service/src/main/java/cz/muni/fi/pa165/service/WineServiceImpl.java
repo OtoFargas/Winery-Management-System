@@ -52,12 +52,11 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public void sell(Wine wine, Integer amount) {
-
-        if (wine.getStocked() >= amount) {
-            wine.setSold(wine.getSold() + amount);
-            wine.setStocked(wine.getStocked() - amount);
-        } else {
+        if (wine.getStocked() < amount) {
             throw new WineryServiceException("Not enough stocked wine!");
         }
+        
+        wine.setSold(wine.getSold() + amount);
+        wine.setStocked(wine.getStocked() - amount);
     }
 }
