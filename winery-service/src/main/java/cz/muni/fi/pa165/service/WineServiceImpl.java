@@ -21,7 +21,7 @@ public class WineServiceImpl implements WineService {
     WineDao wineDao;
 
     @Override
-    public void create(Wine wine) {
+    public void createWine(Wine wine) {
         wineDao.create(wine);
     }
 
@@ -41,17 +41,17 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public void update(Wine wine) {
+    public void updateWine(Wine wine) {
         wineDao.update(wine);
     }
 
     @Override
-    public void remove(Wine wine) {
+    public void removeWine(Wine wine) {
         wineDao.remove(wine);
     }
 
     @Override
-    public void sell(Wine wine, Integer amount) {
+    public void sellWine(Wine wine, Integer amount) {
         if (wine.getStocked() < amount) {
             throw new WineryServiceException("Not enough stocked wine!");
         }

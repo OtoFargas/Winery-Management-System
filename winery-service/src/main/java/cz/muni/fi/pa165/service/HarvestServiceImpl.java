@@ -18,7 +18,7 @@ public class HarvestServiceImpl implements HarvestService{
     HarvestDao harvestDao;
 
     @Override
-    public void create(Harvest harvest) {
+    public void createHarvest(Harvest harvest) {
         harvestDao.create(harvest);
     }
 
@@ -38,12 +38,12 @@ public class HarvestServiceImpl implements HarvestService{
     }
 
     @Override
-    public void update(Harvest harvest) {
+    public void updateHarvest(Harvest harvest) {
         harvestDao.update(harvest);
     }
 
     @Override
-    public void remove(Harvest harvest) {
+    public void removeHarvest(Harvest harvest) {
         harvestDao.remove(harvest);
     }
 }

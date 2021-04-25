@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Import;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
+
 @Configuration
 @Import(PersistenceApplicationContext.class)
 @ComponentScan(basePackageClasses={GrapeServiceImpl.class, FeedbackFacadeImpl.class})
@@ -27,7 +28,7 @@ public class ServiceConfiguration {
 
     /**
      * Custom config for Dozer if needed
-     * @author nguyen
+     * @author Lukáš Fudor
      *
      */
     public class DozerCustomConfig extends BeanMappingBuilder {

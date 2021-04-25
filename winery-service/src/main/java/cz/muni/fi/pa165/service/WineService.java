@@ -15,7 +15,7 @@ public interface WineService {
     /**
      * @param wine to be created
      */
-    void create(Wine wine);
+    void createWine(Wine wine);
 
     /**
      * @return list of all wines
@@ -37,16 +37,16 @@ public interface WineService {
     /**
      * @param wine to be updated
      */
-    void update(Wine wine);
+    void updateWine(Wine wine);
 
     /**
      * @param wine to be removed
      */
-    void remove(Wine wine);
+    void removeWine(Wine wine);
 
     /**
      * @param wine to be sold
      * @param amount to be sold
      */
-    void sell(Wine wine, Integer amount);
+    void sellWine(Wine wine, Integer amount);
 }

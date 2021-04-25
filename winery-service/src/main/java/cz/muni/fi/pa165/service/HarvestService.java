@@ -16,7 +16,7 @@ public interface HarvestService {
     /**
      * @param harvest to be created
      */
-    void create(Harvest harvest);
+    void createHarvest(Harvest harvest);
 
     /**
      * @return list of all harvests
@@ -38,10 +38,10 @@ public interface HarvestService {
     /**
      * @param harvest to be updated
      */
-    void update(Harvest harvest);
+    void updateHarvest(Harvest harvest);
 
     /**
      * @param harvest to be deleted
      */
-    void remove(Harvest harvest);
+    void removeHarvest(Harvest harvest);
 }
