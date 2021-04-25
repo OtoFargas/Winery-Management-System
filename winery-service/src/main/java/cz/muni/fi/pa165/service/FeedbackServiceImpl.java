@@ -19,32 +19,32 @@ public class FeedbackServiceImpl implements FeedbackService {
     private FeedbackDao feedbackDao;
 
     @Override
-    public void create(Feedback feedback) {
+    public void createFeedback(Feedback feedback) {
         feedbackDao.create(feedback);
     }
 
     @Override
-    public List<Feedback> findAll() {
+    public List<Feedback> findAllFeedbacks() {
         return feedbackDao.findAll();
     }
 
     @Override
-    public Feedback findById(Long id) {
+    public Feedback findFeedbackById(Long id) {
         return feedbackDao.findById(id);
     }
 
     @Override
-    public List<Feedback> findByAuthor(String author) {
+    public List<Feedback> findFeedbackByAuthor(String author) {
         return feedbackDao.findByAuthor(author);
     }
 
     @Override
-    public void update(Feedback feedback) {
+    public void updateFeedback(Feedback feedback) {
         feedbackDao.update(feedback);
     }
 
     @Override
-    public void remove(Feedback feedback) {
+    public void removeFeedback(Feedback feedback) {
         feedbackDao.remove(feedback);
     }
 }

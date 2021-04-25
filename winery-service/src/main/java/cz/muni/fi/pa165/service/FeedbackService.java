@@ -14,32 +14,32 @@ public interface FeedbackService {
     /**
      * @param feedback to be created
      */
-    void create(Feedback feedback);
+    void createFeedback(Feedback feedback);
 
     /**
      * @return list of all feedbacks
      */
-    List<Feedback> findAll();
+    List<Feedback> findAllFeedbacks();
 
     /**
      * @param id of desired feedback
      * @return found feedback
      */
-    Feedback findById(Long id);
+    Feedback findFeedbackById(Long id);
 
     /**
      * @param author of feedbacks
      * @return list of found feedbacks
      */
-    List<Feedback> findByAuthor(String author);
+    List<Feedback> findFeedbackByAuthor(String author);
 
     /**
      * @param feedback to be updated
      */
-    void update(Feedback feedback);
+    void updateFeedback(Feedback feedback);
 
     /**
      * @param feedback to be removed
      */
-    void remove(Feedback feedback);
+    void removeFeedback(Feedback feedback);
 }
