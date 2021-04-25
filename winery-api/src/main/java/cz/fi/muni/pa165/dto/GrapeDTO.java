@@ -84,4 +84,15 @@ public class GrapeDTO {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    @Override
+    public String toString() {
+        return "GrapeDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", color=" + color +
+                ", quantity=" + quantity +
+                ", diseases=" + diseases +
+                '}';
+    }
 }
