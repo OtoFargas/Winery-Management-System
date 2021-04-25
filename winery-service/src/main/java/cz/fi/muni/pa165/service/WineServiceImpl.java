@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Implementation of the WineService.
  *
- *
+ * @author Oto Fargas
  */
 @Service
 public class WineServiceImpl implements WineService {

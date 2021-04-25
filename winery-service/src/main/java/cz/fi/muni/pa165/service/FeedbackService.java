@@ -11,27 +11,29 @@ import java.util.List;
 public interface FeedbackService {
 
     /**
-     *
+     * @param feedback to be created
      */
     void create(Feedback feedback);
 
     /**
-     *
+     * @return list of all feedbacks
      */
     List<Feedback> findAll();
 
     /**
-     *
+     * @param id of desired feedback
+     * @return found feedback
      */
     Feedback findById(Long id);
 
     /**
-     *
+     * @param author of feedbacks
+     * @return list of found feedbacks
      */
     List<Feedback> findByAuthor(String author);
 
     /**
-     *
+     * @param feedback to be removed
      */
     void remove(Feedback feedback);
 }
