@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -41,7 +42,8 @@ public class FeedbackServiceTest extends AbstractTestNGSpringContextTests {
     private Wine testWine1;
     private Wine testWine2;
 
-    private FeedbackDao feedbackDao = mock(FeedbackDao.class);
+    @Mock
+    private FeedbackDao feedbackDao;
 
     @InjectMocks
     @Autowired
