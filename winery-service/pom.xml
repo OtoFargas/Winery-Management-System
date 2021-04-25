@@ -13,5 +13,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Service Layer</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>cz.fi.muni.pa165</groupId>
+            <artifactId>Winery-persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     
 </project>
