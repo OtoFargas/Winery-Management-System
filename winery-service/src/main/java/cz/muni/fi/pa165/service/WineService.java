@@ -20,19 +20,19 @@ public interface WineService {
     /**
      * @return list of all wines
      */
-    List<Wine> findAll();
+    List<Wine> findAllWines();
 
     /**
      * @param id of desired wine
      * @return fond wine
      */
-    Wine findById(Long id);
+    Wine findWineById(Long id);
 
     /**
      * @param name of desired wine
      * @return found wine
      */
-    Wine findByName(String name);
+    Wine findWineByName(String name);
 
     /**
      * @param wine to be updated

@@ -26,17 +26,17 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public List<Wine> findAll() {
+    public List<Wine> findAllWines() {
         return wineDao.findAll();
     }
 
     @Override
-    public Wine findById(Long id) {
+    public Wine findWineById(Long id) {
         return wineDao.findById(id);
     }
 
     @Override
-    public Wine findByName(String name) {
+    public Wine findWineByName(String name) {
         return wineDao.findByName(name);
     }
 
@@ -58,5 +58,6 @@ public class WineServiceImpl implements WineService {
         
         wine.setSold(wine.getSold() + amount);
         wine.setStocked(wine.getStocked() - amount);
+        wineDao.update(wine);
     }
 }
