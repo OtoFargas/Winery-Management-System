@@ -22,37 +22,37 @@ public class GrapeServiceImpl  implements GrapeService {
     GrapeDao grapeDao;
 
     @Override
-    public void create(Grape grape) {
+    public void createGrape(Grape grape) {
         grapeDao.create(grape);
     }
 
     @Override
-    public List<Grape> findAll() {
+    public List<Grape> findAllGrapes() {
         return grapeDao.findAll();
     }
 
     @Override
-    public Grape findById(Long id) {
+    public Grape findGrapeById(Long id) {
         return grapeDao.findById(id);
     }
 
     @Override
-    public Grape findByName(String name) {
+    public Grape findGrapeByName(String name) {
         return grapeDao.findByName(name);
     }
 
     @Override
-    public List<Grape> findByColor(GrapeColor color) {
+    public List<Grape> findGrapeByColor(GrapeColor color) {
         return grapeDao.findByColor(color);
     }
 
     @Override
-    public void remove(Grape grape) {
+    public void removeGrape(Grape grape) {
         grapeDao.remove(grape);
     }
 
     @Override
-    public void update(Grape grape) {
+    public void updateGrape(Grape grape) {
         grapeDao.update(grape);
     }
 

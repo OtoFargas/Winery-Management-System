@@ -17,40 +17,40 @@ public interface GrapeService {
     /**
      * @param grape to be created
      */
-    void create(Grape grape);
+    void createGrape(Grape grape);
 
     /**
      * @return list of all grapes
      */
-    List<Grape> findAll();
+    List<Grape> findAllGrapes();
 
     /**
      * @param id of desired grape
      * @return found grape
      */
-    Grape findById(Long id);
+    Grape findGrapeById(Long id);
 
     /**
      * @param name of desired grape
      * @return found grape
      */
-    Grape findByName(String name);
+    Grape findGrapeByName(String name);
 
     /**
      * @param color of desired grape
      * @return list of found grapes
      */
-    List<Grape> findByColor(GrapeColor color);
+    List<Grape> findGrapeByColor(GrapeColor color);
 
     /**
      * @param grape to be deleted
      */
-    void remove(Grape grape);
+    void removeGrape(Grape grape);
 
     /**
      * @param grape to be updated
      */
-    void update(Grape grape);
+    void updateGrape(Grape grape);
 
     /**
      * Cures disease of grape
