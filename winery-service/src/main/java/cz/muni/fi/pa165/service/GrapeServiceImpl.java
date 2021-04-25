@@ -64,10 +64,12 @@ public class GrapeServiceImpl  implements GrapeService {
         List<Disease> diseases = new ArrayList<>(grape.getDiseases());
         diseases.remove(disease);
         grape.setDiseases(diseases);
+        grapeDao.update(grape);
     }
 
     @Override
     public void cureAllDiseases(Grape grape) {
         grape.setDiseases(new ArrayList<>());
+        grapeDao.update(grape);
     }
 }
