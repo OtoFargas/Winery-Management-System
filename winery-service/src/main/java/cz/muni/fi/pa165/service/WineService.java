@@ -43,4 +43,10 @@ public interface WineService {
      * @param wine to be removed
      */
     void remove(Wine wine);
+
+    /**
+     * @param wine to be sold
+     * @param amount to be sold
+     */
+    void sell(Wine wine, Integer amount);
 }
