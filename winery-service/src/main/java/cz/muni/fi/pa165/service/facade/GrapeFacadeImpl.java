@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * This class implements GrapeFacade interace
+ * This class implements GrapeFacade interface
  *
  * @author Lukáš Fudor
  */
@@ -52,6 +52,12 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
+    public GrapeDTO getGrapesByName(String name) {
+        Grape grape = grapeService.findGrapeByName(name);
+        return beanMappingService.mapTo(grape, GrapeDTO.class);
+    }
+
+    @Override
     public void deleteGrape(Long id) {
         grapeService.removeGrape(grapeService.findGrapeById(id));
     }
@@ -61,7 +67,7 @@ public class GrapeFacadeImpl implements GrapeFacade {
         Grape grape = new Grape();
         grape.setName(grapeCreateDTO.getName());
         grapeService.createGrape(grape);
-        return  grape.getId();
+        return grape.getId();
     }
 
     @Override

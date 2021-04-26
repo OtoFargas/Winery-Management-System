@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.service;
 
 
+import cz.muni.fi.pa165.entities.Feedback;
+import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.entities.Wine;
 
 import java.util.List;
@@ -49,4 +51,16 @@ public interface WineService {
      * @param amount to be sold
      */
     void sellWine(Wine wine, Integer amount);
+
+    /**
+     * @param wine to be added to
+     * @param feedback to be added
+     */
+    void addFeedbackToWine(Wine wine, Feedback feedback);
+
+    /**
+     * @param wine to be added to
+     * @param harvest to be added
+     */
+    void addHarvestToWine(Wine wine, Harvest harvest);
 }

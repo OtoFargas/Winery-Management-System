@@ -16,28 +16,16 @@ import java.util.List;
 
 public interface WineFacade {
     /**
-     * @param wine to be created
+     * @param wineCreateDTO to be created
      * @return id of newly created wine
      */
-    Long createWine(WineCreateDTO wine);
+    Long createWine(WineCreateDTO wineCreateDTO);
 
     /**
      * @param id of the desired wine
      * @return WineDTO with the id
      */
     WineDTO getWineById(Long id);
-
-    /**
-     * @param feedbackID of the feedback to be added
-     * @param wineID of the wine for the addition
-     */
-    void addFeedback(Long feedbackID, Long wineID);
-
-    /**
-     * @param feedbackID of the feedback to removed
-     * @param wineID of the wine for the removal
-     */
-    void removeFeedback(Long feedbackID, Long wineID);
 
     /**
      * @param wineID of the wine to be deleted
@@ -50,20 +38,20 @@ public interface WineFacade {
     List<WineDTO> getAllWines();
 
     /**
-     * @param ingredient to be looked for
-     * @return list of wines that contain the ingredient
+     * @param wineID of the wine to be sold
+     * @param amount to be sold
      */
-    List<WineDTO> getWinesByIngredient(Ingredient ingredient);
+    void sellWine(Long wineID, Integer amount);
 
     /**
-     * @param taste to be looked for
-     * @return list of wines with the tast
+     * @param feedbackID of the feedback to be added
+     * @param wineID of the wine for the addition
      */
-    List<WineDTO> getWinesByTaste(Taste taste);
+    void addFeedback(Long feedbackID, Long wineID);
 
     /**
-     * * @param color to be looked for
-     * @return list of wines with the color
+     * @param harvestID of the harvest to be added
+     * @param wineID of the wine for the addition
      */
-    List<WineDTO> getWinesByColor(WineColor color);
+    void addHarvest(Long harvestID, Long wineID);
 }

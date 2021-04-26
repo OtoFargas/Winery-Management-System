@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.dao.WineDao;
+import cz.muni.fi.pa165.entities.Feedback;
+import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +61,21 @@ public class WineServiceImpl implements WineService {
         wine.setSold(wine.getSold() + amount);
         wine.setStocked(wine.getStocked() - amount);
         wineDao.update(wine);
+    }
+
+    @Override
+    public void addFeedbackToWine(Wine wine, Feedback feedback) {
+        if (wine.getFeedbacks().contains(feedback)) {
+            throw new WineryServiceException("This wine already contains this feedback!");
+        }
+        wine.addFeedback(feedback);
+    }
+
+    @Override
+    public void addHarvestToWine(Wine wine, Harvest harvest) {
+        if (wine.getHarvests().contains(harvest)) {
+            throw new WineryServiceException("This wine already contains this harvest!");
+        }
+        wine.addHarvest(harvest);
     }
 }

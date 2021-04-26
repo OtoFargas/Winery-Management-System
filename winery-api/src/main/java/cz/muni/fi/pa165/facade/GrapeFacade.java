@@ -33,6 +33,12 @@ public interface GrapeFacade {
     List<GrapeDTO> getGrapesByColor(GrapeColor grapeColor);
 
     /**
+     * @param name of the grape
+     * @return a list of grapes with the name
+     */
+    GrapeDTO getGrapesByName(String name);
+
+    /**
      * @param id of the grape to be deleted
      */
     void deleteGrape(Long id);
