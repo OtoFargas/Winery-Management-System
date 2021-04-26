@@ -21,19 +21,19 @@ public interface HarvestService {
     /**
      * @return list of all harvests
      */
-    List<Harvest> findAll();
+    List<Harvest> findAllHarvests();
 
     /**
      * @param id of desired harvest
      * @return found harvest
      */
-    Harvest findById(Long id);
+    Harvest findHarvestById(Long id);
 
     /**
      * @param year of desired harvest
      * @return list of found harvests
      */
-    List<Harvest> findByYear(Integer year);
+    List<Harvest> findHarvestByYear(Integer year);
 
     /**
      * @param harvest to be updated

@@ -9,10 +9,12 @@ import java.util.List;
 
 /**
  * This class implements the HarvestService interface.
+ *
+ * @author Lukáš Fudor
  */
 
 @Service
-public class HarvestServiceImpl implements HarvestService{
+public class HarvestServiceImpl implements HarvestService {
 
     @Autowired
     HarvestDao harvestDao;
@@ -23,17 +25,17 @@ public class HarvestServiceImpl implements HarvestService{
     }
 
     @Override
-    public List<Harvest> findAll() {
+    public List<Harvest> findAllHarvests() {
         return harvestDao.findAll();
     }
 
     @Override
-    public Harvest findById(Long id) {
+    public Harvest findHarvestById(Long id) {
         return harvestDao.findById(id);
     }
 
     @Override
-    public List<Harvest> findByYear(Integer year) {
+    public List<Harvest> findHarvestByYear(Integer year) {
         return harvestDao.findByYear(year);
     }
 
