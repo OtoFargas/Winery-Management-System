@@ -2,10 +2,13 @@ package cz.muni.fi.pa165.service.facade;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
+import cz.muni.fi.pa165.entities.Grape;
+import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.GrapeService;
+import cz.muni.fi.pa165.service.HarvestService;
 import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,43 +26,58 @@ import java.util.List;
 public class GrapeFacadeImpl implements GrapeFacade {
 
     @Inject
-    private GrapeService productService;
+    private GrapeService grapeService;
+
+    @Inject
+    private HarvestService harvestService;
 
     @Autowired
     private BeanMappingService beanMappingService;
 
     @Override
     public List<GrapeDTO> getAllGrapes() {
-        return null;
+        return beanMappingService.mapTo(grapeService.findAllGrapes(), GrapeDTO.class);
     }
 
     @Override
     public GrapeDTO getGrapeById(Long id) {
-        return null;
+        Grape grape = grapeService.findGrapeById(id);
+        return (grape == null) ? null : beanMappingService.mapTo(grape, GrapeDTO.class);
     }
 
     @Override
     public List<GrapeDTO> getGrapesByColor(GrapeColor grapeColor) {
-        return null;
+        List<Grape> grapes = grapeService.findGrapeByColor(grapeColor);
+        return beanMappingService.mapTo(grapes, GrapeDTO.class);
     }
 
     @Override
     public void deleteGrape(Long id) {
-
+        grapeService.removeGrape(grapeService.findGrapeById(id));
     }
 
     @Override
     public Long createGrape(GrapeCreateDTO grapeCreateDTO) {
-        return null;
+        Grape grape = new Grape();
+        grape.setName(grapeCreateDTO.getName());
+        grapeService.createGrape(grape);
+        return  grape.getId();
     }
 
     @Override
-    public void addHarvest(Long harvestID, Long GrapeID) {
-
+    public void addHarvest(Long harvestID, Long grapeID) {
+        grapeService.addHarvestToGrape(grapeService.findGrapeById(grapeID),
+                harvestService.findHarvestById(harvestID));
     }
 
     @Override
-    public void removeHarvest(Long harvestID, Long GrapeID) {
+    public void cureDisease(Long grapeID, Disease disease) {
+        Grape grape = grapeService.findGrapeById(grapeID);
+        grapeService.cureDisease(grape, disease);
+    }
 
+    @Override
+    public void cureAllDiseases(Long grapeID) {
+        grapeService.cureAllDiseases(grapeService.findGrapeById(grapeID));
     }
 }

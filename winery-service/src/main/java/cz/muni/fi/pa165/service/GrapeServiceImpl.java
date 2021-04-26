@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.dao.GrapeDao;
 import cz.muni.fi.pa165.entities.Grape;
+import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.exceptions.WineryServiceException;
@@ -54,6 +55,14 @@ public class GrapeServiceImpl  implements GrapeService {
     @Override
     public void updateGrape(Grape grape) {
         grapeDao.update(grape);
+    }
+
+    @Override
+    public void addHarvestToGrape(Grape grape, Harvest harvest) {
+        if (grape.getHarvests().contains(harvest)) {
+            throw new WineryServiceException("This grape already contains this harvest!");
+        }
+        grape.addHarvest(harvest);
     }
 
     @Override

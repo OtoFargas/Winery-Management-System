@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.entities.Grape;
+import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 
@@ -51,6 +52,12 @@ public interface GrapeService {
      * @param grape to be updated
      */
     void updateGrape(Grape grape);
+
+    /**
+     * @param grape to be added to
+     * @param harvest to be added
+     */
+    void addHarvestToGrape(Grape grape, Harvest harvest);
 
     /**
      * Cures disease of grape

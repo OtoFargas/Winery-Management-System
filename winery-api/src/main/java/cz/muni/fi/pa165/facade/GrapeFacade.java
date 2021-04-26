@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
+import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 
 import java.util.List;
@@ -44,13 +45,18 @@ public interface GrapeFacade {
 
     /**
      * @param harvestID of harvest to be added
-     * @param GrapeID of grape to receive harvest
+     * @param grapeID of grape to receive harvest
      */
-    void addHarvest(Long harvestID, Long GrapeID);
+    void addHarvest(Long harvestID, Long grapeID);
 
     /**
-     * @param harvestID of harvest to be removed
-     * @param GrapeID of grape to remove from
+     * @param grapeID to be cured
+     * @param disease to be cured
      */
-    void removeHarvest(Long harvestID, Long GrapeID);
+    void cureDisease(Long grapeID, Disease disease);
+
+    /**
+     * @param grapeID to be cured
+     */
+    void cureAllDiseases(Long grapeID);
 }
