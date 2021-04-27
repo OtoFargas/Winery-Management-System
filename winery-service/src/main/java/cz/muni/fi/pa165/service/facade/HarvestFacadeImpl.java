@@ -8,9 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import cz.muni.fi.pa165.dto.HarvestDTO;
-import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Harvest;
-import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.facade.HarvestFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.HarvestService;
@@ -57,21 +55,13 @@ public class HarvestFacadeImpl implements HarvestFacade {
 
     @Override
     public void updateHarvest(HarvestDTO harvestDTO) {
-        Harvest harvest = harvestService.findHarvestById(harvestDTO.getId());
+        Harvest harvest = beanMappingService.mapTo(harvestDTO, Harvest.class);
 
-        harvest.setHarvestYear(harvestDTO.getHarvestYear());
-        harvest.setQuality(harvestDTO.getQuality());
-        harvest.setQuantity(harvestDTO.getQuantity());
-        harvest.setGrape(beanMappingService.mapTo(harvestDTO.getGrape(), Grape.class));
-        harvest.setWine(beanMappingService.mapTo(harvestDTO.getWine(), Wine.class));
-
-        beanMappingService.mapTo(harvestDTO, Harvest.class);
+        harvestService.updateHarvest(harvest);
     }
 
     @Override
     public void removeHarvest(HarvestDTO harvestDTO) {
         harvestService.removeHarvest(beanMappingService.mapTo(harvestDTO, Harvest.class));
     }
-
-    
 }
