@@ -28,9 +28,9 @@ public interface WineFacade {
     WineDTO getWineById(Long id);
 
     /**
-     * @param id of the wine to be updated
+     * @param wineDTO to be updated
      */
-    void updateWine(Long id);
+    void updateWine(WineDTO wineDTO);
 
     /**
      * @param wineID of the wine to be deleted

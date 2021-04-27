@@ -44,9 +44,9 @@ public interface GrapeFacade {
     void deleteGrape(Long id);
 
     /**
-     * @param id of the grape to be updated
+     * @param grapeDTO to be updated
      */
-    void updateGrape(Long id);
+    void updateGrape(GrapeDTO grapeDTO);
 
     /**
      * @param grapeCreateDTO grape to be created

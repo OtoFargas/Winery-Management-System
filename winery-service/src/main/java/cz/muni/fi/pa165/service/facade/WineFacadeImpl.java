@@ -61,8 +61,8 @@ public class WineFacadeImpl implements WineFacade {
     }
 
     @Override
-    public void updateWine(Long id) {
-        Wine wine = wineService.findWineById(id);
+    public void updateWine(WineDTO wineDTO) {
+        Wine wine = beanMappingService.mapTo(wineDTO, Wine.class);
         wineService.updateWine(wine);
     }
 

@@ -67,8 +67,8 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public void updateGrape(Long id) {
-        Grape grape = grapeService.findGrapeById(id);
+    public void updateGrape(GrapeDTO grapeDTO) {
+        Grape grape = beanMappingService.mapTo(grapeDTO, Grape.class);
         grapeService.updateGrape(grape);
     }
 
