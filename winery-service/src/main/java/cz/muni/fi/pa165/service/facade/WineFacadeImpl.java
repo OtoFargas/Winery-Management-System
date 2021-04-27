@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.service.facade;
 
+import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.entities.Feedback;
@@ -77,9 +78,9 @@ public class WineFacadeImpl implements WineFacade {
     }
 
     @Override
-    public void sellWine(Long wineID, Integer amount) {
-        Wine wine = wineService.findWineById(wineID);
-        wineService.sellWine(wine, amount);
+    public void sellWine(WineBuyDTO wineBuyDTO) {
+        Wine wine = wineService.findWineById(wineBuyDTO.getId());
+        wineService.sellWine(wine, wineBuyDTO.getAmount());
     }
 
     @Override

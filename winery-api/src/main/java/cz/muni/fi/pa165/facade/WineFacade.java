@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.facade;
 
+import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.enums.Ingredient;
@@ -43,10 +44,9 @@ public interface WineFacade {
     List<WineDTO> getAllWines();
 
     /**
-     * @param wineID of the wine to be sold
-     * @param amount to be sold
+     * @param wineBuyDTO to be bought
      */
-    void sellWine(Long wineID, Integer amount);
+    void sellWine(WineBuyDTO wineBuyDTO);
 
     /**
      * @param feedbackID of the feedback to be added
