@@ -61,7 +61,9 @@ public class HarvestFacadeImpl implements HarvestFacade {
     }
 
     @Override
-    public void removeHarvest(HarvestDTO harvestDTO) {
-        harvestService.removeHarvest(beanMappingService.mapTo(harvestDTO, Harvest.class));
+    public void removeHarvest(Long id) {
+        harvestService.removeHarvest(harvestService.findHarvestById(id));
     }
+
+    
 }

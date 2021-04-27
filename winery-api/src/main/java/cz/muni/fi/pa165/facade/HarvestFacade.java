@@ -39,7 +39,7 @@ public interface HarvestFacade {
     void updateHarvest(HarvestDTO harvestDTO);
 
     /**
-     * @param harvestDTO to be deleted
+     * @param id of harvest to be deleted
      */
-    void removeHarvest(HarvestDTO harvestDTO);
+    void removeHarvest(Long id);
 }
