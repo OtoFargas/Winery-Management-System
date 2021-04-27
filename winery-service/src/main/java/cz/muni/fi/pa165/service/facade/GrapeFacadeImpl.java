@@ -9,9 +9,9 @@ import cz.muni.fi.pa165.facade.GrapeFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
-import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.inject.Inject;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -25,14 +25,17 @@ import java.util.List;
 @Transactional
 public class GrapeFacadeImpl implements GrapeFacade {
 
-    @Inject
-    private GrapeService grapeService;
+    private final GrapeService grapeService;
+    private final HarvestService harvestService;
+
+    private final BeanMappingService beanMappingService;
 
     @Inject
-    private HarvestService harvestService;
-
-    @Autowired
-    private BeanMappingService beanMappingService;
+    public GrapeFacadeImpl(GrapeService grapeService, HarvestService harvestService, BeanMappingService beanMappingService) {
+        this.grapeService = grapeService;
+        this.harvestService = harvestService;
+        this.beanMappingService = beanMappingService;
+    }
 
     @Override
     public List<GrapeDTO> getAllGrapes() {

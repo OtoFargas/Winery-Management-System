@@ -103,4 +103,16 @@ public class WineDTO {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    @Override
+    public String toString() {
+        return "WineDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", stocked=" + stocked +
+                ", sold=" + sold +
+                ", type=" + type +
+                ", ingredients=" + ingredients +
+                '}';
+    }
 }

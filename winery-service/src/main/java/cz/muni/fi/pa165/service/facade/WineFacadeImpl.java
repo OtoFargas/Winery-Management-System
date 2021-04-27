@@ -1,21 +1,17 @@
 package cz.muni.fi.pa165.service.facade;
 
-import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.entities.Feedback;
-import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.entities.Wine;
-import cz.muni.fi.pa165.enums.Ingredient;
-import cz.muni.fi.pa165.enums.Taste;
-import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.WineFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
+import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
 import cz.muni.fi.pa165.service.WineService;
-import org.dozer.inject.Inject;
+import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,17 +27,19 @@ import java.util.List;
 @Transactional
 public class WineFacadeImpl implements WineFacade {
 
-    @Inject
-    private WineService wineService;
+    private final WineService wineService;
+    private final HarvestService harvestService;
+    private final FeedbackService feedbackService;
+
+    private final BeanMappingService beanMappingService;
 
     @Inject
-    private HarvestService harvestService;
-
-    @Inject
-    private FeedbackService feedbackService;
-
-    @Autowired
-    private BeanMappingService beanMappingService;
+    public WineFacadeImpl(WineService wineService, FeedbackService feedbackService, HarvestService harvestService, BeanMappingService beanMappingService) {
+        this.wineService = wineService;
+        this.harvestService = harvestService;
+        this.feedbackService = feedbackService;
+        this.beanMappingService = beanMappingService;
+    }
 
     @Override
     public Long createWine(WineCreateDTO wineCreateDTO) {
