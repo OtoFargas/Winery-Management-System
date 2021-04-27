@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.service.facade;
 
+import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
 import cz.muni.fi.pa165.entities.Feedback;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
@@ -31,15 +32,15 @@ public class FeedbackFacadeImpl implements FeedbackFacade {
     }
 
     @Override
-    public Long createFeedback(FeedbackDTO feedbackDTO) {
-        Feedback feedback = beanMappingService.mapTo(feedbackDTO, Feedback.class);
+    public Long createFeedback(FeedbackCreateDTO feedbackCreateDTO) {
+        Feedback feedback = beanMappingService.mapTo(feedbackCreateDTO, Feedback.class);
         feedbackService.createFeedback(feedback);
         return feedback.getId();
     }
 
     @Override
-    public FeedbackDTO findFeedbackById(Long id) {
-        Feedback feedback = feedbackService.findFeedbackById(id);
+    public FeedbackDTO findFeedbackById(Long feedbackId) {
+        Feedback feedback = feedbackService.findFeedbackById(feedbackId);
         return (feedback == null) ? null : beanMappingService.mapTo(feedback, FeedbackDTO.class);
     }
 
@@ -60,7 +61,8 @@ public class FeedbackFacadeImpl implements FeedbackFacade {
     }
 
     @Override
-    public void removeFeedback(FeedbackDTO feedbackDTO) {
-        feedbackService.removeFeedback(beanMappingService.mapTo(feedbackDTO, Feedback.class));
+    public void removeFeedback(Long feedbackId) {
+        Feedback feedback = feedbackService.findFeedbackById(feedbackId);
+        feedbackService.removeFeedback(feedback);
     }
 }

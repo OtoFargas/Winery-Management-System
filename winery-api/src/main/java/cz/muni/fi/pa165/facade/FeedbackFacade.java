@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.facade;
 
+import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
 
 
@@ -12,10 +13,10 @@ import java.util.List;
  */
 public interface FeedbackFacade {
     /**
-     * @param feedbackDTO to be created
+     * @param feedbackCreateDTO to be created
      * @return id of newly created feedback
      */
-    Long createFeedback(FeedbackDTO feedbackDTO);
+    Long createFeedback(FeedbackCreateDTO feedbackCreateDTO);
 
     /**
      * @param id of the desired feedback
@@ -40,7 +41,7 @@ public interface FeedbackFacade {
     void updateFeedback(FeedbackDTO feedbackDTO);
 
     /**
-     * @param feedbackDTO to be deleted
+     * @param feedbackId of Feedback to be deleted
      */
-    void removeFeedback(FeedbackDTO feedbackDTO);
+    void removeFeedback(Long feedbackId);
 }
