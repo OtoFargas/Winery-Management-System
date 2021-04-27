@@ -82,14 +82,14 @@ public class WineCreateDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof WineCreateDTO)) return false;
         WineCreateDTO that = (WineCreateDTO) o;
-        return name.equals(that.name);
+        return getName().equals(that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(getName());
     }
 
     @Override

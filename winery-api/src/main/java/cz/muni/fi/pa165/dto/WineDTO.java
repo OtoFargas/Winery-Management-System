@@ -94,14 +94,14 @@ public class WineDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof WineDTO)) return false;
         WineDTO wineDTO = (WineDTO) o;
-        return name.equals(wineDTO.name);
+        return getName().equals(wineDTO.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(getName());
     }
 
     @Override
