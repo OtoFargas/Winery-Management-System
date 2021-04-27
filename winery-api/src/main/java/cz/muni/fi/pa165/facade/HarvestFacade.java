@@ -4,12 +4,15 @@ import java.util.List;
 
 import cz.muni.fi.pa165.dto.HarvestDTO;
 
+/**
+ * @author Vladimir Visnovsky
+ */
 public interface HarvestFacade {
     /**
      * Create new harvest
      * @param harvestDTO to be created
      */
-    void createHarvest(HarvestDTO harvest);
+    void createHarvest(HarvestDTO harvestDTO);
 
     /**
      * Find all harvests
@@ -33,10 +36,10 @@ public interface HarvestFacade {
     /**
      * @param harvestDTO to be updated
      */
-    void updateHarvest(HarvestDTO harvest);
+    void updateHarvest(HarvestDTO harvestDTO);
 
     /**
      * @param harvestDTO to be deleted
      */
-    void removeHarvest(HarvestDTO harvest);
+    void removeHarvest(HarvestDTO harvestDTO);
 }
