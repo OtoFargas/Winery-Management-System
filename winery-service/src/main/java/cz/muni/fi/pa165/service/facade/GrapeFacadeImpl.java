@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.service.facade;
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.entities.Grape;
+import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
@@ -55,7 +56,7 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public GrapeDTO getGrapesByName(String name) {
+    public GrapeDTO getGrapeByName(String name) {
         Grape grape = grapeService.findGrapeByName(name);
         return beanMappingService.mapTo(grape, GrapeDTO.class);
     }
@@ -66,9 +67,19 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
+    public void updateGrape(Long id) {
+        Grape grape = grapeService.findGrapeById(id);
+        grapeService.updateGrape(grape);
+    }
+
+    @Override
     public Long createGrape(GrapeCreateDTO grapeCreateDTO) {
         Grape grape = new Grape();
         grape.setName(grapeCreateDTO.getName());
+        grape.setColor(grapeCreateDTO.getColor());
+        grape.setQuantity(grapeCreateDTO.getQuantity());
+        grape.setDiseases(grapeCreateDTO.getDiseases());
+
         grapeService.createGrape(grape);
         return grape.getId();
     }

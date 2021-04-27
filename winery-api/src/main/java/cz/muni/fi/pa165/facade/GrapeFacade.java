@@ -36,12 +36,17 @@ public interface GrapeFacade {
      * @param name of the grape
      * @return a list of grapes with the name
      */
-    GrapeDTO getGrapesByName(String name);
+    GrapeDTO getGrapeByName(String name);
 
     /**
      * @param id of the grape to be deleted
      */
     void deleteGrape(Long id);
+
+    /**
+     * @param id of the grape to be updated
+     */
+    void updateGrape(Long id);
 
     /**
      * @param grapeCreateDTO grape to be created

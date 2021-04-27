@@ -28,6 +28,11 @@ public interface WineFacade {
     WineDTO getWineById(Long id);
 
     /**
+     * @param id of the wine to be updated
+     */
+    void updateWine(Long id);
+
+    /**
      * @param wineID of the wine to be deleted
      */
     void deleteWine(Long wineID);
