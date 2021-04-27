@@ -2,6 +2,11 @@ package cz.muni.fi.pa165.dto;
 
 import java.util.Objects;
 
+/**
+ * DTO class for buying Wine
+ *
+ * @author Oto Fargas
+ */
 public class WineBuyDTO {
 
     private Long id;
