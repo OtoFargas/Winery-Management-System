@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.dto;
 
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -88,8 +87,8 @@ public class HarvestCreateDTO {
                 ", harvestYear=" + harvestYear +
                 ", quality=" + quality +
                 ", quantity=" + quantity +
-                ", wineCreateDTO=" + wine +
-                ", grapeCreateDTO=" + grape +
+                ", wineDTO=" + wine +
+                ", grapeDTO=" + grape +
                 '}';
     }
 }
