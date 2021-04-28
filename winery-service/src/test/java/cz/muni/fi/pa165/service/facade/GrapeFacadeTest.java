@@ -1,6 +1,9 @@
 package cz.muni.fi.pa165.service.facade;
 
+import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
@@ -9,13 +12,21 @@ import org.testng.annotations.Test;
 import javax.inject.Inject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
+import javafx.util.Pair;
+import cz.muni.fi.pa165.dto.GrapeCreateDTO;
+import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.entities.Grape;
+import cz.muni.fi.pa165.entities.Harvest;
+import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
+import cz.muni.fi.pa165.enums.Ingredient;
+import cz.muni.fi.pa165.enums.Quality;
+import cz.muni.fi.pa165.enums.Taste;
+import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.GrapeService;
@@ -30,14 +41,17 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
-    private GrapeService grapeService = mock(GrapeService.class);
-    private HarvestService harvestService = mock(HarvestService.class);
+    @Mock
+    private GrapeService grapeService;
+
+    @Mock
+    private HarvestService harvestService;
 
     @Inject
     private BeanMappingService beanMappingService;
 
     @InjectMocks
-    private GrapeFacade grapeFacade;
+    private GrapeFacade grapeFacade = new GrapeFacadeImpl(grapeService, harvestService, beanMappingService);
 
     @BeforeMethod
     public void setupFacade() {
@@ -48,9 +62,14 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     private Grape testGrape2;
     private Grape testGrape3;
 
-    private GrapeDTO testGrapeDTO1;
-    private GrapeDTO testGrapeDTO2;
-    private GrapeDTO testGrapeDTO3;
+    private Harvest testHarvest1;
+
+    private Wine testWine1;
+
+    @BeforeMethod
+    public void setup() throws ServiceException {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @BeforeMethod
     public void createEntities() {
@@ -74,39 +93,22 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         testGrape3.setDiseases(new ArrayList<>());
         testGrape3.setQuantity(0);
         testGrape3.setId(3L);
-    }
 
-    @BeforeMethod
-    public void createDTO() {
-        testGrapeDTO1 = new GrapeDTO();
-        testGrapeDTO1.setName("testGrape1");
-        testGrapeDTO1.setColor(GrapeColor.RED);
-        testGrapeDTO1.setDiseases(new ArrayList<>(List.of(Disease.ANTHRACNOSE, Disease.CROWN_GALL)));
-        testGrapeDTO1.setQuantity(20);
-        testGrapeDTO1.setId(1L);
+        testWine1 = new Wine();
+        testWine1.setId(1L);
+        testWine1.setIngredients(new ArrayList<Ingredient>(List.of(Ingredient.CALCIUM)));
+        testWine1.setName("testWine1");
+        testWine1.setSold(20);
+        testWine1.setStocked(40);
+        testWine1.setType(new Pair<>(WineColor.RED, Taste.SWEET));
 
-        testGrapeDTO2 = new GrapeDTO();
-        testGrapeDTO2.setName("testGrape2");
-        testGrapeDTO2.setColor(GrapeColor.WHITE);
-        testGrapeDTO2.setDiseases(new ArrayList<>(List.of(Disease.CROWN_GALL)));
-        testGrapeDTO2.setQuantity(15);
-        testGrapeDTO2.setId(2L);
-
-        testGrapeDTO3 = new GrapeDTO();
-        testGrapeDTO3.setName("testGrape3");
-        testGrapeDTO3.setColor(GrapeColor.RED);
-        testGrapeDTO3.setDiseases(new ArrayList<>());
-        testGrapeDTO3.setQuantity(0);
-        testGrapeDTO3.setId(3L);
-    }
-
-    @Test
-    public void deleteGrapeTest() {
-        when(grapeService.findGrapeById(1L)).thenReturn(testGrape1);
-
-        grapeFacade.removeGrape(1L);
-
-        verify(grapeService, times(1)).removeGrape(testGrape1);
+        testHarvest1 = new Harvest();
+        testHarvest1.setHarvestYear(2009);
+        testHarvest1.setId(1L);
+        testHarvest1.setQuality(Quality.HIGH);
+        testHarvest1.setGrape(testGrape1);
+        testHarvest1.setQuantity(20);
+        testHarvest1.setWine(testWine1);
     }
 
     @Test
@@ -150,4 +152,68 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         verify(grapeService).findGrapeByName(testGrape1.getName());
         assertThat(grapeDto1).isEqualTo(grapeDto2);
     }
+
+    @Test
+    public void getAllGrapesTest() {
+        GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
+        GrapeDTO grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
+        GrapeDTO grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
+
+        when(grapeService.findAllGrapes()).thenReturn(new ArrayList<>(List.of(testGrape1, testGrape2, testGrape3)));
+
+        List<GrapeDTO> allGrapeDtos = grapeFacade.getAllGrapes();
+
+        verify(grapeService).findAllGrapes();
+        assertThat(allGrapeDtos).containsExactlyInAnyOrder(grapeDto1, grapeDto2, grapeDto3);
+    }
+
+    @Test
+    public void updateGrapeTest() {
+        GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
+
+        grapeDto1.setName("newName");
+        grapeFacade.updateGrape(grapeDto1);
+        grapeDto1.setName("testGrape1");
+        grapeFacade.updateGrape(grapeDto1);
+ 
+        verify(grapeService).updateGrape(testGrape1);
+    }
+
+    @Test
+    public void deleteGrapeTest() {
+        when(grapeService.findGrapeById(1L)).thenReturn(testGrape1);
+
+        grapeFacade.removeGrape(1L);
+
+        verify(grapeService).removeGrape(testGrape1);
+    }
+
+    @Test
+    public void createGrapeTest(){
+        GrapeCreateDTO grapeCreateDto1 = beanMappingService.mapTo(testGrape1, GrapeCreateDTO.class);
+
+        grapeFacade.createGrape(grapeCreateDto1);
+        verify(grapeService, times(1)).createGrape(testGrape1);
+    }
+
+    @Test
+    public void addHarvestTest(){
+        grapeFacade.addHarvest(testHarvest1.getId(), testGrape1.getId());
+        verify(grapeService).addHarvestToGrape(any(), any());
+    }
+
+    @Test
+    public void cureDiseaseTest(){
+        GrapeCureDTO grapeCureDto1 = beanMappingService.mapTo(testGrape1, GrapeCureDTO.class);
+
+        grapeFacade.cureDisease(grapeCureDto1);
+        verify(grapeService).cureDisease(any(), any());
+    }
+
+    @Test
+    public void cureAllDiseasesTest(){
+        grapeFacade.cureAllDiseases(1L);
+        verify(grapeService).cureAllDiseases(any());
+    }
 }
+
