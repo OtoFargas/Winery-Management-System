@@ -56,7 +56,7 @@ public class WineFacadeImpl implements WineFacade {
     }
 
     @Override
-    public WineDTO getWineById(Long id) {
+    public WineDTO findWineById(Long id) {
         Wine wine = wineService.findWineById(id);
         return (wine == null) ? null : beanMappingService.mapTo(wine, WineDTO.class);
     }
@@ -74,7 +74,7 @@ public class WineFacadeImpl implements WineFacade {
     }
 
     @Override
-    public void deleteWine(Long wineID) {
+    public void removeWine(Long wineID) {
         wineService.removeWine(wineService.findWineById(wineID));
     }
 

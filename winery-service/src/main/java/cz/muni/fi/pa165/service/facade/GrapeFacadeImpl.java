@@ -4,14 +4,11 @@ import cz.muni.fi.pa165.dto.GrapeCreateDTO;
 import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.entities.Grape;
-import cz.muni.fi.pa165.entities.Wine;
-import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
@@ -45,25 +42,25 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public GrapeDTO getGrapeById(Long id) {
+    public GrapeDTO findGrapeById(Long id) {
         Grape grape = grapeService.findGrapeById(id);
         return (grape == null) ? null : beanMappingService.mapTo(grape, GrapeDTO.class);
     }
 
     @Override
-    public List<GrapeDTO> getGrapesByColor(GrapeColor grapeColor) {
+    public List<GrapeDTO> findGrapesByColor(GrapeColor grapeColor) {
         List<Grape> grapes = grapeService.findGrapeByColor(grapeColor);
         return beanMappingService.mapTo(grapes, GrapeDTO.class);
     }
 
     @Override
-    public GrapeDTO getGrapeByName(String name) {
+    public GrapeDTO findGrapeByName(String name) {
         Grape grape = grapeService.findGrapeByName(name);
         return beanMappingService.mapTo(grape, GrapeDTO.class);
     }
 
     @Override
-    public void deleteGrape(Long id) {
+    public void removeGrape(Long id) {
         grapeService.removeGrape(grapeService.findGrapeById(id));
     }
 

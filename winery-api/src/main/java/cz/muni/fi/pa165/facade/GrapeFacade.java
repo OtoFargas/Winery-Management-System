@@ -25,24 +25,24 @@ public interface GrapeFacade {
      * @param id from database
      * @return Grape with id from the parameter
      */
-    GrapeDTO getGrapeById(Long id);
+    GrapeDTO findGrapeById(Long id);
 
     /**
      * @param grapeColor enum, color of the grape
      * @return a list of grapes with the grapeColor color
      */
-    List<GrapeDTO> getGrapesByColor(GrapeColor grapeColor);
+    List<GrapeDTO> findGrapesByColor(GrapeColor grapeColor);
 
     /**
      * @param name of the grape
      * @return a list of grapes with the name
      */
-    GrapeDTO getGrapeByName(String name);
+    GrapeDTO findGrapeByName(String name);
 
     /**
      * @param id of the grape to be deleted
      */
-    void deleteGrape(Long id);
+    void removeGrape(Long id);
 
     /**
      * @param grapeDTO to be updated

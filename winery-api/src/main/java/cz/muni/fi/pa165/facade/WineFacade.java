@@ -26,7 +26,7 @@ public interface WineFacade {
      * @param id of the desired wine
      * @return WineDTO with the id
      */
-    WineDTO getWineById(Long id);
+    WineDTO findWineById(Long id);
 
     /**
      * @param name of the desired wine
@@ -42,7 +42,7 @@ public interface WineFacade {
     /**
      * @param wineID of the wine to be deleted
      */
-    void deleteWine(Long wineID);
+    void removeWine(Long wineID);
 
     /**
      * @return list of all wines

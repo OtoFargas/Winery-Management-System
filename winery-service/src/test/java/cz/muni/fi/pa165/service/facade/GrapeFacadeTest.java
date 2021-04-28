@@ -104,7 +104,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     public void deleteGrapeTest() {
         when(grapeService.findGrapeById(1L)).thenReturn(testGrape1);
 
-        grapeFacade.deleteGrape(1L);
+        grapeFacade.removeGrape(1L);
 
         verify(grapeService, times(1)).removeGrape(testGrape1);
     }
@@ -115,7 +115,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
         when(grapeService.findGrapeById(testGrape1.getId())).thenReturn(testGrape1);
 
-        GrapeDTO grapeDto2 = grapeFacade.getGrapeById(testGrape1.getId());
+        GrapeDTO grapeDto2 = grapeFacade.findGrapeById(testGrape1.getId());
 
         verify(grapeService).findGrapeById(testGrape1.getId());
         assertThat(grapeDto1).isEqualTo(grapeDto2);
@@ -130,8 +130,8 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         when(grapeService.findGrapeByColor(GrapeColor.RED)).thenReturn(new ArrayList<>(List.of(testGrape1, testGrape3)));
         when(grapeService.findGrapeByColor(GrapeColor.WHITE)).thenReturn(new ArrayList<>(List.of(testGrape2)));
 
-        List<GrapeDTO> redGrapeDtos = grapeFacade.getGrapesByColor(GrapeColor.RED);
-        List<GrapeDTO> whiteGrapeDtos = grapeFacade.getGrapesByColor(GrapeColor.WHITE);
+        List<GrapeDTO> redGrapeDtos = grapeFacade.findGrapesByColor(GrapeColor.RED);
+        List<GrapeDTO> whiteGrapeDtos = grapeFacade.findGrapesByColor(GrapeColor.WHITE);
 
         verify(grapeService).findGrapeByColor(GrapeColor.RED);
         verify(grapeService).findGrapeByColor(GrapeColor.WHITE);
@@ -145,7 +145,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
         when(grapeService.findGrapeByName(testGrape1.getName())).thenReturn(testGrape1);
 
-        GrapeDTO grapeDto2 = grapeFacade.getGrapeByName(testGrape1.getName());
+        GrapeDTO grapeDto2 = grapeFacade.findGrapeByName(testGrape1.getName());
 
         verify(grapeService).findGrapeByName(testGrape1.getName());
         assertThat(grapeDto1).isEqualTo(grapeDto2);
