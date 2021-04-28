@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.service.facade;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
+import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Wine;
@@ -91,13 +92,14 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public void cureDisease(Long grapeID, Disease disease) {
-        Grape grape = grapeService.findGrapeById(grapeID);
-        grapeService.cureDisease(grape, disease);
+    public void cureDisease(GrapeCureDTO grapeCureDTO) {
+        Grape grape = grapeService.findGrapeById(grapeCureDTO.getId());
+        grapeService.cureDisease(grape, grapeCureDTO.getDisease());
     }
 
     @Override
     public void cureAllDiseases(Long grapeID) {
-        grapeService.cureAllDiseases(grapeService.findGrapeById(grapeID));
+        Grape grape = grapeService.findGrapeById(grapeID);
+        grapeService.cureAllDiseases(grape);
     }
 }
