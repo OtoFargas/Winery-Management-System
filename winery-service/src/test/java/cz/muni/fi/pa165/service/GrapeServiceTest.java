@@ -95,7 +95,7 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testFindNonExistingLectureById() {
+    public void testFindNonExistingGrapeById() {
         Grape foundGrape = grapeService.findGrapeById(5L);
         assertThat(foundGrape).isNull();
     }
