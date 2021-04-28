@@ -2,6 +2,9 @@ package cz.muni.fi.pa165.dao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import cz.muni.fi.pa165.PersistenceApplicationContext;
@@ -25,7 +28,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 
-
+/**
+ * @author Vladimir Visnovsky
+ */
 @ContextConfiguration(classes= PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
@@ -56,9 +61,9 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         testWine2 = createWine(25, 100, ingredients2, "Orech", new Pair<>(WineColor.ROSE, Taste.SEMI_SWEET));
 
         // Create test feedbacks
-        testFeedback1 = createFeedback("Oto Fargas", "Very good wine", LocalDate.now(), 7, testWine1);
-        testFeedback2 = createFeedback("Lukas Fudor", "Tastes like sh*t, wanted to throw up", LocalDate.now(), 1, testWine2);
-        testFeedback3 = createFeedback("Oto Fargas", "Pretty nice taste, the touch of vanilla makes all the difference", LocalDate.now(), 10, testWine2);
+        testFeedback1 = createFeedback("Oto Fargas", "Very good wine", new Date(), 7, testWine1);
+        testFeedback2 = createFeedback("Lukas Fudor", "Tastes like sh*t, wanted to throw up", new Date(), 1, testWine2);
+        testFeedback3 = createFeedback("Oto Fargas", "Pretty nice taste, the touch of vanilla makes all the difference", new Date(), 10, testWine2);
 
         em.persist(testWine1);
         em.persist(testWine2);
@@ -78,7 +83,7 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         return wine;
     }
 
-    private Feedback createFeedback(String author, String content, LocalDate date, Integer rating, Wine wine) {
+    private Feedback createFeedback(String author, String content, Date date, Integer rating, Wine wine) {
         Feedback feedback = new Feedback();
         feedback.setAuthor(author);
         feedback.setContent(content);
@@ -90,7 +95,7 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void createTest() {
-        Feedback newFeedback = createFeedback("Fudas Ludor", "Test content", LocalDate.now(), 7, testWine1);
+        Feedback newFeedback = createFeedback("Fudas Ludor", "Test content", new Date(), 7, testWine1);
         feedbackDao.create(newFeedback);
 
         Assert.assertEquals(em.createQuery("select f from Feedback f", Feedback.class).getResultList().size(), 4);
@@ -107,13 +112,13 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
 
         feedbackOtoAssert.setAuthor("Oto Fargas");
         feedbackOtoAssert.setContent("Very good wine");
-        feedbackOtoAssert.setDate(LocalDate.now());
+        feedbackOtoAssert.setDate(new Date());
         feedbackOtoAssert.setRating(7);
         feedbackOtoAssert.setWine(testWine1);
 
         feedbackLukasAssert.setAuthor("Lukas Fudor");
         feedbackLukasAssert.setContent("Tastes like sh*t, wanted to throw up");
-        feedbackLukasAssert.setDate(LocalDate.now());
+        feedbackLukasAssert.setDate(new Date());
         feedbackLukasAssert.setRating(1);
         feedbackLukasAssert.setWine(testWine2);
 
@@ -123,25 +128,26 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
 
     @Test(expectedExceptions= ConstraintViolationException.class)
     public void nullAuthorNotAllowedTest() {
-        Feedback nullAuthorFeedback = createFeedback(null, "Very good wine", LocalDate.now(), 7, testWine1);
+        Feedback nullAuthorFeedback = createFeedback(null, "Very good wine", new Date(), 7, testWine1);
         feedbackDao.create(nullAuthorFeedback);
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
     public void emptyStringAuthorNotAllowedTest() {
-        Feedback emptyStringAuthorFeedback = createFeedback("", "Very good wine", LocalDate.now(), 7, testWine1);
+        Feedback emptyStringAuthorFeedback = createFeedback("", "Very good wine", new Date(), 7, testWine1);
         feedbackDao.create(emptyStringAuthorFeedback);
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
     public void negativeRatingNotAllowedTest() {
-        Feedback negativeRatingFeedback = createFeedback("Oto Fargas", "Very good wine", LocalDate.now(), -2, testWine1);
+        Feedback negativeRatingFeedback = createFeedback("Oto Fargas", "Very good wine", new Date(), -2, testWine1);
         feedbackDao.create(negativeRatingFeedback);
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)
     public void futureDateNotAllowedTest() {
-        Feedback futureDateFeedback = createFeedback("Oto Fargas", "Very good wine", LocalDate.now().plusMonths(1), 7, testWine1);
+        Date date = new GregorianCalendar(LocalDate.now().getYear() + 2, Calendar.AUGUST, 25).getTime();
+        Feedback futureDateFeedback = createFeedback("Oto Fargas", "Very good wine", date, 7, testWine1);
         feedbackDao.create(futureDateFeedback);
     }
 

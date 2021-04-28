@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,7 +14,7 @@ public class FeedbackDTO {
     private String author;
     private Integer rating;
     private String content;
-    private LocalDate date;
+    private Date date;
     private WineDTO wine;
 
     public Long getId() {
@@ -48,11 +49,11 @@ public class FeedbackDTO {
         this.content = content;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -81,15 +82,11 @@ public class FeedbackDTO {
         if (this == o) return true;
         if (!(o instanceof FeedbackDTO)) return false;
         FeedbackDTO that = (FeedbackDTO) o;
-        return getAuthor().equals(that.getAuthor())
-            && getRating().equals(that.getRating())
-            && getContent().equals(that.getContent())
-            && getDate().equals(that.getDate())
-            && Objects.equals(getWine(), that.getWine());
+        return getAuthor().equals(that.getAuthor()) && getRating().equals(that.getRating()) && getContent().equals(that.getContent()) && getDate().equals(that.getDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAuthor(), getRating(), getContent(), getDate(), getWine());
+        return Objects.hash(getAuthor(), getRating(), getContent(), getDate());
     }
 }

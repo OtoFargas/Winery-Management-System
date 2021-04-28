@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Entity class for feedback
@@ -35,7 +36,7 @@ public class Feedback {
     @NotNull
     @PastOrPresent
     @Column(nullable = false)
-    private LocalDate date;
+    private Date date;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     private Wine wine;
@@ -80,11 +81,11 @@ public class Feedback {
         this.content = content;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

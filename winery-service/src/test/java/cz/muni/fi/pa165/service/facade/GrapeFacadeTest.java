@@ -150,6 +150,4 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         verify(grapeService).findGrapeByName(testGrape1.getName());
         assertThat(grapeDto1).isEqualTo(grapeDto2);
     }
-
-
 }

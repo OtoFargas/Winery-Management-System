@@ -23,6 +23,7 @@ import javafx.util.Pair;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -73,21 +74,21 @@ public class FeedbackServiceTest extends AbstractTestNGSpringContextTests {
         testFeedback1 = new Feedback(1L);
         testFeedback1.setAuthor("testAuthor1");
         testFeedback1.setContent("testContent1");
-        testFeedback1.setDate(LocalDate.now());
+        testFeedback1.setDate(new Date());
         testFeedback1.setRating(5);
         testFeedback1.setWine(testWine1);
 
         testFeedback2 = new Feedback(2L);
         testFeedback2.setAuthor("testAuthor2");
         testFeedback2.setContent("testContent2");
-        testFeedback2.setDate(LocalDate.now());
+        testFeedback2.setDate(new Date());
         testFeedback2.setRating(3);
         testFeedback2.setWine(testWine2);
 
         testFeedback3 = new Feedback(3L);
         testFeedback3.setAuthor("testAuthor3");
         testFeedback3.setContent("testContent3");
-        testFeedback3.setDate(LocalDate.now());
+        testFeedback3.setDate(new Date());
         testFeedback3.setRating(8);
         testFeedback3.setWine(testWine1);
     }

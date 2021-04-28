@@ -6,6 +6,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -29,7 +30,7 @@ public class FeedbackCreateDTO {
 
     @NotNull
     @PastOrPresent
-    private LocalDate date;
+    private Date date;
 
     private WineDTO wine;
 
@@ -57,11 +58,11 @@ public class FeedbackCreateDTO {
         this.content = content;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
