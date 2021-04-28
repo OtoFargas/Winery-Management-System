@@ -29,6 +29,12 @@ public interface WineFacade {
     WineDTO getWineById(Long id);
 
     /**
+     * @param name of the desired wine
+     * @return WineDTO with the name
+     */
+    WineDTO findWineByName(String name);
+
+    /**
      * @param wineDTO to be updated
      */
     void updateWine(WineDTO wineDTO);
