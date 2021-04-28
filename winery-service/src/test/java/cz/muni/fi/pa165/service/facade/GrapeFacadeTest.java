@@ -151,30 +151,5 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         assertThat(grapeDto1).isEqualTo(grapeDto2);
     }
 
-    // @Test
-    // public void testGetLecturesByCourse() {
-    //     when(lectureService.getLecturesByCourse(englishCourse)).thenReturn(Arrays.asList(englishLecture1, englishLecture2));
 
-    //     List<LectureDTO> lectures = lectureFacade.getLecturesByCourse(englishCourseDTO);
-
-    //     assertThat(lectures).containsExactlyInAnyOrder(englishLecture1DTO, englishLecture2DTO);
-    // }
-
-    // @Test
-    // public void testGetLecturesByTeacher() {
-    //     when(lectureService.getLectureByTeacher(englishTeacher)).thenReturn(Arrays.asList(englishLecture2));
-
-    //     List<LectureDTO> lectures = lectureFacade.getLectureByTeacher(englishTeacherDTO);
-
-    //     assertThat(lectures).containsExactlyInAnyOrder(englishLecture2DTO);
-    // }
-
-    // @Test
-    // public void testGetLecturesByLanguage() {
-    //     when(lectureService.getLecturesByLanguage(Language.ENGLISH)).thenReturn(Arrays.asList(englishLecture1, englishLecture2));
-
-    //     List<LectureDTO> lectures = lectureFacade.getLecturesByLanguage(Language.ENGLISH);
-
-    //     assertThat(lectures).containsExactlyInAnyOrder(englishLecture1DTO, englishLecture2DTO);
-    // }
 }
