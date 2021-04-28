@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.facade;
 
 import java.util.List;
 
+import cz.muni.fi.pa165.dto.HarvestCreateDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
 
 /**
@@ -10,9 +11,9 @@ import cz.muni.fi.pa165.dto.HarvestDTO;
 public interface HarvestFacade {
     /**
      * Create new harvest
-     * @param harvestDTO to be created
+     * @param harvestCreateDTO to be created
      */
-    void createHarvest(HarvestDTO harvestDTO);
+    void createHarvest(HarvestCreateDTO harvestCreateDTO);
 
     /**
      * Find all harvests
@@ -31,7 +32,7 @@ public interface HarvestFacade {
      * @param year of desired harvest
      * @return list of found DTO harvests
      */
-    List<HarvestDTO> findHarvestByYear(Integer year);
+    List<HarvestDTO> findHarvestsByYear(Integer year);
 
     /**
      * @param harvestDTO to be updated
