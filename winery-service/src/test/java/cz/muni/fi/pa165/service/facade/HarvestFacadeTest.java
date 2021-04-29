@@ -101,10 +101,7 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
         testHarvest3.setQuantity(1000);
         testHarvest3.setQuality(Quality.LOW);
         testHarvest3.setGrape(grape3);
-    }
 
-    @BeforeMethod
-    public void createDTOs() {
         testHarvestDTO1 = beanMappingService.mapTo(testHarvest1, HarvestDTO.class);
         testHarvestDTO2 = beanMappingService.mapTo(testHarvest2, HarvestDTO.class);
         testHarvestDTO3 = beanMappingService.mapTo(testHarvest3, HarvestDTO.class);
@@ -122,8 +119,9 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
     public void findHarvestByIdTest() {
         when(harvestService.findHarvestById(testHarvest1.getId())).thenReturn(testHarvest1);
 
+        HarvestDTO harvestDTO = harvestFacade.findHarvestById(testHarvest1.getId());
         verify(harvestService).findHarvestById(testHarvest1.getId());
-        assertThat(testHarvestDTO1).isEqualTo(testHarvestDTO2);
+        assertThat(testHarvestDTO1).isEqualTo(harvestDTO);
     }
 
     @Test
