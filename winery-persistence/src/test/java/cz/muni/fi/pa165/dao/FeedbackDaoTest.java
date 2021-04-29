@@ -13,7 +13,6 @@ import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.enums.Ingredient;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -57,8 +56,8 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         // Create test wines
         List<Ingredient> ingredients1 = new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.CALCIUM, Ingredient.OAK));
         List<Ingredient> ingredients2 = new ArrayList<>(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS));
-        testWine1 = createWine(3, 250, ingredients1, "Muskat", new Pair<>(WineColor.RED, Taste.SWEET));
-        testWine2 = createWine(25, 100, ingredients2, "Orech", new Pair<>(WineColor.ROSE, Taste.SEMI_SWEET));
+        testWine1 = createWine(3, 250, ingredients1, "Muskat", WineColor.RED, Taste.SWEET);
+        testWine2 = createWine(25, 100, ingredients2, "Orech", WineColor.ROSE, Taste.SEMI_SWEET);
 
         // Create test feedbacks
         testFeedback1 = createFeedback("Oto Fargas", "Very good wine", new Date(), 7, testWine1);
@@ -73,13 +72,14 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         em.persist(testFeedback3);
     }
 
-    private Wine createWine(Integer sold, Integer stocked, List<Ingredient> ingredients, String name, Pair<WineColor, Taste> type) {
+    private Wine createWine(Integer sold, Integer stocked, List<Ingredient> ingredients, String name, WineColor color, Taste taste) {
         Wine wine = new Wine();
         wine.setSold(sold);
         wine.setStocked(stocked);
         wine.setIngredients(ingredients);
         wine.setName(name);
-        wine.setType(type);
+        wine.setColor(color);
+        wine.setTaste(taste);;
         return wine;
     }
 
@@ -106,24 +106,7 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         List<Feedback> feedbacks = feedbackDao.findAll();
 
         Assert.assertEquals(feedbacks.size(), 3);
-
-        Feedback feedbackOtoAssert = new Feedback();
-        Feedback feedbackLukasAssert = new Feedback();
-
-        feedbackOtoAssert.setAuthor("Oto Fargas");
-        feedbackOtoAssert.setContent("Very good wine");
-        feedbackOtoAssert.setDate(new Date());
-        feedbackOtoAssert.setRating(7);
-        feedbackOtoAssert.setWine(testWine1);
-
-        feedbackLukasAssert.setAuthor("Lukas Fudor");
-        feedbackLukasAssert.setContent("Tastes like sh*t, wanted to throw up");
-        feedbackLukasAssert.setDate(new Date());
-        feedbackLukasAssert.setRating(1);
-        feedbackLukasAssert.setWine(testWine2);
-
-        Assert.assertTrue(feedbacks.contains(feedbackOtoAssert));
-        Assert.assertTrue(feedbacks.contains(feedbackLukasAssert));
+        Assert.assertTrue(feedbacks.containsAll(List.of(testFeedback1, testFeedback2, testFeedback3)));
     }
 
     @Test(expectedExceptions= ConstraintViolationException.class)

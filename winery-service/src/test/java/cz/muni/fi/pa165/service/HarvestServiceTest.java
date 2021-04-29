@@ -9,7 +9,6 @@ import cz.muni.fi.pa165.enums.Quality;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
-import javafx.util.Pair;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
