@@ -153,8 +153,8 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testCureNullDisease() {
         when(grapeDao.findById(1L)).thenReturn(grape1);
-        // cure first disease
-        grapeService.cureDisease(grape1, null);
+        assertThatThrownBy(() -> grapeService.cureDisease(grape1, null))
+                .isInstanceOf(WineryServiceException.class);
     }
 
     @Test
