@@ -11,10 +11,12 @@ import cz.muni.fi.pa165.facade.HarvestFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.HarvestService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
+import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,13 +37,14 @@ import static org.mockito.Mockito.when;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
 
-    private HarvestService harvestService = mock(HarvestService.class);
+    @Mock
+    private HarvestService harvestService;
 
     @Inject
     private BeanMappingService beanMappingService;
 
     @InjectMocks
-    private HarvestFacade harvestFacade;
+    private HarvestFacade harvestFacade = new HarvestFacadeImpl(harvestService, beanMappingService);
 
     private Harvest testHarvest1;
     private Harvest testHarvest2;
@@ -52,9 +54,14 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
     private HarvestDTO testHarvestDTO2;
     private HarvestDTO testHarvestDTO3;
 
-    @BeforeClass
+    @BeforeMethod
     public void setupFacade() {
         harvestFacade = new HarvestFacadeImpl(harvestService, beanMappingService);
+    }
+
+    @BeforeMethod
+    public void setup() throws ServiceException {
+        MockitoAnnotations.openMocks(this);
     }
 
     @BeforeMethod
