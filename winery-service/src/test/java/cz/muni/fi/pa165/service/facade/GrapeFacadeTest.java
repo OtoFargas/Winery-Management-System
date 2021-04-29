@@ -112,7 +112,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getGrapeByIdTest() {
+    public void findGrapeByIdTest() {
         GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
 
         when(grapeService.findGrapeById(testGrape1.getId())).thenReturn(testGrape1);
@@ -124,7 +124,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getGrapeByColorTest() {
+    public void findGrapeByColorTest() {
         GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
         GrapeDTO grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
         GrapeDTO grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
@@ -142,7 +142,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getGrapeByNameTest() {
+    public void findGrapeByNameTest() {
         GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
 
         when(grapeService.findGrapeByName(testGrape1.getName())).thenReturn(testGrape1);
@@ -154,14 +154,14 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getAllGrapesTest() {
+    public void findAllGrapesTest() {
         GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
         GrapeDTO grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
         GrapeDTO grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
 
         when(grapeService.findAllGrapes()).thenReturn(new ArrayList<>(List.of(testGrape1, testGrape2, testGrape3)));
 
-        List<GrapeDTO> allGrapeDtos = grapeFacade.getAllGrapes();
+        List<GrapeDTO> allGrapeDtos = grapeFacade.findAllGrapes();
 
         verify(grapeService).findAllGrapes();
         assertThat(allGrapeDtos).containsExactlyInAnyOrder(grapeDto1, grapeDto2, grapeDto3);

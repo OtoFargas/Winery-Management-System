@@ -19,7 +19,7 @@ public interface GrapeFacade {
     /**
      * @return a list of all grapes
      */
-    List<GrapeDTO> getAllGrapes();
+    List<GrapeDTO> findAllGrapes();
 
     /**
      * @param id from database

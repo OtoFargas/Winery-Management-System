@@ -37,7 +37,7 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public List<GrapeDTO> getAllGrapes() {
+    public List<GrapeDTO> findAllGrapes() {
         return beanMappingService.mapTo(grapeService.findAllGrapes(), GrapeDTO.class);
     }
 
