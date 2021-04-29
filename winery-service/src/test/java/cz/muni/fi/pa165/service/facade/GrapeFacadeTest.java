@@ -65,6 +65,12 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     private Wine testWine1;
 
+    private GrapeDTO grapeDto1;
+    private GrapeDTO grapeDto2;
+    private GrapeDTO grapeDto3;
+    private GrapeCreateDTO grapeCreateDto1;
+    private GrapeCureDTO grapeCureDto1;
+
     @BeforeMethod
     public void setup() throws ServiceException {
         MockitoAnnotations.openMocks(this);
@@ -109,6 +115,12 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         testHarvest1.setGrape(testGrape1);
         testHarvest1.setQuantity(20);
         testHarvest1.setWine(testWine1);
+
+        grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
+        grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
+        grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
+        grapeCreateDto1 = beanMappingService.mapTo(testGrape1, GrapeCreateDTO.class);
+        grapeCureDto1 = beanMappingService.mapTo(testGrape1, GrapeCureDTO.class);
     }
 
     @Test
@@ -125,10 +137,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findGrapeByColorTest() {
-        GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
-        GrapeDTO grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
-        GrapeDTO grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
-
         when(grapeService.findGrapeByColor(GrapeColor.RED)).thenReturn(new ArrayList<>(List.of(testGrape1, testGrape3)));
         when(grapeService.findGrapeByColor(GrapeColor.WHITE)).thenReturn(new ArrayList<>(List.of(testGrape2)));
 
@@ -143,8 +151,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findGrapeByNameTest() {
-        GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
-
         when(grapeService.findGrapeByName(testGrape1.getName())).thenReturn(testGrape1);
 
         GrapeDTO grapeDto2 = grapeFacade.findGrapeByName(testGrape1.getName());
@@ -155,10 +161,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findAllGrapesTest() {
-        GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
-        GrapeDTO grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
-        GrapeDTO grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
-
         when(grapeService.findAllGrapes()).thenReturn(new ArrayList<>(List.of(testGrape1, testGrape2, testGrape3)));
 
         List<GrapeDTO> allGrapeDtos = grapeFacade.findAllGrapes();
@@ -169,8 +171,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void updateGrapeTest() {
-        GrapeDTO grapeDto1 = beanMappingService.mapTo(testGrape1, GrapeDTO.class);
-
         grapeDto1.setName("newName");
         grapeFacade.updateGrape(grapeDto1);
         grapeDto1.setName("testGrape1");
@@ -190,8 +190,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void createGrapeTest(){
-        GrapeCreateDTO grapeCreateDto1 = beanMappingService.mapTo(testGrape1, GrapeCreateDTO.class);
-
         grapeFacade.createGrape(grapeCreateDto1);
         verify(grapeService, times(1)).createGrape(testGrape1);
     }
@@ -204,8 +202,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void cureDiseaseTest(){
-        GrapeCureDTO grapeCureDto1 = beanMappingService.mapTo(testGrape1, GrapeCureDTO.class);
-
         grapeFacade.cureDisease(grapeCureDto1);
         verify(grapeService).cureDisease(any(), any());
     }
