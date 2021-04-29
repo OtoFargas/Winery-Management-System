@@ -105,8 +105,11 @@ public class HarvestServiceTest extends AbstractTestNGSpringContextTests  {
         wine1.setName("TestWine1");
         wine2.setName("TestWine2");
 
-        wine1.setType(new Pair<>(WineColor.SPARKLING, Taste.SEMI_SWEET));
-        wine2.setType(new Pair<>(WineColor.RED, Taste.SEMI_DRY));
+        wine1.setColor(WineColor.SPARKLING);
+        wine2.setColor(WineColor.RED);
+
+        wine1.setTaste(Taste.SEMI_SWEET);
+        wine2.setTaste(Taste.SEMI_DRY);
 
         harvest1.setWine(wine1);
         harvest2.setWine(wine2);

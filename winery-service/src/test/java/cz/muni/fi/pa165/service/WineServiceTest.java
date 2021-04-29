@@ -18,7 +18,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,21 +56,24 @@ public class WineServiceTest extends AbstractTestNGSpringContextTests {
         testWine1.setName("testWine1");
         testWine1.setSold(20);
         testWine1.setStocked(30);
-        testWine1.setType(new Pair<>(WineColor.RED, Taste.SWEET));
+        testWine1.setColor(WineColor.RED);
+        testWine1.setTaste(Taste.SWEET);
         testWine1.setIngredients(new ArrayList<>(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS)));
 
         testWine2 = new Wine(2L);
         testWine2.setName("testWine2");
         testWine2.setSold(10);
         testWine2.setStocked(40);
-        testWine2.setType(new Pair<>(WineColor.DESSERT, Taste.DRY));
+        testWine2.setColor(WineColor.DESSERT);
+        testWine2.setTaste(Taste.DRY);
         testWine2.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.SULFUR)));
 
         testWine3 = new Wine(3L);
         testWine3.setName("testWine3");
         testWine3.setSold(15);
         testWine3.setStocked(14);
-        testWine3.setType(new Pair<>(WineColor.WHITE, Taste.SEMI_DRY));
+        testWine3.setColor(WineColor.WHITE);
+        testWine2.setTaste(Taste.SEMI_DRY);
         testWine3.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.TANNINS)));
     }
 
