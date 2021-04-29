@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.dto;
 import cz.muni.fi.pa165.enums.Ingredient;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
-import javafx.util.Pair;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

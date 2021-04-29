@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.dto;
 import cz.muni.fi.pa165.enums.Ingredient;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +21,9 @@ public class WineDTO {
     private String name;
     private Integer stocked;
     private Integer sold;
-    private Pair<WineColor, Taste> type;
+    private WineColor color;
+    private Taste taste;
+
     private List<Ingredient> ingredients = new ArrayList<>();
     private Set<FeedbackDTO> feedbacks = new HashSet<>();
     private Set<HarvestDTO> harvests = new HashSet<>();
@@ -59,12 +60,20 @@ public class WineDTO {
         this.sold = sold;
     }
 
-    public Pair<WineColor, Taste> getType() {
-        return type;
+    public WineColor getColor() {
+        return this.color;
     }
 
-    public void setType(Pair<WineColor, Taste> type) {
-        this.type = type;
+    public void setColor(WineColor color) {
+        this.color = color;
+    }
+
+    public Taste getTaste() {
+        return this.taste;
+    }
+
+    public void setTaste(Taste taste) {
+        this.taste = taste;
     }
 
     public List<Ingredient> getIngredients() {
@@ -107,12 +116,12 @@ public class WineDTO {
     @Override
     public String toString() {
         return "WineDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", stocked=" + stocked +
-                ", sold=" + sold +
-                ", type=" + type +
-                ", ingredients=" + ingredients +
-                '}';
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", stocked=" + stocked +
+                    ", sold=" + sold +
+                    ", color=" + color +
+                    ", taste=" + taste +
+                    '}';
     }
 }
