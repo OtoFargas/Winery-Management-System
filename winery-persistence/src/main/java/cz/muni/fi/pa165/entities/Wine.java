@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javafx.util.Pair;
-
 /**
  * Entity class for wine
  *
@@ -44,8 +42,14 @@ public class Wine {
     private Integer sold;
 
     @NotNull
+    @Enumerated
     @Column(nullable = false)
-    private Pair<WineColor, Taste> type;
+    private WineColor color;
+
+    @NotNull
+    @Enumerated
+    @Column(nullable = false)
+    private Taste taste;
 
     @ElementCollection
     @NotNull
@@ -97,12 +101,20 @@ public class Wine {
         this.sold = sold;
     }
 
-    public Pair<WineColor, Taste> getType() {
-        return type;
+    public Taste getTaste() {
+        return taste;
     }
 
-    public void setType(Pair<WineColor, Taste> type) {
-        this.type = type;
+    public void setTaste(Taste taste) {
+        this.taste = taste;
+    }
+
+    public WineColor getColor() {
+        return color;
+    }
+
+    public void setColor(WineColor color) {
+        this.color = color;
     }
 
     public List<Ingredient> getIngredients() {
@@ -152,7 +164,8 @@ public class Wine {
                 ", name='" + name + '\'' +
                 ", stocked=" + stocked +
                 ", sold=" + sold +
-                ", type=" + type +
+                ", color=" + color +
+                ", taste=" + taste +
                 '}';
     }
 }
