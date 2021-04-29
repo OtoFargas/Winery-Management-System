@@ -9,7 +9,6 @@ import cz.muni.fi.pa165.enums.Ingredient;
 import cz.muni.fi.pa165.enums.Quality;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;

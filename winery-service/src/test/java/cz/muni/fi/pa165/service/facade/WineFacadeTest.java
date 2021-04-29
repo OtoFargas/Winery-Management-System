@@ -16,7 +16,6 @@ import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.WineFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
-import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
 import cz.muni.fi.pa165.service.WineService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
@@ -36,7 +35,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
