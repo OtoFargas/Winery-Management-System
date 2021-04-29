@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.dto.FeedbackDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.entities.Feedback;
 import cz.muni.fi.pa165.entities.Wine;
+import cz.muni.fi.pa165.enums.Taste;
+import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
@@ -56,7 +58,8 @@ public class FeedbackFacadeTest extends AbstractTestNGSpringContextTests {
         wine.setIngredients(new ArrayList<>());
         wine.setSold(11);
         wine.setStocked(85);
-        //wine.setType(new Pair<>(WineColor.SPARKLING, Taste.SEMI_SWEET));
+        wine.setColor(WineColor.WHITE);
+        wine.setTaste(Taste.DRY);
         wine.setName("Nitrianske knieža");
 
         feedback = new Feedback();

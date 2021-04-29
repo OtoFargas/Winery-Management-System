@@ -44,7 +44,7 @@ public interface WineFacade {
     /**
      * @return list of all wines
      */
-    List<WineDTO> getAllWines();
+    List<WineDTO> findAllWines();
 
     /**
      * @param wineBuyDTO to be bought

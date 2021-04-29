@@ -78,7 +78,7 @@ public class WineFacadeImpl implements WineFacade {
     }
 
     @Override
-    public List<WineDTO> getAllWines() {
+    public List<WineDTO> findAllWines() {
         return beanMappingService.mapTo(wineService.findAllWines(), WineDTO.class);
     }
 
