@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
-import javafx.util.Pair;
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
 import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
