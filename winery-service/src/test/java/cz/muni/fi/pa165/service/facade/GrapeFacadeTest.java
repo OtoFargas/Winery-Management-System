@@ -100,7 +100,8 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         testWine1.setName("testWine1");
         testWine1.setSold(20);
         testWine1.setStocked(40);
-        testWine1.setType(new Pair<>(WineColor.RED, Taste.SWEET));
+        testWine1.setColor(WineColor.RED);
+        testWine1.setTaste(Taste.SWEET);
 
         testHarvest1 = new Harvest();
         testHarvest1.setHarvestYear(2009);

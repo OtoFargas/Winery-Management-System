@@ -73,11 +73,17 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w5.setStocked(43);
         w5.setSold(15);
 
-        w1.setType(new Pair<>(WineColor.DESSERT, Taste.SEMI_DRY));
-        w2.setType(new Pair<>(WineColor.RED, Taste.DRY));
-        w3.setType(new Pair<>(WineColor.ROSE, Taste.SEMI_SWEET));
-        w4.setType(new Pair<>(WineColor.WHITE, Taste.SWEET));
-        w5.setType(new Pair<>(WineColor.SPARKLING,Taste.SEMI_SWEET));
+        w1.setColor(WineColor.DESSERT);
+        w2.setColor(WineColor.RED);
+        w3.setColor(WineColor.ROSE);
+        w4.setColor(WineColor.WHITE);
+        w5.setColor(WineColor.SPARKLING);
+
+        w1.setTaste(Taste.SEMI_DRY);
+        w2.setTaste(Taste.DRY);
+        w3.setTaste(Taste.SEMI_SWEET);
+        w4.setTaste(Taste.SWEET);
+        w5.setTaste(Taste.SEMI_SWEET);
 
         List<Ingredient> w1IngredientList = new ArrayList<>();
         w1IngredientList.add(Ingredient.WATER);
@@ -116,7 +122,8 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w.setName("CreateTestWine");
         w.setStocked(112);
         w.setSold(84);
-        w.setType(new Pair<>(WineColor.DESSERT, Taste.SEMI_DRY));
+        w.setColor(WineColor.DESSERT);
+        w.setTaste(Taste.SEMI_SWEET);
         List<Ingredient> wIngredientList = new ArrayList<>();
         wIngredientList.add(Ingredient.POTASSIUM);
         wIngredientList.add(Ingredient.SUGAR);
@@ -171,7 +178,8 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         newWine.setName("Riesling");
         newWine.setStocked(86);
         newWine.setSold(69);
-        newWine.setType(new Pair<>(WineColor.DESSERT, Taste.SEMI_DRY));
+        newWine.setColor(WineColor.DESSERT);
+        newWine.setTaste(Taste.SEMI_SWEET);
         List<Ingredient> newWineIngredientList = new ArrayList<>();
         newWineIngredientList.add(Ingredient.GRAPE_JUICE);
         newWine.setIngredients(newWineIngredientList);

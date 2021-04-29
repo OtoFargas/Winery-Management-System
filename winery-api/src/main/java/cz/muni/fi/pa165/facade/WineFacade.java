@@ -3,9 +3,6 @@ package cz.muni.fi.pa165.facade;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
-import cz.muni.fi.pa165.enums.Ingredient;
-import cz.muni.fi.pa165.enums.Taste;
-import cz.muni.fi.pa165.enums.WineColor;
 
 import java.util.List;
 

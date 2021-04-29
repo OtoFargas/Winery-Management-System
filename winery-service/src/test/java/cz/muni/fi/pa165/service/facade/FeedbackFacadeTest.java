@@ -2,29 +2,21 @@ package cz.muni.fi.pa165.service.facade;
 
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
-import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.entities.Feedback;
 import cz.muni.fi.pa165.entities.Wine;
-import cz.muni.fi.pa165.enums.Ingredient;
-import cz.muni.fi.pa165.enums.Taste;
-import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
-import javafx.util.Pair;
 import org.mockito.InjectMocks;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

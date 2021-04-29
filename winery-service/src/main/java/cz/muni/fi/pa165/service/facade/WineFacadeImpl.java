@@ -9,11 +9,9 @@ import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.facade.WineFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
-import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
 import cz.muni.fi.pa165.service.WineService;
 import javax.inject.Inject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -46,7 +44,8 @@ public class WineFacadeImpl implements WineFacade {
     public Long createWine(WineCreateDTO wineCreateDTO) {
         Wine wine = new Wine();
         wine.setName(wineCreateDTO.getName());
-        wine.setType(wineCreateDTO.getType());
+        wine.setColor(wineCreateDTO.getColor());
+        wine.setTaste(wineCreateDTO.getTaste());
         wine.setStocked(wineCreateDTO.getStocked());
         wine.setSold(wineCreateDTO.getSold());
         wine.setIngredients(wineCreateDTO.getIngredients());
