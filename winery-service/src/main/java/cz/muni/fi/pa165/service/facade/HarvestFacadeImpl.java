@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import javax.inject.Inject;
+
+import cz.muni.fi.pa165.dto.HarvestCreateDTO;
 import org.springframework.stereotype.Service;
 
 import cz.muni.fi.pa165.dto.HarvestDTO;
@@ -32,8 +34,8 @@ public class HarvestFacadeImpl implements HarvestFacade {
     }
 
     @Override
-    public void createHarvest(HarvestDTO harvestDTO) {
-        Harvest harvest = beanMappingService.mapTo(harvestDTO, Harvest.class);
+    public void createHarvest(HarvestCreateDTO harvestCreateDTO) {
+        Harvest harvest = beanMappingService.mapTo(harvestCreateDTO, Harvest.class);
         harvestService.createHarvest(harvest);
     }
 
@@ -49,7 +51,7 @@ public class HarvestFacadeImpl implements HarvestFacade {
     }
 
     @Override
-    public List<HarvestDTO> findHarvestByYear(Integer year) {
+    public List<HarvestDTO> findHarvestsByYear(Integer year) {
         return beanMappingService.mapTo(harvestService.findHarvestByYear(year), HarvestDTO.class);
     }
 
