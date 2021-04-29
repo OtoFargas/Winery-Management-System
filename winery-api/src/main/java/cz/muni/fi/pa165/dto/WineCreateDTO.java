@@ -34,7 +34,10 @@ public class WineCreateDTO {
     private Integer sold;
 
     @NotNull
-    private Pair<WineColor, Taste> type;
+    private WineColor color;
+
+    @NotNull
+    private Taste taste;
 
     @NotNull
     private List<Ingredient> ingredients = new ArrayList<>();
@@ -63,12 +66,20 @@ public class WineCreateDTO {
         this.sold = sold;
     }
 
-    public Pair<WineColor, Taste> getType() {
-        return type;
+    public WineColor getColor() {
+        return this.color;
     }
 
-    public void setType(Pair<WineColor, Taste> type) {
-        this.type = type;
+    public void setColor(WineColor color) {
+        this.color = color;
+    }
+
+    public Taste getTaste() {
+        return this.taste;
+    }
+
+    public void setTaste(Taste taste) {
+        this.taste = taste;
     }
 
     public List<Ingredient> getIngredients() {
@@ -94,12 +105,12 @@ public class WineCreateDTO {
 
     @Override
     public String toString() {
-        return "WineCreateDTO{" +
-                "name='" + name + '\'' +
+        return "WineDTO{" +
+                ", name='" + name + '\'' +
                 ", stocked=" + stocked +
                 ", sold=" + sold +
-                ", type=" + type +
-                ", ingredients=" + ingredients +
+                ", color=" + color +
+                ", taste=" + taste +
                 '}';
     }
 }
