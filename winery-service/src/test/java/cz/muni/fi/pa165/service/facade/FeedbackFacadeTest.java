@@ -88,7 +88,7 @@ public class FeedbackFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testCreateFeedback() {
-        feedback = beanMappingService.mapTo(feedbackCreateDTO, Feedback.class);
+        Feedback feedback = beanMappingService.mapTo(feedbackCreateDTO, Feedback.class);
         Long id = feedbackFacade.createFeedback(feedbackCreateDTO);
         verify(feedbackService).createFeedback(feedback);
         assertThat(id).isEqualTo(feedback.getId());

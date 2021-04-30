@@ -76,6 +76,8 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
     private Harvest testHarvest1;
     private HarvestDTO testHarvestDTO1;
 
+    private WineCreateDTO testWineCreateDTO;
+
     @BeforeMethod
     public void setupFacade() {
         wineFacade = new WineFacadeImpl(wineService, feedbackService, harvestService, beanMappingService);
@@ -141,14 +143,23 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
         testHarvest1.setId(21L);
 
         testHarvestDTO1 = beanMappingService.mapTo(testHarvest1, HarvestDTO.class);
+
+        testWineCreateDTO = new WineCreateDTO();
+        testWineCreateDTO.setColor(WineColor.RED);
+        testWineCreateDTO.setIngredients(new ArrayList<>(List.of(Ingredient.POTASSIUM)));
+        testWineCreateDTO.setName("test");
+        testWineCreateDTO.setStocked(888);
+        testWineCreateDTO.setTaste(Taste.SEMI_SWEET);
+        testWineCreateDTO.setStocked(1231);
     }
 
     @Test
-    public void createWineTest(){
-        WineCreateDTO wineCreateDTO1 = beanMappingService.mapTo(testWine1, WineCreateDTO.class);
+    public void createWineTest() {
+        Wine wine = beanMappingService.mapTo(testWineCreateDTO, Wine.class);
+        Long id = wineFacade.createWine(testWineCreateDTO);
 
-        wineFacade.createWine(wineCreateDTO1);
-        verify(wineService).createWine(testWine1);
+        verify(wineService).createWine(wine);
+        assertThat(id).isEqualTo(wine.getId());
     }
 
     @Test

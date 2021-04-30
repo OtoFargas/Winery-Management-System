@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.service.facade;
 
+import cz.muni.fi.pa165.entities.Feedback;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -190,25 +191,27 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void createGrapeTest(){
-        grapeFacade.createGrape(grapeCreateDto1);
+    public void createGrapeTest() {
+        Grape grape = beanMappingService.mapTo(grapeCreateDto1, Grape.class);
+        Long id = grapeFacade.createGrape(grapeCreateDto1);
         verify(grapeService, times(1)).createGrape(testGrape1);
+        assertThat(id).isEqualTo(grape.getId());
     }
 
     @Test
-    public void addHarvestTest(){
+    public void addHarvestTest() {
         grapeFacade.addHarvest(testHarvest1.getId(), testGrape1.getId());
         verify(grapeService).addHarvestToGrape(any(), any());
     }
 
     @Test
-    public void cureDiseaseTest(){
+    public void cureDiseaseTest() {
         grapeFacade.cureDisease(grapeCureDto1);
         verify(grapeService).cureDisease(any(), any());
     }
 
     @Test
-    public void cureAllDiseasesTest(){
+    public void cureAllDiseasesTest() {
         grapeFacade.cureAllDiseases(1L);
         verify(grapeService).cureAllDiseases(any());
     }
