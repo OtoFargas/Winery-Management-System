@@ -17,6 +17,12 @@ import java.util.List;
 public interface GrapeFacade {
 
     /**
+     * @param grapeCreateDTO grape to be created
+     * @return id of newly created GrapeDTO
+     */
+    Long createGrape(GrapeCreateDTO grapeCreateDTO);
+
+    /**
      * @return a list of all grapes
      */
     List<GrapeDTO> findAllGrapes();
@@ -48,12 +54,6 @@ public interface GrapeFacade {
      * @param grapeDTO to be updated
      */
     void updateGrape(GrapeDTO grapeDTO);
-
-    /**
-     * @param grapeCreateDTO grape to be created
-     * @return id of newly created GrapeDTO
-     */
-    Long createGrape(GrapeCreateDTO grapeCreateDTO);
 
     /**
      * @param harvestID of harvest to be added

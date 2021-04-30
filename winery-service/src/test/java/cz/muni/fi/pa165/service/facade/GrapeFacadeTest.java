@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.service.facade;
 
-import cz.muni.fi.pa165.entities.Feedback;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -65,8 +64,6 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     private Harvest testHarvest1;
 
-    private Wine testWine1;
-
     private GrapeDTO grapeDto1;
     private GrapeDTO grapeDto2;
     private GrapeDTO grapeDto3;
@@ -101,7 +98,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         testGrape3.setQuantity(0);
         testGrape3.setId(3L);
 
-        testWine1 = new Wine();
+        Wine testWine1 = new Wine();
         testWine1.setId(1L);
         testWine1.setIngredients(new ArrayList<Ingredient>(List.of(Ingredient.CALCIUM)));
         testWine1.setName("testWine1");

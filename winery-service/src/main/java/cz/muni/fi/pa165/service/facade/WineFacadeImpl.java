@@ -42,14 +42,7 @@ public class WineFacadeImpl implements WineFacade {
 
     @Override
     public Long createWine(WineCreateDTO wineCreateDTO) {
-        Wine wine = new Wine();
-        wine.setName(wineCreateDTO.getName());
-        wine.setColor(wineCreateDTO.getColor());
-        wine.setTaste(wineCreateDTO.getTaste());
-        wine.setStocked(wineCreateDTO.getStocked());
-        wine.setSold(wineCreateDTO.getSold());
-        wine.setIngredients(wineCreateDTO.getIngredients());
-        
+        Wine wine = beanMappingService.mapTo(wineCreateDTO, Wine.class);
         wineService.createWine(wine);
         return wine.getId();
     }
@@ -58,6 +51,11 @@ public class WineFacadeImpl implements WineFacade {
     public WineDTO findWineById(Long id) {
         Wine wine = wineService.findWineById(id);
         return (wine == null) ? null : beanMappingService.mapTo(wine, WineDTO.class);
+    }
+
+    @Override
+    public List<WineDTO> findAllWines() {
+        return beanMappingService.mapTo(wineService.findAllWines(), WineDTO.class);
     }
 
     @Override
@@ -75,11 +73,6 @@ public class WineFacadeImpl implements WineFacade {
     @Override
     public void removeWine(Long wineID) {
         wineService.removeWine(wineService.findWineById(wineID));
-    }
-
-    @Override
-    public List<WineDTO> findAllWines() {
-        return beanMappingService.mapTo(wineService.findAllWines(), WineDTO.class);
     }
 
     @Override

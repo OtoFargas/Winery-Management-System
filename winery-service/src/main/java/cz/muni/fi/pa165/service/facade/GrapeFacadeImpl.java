@@ -37,6 +37,13 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
+    public Long createGrape(GrapeCreateDTO grapeCreateDTO) {
+        Grape grape = beanMappingService.mapTo(grapeCreateDTO, Grape.class);
+        grapeService.createGrape(grape);
+        return grape.getId();
+    }
+
+    @Override
     public List<GrapeDTO> findAllGrapes() {
         return beanMappingService.mapTo(grapeService.findAllGrapes(), GrapeDTO.class);
     }
@@ -60,26 +67,14 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public void removeGrape(Long id) {
-        grapeService.removeGrape(grapeService.findGrapeById(id));
-    }
-
-    @Override
     public void updateGrape(GrapeDTO grapeDTO) {
         Grape grape = beanMappingService.mapTo(grapeDTO, Grape.class);
         grapeService.updateGrape(grape);
     }
 
     @Override
-    public Long createGrape(GrapeCreateDTO grapeCreateDTO) {
-        Grape grape = new Grape();
-        grape.setName(grapeCreateDTO.getName());
-        grape.setColor(grapeCreateDTO.getColor());
-        grape.setQuantity(grapeCreateDTO.getQuantity());
-        grape.setDiseases(grapeCreateDTO.getDiseases());
-
-        grapeService.createGrape(grape);
-        return grape.getId();
+    public void removeGrape(Long id) {
+        grapeService.removeGrape(grapeService.findGrapeById(id));
     }
 
     @Override

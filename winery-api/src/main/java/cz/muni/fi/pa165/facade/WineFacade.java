@@ -20,6 +20,11 @@ public interface WineFacade {
     Long createWine(WineCreateDTO wineCreateDTO);
 
     /**
+     * @return list of all wines
+     */
+    List<WineDTO> findAllWines();
+
+    /**
      * @param id of the desired wine
      * @return WineDTO with the id
      */
@@ -40,11 +45,6 @@ public interface WineFacade {
      * @param wineID of the wine to be deleted
      */
     void removeWine(Long wineID);
-
-    /**
-     * @return list of all wines
-     */
-    List<WineDTO> findAllWines();
 
     /**
      * @param wineBuyDTO to be bought

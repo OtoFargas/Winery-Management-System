@@ -12,9 +12,13 @@ import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
 import cz.muni.fi.pa165.service.WineService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
+import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -36,14 +40,17 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class FeedbackFacadeTest extends AbstractTestNGSpringContextTests {
 
-    private FeedbackService feedbackService = mock(FeedbackService.class);
-    private WineService wineService = mock(WineService.class);
+    @Mock
+    private FeedbackService feedbackService;
+
+    @Mock
+    private WineService wineService;
 
     @Inject
     private BeanMappingService beanMappingService;
 
     @InjectMocks
-    private FeedbackFacade feedbackFacade;
+    private FeedbackFacade feedbackFacade = new FeedbackFacadeImpl(feedbackService, wineService, beanMappingService);
 
     private Feedback feedback1;
     private Feedback feedback2;
@@ -52,11 +59,16 @@ public class FeedbackFacadeTest extends AbstractTestNGSpringContextTests {
     private FeedbackDTO feedbackDTO;
 
     @BeforeMethod
-    public void setFacade() {
+    public void setupFacade() {
         feedbackFacade = new FeedbackFacadeImpl(feedbackService, wineService, beanMappingService);
     }
 
     @BeforeMethod
+    public void setup() throws ServiceException {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @BeforeClass
     public void createEntities() {
         wine = new Wine();
         wine.setId(1L);

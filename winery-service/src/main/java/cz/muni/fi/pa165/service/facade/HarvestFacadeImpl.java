@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import javax.inject.Inject;
 
 import cz.muni.fi.pa165.dto.HarvestCreateDTO;
-import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.WineService;
 import org.springframework.stereotype.Service;

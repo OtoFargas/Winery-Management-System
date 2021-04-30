@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.service.facade;
 
-import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestCreateDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
-import cz.muni.fi.pa165.dto.WineDTO;
-import cz.muni.fi.pa165.entities.Feedback;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.entities.Wine;
