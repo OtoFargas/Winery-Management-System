@@ -3,9 +3,11 @@ package cz.muni.fi.pa165.service.facade;
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
 import cz.muni.fi.pa165.entities.Feedback;
+import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
 import cz.muni.fi.pa165.service.FeedbackService;
+import cz.muni.fi.pa165.service.WineService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,17 +25,22 @@ public class FeedbackFacadeImpl implements FeedbackFacade {
 
     private final FeedbackService feedbackService;
 
+    private WineService wineService;
+
     private final BeanMappingService beanMappingService;
 
-//    @Inject
-    public FeedbackFacadeImpl(FeedbackService feedbackService, BeanMappingService beanMappingService) {
+    @Inject
+    public FeedbackFacadeImpl(FeedbackService feedbackService, WineService wineService, BeanMappingService beanMappingService) {
         this.feedbackService = feedbackService;
+        this.wineService = wineService;
         this.beanMappingService = beanMappingService;
     }
 
     @Override
     public Long createFeedback(FeedbackCreateDTO feedbackCreateDTO) {
         Feedback feedback = beanMappingService.mapTo(feedbackCreateDTO, Feedback.class);
+        Wine wine = wineService.findWineById(feedbackCreateDTO.getWineId());
+        feedback.setWine(wine);
         feedbackService.createFeedback(feedback);
         return feedback.getId();
     }

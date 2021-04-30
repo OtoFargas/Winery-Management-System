@@ -32,7 +32,7 @@ public class FeedbackCreateDTO {
     @PastOrPresent
     private Date date;
 
-    private WineDTO wine;
+    private Long wineId;
 
     public String getAuthor() {
         return author;
@@ -66,12 +66,12 @@ public class FeedbackCreateDTO {
         this.date = date;
     }
 
-    public WineDTO getWine() {
-        return wine;
+    public Long getWineId() {
+        return wineId;
     }
 
-    public void setWine(WineDTO wine) {
-        this.wine = wine;
+    public void setWineId(Long wineId) {
+        this.wineId = wineId;
     }
 
     @Override
@@ -81,24 +81,24 @@ public class FeedbackCreateDTO {
                 ", rating=" + rating +
                 ", content='" + content + '\'' +
                 ", date=" + date +
-                ", wine=" + wine +
+                ", wineId=" + wineId +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FeedbackDTO)) return false;
-        FeedbackDTO that = (FeedbackDTO) o;
-        return getAuthor().equals(that.getAuthor())
-                && getRating().equals(that.getRating())
-                && getContent().equals(that.getContent())
-                && getDate().equals(that.getDate())
-                && Objects.equals(getWine(), that.getWine());
+        if (!(o instanceof FeedbackCreateDTO)) return false;
+        FeedbackCreateDTO that = (FeedbackCreateDTO) o;
+        return Objects.equals(getAuthor(), that.getAuthor())
+                && Objects.equals(getRating(), that.getRating())
+                && Objects.equals(getContent(), that.getContent())
+                && Objects.equals(getDate(), that.getDate())
+                && Objects.equals(getWineId(), that.getWineId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAuthor(), getRating(), getContent(), getDate(), getWine());
+        return Objects.hash(getAuthor(), getRating(), getContent(), getDate(), getWineId());
     }
 }
