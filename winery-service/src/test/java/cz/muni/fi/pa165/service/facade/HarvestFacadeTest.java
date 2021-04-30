@@ -7,12 +7,17 @@ import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.entities.Feedback;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Harvest;
+import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.enums.Quality;
+import cz.muni.fi.pa165.enums.Taste;
+import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.HarvestFacade;
 import cz.muni.fi.pa165.service.BeanMappingService;
+import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
+import cz.muni.fi.pa165.service.WineService;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -43,11 +48,17 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
     @Mock
     private HarvestService harvestService;
 
+    @Mock
+    private GrapeService grapeService;
+
+    @Mock
+    private WineService wineService;
+
     @Inject
     private BeanMappingService beanMappingService;
 
     @InjectMocks
-    private HarvestFacade harvestFacade = new HarvestFacadeImpl(harvestService, beanMappingService);
+    private HarvestFacade harvestFacade = new HarvestFacadeImpl(harvestService, wineService, grapeService, beanMappingService);
 
     private Harvest testHarvest1;
     private Harvest testHarvest2;
@@ -58,10 +69,14 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
     private HarvestDTO testHarvestDTO3;
 
     private HarvestCreateDTO testHarvestCreateDTO;
+    private Harvest testCreateHarvest;
+
+    private Grape grape1;
+    private Wine wine;
 
     @BeforeMethod
     public void setupFacade() {
-        harvestFacade = new HarvestFacadeImpl(harvestService, beanMappingService);
+        harvestFacade = new HarvestFacadeImpl(harvestService, wineService, grapeService, beanMappingService);
     }
 
     @BeforeMethod
@@ -72,7 +87,7 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void createEntities() {
 
-        Grape grape1 = new Grape();
+        grape1 = new Grape();
         grape1.setId(1L);
         grape1.setName("grape1");
         grape1.setColor(GrapeColor.RED);
@@ -118,19 +133,37 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
         testHarvestDTO2 = beanMappingService.mapTo(testHarvest2, HarvestDTO.class);
         testHarvestDTO3 = beanMappingService.mapTo(testHarvest3, HarvestDTO.class);
 
+        wine = new Wine();
+        wine.setTaste(Taste.SWEET);
+        wine.setStocked(421);
+        wine.setSold(70);
+        wine.setIngredients(new ArrayList<>());
+        wine.setName("Red dragon");
+        wine.setId(16L);
+        wine.setColor(WineColor.RED);
+
+        testCreateHarvest = new Harvest();
+        testCreateHarvest. setHarvestYear(2005);
+        testCreateHarvest.setQuality(Quality.HIGH);
+        testCreateHarvest.setGrape(grape1);
+        testCreateHarvest.setQuantity(455);
+        testCreateHarvest.setWine(wine);
+
         testHarvestCreateDTO = new HarvestCreateDTO();
         testHarvestCreateDTO.setHarvestYear(2005);
-        testHarvestCreateDTO.setGrape(beanMappingService.mapTo(grape1, GrapeDTO.class));
+        testHarvestCreateDTO.setGrapeId(grape1.getId());
         testHarvestCreateDTO.setQuality(Quality.HIGH);
-        testHarvestCreateDTO.setWine(new WineDTO());
+        testHarvestCreateDTO.setWineId(wine.getId());
         testHarvestCreateDTO.setQuantity(455);
     }
 
     @Test
     public void createHarvestTest(){
+        when(grapeService.findGrapeById(testHarvestCreateDTO.getGrapeId())).thenReturn(grape1);
+        when(wineService.findWineById(testHarvestCreateDTO.getWineId())).thenReturn(wine);
         Harvest harvest = beanMappingService.mapTo(testHarvestCreateDTO, Harvest.class);
         Long id = harvestFacade.createHarvest(testHarvestCreateDTO);
-        verify(harvestService).createHarvest(harvest);
+        verify(harvestService).createHarvest(testCreateHarvest);
         assertThat(id).isEqualTo(harvest.getId());
     }
 
