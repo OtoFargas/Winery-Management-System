@@ -34,9 +34,10 @@ public class HarvestFacadeImpl implements HarvestFacade {
     }
 
     @Override
-    public void createHarvest(HarvestCreateDTO harvestCreateDTO) {
+    public Long createHarvest(HarvestCreateDTO harvestCreateDTO) {
         Harvest harvest = beanMappingService.mapTo(harvestCreateDTO, Harvest.class);
         harvestService.createHarvest(harvest);
+        return harvest.getId();
     }
 
     @Override

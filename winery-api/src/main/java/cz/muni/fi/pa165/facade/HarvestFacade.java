@@ -13,7 +13,7 @@ public interface HarvestFacade {
      * Create new harvest
      * @param harvestCreateDTO to be created
      */
-    void createHarvest(HarvestCreateDTO harvestCreateDTO);
+    Long createHarvest(HarvestCreateDTO harvestCreateDTO);
 
     /**
      * Find all harvests
