@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,37 +25,65 @@ public class GrapeServiceImpl  implements GrapeService {
 
     @Override
     public void createGrape(Grape grape) {
-        grapeDao.create(grape);
+        try {
+            grapeDao.create(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public List<Grape> findAllGrapes() {
-        return grapeDao.findAll();
+        try {
+            return grapeDao.findAll();
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public Grape findGrapeById(Long id) {
-        return grapeDao.findById(id);
+        try {
+            return grapeDao.findById(id);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public Grape findGrapeByName(String name) {
-        return grapeDao.findByName(name);
+        try {
+            return grapeDao.findByName(name);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public List<Grape> findGrapeByColor(GrapeColor color) {
-        return grapeDao.findByColor(color);
+        try {
+            return grapeDao.findByColor(color);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void removeGrape(Grape grape) {
-        grapeDao.remove(grape);
+        try {
+            grapeDao.remove(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void updateGrape(Grape grape) {
-        grapeDao.update(grape);
+        try {
+            grapeDao.update(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
@@ -63,6 +92,11 @@ public class GrapeServiceImpl  implements GrapeService {
             throw new WineryServiceException("This grape already contains this harvest!");
         }
         grape.addHarvest(harvest);
+        try {
+            grapeDao.update(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
@@ -73,12 +107,20 @@ public class GrapeServiceImpl  implements GrapeService {
         List<Disease> diseases = new ArrayList<>(grape.getDiseases());
         diseases.remove(disease);
         grape.setDiseases(diseases);
-        grapeDao.update(grape);
+        try {
+            grapeDao.update(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void cureAllDiseases(Grape grape) {
         grape.setDiseases(new ArrayList<>());
-        grapeDao.update(grape);
+        try {
+            grapeDao.update(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 }

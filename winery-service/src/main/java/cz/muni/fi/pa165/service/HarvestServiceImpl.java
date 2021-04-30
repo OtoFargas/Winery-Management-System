@@ -2,7 +2,9 @@ package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.dao.HarvestDao;
 import cz.muni.fi.pa165.entities.Harvest;
+import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,31 +23,55 @@ public class HarvestServiceImpl implements HarvestService {
 
     @Override
     public void createHarvest(Harvest harvest) {
-        harvestDao.create(harvest);
+        try {
+            harvestDao.create(harvest);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public List<Harvest> findAllHarvests() {
-        return harvestDao.findAll();
+        try {
+            return harvestDao.findAll();
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public Harvest findHarvestById(Long id) {
-        return harvestDao.findById(id);
+        try {
+            return harvestDao.findById(id);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public List<Harvest> findHarvestByYear(Integer year) {
-        return harvestDao.findByYear(year);
+        try {
+            return harvestDao.findByYear(year);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void updateHarvest(Harvest harvest) {
-        harvestDao.update(harvest);
+        try {
+            harvestDao.update(harvest);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void removeHarvest(Harvest harvest) {
-        harvestDao.remove(harvest);
+        try {
+            harvestDao.remove(harvest);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 }

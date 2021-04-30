@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,32 +25,56 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public void createWine(Wine wine) {
-        wineDao.create(wine);
+        try {
+            wineDao.create(wine);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public List<Wine> findAllWines() {
-        return wineDao.findAll();
+        try {
+            return wineDao.findAll();
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public Wine findWineById(Long id) {
-        return wineDao.findById(id);
+        try {
+            return wineDao.findById(id);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public Wine findWineByName(String name) {
-        return wineDao.findByName(name);
+        try {
+            return wineDao.findByName(name);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void updateWine(Wine wine) {
-        wineDao.update(wine);
+        try {
+            wineDao.update(wine);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
     public void removeWine(Wine wine) {
-        wineDao.remove(wine);
+        try {
+            wineDao.remove(wine);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
@@ -60,7 +85,11 @@ public class WineServiceImpl implements WineService {
         
         wine.setSold(wine.getSold() + amount);
         wine.setStocked(wine.getStocked() - amount);
-        wineDao.update(wine);
+        try {
+            wineDao.update(wine);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
@@ -69,6 +98,11 @@ public class WineServiceImpl implements WineService {
             throw new WineryServiceException("This wine already contains this feedback!");
         }
         wine.addFeedback(feedback);
+        try {
+            wineDao.update(wine);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 
     @Override
@@ -77,5 +111,10 @@ public class WineServiceImpl implements WineService {
             throw new WineryServiceException("This wine already contains this harvest!");
         }
         wine.addHarvest(harvest);
+        try {
+            wineDao.update(wine);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
     }
 }

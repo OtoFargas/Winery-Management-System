@@ -25,7 +25,7 @@ public class FeedbackFacadeImpl implements FeedbackFacade {
 
     private final BeanMappingService beanMappingService;
 
-    @Inject
+//    @Inject
     public FeedbackFacadeImpl(FeedbackService feedbackService, BeanMappingService beanMappingService) {
         this.feedbackService = feedbackService;
         this.beanMappingService = beanMappingService;
