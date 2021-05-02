@@ -9,12 +9,12 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>cz.fi.muni.pa165</groupId>
+	<groupId>cz.muni.fi.pa165</groupId>
 	<artifactId>Winery-Management-System</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>Group project</name>
+	<name>Winery management system</name>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -85,4 +85,10 @@
 			<version>10.10.2.0</version>
 		</dependency>
 	</dependencies>
+
+	<modules>
+		<module>winery-persistence</module>
+		<module>winery-api</module>
+		<module>winery-service</module>
+	</modules>
 </project>
