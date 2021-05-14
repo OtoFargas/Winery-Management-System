@@ -25,6 +25,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -78,6 +79,8 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
 
     private WineCreateDTO testWineCreateDTO;
 
+    private AutoCloseable mocks;
+
     @BeforeMethod
     public void setupFacade() {
         wineFacade = new WineFacadeImpl(wineService, feedbackService, harvestService, beanMappingService);
@@ -85,7 +88,12 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void setup() throws ServiceException {
-        MockitoAnnotations.openMocks(this);
+        mocks = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterMethod
+    public void close() throws Exception {
+        mocks.close();
     }
 
     @BeforeClass
