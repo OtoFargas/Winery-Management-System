@@ -90,5 +90,6 @@
 		<module>winery-persistence</module>
 		<module>winery-api</module>
 		<module>winery-service</module>
+		<module>winery-sample-data</module>
 	</modules>
 </project>
