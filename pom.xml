@@ -91,5 +91,6 @@
 		<module>winery-api</module>
 		<module>winery-service</module>
 		<module>winery-sample-data</module>
+		<module>winery-rest</module>
 	</modules>
 </project>
