@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -48,9 +49,16 @@ public class FeedbackServiceTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private FeedbackService feedbackService;
 
+    private AutoCloseable mocks;
+
     @BeforeClass
     public void setup() throws ServiceException {
-        MockitoAnnotations.openMocks(this);
+         mocks = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterClass
+    public void close() throws Exception {
+        mocks.close();
     }
 
     @BeforeMethod
