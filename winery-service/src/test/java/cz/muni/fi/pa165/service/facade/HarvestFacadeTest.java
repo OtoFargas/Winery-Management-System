@@ -22,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -70,6 +71,7 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
 
     private Grape grape1;
     private Wine wine;
+    private AutoCloseable mocks;
 
     @BeforeMethod
     public void setupFacade() {
@@ -78,7 +80,12 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void setup() throws ServiceException {
-        MockitoAnnotations.openMocks(this);
+        mocks = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterMethod
+    public void close() throws Exception {
+        mocks.close();
     }
 
     @BeforeMethod
