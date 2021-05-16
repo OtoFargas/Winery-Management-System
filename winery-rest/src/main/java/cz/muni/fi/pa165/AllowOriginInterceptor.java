@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 
  * @author Vladimir Visnovsky
  */
 public class AllowOriginInterceptor extends HandlerInterceptorAdapter {

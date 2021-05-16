@@ -7,6 +7,7 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
+ * 
  * @author Vladimir Visnovsky
  */
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
