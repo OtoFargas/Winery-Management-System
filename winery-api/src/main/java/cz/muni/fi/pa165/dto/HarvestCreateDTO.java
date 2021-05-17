@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.dto;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import cz.muni.fi.pa165.enums.Quality;
