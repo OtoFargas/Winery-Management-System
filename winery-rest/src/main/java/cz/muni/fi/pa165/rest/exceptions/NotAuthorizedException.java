@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.exceptions;
+package cz.muni.fi.pa165.rest.exceptions;
 
 /**
  * @author Oto Fargas
