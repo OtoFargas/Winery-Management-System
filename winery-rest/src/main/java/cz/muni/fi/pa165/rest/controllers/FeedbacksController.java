@@ -37,7 +37,7 @@ public class FeedbacksController {
      * @return FeedbackDTO of the newly created feedback
      * @throws ResourceAlreadyExistingException if the given feedback already exists
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/feedback/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final FeedbackDTO createFeedback(@RequestBody FeedbackCreateDTO feedback) throws ResourceAlreadyExistingException {
 
@@ -67,7 +67,7 @@ public class FeedbacksController {
      * @return found feedback
      * @throws ResourceNotFoundException if the feedback cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/feedback/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final FeedbackDTO findFeedback(@PathVariable("id") long id) throws ResourceNotFoundException {
 
         logger.debug("rest findFeedbackById({})", id);
@@ -85,7 +85,8 @@ public class FeedbacksController {
      * @return feedbacks written by the given author
      * @throws ResourceNotFoundException when no feedbacks are found
      */
-    @RequestMapping(value = "by_author/{author}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/feedback/by_author/{author}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<FeedbackDTO> findFeedbacksByAuthor(@PathVariable("author") String author) throws ResourceNotFoundException {
 
         logger.debug("rest findFeedbacksByAuthor({})", author);
@@ -102,7 +103,7 @@ public class FeedbacksController {
      * @param id of the feedback to be deleted
      * @throws ResourceNotFoundException when the feedback cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/feedback/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeFeedback(@PathVariable("id") long id) throws ResourceNotFoundException {
 
         logger.debug("rest removeFeedback({})", id);

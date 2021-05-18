@@ -125,7 +125,7 @@ public class GrapesController {
      * @param id of the grape to be deleted
      * @throws ResourceNotFoundException when the grape cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/grape/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeGrape(@PathVariable("id") long id) throws ResourceNotFoundException {
 
         logger.debug("rest removeGrape({})", id);
@@ -143,7 +143,7 @@ public class GrapesController {
      * @return GrapeDTO of changed grape
      * @throws InvalidParameterException when given harvest is invalid
      */
-    @RequestMapping(value = "/{id}/harvests", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/grape/{id}/harvests", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final GrapeDTO addHarvest(@PathVariable("id") long id, @RequestBody HarvestDTO harvest) throws InvalidParameterException {
 
@@ -162,7 +162,7 @@ public class GrapesController {
      * @return of the cured Grape
      * @throws InvalidParameterException when the grapeCureDTO is invalid
      */
-    @RequestMapping(value = "/cureDisease", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/grape/cureDisease", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final GrapeDTO cureDisease(@RequestBody GrapeCureDTO grapeCureDTO) throws InvalidParameterException {
 
@@ -181,7 +181,7 @@ public class GrapesController {
      * @return the cured grape
      * @throws ResourceNotFoundException when the grape cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/grape/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public final GrapeDTO cureAllDiseases(@PathVariable("id") long id) throws ResourceNotFoundException {
 
         logger.debug("rest cureAllDiseases({})", id);
