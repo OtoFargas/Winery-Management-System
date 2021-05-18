@@ -92,6 +92,6 @@
 		<module>winery-service</module>
 		<module>winery-sample-data</module>
 		<module>winery-rest</module>
-		<module>winery-mvc</module>
+		<module>winery-spring-mvc</module>
 	</modules>
 </project>
