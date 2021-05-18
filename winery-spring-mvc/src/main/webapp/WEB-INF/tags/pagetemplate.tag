@@ -33,14 +33,14 @@ pa<!DOCTYPE html>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><my:a href="/shopping/show"><f:message key="navigation.home"/></my:a></li>
+                <li><my:a href="/show"><f:message key="navigation.home"/></my:a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="/order/list/all"><f:message key="navigation.admin.orders"/></my:a></li>
-                        <li><my:a href="/user/list"><f:message key="navigation.admin.customers"/></my:a></li>
-                        <li><my:a href="/product/list"><f:message key="navigation.admin.products"/></my:a></li>
-                        <li><my:a href="/category/list"><f:message key="navigation.admin.categories"/></my:a></li>
+                        <li><my:a href="/grape/list/all"><f:message key="navigation.admin.grapes"/></my:a></li>
+                        <li><my:a href="/wine/list"><f:message key="navigation.admin.wines"/></my:a></li>
+                        <li><my:a href="/harvest/list"><f:message key="navigation.admin.harvests"/></my:a></li>
+                        <li><my:a href="/feedback/list"><f:message key="navigation.admin.feedbacks"/></my:a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
