@@ -9,7 +9,7 @@
         <artifactId>Winery-Management-System</artifactId>
     </parent>
 
-    <artifactId>winery-sample-data</artifactId>
+    <artifactId>Winery-sample-data</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Sample data</name>

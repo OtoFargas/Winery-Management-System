@@ -10,7 +10,7 @@
         <artifactId>Winery-Management-System</artifactId>
     </parent>
 
-    <artifactId>winery-rest</artifactId>
+    <artifactId>Winery-rest</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>REST</name>
@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>winery-sample-data</artifactId>
+            <artifactId>Winery-sample-data</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
