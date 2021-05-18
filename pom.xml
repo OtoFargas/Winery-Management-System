@@ -77,7 +77,12 @@
 			<version>7.4.0</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.26</version>
+			<scope>compile</scope>
+		</dependency>
 		<!-- For embedded usage -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
