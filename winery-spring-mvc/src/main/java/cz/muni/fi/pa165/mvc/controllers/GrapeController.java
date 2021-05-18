@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
+import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
+import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
 import org.slf4j.Logger;
@@ -53,11 +55,11 @@ public class GrapeController {
     /**
      * TODO
      *
-     * @param formBean data for grape creation
+     * @param formBean           data for grape creation
      * @param bindingResult
      * @param model
      * @param redirectAttributes attributes for redirect scenario
-     * @param uriBuilder sets URI components
+     * @param uriBuilder         sets URI components
      * @return page grape/new if failed, page grape/all else
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -86,9 +88,9 @@ public class GrapeController {
     /**
      * TODO
      *
-     * @param id of the grape to be viewed
+     * @param id    of the grape to be viewed
      * @param model data to be displayed
-     * @return page name
+     * @return page name of the view of the grape
      */
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String viewById(@PathVariable long id, Model model) {
@@ -100,9 +102,9 @@ public class GrapeController {
     /**
      * TODO
      *
-     * @param name of the grape to be viewed
+     * @param name  of the grape to be viewed
      * @param model data to be displayed
-     * @return page name
+     * @return page name of the view of the grape
      */
     @RequestMapping(value = "/view/{name}", method = RequestMethod.GET)
     public String viewByName(@PathVariable String name, Model model) {
@@ -115,7 +117,7 @@ public class GrapeController {
      * TODO
      *
      * @param model to be displayed
-     * @return page name
+     * @return page name of all the grapes
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listAllGrapes(Model model) {
@@ -128,10 +130,10 @@ public class GrapeController {
      *
      * @param model to be displayed
      * @param color to be filtered by
-     * @return page name
+     * @return page name of all the grapes
      */
     @RequestMapping(value = "/list/{color}", method = RequestMethod.GET)
-    public String listGrapesWithColor(Model model,@PathVariable GrapeColor color) {
+    public String listGrapesWithColor(Model model, @PathVariable GrapeColor color) {
         model.addAttribute("grapes", grapeFacade.findGrapesByColor(color));
         return "grape/list";
     }
@@ -142,7 +144,7 @@ public class GrapeController {
      * @param id of the grape to be removed
      * @param uriBuilder
      * @param redirectAttributes
-     * @return page name
+     * @return page name of all the other grapes
      */
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
@@ -154,8 +156,85 @@ public class GrapeController {
             redirectAttributes.addFlashAttribute("alert_success", "Grape \"" + grape.getId() + ":" + grape.getName()
                                                 + "\" was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Grape \"" + grape.getName() + "\" cannot be deleted.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape \"" + grape.getId() + ":" + grape.getName()
+                                                + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/grape/list").toUriString();
+    }
+
+    /**
+     * TODO
+     *
+     * @param id of the grape to be added to
+     * @param harvestid of the harvest to be added
+     * @param uriBuilder
+     * @param redirectAttributes
+     * @return page name of the view of the grape
+     */
+    @RequestMapping(value = "/addHarvest/{id}/{harvestid}", method = RequestMethod.POST)
+    public String addHarvest(@PathVariable long id, @PathVariable long harvestid,
+                             UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+        try {
+            grapeFacade.addHarvest(harvestid, id);
+            redirectAttributes.addFlashAttribute("alert_success", "Harvest number " + harvestid
+                    + " was added to the grape number" + id + ".");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Harvest number " + harvestid
+                    + " was NOT added to the grape number" + id + "." + e.getMessage());
+        }
+
+        return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    /**
+     * TODO
+     *
+     * @param id of the grape to be cured
+     * @param uriBuilder
+     * @param redirectAttributes
+     * @return page name of the view of the grape
+     */
+    @RequestMapping(value = "/cureAllDiseases/{id}", method = RequestMethod.PUT)
+    public String cureAll(@PathVariable long id, UriComponentsBuilder uriBuilder,
+                          RedirectAttributes redirectAttributes) {
+        try {
+            grapeFacade.cureAllDiseases(id);
+            redirectAttributes.addFlashAttribute("alert_success", "Grape number " + id
+                                                + " was cured of all diseases.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape number " + id
+                                                + " was not cured. " + e.getMessage());
+        }
+
+        return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    /**
+     * TODO
+     *
+     * @param id of the grape to be cured
+     * @param disease to be cured from given grape
+     * @param uriBuilder
+     * @param redirectAttributes
+     * @return page name of the view of the grape
+     */
+    @RequestMapping(value = "/cureDisease/{id}/{disease}", method = RequestMethod.PUT)
+    public String cureDisease(@PathVariable long id, @PathVariable Disease disease,
+                              UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+
+        try {
+            GrapeCureDTO grapeCureDTO = new GrapeCureDTO();
+            grapeCureDTO.setDisease(disease);
+            grapeCureDTO.setId(id);
+
+            grapeFacade.cureDisease(grapeCureDTO);
+            redirectAttributes.addFlashAttribute("alert_success", "Grape number " + id
+                    + " was cured of" + disease + ".");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape number " + id
+                    + " was not cured. " + e.getMessage());
+        }
+
+        return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 }
