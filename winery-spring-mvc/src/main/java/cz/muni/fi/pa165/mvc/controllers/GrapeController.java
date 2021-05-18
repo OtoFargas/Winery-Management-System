@@ -136,19 +136,26 @@ public class GrapeController {
         return "grape/list";
     }
 
+    /**
+     * TODO
+     *
+     * @param id of the grape to be removed
+     * @param uriBuilder
+     * @param redirectAttributes
+     * @return page name
+     */
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        GrapeDTO product = grapeFacade.findGrapeById(id);
+        GrapeDTO grape = grapeFacade.findGrapeById(id);
         log.debug("remove({})", id);
 
         try {
             grapeFacade.removeGrape(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Product \"" + product.getName() + "\" was deleted.");
+            redirectAttributes.addFlashAttribute("alert_success", "Grape \"" + grape.getId() + ":" + grape.getName()
+                                                + "\" was deleted.");
         } catch (Exception ex) {
-            log.error("product "+id+" cannot be deleted (it is included in an order)");
-            log.error(NestedExceptionUtils.getMostSpecificCause(ex).getMessage());
-            redirectAttributes.addFlashAttribute("alert_danger", "Product \"" + product.getName() + "\" cannot be deleted.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape \"" + grape.getName() + "\" cannot be deleted.");
         }
-        return "redirect:" + uriBuilder.path("/product/list").toUriString();
+        return "redirect:" + uriBuilder.path("/grape/list").toUriString();
     }
 }
