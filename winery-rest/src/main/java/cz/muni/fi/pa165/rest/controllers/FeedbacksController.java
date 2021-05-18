@@ -85,7 +85,8 @@ public class FeedbacksController {
      * @return feedbacks written by the given author
      * @throws ResourceNotFoundException when no feedbacks are found
      */
-    @RequestMapping(value = "by_author/{author}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/by_author/{author}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<FeedbackDTO> findFeedbacksByAuthor(@PathVariable("author") String author) throws ResourceNotFoundException {
 
         logger.debug("rest findFeedbacksByAuthor({})", author);
