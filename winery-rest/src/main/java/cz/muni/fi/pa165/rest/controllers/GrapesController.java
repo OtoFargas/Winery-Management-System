@@ -80,7 +80,7 @@ public class GrapesController {
 
         GrapeDTO grapeDTO = grapeFacade.findGrapeById(id);
         if (grapeDTO == null) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No grape with ID" + id + "found.");
         }
 
         return grapeDTO;
@@ -98,7 +98,7 @@ public class GrapesController {
 
         List<GrapeDTO> grapeDTOs = grapeFacade.findGrapesByColor(color);
         if (grapeDTOs == null){
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No grapes with color" + color + "found.");
         }
 
         return grapeDTOs;
@@ -116,7 +116,7 @@ public class GrapesController {
 
         GrapeDTO grapeDTO = grapeFacade.findGrapeByName(name);
         if (grapeDTO == null){
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No grape with name" + name + "found.");
         }
 
         return grapeDTO;
@@ -134,7 +134,7 @@ public class GrapesController {
         try {
             grapeFacade.removeGrape(id);
         } catch (Exception ex) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No grape with ID" + id + "found.");
         }
     }
 
@@ -191,7 +191,7 @@ public class GrapesController {
             grapeFacade.cureAllDiseases(id);
             return grapeFacade.findGrapeById(id);
         } catch (Exception ex) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No grape with ID" + id + "found.");
         }
     }
 }

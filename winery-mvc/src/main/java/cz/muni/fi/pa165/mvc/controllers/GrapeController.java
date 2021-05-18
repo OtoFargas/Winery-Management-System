@@ -1,11 +1,13 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
+import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedExceptionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -132,5 +134,21 @@ public class GrapeController {
     public String listGrapesWithColor(Model model,@PathVariable GrapeColor color) {
         model.addAttribute("grapes", grapeFacade.findGrapesByColor(color));
         return "grape/list";
+    }
+
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+        GrapeDTO product = grapeFacade.findGrapeById(id);
+        log.debug("remove({})", id);
+
+        try {
+            grapeFacade.removeGrape(id);
+            redirectAttributes.addFlashAttribute("alert_success", "Product \"" + product.getName() + "\" was deleted.");
+        } catch (Exception ex) {
+            log.error("product "+id+" cannot be deleted (it is included in an order)");
+            log.error(NestedExceptionUtils.getMostSpecificCause(ex).getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", "Product \"" + product.getName() + "\" cannot be deleted.");
+        }
+        return "redirect:" + uriBuilder.path("/product/list").toUriString();
     }
 }

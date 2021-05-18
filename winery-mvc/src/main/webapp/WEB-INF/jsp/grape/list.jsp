@@ -1,16 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: fudor
-  Date: 18/05/2021
-  Time: 15:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 
+<html>
+
+<head>
+    <title>Grape list:</title>
+</head>
+
+<body>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${grapes}" var="grape">
+            <tr>
+                <td>${grape.id}</td>
+                <td><c:out value="${grape.name}"/></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </body>
+
 </html>

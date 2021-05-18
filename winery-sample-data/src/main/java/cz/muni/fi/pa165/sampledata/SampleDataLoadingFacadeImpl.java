@@ -92,7 +92,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine3.setTaste(Taste.SEMI_DRY);
         wine3.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.TANNINS)));
 
-
         // grapes
         grape1 = new Grape(1L);
         grape1.setName("Test1");
@@ -144,7 +143,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         harvest3.setQuantity(123);
         harvest3.setGrape(grape3);
         harvest3.setWine(wine3);
-
 
         // feedbacks
         feedback1 = new Feedback(1L);

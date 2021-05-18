@@ -75,7 +75,7 @@ public class FeedbacksController {
 
         FeedbackDTO feedbackDTO = feedbackFacade.findFeedbackById(id);
         if (feedbackDTO == null) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No feedback with ID" + id + "found.");
         }
 
         return feedbackDTO;
@@ -94,7 +94,7 @@ public class FeedbacksController {
 
         List<FeedbackDTO> feedbackDTOs = feedbackFacade.findFeedbacksByAuthor(author);
         if (feedbackDTOs == null){
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No feedbacks with author" + author + "found.");
         }
 
         return feedbackDTOs;
@@ -112,7 +112,7 @@ public class FeedbacksController {
         try {
             feedbackFacade.removeFeedback(id);
         } catch (Exception ex) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException("No feedback with ID" + id + "found.");
         }
     }
 }
