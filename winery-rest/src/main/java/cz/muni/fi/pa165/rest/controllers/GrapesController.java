@@ -36,7 +36,6 @@ public class GrapesController {
     @Inject
     private GrapeFacade grapeFacade;
 
-
     /**
      * @param grape to be created
      * @return newly created GrapeDTO
@@ -163,7 +162,7 @@ public class GrapesController {
      * @return of the cured Grape
      * @throws InvalidParameterException when the grapeCureDTO is invalid
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/cureDisease", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final GrapeDTO cureDisease(@RequestBody GrapeCureDTO grapeCureDTO) throws InvalidParameterException {
 
@@ -180,13 +179,12 @@ public class GrapesController {
     /**
      * @param id of the grape to be cured of all diseases
      * @return the cured grape
-     * @throws ResourceNotFoundException when grape cant be found
+     * @throws ResourceNotFoundException when the grape cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public final GrapeDTO cureAllDiseases(@PathVariable("id") long id) throws ResourceNotFoundException {
 
-        logger.debug("rest cureDisease({})", id);
+        logger.debug("rest cureAllDiseases({})", id);
 
         try {
             grapeFacade.cureAllDiseases(id);
