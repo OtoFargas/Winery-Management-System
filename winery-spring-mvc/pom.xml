@@ -10,7 +10,7 @@
         <artifactId>Winery-Management-System</artifactId>
     </parent>
 
-    <artifactId>winery-mvc</artifactId>
+    <artifactId>winery-spring-mvc</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>MVC</name>
