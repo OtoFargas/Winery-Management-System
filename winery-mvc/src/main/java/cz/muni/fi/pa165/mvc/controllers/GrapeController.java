@@ -78,7 +78,7 @@ public class GrapeController {
         Long id = grapeFacade.createGrape(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was created");
-        return "redirect:" + uriBuilder.path("/grape/all").toUriString();
+        return "redirect:" + uriBuilder.path("/grape/list").toUriString();
     }
 
     /**
