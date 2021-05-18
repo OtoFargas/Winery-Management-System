@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
+import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.enums.GrapeColor;
@@ -22,7 +23,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * REST Controller for Orders
+ * REST Controller for Grapes
  *
  * @author Lukáš Fudor
  */
@@ -154,6 +155,44 @@ public class GrapesController {
             return grapeFacade.findGrapeById(id);
         } catch (Exception ex) {
             throw new InvalidParameterException();
+        }
+    }
+
+    /**
+     * @param grapeCureDTO to be cured of grapeCureDTO.disease
+     * @return of the cured Grape
+     * @throws InvalidParameterException when the grapeCureDTO is invalid
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final GrapeDTO cureDisease(@RequestBody GrapeCureDTO grapeCureDTO) throws InvalidParameterException {
+
+        logger.debug("rest cureDisease({})", grapeCureDTO.getId());
+
+        try {
+            grapeFacade.cureDisease(grapeCureDTO);
+            return grapeFacade.findGrapeById(grapeCureDTO.getId());
+        } catch (Exception ex) {
+            throw new InvalidParameterException();
+        }
+    }
+
+    /**
+     * @param id of the grape to be cured of all diseases
+     * @return the cured grape
+     * @throws ResourceNotFoundException when grape cant be found
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final GrapeDTO cureAllDiseases(@PathVariable("id") long id) throws ResourceNotFoundException {
+
+        logger.debug("rest cureDisease({})", id);
+
+        try {
+            grapeFacade.cureAllDiseases(id);
+            return grapeFacade.findGrapeById(id);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
         }
     }
 }
