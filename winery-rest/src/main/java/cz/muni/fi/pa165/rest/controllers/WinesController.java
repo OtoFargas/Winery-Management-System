@@ -16,6 +16,7 @@ import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.facade.WineFacade;
+import cz.muni.fi.pa165.rest.exceptions.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -61,13 +62,24 @@ public class WinesController {
     @PostMapping("wine/{id}/sell")
     public void sellWine(@RequestBody WineBuyDTO wineBuyDTO) {
         logger.info("sellWine({})", wineBuyDTO);
+
+        if (wineBuyDTO == null) {
+            throw new ResourceNotFoundException();
+        }
         wineFacade.sellWine(wineBuyDTO);
     }
 
     @GetMapping("wine/{id}")
     public WineDTO findWineById(@PathVariable("id") Long id) {
         logger.info("findById({})", id);
-        return wineFacade.findWineById(id);
+        WineDTO wineDTO;
+
+        try {
+            wineDTO = wineFacade.findWineById(id);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Wine with id " + id + " not found");
+        }
+        return wineDTO;
     }
 
     @GetMapping("wine/{name}")
