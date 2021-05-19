@@ -4,13 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" %>
 
 <my:pagetemplate>
 <jsp:attribute name="body">
 
     <div class="jumbotron">
         <h1>Winery management IS</h1>
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/wine/list"
+        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/grape/list"
               role="button">Grapes</a></p>
     </div>
 
