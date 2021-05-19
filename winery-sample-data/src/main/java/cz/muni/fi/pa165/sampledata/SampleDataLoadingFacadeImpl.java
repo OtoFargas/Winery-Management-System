@@ -14,7 +14,9 @@ import cz.muni.fi.pa165.service.FeedbackService;
 import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
 import cz.muni.fi.pa165.service.WineService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -28,16 +30,20 @@ import java.util.List;
  *
  * @author Oto Fargas
  */
-@Service
+@Component
 @Transactional
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
+    @Autowired
     private final FeedbackService feedbackService;
 
+    @Autowired
     private final WineService wineService;
 
+    @Autowired
     private final HarvestService harvestService;
 
+    @Autowired
     private final GrapeService grapeService;
 
     private Wine wine1;
@@ -92,6 +98,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine3.setTaste(Taste.SEMI_DRY);
         wine3.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.TANNINS)));
 
+        // wineService.createWine(wine1);
+
         // grapes
         grape1 = new Grape(1L);
         grape1.setName("Test1");
@@ -121,6 +129,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         diseases = new ArrayList<>();
         diseases.add(Disease.ANTHRACNOSE);
         grape3.setDiseases(diseases);
+
+        grapeService.createGrape(grape1);
+        grapeService.createGrape(grape2);
+        grapeService.createGrape(grape3);
+
 
         // harvests
         harvest1 = new Harvest();

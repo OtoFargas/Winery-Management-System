@@ -59,7 +59,7 @@ public class GrapesController {
      * return all grapes
      * @return list of GrapeDTOs
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/grape/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<GrapeDTO> findAllGrapes() {
 
         logger.debug("rest findAllGrapes()");
