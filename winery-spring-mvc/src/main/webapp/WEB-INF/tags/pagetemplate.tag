@@ -39,14 +39,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wines<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="/wine/list">List</my:a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Genres<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><my:a href="/genre/list">List</my:a></li>
-                        <li><my:a href="/genre/create">Create</my:a></li>
+                        <li><my:a href="${pageContext.request.contextPath}/wine/list">List</my:a></li>
                     </ul>
                 </li>
 <%--                <li class="dropdown">--%>

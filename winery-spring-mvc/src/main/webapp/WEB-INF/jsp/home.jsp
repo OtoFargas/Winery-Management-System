@@ -6,13 +6,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<my:pagetemplate>
+<my:pagetemplate title="Home">
 <jsp:attribute name="body">
 
     <div class="jumbotron">
         <h1>Winery management IS</h1>
         <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/grape/list"
               role="button">Grapes</a></p>
+        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/wine/list"
+              role="button">Wines</a></p>
     </div>
 
 </jsp:attribute>
