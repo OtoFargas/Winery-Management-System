@@ -74,7 +74,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     public void loadData() throws IOException {
 
         // wines
-        wine1 = new Wine(1L);
+        wine1 = new Wine();
         wine1.setName("wine1");
         wine1.setSold(20);
         wine1.setStocked(30);
@@ -82,7 +82,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine1.setTaste(Taste.SWEET);
         wine1.setIngredients(new ArrayList<>(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS)));
 
-        wine2 = new Wine(2L);
+        wine2 = new Wine();
         wine2.setName("wine2");
         wine2.setSold(10);
         wine2.setStocked(40);
@@ -90,7 +90,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine2.setTaste(Taste.DRY);
         wine2.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.SULFUR)));
 
-        wine3 = new Wine(3L);
+        wine3 = new Wine();
         wine3.setName("wine3");
         wine3.setSold(15);
         wine3.setStocked(14);
@@ -99,9 +99,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine3.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.TANNINS)));
 
         // wineService.createWine(wine1);
+        // wineService.createWine(wine2);
+        // wineService.createWine(wine3);
 
         // grapes
-        grape1 = new Grape(1L);
+        grape1 = new Grape();
         grape1.setName("Test1");
         grape1.setColor(GrapeColor.RED);
         grape1.setQuantity(56);
@@ -111,7 +113,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         diseases.add(Disease.GREY_MOLD);
         grape1.setDiseases(diseases);
 
-        grape2 = new Grape(2L);
+        grape2 = new Grape();
         grape2.setName("Test2");
         grape2.setColor(GrapeColor.WHITE);
         grape2.setQuantity(99);
@@ -121,7 +123,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         diseases.add(Disease.POWDERY_MILDEW);
         grape2.setDiseases(diseases);
 
-        grape3 = new Grape(3L);
+        grape3 = new Grape();
         grape3.setName("Test3");
         grape3.setColor(GrapeColor.WHITE);
         grape3.setQuantity(12);
