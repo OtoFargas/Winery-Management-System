@@ -98,10 +98,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine3.setTaste(Taste.SEMI_DRY);
         wine3.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.TANNINS)));
 
-        // wineService.createWine(wine1);
-        // wineService.createWine(wine2);
-        // wineService.createWine(wine3);
-
         // grapes
         grape1 = new Grape();
         grape1.setName("Test1");
@@ -132,53 +128,81 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         diseases.add(Disease.ANTHRACNOSE);
         grape3.setDiseases(diseases);
 
-        grapeService.createGrape(grape1);
-        grapeService.createGrape(grape2);
-        grapeService.createGrape(grape3);
-
-
         // harvests
         harvest1 = new Harvest();
         harvest1.setHarvestYear(2015);
         harvest1.setQuality(Quality.HIGH);
         harvest1.setQuantity(200);
-        harvest1.setGrape(grape1);
-        harvest1.setWine(wine1);
 
         harvest2 = new Harvest();
         harvest2.setHarvestYear(2014);
         harvest2.setQuality(Quality.MEDIUM);
         harvest2.setQuantity(168);
-        harvest2.setGrape(grape2);
-        harvest2.setWine(wine2);
 
         harvest3 = new Harvest();
         harvest3.setHarvestYear(2014);
         harvest3.setQuality(Quality.LOW);
         harvest3.setQuantity(123);
-        harvest3.setGrape(grape3);
-        harvest3.setWine(wine3);
 
         // feedbacks
-        feedback1 = new Feedback(1L);
+        feedback1 = new Feedback();
         feedback1.setAuthor("author1");
         feedback1.setContent("content1");
         feedback1.setDate(new Date());
         feedback1.setRating(5);
-        feedback1.setWine(wine1);
 
-        feedback2 = new Feedback(2L);
+        feedback2 = new Feedback();
         feedback2.setAuthor("testAuthor2");
         feedback2.setContent("testContent2");
         feedback2.setDate(new Date());
         feedback2.setRating(3);
-        feedback2.setWine(wine2);
 
-        feedback3 = new Feedback(3L);
+        feedback3 = new Feedback();
         feedback3.setAuthor("testAuthor3");
         feedback3.setContent("testContent3");
         feedback3.setDate(new Date());
         feedback3.setRating(8);
+
+
+        harvest1.setGrape(grape1);
+        harvest1.setWine(wine1);
+        grape1.addHarvest(harvest1);
+        wine1.addHarvest(harvest1);
+
+        harvest2.setGrape(grape2);
+        harvest2.setWine(wine2);
+        grape2.addHarvest(harvest2);
+        wine2.addHarvest(harvest2);
+
+        harvest3.setGrape(grape3);
+        harvest3.setWine(wine3);
+        grape3.addHarvest(harvest3);
+        wine3.addHarvest(harvest3);
+
+        feedback1.setWine(wine1);
+        wine1.addFeedback(feedback1);
+
+        feedback2.setWine(wine2);
+        wine2.addFeedback(feedback2);
+
         feedback3.setWine(wine1);
+        wine3.addFeedback(feedback3);
+
+
+        grapeService.createGrape(grape1);
+        grapeService.createGrape(grape2);
+        grapeService.createGrape(grape3);
+
+        wineService.createWine(wine1);
+        wineService.createWine(wine2);
+        wineService.createWine(wine3);
+
+        harvestService.createHarvest(harvest1);
+        harvestService.createHarvest(harvest2);
+        harvestService.createHarvest(harvest3);
+
+        feedbackService.createFeedback(feedback1);
+        feedbackService.createFeedback(feedback2);
+        feedbackService.createFeedback(feedback3);
     }
 }
