@@ -32,14 +32,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}">Movies Recommender</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}">Winery Management System</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wines<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="/movie/list">List</my:a></li>
+                        <li><my:a href="/wine/list">List</my:a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
