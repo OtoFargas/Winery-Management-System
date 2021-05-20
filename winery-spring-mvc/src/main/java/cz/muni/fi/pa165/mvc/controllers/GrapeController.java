@@ -147,7 +147,7 @@ public class GrapeController {
      * @param redirectAttributes
      * @return page name of all the other grapes
      */
-    @PostMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         GrapeDTO grape = grapeFacade.findGrapeById(id);
         log.debug("remove({})", id);

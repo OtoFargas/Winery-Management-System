@@ -24,7 +24,7 @@
                     <td><c:out value="${grape.color}"/></td>
                     <td><c:out value="${grape.diseases}"/></td>
                     <td>
-                        <my:a href="/grape/delete/${grape.id}" class="btn btn-danger">Delete</my:a>
+                        <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>
                         <my:a href="/grape/edit/${grape.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>
