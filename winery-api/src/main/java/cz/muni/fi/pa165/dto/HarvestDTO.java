@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
+import java.util.Objects;
+
 import cz.muni.fi.pa165.enums.Quality;
 
 /**
@@ -80,9 +82,7 @@ public class HarvestDTO {
 
     @Override
     public int hashCode() {
-        int result = getHarvestYear().hashCode();
-        result = 31 * result + getGrape().hashCode();
-        return result;
+        return Objects.hash(getHarvestYear(), getGrape());
     }
 
     @Override
