@@ -59,7 +59,7 @@
         <!-- what to do when only "mvn" is run -->
         <defaultGoal>cargo:run</defaultGoal>
         <!-- name of the produced war -->
-        <finalName>winery</finalName>
+        <finalName>pa165</finalName>
         <plugins>
             <!--  embedded Tomcat -->
             <plugin>
