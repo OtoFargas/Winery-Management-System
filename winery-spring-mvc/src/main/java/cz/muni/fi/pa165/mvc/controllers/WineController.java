@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -91,7 +92,7 @@ public class WineController {
      * @param model data to be displayed
      * @return page name of the view of the wine
      */
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/view/{id}")
     public String viewById(@PathVariable long id, Model model) {
         log.debug("viewById({})", id);
         model.addAttribute("wine", wineFacade.findWineById(id));
@@ -105,7 +106,7 @@ public class WineController {
      * @param model data to be displayed
      * @return page name of the view of the wine
      */
-    @RequestMapping(value = "/view/{name}", method = RequestMethod.GET)
+    @GetMapping("/view/{name}")
     public String viewByName(@PathVariable String name, Model model) {
         log.debug("viewByName({})", name);
         model.addAttribute("wine", wineFacade.findWineByName(name));
@@ -118,7 +119,7 @@ public class WineController {
      * @param model to be displayed
      * @return page name of all the wines
      */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping("/list")
     public String listAllWines(Model model) {
         model.addAttribute("wines", wineFacade.findAllWines());
         return "wine/list";
@@ -132,7 +133,7 @@ public class WineController {
      * @param redirectAttributes
      * @return page name of all the other wines
      */
-    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         WineDTO wine = wineFacade.findWineById(id);
         log.debug("remove({})", id);
@@ -152,20 +153,20 @@ public class WineController {
      * TODO
      *
      * @param id of the wine to be added to
-     * @param harvestId of the harvest to be added
+     * @param harvestid of the harvest to be added
      * @param uriBuilder
      * @param redirectAttributes
      * @return page name of the view of the wine
      */
-    @RequestMapping(value = "/addHarvest/{id}/{harvestid}", method = RequestMethod.POST)
-    public String addHarvest(@PathVariable long id, @PathVariable long harvestId,
+    @PostMapping("/addHarvest/{id}/{harvestid}")
+    public String addHarvest(@PathVariable long id, @PathVariable long harvestid,
                              UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         try {
-            wineFacade.addHarvest(harvestId, id);
-            redirectAttributes.addFlashAttribute("alert_success", "Harvest number " + harvestId
+            wineFacade.addHarvest(harvestid, id);
+            redirectAttributes.addFlashAttribute("alert_success", "Harvest number " + harvestid
                     + " was added to the wine number" + id + ".");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Harvest number " + harvestId
+            redirectAttributes.addFlashAttribute("alert_danger", "Harvest number " + harvestid
                     + " was NOT added to the wine number" + id + "." + e.getMessage());
         }
 
@@ -181,7 +182,7 @@ public class WineController {
      * @param redirectAttributes
      * @return page name of the view of the wine
      */
-    @RequestMapping(value = "/soldWine/{id}", method = RequestMethod.PUT)
+    @PutMapping("/sellWine/{id}/{amount}")
     public String sellWine(@PathVariable long id, @PathVariable Integer amount,
                               UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
 

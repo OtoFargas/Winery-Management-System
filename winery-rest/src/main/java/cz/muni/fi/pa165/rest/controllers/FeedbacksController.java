@@ -10,7 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,8 +40,7 @@ public class FeedbacksController {
      * @return FeedbackDTO of the newly created feedback
      * @throws ResourceAlreadyExistingException if the given feedback already exists
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("harvest/create")
     public final FeedbackDTO createFeedback(@RequestBody FeedbackCreateDTO feedback) throws ResourceAlreadyExistingException {
 
         logger.debug("rest createFeedback()");
@@ -54,7 +56,7 @@ public class FeedbacksController {
     /**
      * @return list of all feedbacks
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("harvest/list")
     public final List<FeedbackDTO> findAllFeedbacks() {
 
         logger.debug("rest findAllFeedbacks()");
@@ -67,7 +69,7 @@ public class FeedbacksController {
      * @return found feedback
      * @throws ResourceNotFoundException if the feedback cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "harvest/{id}")
     public final FeedbackDTO findFeedback(@PathVariable("id") long id) throws ResourceNotFoundException {
 
         logger.debug("rest findFeedbackById({})", id);
@@ -85,8 +87,7 @@ public class FeedbacksController {
      * @return feedbacks written by the given author
      * @throws ResourceNotFoundException when no feedbacks are found
      */
-    @RequestMapping(value = "/by_author/{author}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("harvest/by_author/{author}")
     public final List<FeedbackDTO> findFeedbacksByAuthor(@PathVariable("author") String author) throws ResourceNotFoundException {
 
         logger.debug("rest findFeedbacksByAuthor({})", author);
@@ -103,7 +104,7 @@ public class FeedbacksController {
      * @param id of the feedback to be deleted
      * @throws ResourceNotFoundException when the feedback cant be found
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping("harvest/{id}")
     public final void removeFeedback(@PathVariable("id") long id) throws ResourceNotFoundException {
 
         logger.debug("rest removeFeedback({})", id);
