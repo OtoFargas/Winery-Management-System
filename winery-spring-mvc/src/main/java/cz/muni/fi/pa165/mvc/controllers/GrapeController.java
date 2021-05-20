@@ -61,7 +61,7 @@ public class GrapeController {
      * @param model
      * @param redirectAttributes attributes for redirect scenario
      * @param uriBuilder         sets URI components
-     * @return page grape/new if failed, page grape/all else
+     * @return page grape/new if failed, page grape/list else
      */
     @PostMapping("/create")
     public String createGrape(@Valid @ModelAttribute("grapeCreate") GrapeCreateDTO formBean, BindingResult bindingResult,
@@ -154,10 +154,10 @@ public class GrapeController {
 
         try {
             grapeFacade.removeGrape(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Grape \"" + grape.getId() + ":" + grape.getName()
+            redirectAttributes.addFlashAttribute("alert_success", "Grape " + grape.getId() + ": \"" + grape.getName()
                                                 + "\" was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Grape \"" + grape.getId() + ":" + grape.getName()
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape " + grape.getId() + ": \"" + grape.getName()
                                                 + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/grape/list").toUriString();
@@ -237,5 +237,17 @@ public class GrapeController {
         }
 
         return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    @ModelAttribute("colors")
+    public GrapeColor[] colors() {
+        log.debug("colors()");
+        return GrapeColor.values();
+    }
+
+    @ModelAttribute("diseases")
+    public Disease[] diseases() {
+        log.debug("diseases()");
+        return Disease.values();
     }
 }

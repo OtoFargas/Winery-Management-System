@@ -29,7 +29,7 @@
                     <td><c:out value="${feedback.date}"/></td>
                     <td><c:out value="${feedback.wine}"/></td>
                     <td>
-                        <my:a href="/wine/delete/${feedback.id}" class="btn btn-danger">Delete</my:a>
+                        <my:a href="/wine/remove/${feedback.id}" class="btn btn-danger">Delete</my:a>
                         <my:a href="/wine/edit/${feedback.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>

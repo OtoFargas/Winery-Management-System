@@ -10,10 +10,10 @@
 <my:pagetemplate title="New grape">
 <jsp:attribute name="body">
 
-<form:form method="post" action="${pageContext.request.contextPath}/product/create"
+<form:form method="post" action="${pageContext.request.contextPath}/grape/create"
            modelAttribute="grapeCreate" cssClass="form-horizontal">
 
-        <div class="form-group ${name_error?'has-error':''}">
+        <div class="form-group">
             <form:label path="name" cssClass="col-sm-2 control-label">Name</form:label>
             <div class="col-sm-10">
                 <form:input path="name" cssClass="form-control"/>
@@ -33,25 +33,25 @@
             </div>
         </div>
 
-<%--        <div class="form-group ${price_error?'has-error':''}" >--%>
-<%--            <form:label path="price" cssClass="col-sm-2 control-label">Quantity</form:label>--%>
-<%--            <div class="col-sm-10">--%>
-<%--                <form:input path="price" cssClass="form-control"/>--%>
-<%--                <form:errors path="price" cssClass="help-block"/>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    --%>
-<%--        <div class="form-group">--%>
-<%--            <form:label path="currency" cssClass="col-sm-2 control-label">Disease</form:label>--%>
-<%--            <div class="col-sm-10">--%>
-<%--                <form:select path="currency" cssClass="form-control">--%>
-<%--                    <c:forEach items="${currencies}" var="c">--%>
-<%--                        <form:option value="${c}">${c}</form:option>--%>
-<%--                    </c:forEach>--%>
-<%--                </form:select>--%>
-<%--                <form:errors path="currency" cssClass="error"/>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+        <div class="form-group" >
+            <form:label path="quantity" cssClass="col-sm-2 control-label">Quantity</form:label>
+            <div class="col-sm-10">
+                <form:input path="quantity" cssClass="form-control"/>
+                <form:errors path="quantity" cssClass="help-block"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <form:label path="diseases" cssClass="col-sm-2 control-label">Disease</form:label>
+            <div class="col-sm-10">
+                <form:select path="diseases" cssClass="form-control">
+                    <c:forEach items="${diseases}" var="c">
+                        <form:option value="${c}">${c}</form:option>
+                    </c:forEach>
+                </form:select>
+                <form:errors path="diseases" cssClass="error"/>
+            </div>
+        </div>
 
     <button class="btn btn-success" type="submit">Create grape</button>
     </form:form>
