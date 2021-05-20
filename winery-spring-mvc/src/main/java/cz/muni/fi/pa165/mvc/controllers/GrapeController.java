@@ -107,7 +107,7 @@ public class GrapeController {
      * @param model data to be displayed
      * @return page name of the view of the grape
      */
-    @GetMapping("/view/{name}")
+    @GetMapping("/viewByName/{name}")
     public String viewByName(@PathVariable String name, Model model) {
         log.debug("viewByName({})", name);
         model.addAttribute("grape", grapeFacade.findGrapeByName(name));
@@ -195,13 +195,12 @@ public class GrapeController {
      * @param redirectAttributes
      * @return page name of the view of the grape
      */
-    @PutMapping("/cureAllDiseases/{id}")
+    @GetMapping("/cureAllDiseases/{id}")
     public String cureAll(@PathVariable long id, UriComponentsBuilder uriBuilder,
                           RedirectAttributes redirectAttributes) {
         try {
             grapeFacade.cureAllDiseases(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Grape number " + id
-                                                + " was cured of all diseases.");
+            redirectAttributes.addFlashAttribute("alert_success", "Grape number was cured of all the diseases.");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("alert_danger", "Grape number " + id
                                                 + " was not cured. " + e.getMessage());

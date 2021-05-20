@@ -13,17 +13,15 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">Grape</th>
-            <th scope="col">Color</th>
-            <th scope="col">Diseases</th>
         </tr>
         </thead>
         <tbody>
             <c:forEach items="${grapes}" var="grape">
                 <tr>
+                    <td><c:out value="${grape.id}"/></td>
                     <td><c:out value="${grape.name}"/></td>
-                    <td><c:out value="${grape.color}"/></td>
-                    <td><c:out value="${grape.diseases}"/></td>
                     <td>
                         <my:a href="/grape/view/${grape.id}" class="btn btn-primary">View</my:a>
                         <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>
