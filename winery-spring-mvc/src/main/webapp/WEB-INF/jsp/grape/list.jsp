@@ -9,6 +9,7 @@
 
 <my:pagetemplate title="Grapes">
 <jsp:attribute name="body">
+    <my:a href="/grape/new" class="btn btn-success">New</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -24,8 +25,8 @@
                     <td><c:out value="${grape.color}"/></td>
                     <td><c:out value="${grape.diseases}"/></td>
                     <td>
+                        <my:a href="/grape/view/${grape.id}" class="btn btn-primary">View</my:a>
                         <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>
-                        <my:a href="/grape/edit/${grape.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>
             </c:forEach>
