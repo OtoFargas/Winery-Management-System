@@ -6,7 +6,6 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <html lang="${pageContext.request.locale}">
 <head>
     <meta charset="utf-8">
@@ -15,58 +14,28 @@
     <title><c:out value="${title}"/></title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
     <!-- bootstrap loaded from content delivery network -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <jsp:invoke fragment="head"/>
 </head>
 <body>
 <!-- navigation bar -->
-<nav class="navbar navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}">Winery Management System</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation.project"/></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wines<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><my:a href="/wine/list">List</my:a></li>
-                    </ul>
-                </li>
-<%--                <li class="dropdown">--%>
-<%--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation<b class="caret"></b></a>--%>
-<%--                    <ul class="dropdown-menu">--%>
-<%--                        <li class="dropdown-header">Javadocs</li>--%>
-<%--                        <li><a href="http://docs.oracle.com/javase/8/docs/api/">JDK 8 API</a></li>--%>
-<%--                        <li><a href="https://javaee.github.io/javaee-spec/javadocs/">Java EE API</a></li>--%>
-<%--                        <li><a href="http://docs.spring.io/spring/docs/current/javadoc-api/">Spring API</a></li>--%>
-<%--                        <li role="separator" class="divider"></li>--%>
-<%--                        <li class="dropdown-header">Other</li>--%>
-<%--                        <li><a href="http://getbootstrap.com/css/">Bootstrap CSS</a></li>--%>
-<%--                        <li><a href="http://getbootstrap.com/components/">Bootstrap components</a></li>--%>
-<%--                    </ul>--%>
-<%--                </li>--%>
-<%--                <li class="dropdown">--%>
-<%--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>--%>
-<%--                    <ul class="dropdown-menu">--%>
-<%--                        <li><a href="https://is.muni.cz/predmet/fi/podzim2018/PA165">PA165</a></li>--%>
-<%--                        <li>--%>
-<%--                            <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">SpringMVC</a>--%>
-<%--                        </li>--%>
-<%--                        <li><a href="http://getbootstrap.com/">Bootstrap</a></li>--%>
-<%--                        <li><a href="https://maven.apache.org/">Maven</a></li>--%>
-<%--                    </ul>--%>
-<%--                </li>--%>
+                    <li><my:a href="/winery/admin"><f:message key="navigation.admin"/></my:a></li>
+                    <li><my:a href="/winery/show"><f:message key="navigation.about"/></my:a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -82,18 +51,18 @@
     </c:if>
 
     <!-- authenticated user info -->
-    <%--    <c:if test="${not empty authenticatedUser}">--%>
-    <%--        <div class="row">--%>
-    <%--            <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>--%>
-    <%--            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">--%>
-    <%--                <div class="panel panel-default">--%>
-    <%--                    <div class="panel-body">--%>
-    <%--                        <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>--%>
-    <%--                    </div>--%>
-    <%--                </div>--%>
-    <%--            </div>--%>
-    <%--        </div>--%>
-    <%--    </c:if>--%>
+    <c:if test="${not empty authenticatedUser}">
+    <div class="row">
+        <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    </c:if>
 
     <!-- alerts -->
     <c:if test="${not empty alert_danger}">
@@ -116,13 +85,11 @@
 
     <!-- footer -->
     <footer class="footer">
-        <p>&copy;&nbsp;2021&nbsp;Masaryk University</p>
+        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
     </footer>
 </div>
 <!-- javascripts placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
