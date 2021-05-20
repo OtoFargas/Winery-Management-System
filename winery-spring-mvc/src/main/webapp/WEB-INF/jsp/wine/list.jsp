@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<my:pagetemplate title="wines">
+<my:pagetemplate title="Wines">
 <jsp:attribute name="body">
     <table class="table table-hover">
         <thead>

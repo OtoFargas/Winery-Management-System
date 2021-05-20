@@ -6,6 +6,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html lang="${pageContext.request.locale}">
 <head>
     <meta charset="utf-8">
@@ -39,7 +40,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wines<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><my:a href="${pageContext.request.contextPath}/wine/list">List</my:a></li>
+                        <li><my:a href="/wine/list">List</my:a></li>
                     </ul>
                 </li>
 <%--                <li class="dropdown">--%>

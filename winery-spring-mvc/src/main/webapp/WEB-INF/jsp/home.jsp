@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<my:pagetemplate title="Home">
+<my:pagetemplate title="Winery">
 <jsp:attribute name="body">
 
     <div class="jumbotron">
