@@ -135,9 +135,9 @@ public class FeedbackController {
 
         try {
             feedbackFacade.removeFeedback(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Feedback \"" + feedback.getId() + "\" was deleted.");
+            redirectAttributes.addFlashAttribute("alert_success", "Feedback " + feedback.getId() + " was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Feedback \"" + feedback.getId() + "\" cannot be deleted.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Feedback " + feedback.getId() + " cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/feedback/list").toUriString();
     }

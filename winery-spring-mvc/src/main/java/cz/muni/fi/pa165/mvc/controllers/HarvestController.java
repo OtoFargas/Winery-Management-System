@@ -130,18 +130,16 @@ public class HarvestController {
      * @param redirectAttributes
      * @return page name of all the other harvests
      */
-    @PostMapping(value = "/remove/{id}")
+    @GetMapping(value = "/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         HarvestDTO harvest = harvestFacade.findHarvestById(id);
         log.debug("remove({})", id);
 
         try {
             harvestFacade.removeHarvest(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Harvest \"" + harvest.getId() + ":" + harvest.getHarvestYear()
-                                                + "\" was deleted.");
+            redirectAttributes.addFlashAttribute("alert_success", "Harvest \"" + harvest.getId() + ":" + "\" was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Harvest \"" + harvest.getId() + ":" + harvest.getHarvestYear()
-                                                + "\" cannot be deleted.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Harvest \"" + harvest.getId() + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/harvest/list").toUriString();
     }

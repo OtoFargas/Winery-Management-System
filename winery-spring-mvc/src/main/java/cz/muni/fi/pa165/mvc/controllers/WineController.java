@@ -132,17 +132,17 @@ public class WineController {
      * @param redirectAttributes
      * @return page name of all the other wines
      */
-    @PostMapping(value = "/remove/{id}")
+    @GetMapping(value = "/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         WineDTO wine = wineFacade.findWineById(id);
         log.debug("remove({})", id);
 
         try {
             wineFacade.removeWine(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Wine \"" + wine.getId() + ":" + wine.getName()
+            redirectAttributes.addFlashAttribute("alert_success", "Wine " + wine.getId() + ": \"" + wine.getName()
                                                 + "\" was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Wine \"" + wine.getId() + ":" + wine.getName()
+            redirectAttributes.addFlashAttribute("alert_danger", "Wine " + wine.getId() + ": \"" + wine.getName()
                                                 + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/wine/list").toUriString();

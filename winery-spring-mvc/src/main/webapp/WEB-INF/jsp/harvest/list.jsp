@@ -28,7 +28,7 @@
                     <td><c:out value="${harvest.wine}"/></td>
                     <td><c:out value="${harvest.grape}"/></td>
                     <td>
-                        <my:a href="/harvest/remove/${harvest.id}" class="btn btn-danger">Delete</my:a>
+                        <my:a href="/harvest/remove/${harvest.id}" class="btn btn-danger">Remove</my:a>
                         <my:a href="/harvest/edit/${harvest.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>

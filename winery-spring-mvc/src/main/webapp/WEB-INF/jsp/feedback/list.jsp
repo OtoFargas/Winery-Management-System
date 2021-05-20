@@ -29,8 +29,8 @@
                     <td><c:out value="${feedback.date}"/></td>
                     <td><c:out value="${feedback.wine}"/></td>
                     <td>
-                        <my:a href="/wine/remove/${feedback.id}" class="btn btn-danger">Delete</my:a>
-                        <my:a href="/wine/edit/${feedback.id}" class="btn btn-secondary">Edit</my:a>
+                        <my:a href="/feedback/remove/${feedback.id}" class="btn btn-danger">Remove</my:a>
+                        <my:a href="/feedback/edit/${feedback.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>
             </c:forEach>

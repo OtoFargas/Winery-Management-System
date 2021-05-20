@@ -30,7 +30,7 @@
                     <td><c:out value="${wine.stocked}"/></td>
                     <td><c:out value="${wine.sold}"/></td>
                     <td>
-                        <my:a href="/wine/remove/${wine.id}" class="btn btn-danger">Delete</my:a>
+                        <my:a href="/wine/remove/${wine.id}" class="btn btn-danger">Remove</my:a>
                         <my:a href="/wine/edit/${wine.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>
