@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -167,6 +166,30 @@ public class WineController {
                     + " was added to the wine number" + id + ".");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("alert_danger", "Harvest number " + harvestid
+                    + " was NOT added to the wine number" + id + "." + e.getMessage());
+        }
+
+        return "redirect:" + uriBuilder.path("/wine/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    /**
+     * TODO
+     *
+     * @param id of the wine to be added to
+     * @param feedbackid of the feedback to be added
+     * @param uriBuilder
+     * @param redirectAttributes
+     * @return page name of the view of the wine
+     */
+    @PostMapping("/addFeedback/{id}/{feedbackid}")
+    public String addFeedback(@PathVariable long id, @PathVariable long feedbackid,
+                             UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+        try {
+            wineFacade.addFeedback(feedbackid, id);
+            redirectAttributes.addFlashAttribute("alert_success", "Feedback number " + feedbackid
+                    + " was added to the wine number" + id + ".");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Feedback number " + feedbackid
                     + " was NOT added to the wine number" + id + "." + e.getMessage());
         }
 
