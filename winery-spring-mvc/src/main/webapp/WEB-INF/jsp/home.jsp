@@ -23,6 +23,10 @@
             <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/harvest/list"
                role="button">Harvests</a>
         </p>
+        <p>
+            <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/feedback/list"
+               role="button">Feedbacks</a>
+        </p>
     </div>
 
 </jsp:attribute>
