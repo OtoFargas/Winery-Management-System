@@ -23,7 +23,7 @@
                     <td><c:out value="${feedback.author}"/></td>
                     <td><c:out value="${feedback.wine.id}: ${feedback.wine.name}"/></td>
                     <td align="right">
-                        <my:a href="/feedback/view/${feedback.id}" class="btn btn-primary">View</my:a>
+                        <my:a href="/feedback/view/${feedback.id}" class="btn btn-primary">View</my:a>&emsp;
                         <my:a href="/feedback/remove/${feedback.id}" class="btn btn-danger">Remove</my:a>
                     </td>
                 </tr>
