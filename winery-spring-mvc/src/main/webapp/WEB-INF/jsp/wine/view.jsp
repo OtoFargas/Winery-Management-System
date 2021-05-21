@@ -44,10 +44,6 @@
                 <td><c:out value="${wine.taste}"/></td>
             </tr>
             <tr>
-                <th>Taste</th>
-                <td><c:out value="${wine.taste}"/></td>
-            </tr>
-            <tr>
                 <th>Ingredients</th>
                 <td><c:out value="${wine.ingredients}"/></td>
             </tr>

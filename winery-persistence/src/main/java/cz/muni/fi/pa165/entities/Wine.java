@@ -60,7 +60,7 @@ public class Wine {
     @OneToMany(mappedBy = "wine", cascade = {CascadeType.ALL})
     private Set<Feedback> feedbacks = new HashSet<>();
 
-    @OneToMany(mappedBy = "wine", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "wine", cascade = {CascadeType.PERSIST})
     private Set<Harvest> harvests = new HashSet<>();
 
     public Wine() {}
