@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.mvc.controllers;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
-import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.Ingredient;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
@@ -103,6 +102,22 @@ public class WineController {
     }
 
     /**
+     * Redirects to ../wine/edit based on the ID of the wine.
+     *
+     * @param id    of the i
+     * @param model page data
+     * @return      page name
+     */
+    @GetMapping("/edit/{id}")
+    public String editWine(@PathVariable long id, Model model) {
+        log.debug("editWine({})", id);
+        model.addAttribute("wine", wineFacade.findWineById(id));
+//        model.addAttribute("setDisease", new GrapeChangeDTO());
+//        model.addAttribute("changeQuantity", new GrapeChangeDTO());
+        return "wine/edit";
+    }
+
+    /**
      * TODO
      *
      * @param name  of the wine to be viewed
@@ -117,7 +132,7 @@ public class WineController {
     }
 
     /**
-     * TODO
+     * Redirects to ../wine/list page.
      *
      * @param model to be displayed
      * @return page name of all the wines
@@ -129,7 +144,7 @@ public class WineController {
     }
 
     /**
-     * TODO
+     * Removes wine with given ID.
      *
      * @param id of the wine to be removed
      * @param uriBuilder

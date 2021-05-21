@@ -10,12 +10,9 @@
 <my:pagetemplate title="Wine">
 <jsp:attribute name="body">
 
-    <my:a href="/wine/view/${wine.id}" class="btn btn-primary">Change Quantity</my:a>
-    <my:a href="/wine/view/${wine.id}" class="btn btn-primary">Add Harvest</my:a>
-    <my:a href="/wine/view/${wine.id}" class="btn btn-primary">Add Feedback</my:a>
-    <my:a href="/wine/view/${wine.id}" class="btn btn-primary">Buy wine</my:a>
-    <my:a href="/wine/remove/${wine.id}" class="btn btn-danger">Remove</my:a>
-    <my:a href="/wine/list" class="btn btn-danger">Back</my:a>
+    <my:a href="/wine/edit/${wine.id}" class="btn btn-primary">Edit</my:a>&emsp;
+    <my:a href="/wine/remove/${wine.id}" class="btn btn-danger">Remove</my:a>&emsp;
+    <my:a href="/wine/list" class="btn btn-danger">Back</my:a>&emsp;
 
     <table class="table">
         <tbody>

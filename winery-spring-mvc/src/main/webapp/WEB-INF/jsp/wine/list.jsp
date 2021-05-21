@@ -22,7 +22,6 @@
                     <td><c:out value="${wine.name}"/></td>
                     <td align="right">
                         <my:a href="/wine/view/${wine.id}" class="btn btn-primary">View</my:a>&emsp;
-                        <my:a href="/wine/remove/${wine.id}" class="btn btn-danger">Remove</my:a>
                     </td>
                 </tr>
             </c:forEach>
