@@ -43,11 +43,6 @@ public class HarvestFacadeImpl implements HarvestFacade {
     @Override
     public Long createHarvest(HarvestCreateDTO harvestCreateDTO) {
         Harvest harvest = beanMappingService.mapTo(harvestCreateDTO, Harvest.class);
-        Long wineId = harvestCreateDTO.getWineId();
-
-        if (wineId != null) {
-            harvest.setWine(wineService.findWineById(wineId));
-        }
         harvest.setGrape(grapeService.findGrapeById(harvestCreateDTO.getGrapeId()));
         harvestService.createHarvest(harvest);
         return harvest.getId();
