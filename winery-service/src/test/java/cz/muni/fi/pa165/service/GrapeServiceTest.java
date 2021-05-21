@@ -145,6 +145,22 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void testAddDisease() {
+        when(grapeDao.findById(1L)).thenReturn(grape1);
+        // add a disease
+        grapeService.addDisease(grape1, Disease.POWDERY_MILDEW);
+        List<Disease> diseases = grapeDao.findById(1L).getDiseases();
+        assertThat(diseases).contains(Disease.POWDERY_MILDEW);
+        verify(grapeDao, times(1)).update(grape1);
+    }
+
+    @Test
+    public void testAddExistingDisease() {
+        assertThatThrownBy(() -> grapeService.addDisease(grape1, Disease.GREY_MOLD))
+                .isInstanceOf(WineryServiceException.class);
+    }
+
+    @Test
     public void testCureDisease() {
         when(grapeDao.findById(1L)).thenReturn(grape1);
         // cure first disease

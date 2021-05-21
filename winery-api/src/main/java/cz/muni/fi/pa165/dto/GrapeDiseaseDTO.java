@@ -10,7 +10,7 @@ import java.util.Objects;
  * @author Lukáš Fudor
  */
 
-public class GrapeCureDTO {
+public class GrapeDiseaseDTO {
 
     private Long id;
 
@@ -35,8 +35,8 @@ public class GrapeCureDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GrapeCureDTO)) return false;
-        GrapeCureDTO that = (GrapeCureDTO) o;
+        if (!(o instanceof GrapeDiseaseDTO)) return false;
+        GrapeDiseaseDTO that = (GrapeDiseaseDTO) o;
         return getId().equals(that.getId()) && getDisease() == that.getDisease();
     }
 

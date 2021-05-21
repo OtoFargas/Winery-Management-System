@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
-import cz.muni.fi.pa165.dto.GrapeCureDTO;
+import cz.muni.fi.pa165.dto.GrapeDiseaseDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.enums.GrapeColor;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -164,7 +163,7 @@ public class GrapesController {
      * @throws InvalidParameterException when the grapeCureDTO is invalid
      */
     @PutMapping("grape/cureDisease")
-    public final GrapeDTO cureDisease(@RequestBody GrapeCureDTO grapeCureDTO) throws InvalidParameterException {
+    public final GrapeDTO cureDisease(@RequestBody GrapeDiseaseDTO grapeCureDTO) throws InvalidParameterException {
 
         logger.debug("rest cureDisease({})", grapeCureDTO.getId());
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
-import cz.muni.fi.pa165.dto.GrapeCureDTO;
+import cz.muni.fi.pa165.dto.GrapeDiseaseDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Harvest;
@@ -69,7 +69,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     private GrapeDTO grapeDto2;
     private GrapeDTO grapeDto3;
     private GrapeCreateDTO grapeCreateDto1;
-    private GrapeCureDTO grapeCureDto1;
+    private GrapeDiseaseDTO grapeCureDto1;
 
     private AutoCloseable mocks;
 
@@ -127,7 +127,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
         grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
         grapeCreateDto1 = beanMappingService.mapTo(testGrape1, GrapeCreateDTO.class);
-        grapeCureDto1 = beanMappingService.mapTo(testGrape1, GrapeCureDTO.class);
+        grapeCureDto1 = beanMappingService.mapTo(testGrape1, GrapeDiseaseDTO.class);
     }
 
     @Test

@@ -1,10 +1,9 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
-import cz.muni.fi.pa165.dto.GrapeCureDTO;
+import cz.muni.fi.pa165.dto.GrapeDiseaseDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
-import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -103,7 +101,7 @@ public class GrapeController {
     public String viewById(@PathVariable long id, Model model) {
         log.debug("viewById({})", id);
         model.addAttribute("grape", grapeFacade.findGrapeById(id));
-        model.addAttribute("cureDisease", new GrapeCureDTO());
+        model.addAttribute("cureDisease", new GrapeDiseaseDTO());
         return "grape/view";
     }
 
@@ -218,7 +216,7 @@ public class GrapeController {
 
 
     @PostMapping("/cureDisease/{id}")
-    public String cureDisease(@Valid @ModelAttribute("cureDisease") GrapeCureDTO formBean,
+    public String cureDisease(@Valid @ModelAttribute("cureDisease") GrapeDiseaseDTO formBean,
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
                               UriComponentsBuilder uriBuilder, @PathVariable long id) {
 

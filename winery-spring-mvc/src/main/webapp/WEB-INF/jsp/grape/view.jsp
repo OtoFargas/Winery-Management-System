@@ -24,12 +24,12 @@
              </div>
          </div>
         <button class="btn btn-success" type="submit">Cure</button>
+        <button class="btn btn-danger" type="submit" name="add">Add</button>
     </form:form>
 
     <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Change Quantity</my:a>&emsp;
     <my:a href="/grape/addHarvest/${grape.id}/${harvest.id}" class="btn btn-primary">Add Harvest</my:a>&emsp;
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Add Disease</my:a>&emsp;
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Cure Disease</my:a>&emsp;
+    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Manage Diseases</my:a>&emsp;
     <my:a href="/grape/cureAllDiseases/${grape.id}" class="btn btn-primary">Cure All Diseases</my:a>&emsp;
     <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>&emsp;
     <my:a href="/grape/list" class="btn btn-danger">Back</my:a>&emsp;

@@ -15,6 +15,8 @@ import java.util.List;
 
 /**
  * This class implements the GrapeService interface.
+ *
+ * @author Lukáš Fudor
  */
 
 @Service
@@ -92,6 +94,21 @@ public class GrapeServiceImpl  implements GrapeService {
             throw new WineryServiceException("This grape already contains this harvest!");
         }
         grape.addHarvest(harvest);
+        try {
+            grapeDao.update(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void addDisease(Grape grape, Disease disease) {
+        if (grape.getDiseases().contains(disease)) {
+            throw new WineryServiceException("This grape is already infected by: " + disease);
+        }
+        List<Disease> diseases = new ArrayList<>(grape.getDiseases());
+        diseases.add(disease);
+        grape.setDiseases(diseases);
         try {
             grapeDao.update(grape);
         } catch (DataAccessException e) {

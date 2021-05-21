@@ -60,6 +60,14 @@ public interface GrapeService {
     void addHarvestToGrape(Grape grape, Harvest harvest);
 
     /**
+     * Adds a disease to a grape
+     *
+     * @param grape to be added to
+     * @param disease to be added
+     */
+    public void addDisease(Grape grape, Disease disease);
+
+    /**
      * Cures disease of grape
      *
      * @param grape to be cured
