@@ -3,9 +3,12 @@ package cz.muni.fi.pa165.mvc.controllers;
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
 import cz.muni.fi.pa165.dto.GrapeCureDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
+import cz.muni.fi.pa165.dto.HarvestDTO;
+import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.GrapeFacade;
+import cz.muni.fi.pa165.facade.HarvestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,9 @@ public class GrapeController {
 
     @Autowired
     private GrapeFacade grapeFacade;
+
+    @Autowired
+    private HarvestFacade harvestFacade;
 
     /**
      * TODO
@@ -97,6 +103,7 @@ public class GrapeController {
     public String viewById(@PathVariable long id, Model model) {
         log.debug("viewById({})", id);
         model.addAttribute("grape", grapeFacade.findGrapeById(id));
+        model.addAttribute("cureDisease", new GrapeCureDTO());
         return "grape/view";
     }
 
@@ -209,32 +216,29 @@ public class GrapeController {
         return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 
-    /**
-     * TODO
-     *
-     * @param id of the grape to be cured
-     * @param disease to be cured from given grape
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of the view of the grape
-     */
-    @PutMapping("/cureDisease/{id}/{disease}")
-    public String cureDisease(@PathVariable long id, @PathVariable Disease disease,
-                              UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
 
-        try {
-            GrapeCureDTO grapeCureDTO = new GrapeCureDTO();
-            grapeCureDTO.setDisease(disease);
-            grapeCureDTO.setId(id);
+    @PostMapping("/cureDisease/{id}")
+    public String cureDisease(@Valid @ModelAttribute("cureDisease") GrapeCureDTO formBean,
+                              BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+                              UriComponentsBuilder uriBuilder, @PathVariable long id) {
 
-            grapeFacade.cureDisease(grapeCureDTO);
-            redirectAttributes.addFlashAttribute("alert_success", "Grape number " + id
-                    + " was cured of" + disease + ".");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Grape number " + id
-                    + " was not cured. " + e.getMessage());
+        log.debug("cureGrape(formBean={})", formBean);
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape " + id + " could not have been cured.");
+            return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
         }
+        formBean.setId(id);
+        grapeFacade.cureDisease(formBean);
 
+        redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was cured");
         return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 
@@ -248,5 +252,11 @@ public class GrapeController {
     public Disease[] diseases() {
         log.debug("diseases()");
         return Disease.values();
+    }
+
+    @ModelAttribute("harvests")
+    public HarvestDTO[] harvests() {
+        log.debug("harvests()");
+        return harvestFacade.findAllHarvests().toArray(new HarvestDTO[0]);
     }
 }
