@@ -210,6 +210,12 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void addDiseaseTest() {
+        grapeFacade.addDisease(grapeDiseaseDTO1);
+        verify(grapeService).addDisease(any(), any());
+    }
+
+    @Test
     public void cureDiseaseTest() {
         grapeFacade.cureDisease(grapeDiseaseDTO1);
         verify(grapeService).cureDisease(any(), any());

@@ -101,7 +101,7 @@ public class GrapeController {
     public String viewById(@PathVariable long id, Model model) {
         log.debug("viewById({})", id);
         model.addAttribute("grape", grapeFacade.findGrapeById(id));
-        model.addAttribute("cureDisease", new GrapeDiseaseDTO());
+        model.addAttribute("setDisease", new GrapeDiseaseDTO());
         return "grape/view";
     }
 
@@ -215,8 +215,8 @@ public class GrapeController {
     }
 
 
-    @PostMapping("/cureDisease/{id}")
-    public String cureDisease(@Valid @ModelAttribute("cureDisease") GrapeDiseaseDTO formBean,
+    @PostMapping(value = "/setDisease/{id}", params = "cure")
+    public String cureDisease(@Valid @ModelAttribute("setDisease") GrapeDiseaseDTO formBean,
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
                               UriComponentsBuilder uriBuilder, @PathVariable long id) {
 
@@ -237,6 +237,33 @@ public class GrapeController {
         grapeFacade.cureDisease(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was cured");
+        return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    @PostMapping(value = "/setDisease/{id}", params = "add")
+    public String addDisease(@Valid @ModelAttribute("setDisease") GrapeDiseaseDTO formBean,
+                              BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+                              UriComponentsBuilder uriBuilder, @PathVariable long id) {
+
+        log.debug("cureGrape(formBean={})", formBean);
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            redirectAttributes.addFlashAttribute("alert_danger", "Disease " + formBean.getDisease()
+                                                + "could not have been added to grape with ID: " + id + ".");
+            return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
+        }
+        formBean.setId(id);
+        grapeFacade.addDisease(formBean);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Disease " + formBean.getDisease()
+                                            + "was added to grape with ID: " + id + ".");
         return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 

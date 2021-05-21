@@ -11,7 +11,7 @@
 <jsp:attribute name="body">
 
     <form:form method="POST"
-       action="${pageContext.request.contextPath}/grape/cureDisease/${grape.id}" modelAttribute="cureDisease">
+       action="${pageContext.request.contextPath}/grape/setDisease/${grape.id}" modelAttribute="setDisease">
          <div class="form-group">
              <form:label path="disease" cssClass="col-sm-2 control-label">Select a disease</form:label>
              <div class="col-sm-10">
@@ -23,7 +23,7 @@
                  <form:errors path="disease" cssClass="error"/>
              </div>
          </div>
-        <button class="btn btn-success" type="submit">Cure</button>
+        <button class="btn btn-success" type="submit" name="cure">Cure</button>
         <button class="btn btn-danger" type="submit" name="add">Add</button>
     </form:form>
 
