@@ -14,22 +14,12 @@
         <thead>
         <tr>
             <th scope="col">Wine</th>
-            <th scope="col">Color</th>
-            <th scope="col">Taste</th>
-            <th scope="col">Ingredients</th>
-            <th scope="col">Stocked</th>
-            <th scope="col">Sold</th>
         </tr>
         </thead>
         <tbody>
             <c:forEach items="${wines}" var="wine">
                 <tr>
                     <td><c:out value="${wine.name}"/></td>
-                    <td><c:out value="${wine.color}"/></td>
-                    <td><c:out value="${wine.taste}"/></td>
-                    <td><c:out value="${wine.ingredients}"/></td>
-                    <td><c:out value="${wine.stocked}"/></td>
-                    <td><c:out value="${wine.sold}"/></td>
                     <td align="right">
                         <my:a href="/wine/view/${wine.id}" class="btn btn-primary">View</my:a>
                         <my:a href="/wine/remove/${wine.id}" class="btn btn-danger">Remove</my:a>

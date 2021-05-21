@@ -9,7 +9,7 @@
 
 <my:pagetemplate title="New wine">
 <jsp:attribute name="body">
-    <form:form method="post" action="${pageContext.request.contextPath}/grape/create"
+    <form:form method="post" action="${pageContext.request.contextPath}/wine/create"
            modelAttribute="wineCreate" cssClass="form-horizontal">
 
         <div class="form-group">
