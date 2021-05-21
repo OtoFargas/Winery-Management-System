@@ -3,6 +3,10 @@ package cz.muni.fi.pa165.mvc.controllers;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
+import cz.muni.fi.pa165.enums.Disease;
+import cz.muni.fi.pa165.enums.Ingredient;
+import cz.muni.fi.pa165.enums.Taste;
+import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.facade.WineFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -223,5 +227,23 @@ public class WineController {
         }
 
         return "redirect:" + uriBuilder.path("/wine/view/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    @ModelAttribute("taste")
+    public Taste[] tastes() {
+        log.debug("tastes()");
+        return Taste.values();
+    }
+
+    @ModelAttribute("colors")
+    public WineColor[] colors() {
+        log.debug("colors()");
+        return WineColor.values();
+    }
+
+    @ModelAttribute("ingredients")
+    public Ingredient[] ingredients() {
+        log.debug("ingredients()");
+        return Ingredient.values();
     }
 }
