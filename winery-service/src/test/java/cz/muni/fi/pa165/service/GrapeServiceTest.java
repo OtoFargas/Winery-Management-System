@@ -195,4 +195,13 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
         assertThat(diseases).isEmpty();
         verify(grapeDao, times(1)).update(grape2);
     }
+
+    @Test
+    public void testChangeQuantity() {
+        when(grapeDao.findById(2L)).thenReturn(grape2);
+        grapeService.changeQuantity(grape2, 17);
+        Integer quantity = grapeDao.findById(2L).getQuantity();
+        assertThat(quantity).isEqualTo(17);
+        verify(grapeDao, times(1)).update(grape2);
+    }
 }

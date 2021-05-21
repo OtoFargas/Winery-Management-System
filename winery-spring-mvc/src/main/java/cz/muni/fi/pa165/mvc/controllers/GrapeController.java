@@ -109,6 +109,7 @@ public class GrapeController {
         log.debug("editGrape({})", id);
         model.addAttribute("grape", grapeFacade.findGrapeById(id));
         model.addAttribute("setDisease", new GrapeChangeDTO());
+        model.addAttribute("changeQuantity", new GrapeChangeDTO());
         return "grape/edit";
     }
 
@@ -243,7 +244,7 @@ public class GrapeController {
         formBean.setId(id);
         grapeFacade.cureDisease(formBean);
 
-        redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was cured");
+        redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was cured.");
         return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
@@ -271,6 +272,32 @@ public class GrapeController {
 
         redirectAttributes.addFlashAttribute("alert_success", "Disease " + formBean.getDisease()
                                             + "was added to grape with ID: " + id + ".");
+        return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    @PostMapping(value = "/changeQuantity/{id}")
+    public String changeQuantity(@Valid @ModelAttribute("changeQuantity") GrapeChangeDTO formBean,
+                             BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+                             UriComponentsBuilder uriBuilder, @PathVariable long id) {
+
+        log.debug("cureGrape(formBean={})", formBean);
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            redirectAttributes.addFlashAttribute("alert_danger", "Quantity of grape " + id
+                                                + " could not have been changed.");
+            return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
+        formBean.setId(id);
+        grapeFacade.changeQuantity(formBean);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Quantity of grape " + id + " was changed.");
         return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 

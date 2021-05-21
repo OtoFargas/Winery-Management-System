@@ -140,4 +140,14 @@ public class GrapeServiceImpl  implements GrapeService {
             throw new WineryServiceException(e.getMessage());
         }
     }
+
+    @Override
+    public void changeQuantity(Grape grape, Integer quantity) {
+        grape.setQuantity(quantity);
+        try {
+            grapeDao.update(grape);
+        } catch (DataAccessException e) {
+            throw new WineryServiceException(e.getMessage());
+        }
+    }
 }

@@ -226,5 +226,11 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         grapeFacade.cureAllDiseases(1L);
         verify(grapeService).cureAllDiseases(any());
     }
+
+    @Test
+    public void changeQuantityTest() {
+        grapeFacade.changeQuantity(grapeChangeDTO1);
+        verify(grapeService).changeQuantity(any(), any());
+    }
 }
 

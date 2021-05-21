@@ -22,7 +22,7 @@
     <form:form method="POST"
                action="${pageContext.request.contextPath}/grape/setDisease/${grape.id}" modelAttribute="setDisease">
          <div class="form-group">
-             <form:label path="disease" cssClass="col-sm-2 control-label">Select a disease</form:label>
+             <form:label path="disease" cssClass="col-sm-2 control-label">Select a disease:</form:label>
              <div class="col-sm-10">
                     <form:select path="disease" cssClass="form-control">
                         <c:forEach items="${diseases}" var="disease">
@@ -44,6 +44,19 @@
             </tr>
         </tbody>
     </table>
+
+    <form:form method="POST"
+               action="${pageContext.request.contextPath}/grape/changeQuantity/${grape.id}" modelAttribute="changeQuantity">
+         <div class="form-group">
+             <form:label path="quantity" cssClass="col-sm-2 control-label">Enter new quality:</form:label>
+             <div class="col-sm-10">
+                 <form:input path="quantity" cssClass="form-control"/>
+                 <form:errors path="quantity" cssClass="help-block"/>
+             </div>
+         </div>
+        <button class="btn btn-success" type="submit">Change</button>
+    </form:form>
+
     <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Back</my:a>&emsp;
 </jsp:attribute>
 </my:pagetemplate>

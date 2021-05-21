@@ -100,4 +100,10 @@ public class GrapeFacadeImpl implements GrapeFacade {
         Grape grape = grapeService.findGrapeById(grapeID);
         grapeService.cureAllDiseases(grape);
     }
+
+    @Override
+    public void changeQuantity(GrapeChangeDTO grapeChangeDTO) {
+        Grape grape = grapeService.findGrapeById(grapeChangeDTO.getId());
+        grapeService.changeQuantity(grape, grapeChangeDTO.getQuantity());
+    }
 }

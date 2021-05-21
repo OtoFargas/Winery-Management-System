@@ -74,4 +74,9 @@ public interface GrapeFacade {
      * @param grapeID to be cured of all diseases
      */
     void cureAllDiseases(Long grapeID);
+
+    /**
+     * @param grapeChangeDTO .grape.quantity to be changed to grapeChangeDTO.quantity
+     */
+    void changeQuantity(GrapeChangeDTO grapeChangeDTO);
 }

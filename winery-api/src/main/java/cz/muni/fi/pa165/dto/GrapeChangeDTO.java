@@ -34,17 +34,25 @@ public class GrapeChangeDTO {
         this.disease = disease;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof GrapeChangeDTO)) return false;
         GrapeChangeDTO that = (GrapeChangeDTO) o;
-        return getId().equals(that.getId()) && getDisease() == that.getDisease();
+        return getId().equals(that.getId()) && getDisease() == that.getDisease() && Objects.equals(getQuantity(), that.getQuantity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDisease());
+        return Objects.hash(getId(), getDisease(), getQuantity());
     }
 
     @Override
@@ -52,6 +60,7 @@ public class GrapeChangeDTO {
         return "GrapeChangeDTO{" +
                 "id=" + id +
                 ", disease=" + disease +
+                ", quantity=" + quantity +
                 '}';
     }
 }

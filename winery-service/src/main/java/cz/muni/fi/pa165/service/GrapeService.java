@@ -79,4 +79,10 @@ public interface GrapeService {
      * @param grape to be cured
      */
     void cureAllDiseases(Grape grape);
+
+    /**
+     * @param grape to be changed
+     * @param quantity to be set
+     */
+    void changeQuantity(Grape grape, Integer quantity);
 }
