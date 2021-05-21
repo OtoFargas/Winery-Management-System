@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -29,6 +31,7 @@ public class FeedbackCreateDTO {
 
     @NotNull
     @PastOrPresent
+    @DateTimeFormat(pattern = "MM.dd.yyyy")
     private Date date;
 
     private Long wineId;
