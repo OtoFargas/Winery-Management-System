@@ -2,7 +2,10 @@ package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
+import cz.muni.fi.pa165.dto.WineDTO;
+import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
+import cz.muni.fi.pa165.facade.WineFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,9 @@ public class FeedbackController {
 
     @Autowired
     private FeedbackFacade feedbackFacade;
+
+    @Autowired
+    private WineFacade wineFacade;
 
     /**
      * TODO
@@ -140,5 +146,17 @@ public class FeedbackController {
             redirectAttributes.addFlashAttribute("alert_danger", "Feedback " + feedback.getId() + " cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/feedback/list").toUriString();
+    }
+
+    @ModelAttribute("rating")
+    public Integer[] rating() {
+        log.debug("rating()");
+        return new Integer[]{1,2,3,4,5,6,7,8,9,10};
+    }
+
+    @ModelAttribute("wines")
+    public WineDTO[] wines() {
+        log.debug("wines()");
+        return wineFacade.findAllWines().toArray(new WineDTO[0]);
     }
 }

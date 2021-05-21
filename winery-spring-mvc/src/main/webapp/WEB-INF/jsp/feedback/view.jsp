@@ -9,5 +9,35 @@
 
 <my:pagetemplate title="Feedback">
 <jsp:attribute name="body">
+    <my:a href="/feedback/remove/${feedback.id}" class="btn btn-danger">Remove</my:a>
+    <my:a href="/feedback/list" class="btn btn-danger">Back</my:a>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Author</th>
+            <td><c:out value="${feedback.author}"/></td>
+        </tr>
+
+        <tr>
+            <th>Date</th>
+            <td><c:out value="${feedback.date}"/></td>
+        </tr>
+
+        <tr>
+            <th>Wine</th>
+            <td><c:out value="${feedback.wine.name}"/></td>
+        </tr>
+
+        <tr>
+            <th>Rating</th>
+            <td><c:out value="${feedback.rating}"/></td>
+        </tr>
+
+        <tr>
+            <th>Content</th>
+            <td><c:out value="${feedback.content}"/></td>
+        </tr>
+        </tbody>
+    </table>
 </jsp:attribute>
 </my:pagetemplate>
