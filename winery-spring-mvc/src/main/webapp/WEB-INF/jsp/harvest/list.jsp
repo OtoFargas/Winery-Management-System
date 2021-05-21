@@ -13,23 +13,19 @@
         <thead>
         <tr>
             <th scope="col">Harvest year</th>
-            <th scope="col">Quality</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Wine</th>
             <th scope="col">Grape</th>
+            <th scope="col">Quantity</th>
         </tr>
         </thead>
         <tbody>
             <c:forEach items="${harvests}" var="harvest">
                 <tr>
                     <td><c:out value="${harvest.harvestYear}"/></td>
-                    <td><c:out value="${harvest.quality}"/></td>
+                    <td><c:out value="${harvest.grape.name}"/></td>
                     <td><c:out value="${harvest.quantity}"/></td>
-                    <td><c:out value="${harvest.wine}"/></td>
-                    <td><c:out value="${harvest.grape}"/></td>
-                    <td>
+                    <td align="right">
+                        <my:a href="/harvest/view/${harvest.id}" class="btn btn-primary">View</my:a>
                         <my:a href="/harvest/remove/${harvest.id}" class="btn btn-danger">Remove</my:a>
-                        <my:a href="/harvest/edit/${harvest.id}" class="btn btn-secondary">Edit</my:a>
                     </td>
                 </tr>
             </c:forEach>

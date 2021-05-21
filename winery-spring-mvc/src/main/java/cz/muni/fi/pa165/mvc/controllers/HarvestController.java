@@ -103,7 +103,7 @@ public class HarvestController {
      * @param model data to be displayed
      * @return page name of the view of the harvest
      */
-    @GetMapping("/view/{name}")
+    @GetMapping("/viewByName/{name}")
     public String viewByName(@PathVariable Integer year, Model model) {
         log.debug("viewByYear({})", year);
         model.addAttribute("harvest", harvestFacade.findHarvestsByYear(year));

@@ -22,7 +22,7 @@
                 <tr>
                     <td><c:out value="${grape.id}"/></td>
                     <td><c:out value="${grape.name}"/></td>
-                    <td>
+                    <td align="right">
                         <my:a href="/grape/view/${grape.id}" class="btn btn-primary">View</my:a>
                         <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>
                     </td>

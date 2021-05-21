@@ -9,13 +9,15 @@
 
 <my:pagetemplate title="Grape">
 <jsp:attribute name="body">
+    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Change Quantity</my:a>
+    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Add Harvest</my:a>
+    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Add Disease</my:a>
+    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Cure Disease</my:a>
+    <my:a href="/grape/cureAllDiseases/${grape.id}" class="btn btn-primary">Cure All Diseases</my:a>
+    <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>
+    <my:a href="/grape/list" class="btn btn-danger">Back</my:a>
     <table class="table">
         <tbody>
-        <tr>
-            <th>ID</th>
-            <td><c:out value="${grape.id}"/></td>
-        </tr>
-
         <tr>
             <th>Name</th>
             <td><c:out value="${grape.name}"/></td>
@@ -43,13 +45,5 @@
 
         </tbody>
     </table>
-
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Change Quantity</my:a>
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Add Harvest</my:a>
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Add Disease</my:a>
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Cure Disease</my:a>
-    <my:a href="/grape/cureAllDiseases/${grape.id}" class="btn btn-primary">Cure All Diseases</my:a>
-    <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>
-    <my:a href="/grape/list" class="btn btn-danger">Back</my:a>
 </jsp:attribute>
 </my:pagetemplate>
