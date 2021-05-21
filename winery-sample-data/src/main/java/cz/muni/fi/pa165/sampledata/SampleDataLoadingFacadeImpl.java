@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.sampledata;
 import cz.muni.fi.pa165.entities.Feedback;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.entities.Harvest;
+import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.entities.Wine;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
@@ -13,6 +14,7 @@ import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.service.FeedbackService;
 import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
+import cz.muni.fi.pa165.service.UserService;
 import cz.muni.fi.pa165.service.WineService;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -46,6 +50,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Autowired
     private final GrapeService grapeService;
 
+    @Autowired
+    private final UserService userService;
+
     private Wine wine1;
     private Wine wine2;
     private Wine wine3;
@@ -62,12 +69,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Feedback feedback2;
     private Feedback feedback3;
 
+    private User user1;
+    private User user2;
+    private User user3;
+
     @Inject
-    public SampleDataLoadingFacadeImpl(FeedbackService feedbackService, WineService wineService, HarvestService harvestService, GrapeService grapeService) {
+    public SampleDataLoadingFacadeImpl(FeedbackService feedbackService, WineService wineService, HarvestService harvestService,
+                                       GrapeService grapeService, UserService userService) {
         this.feedbackService = feedbackService;
         this.wineService = wineService;
         this.harvestService = harvestService;
         this.grapeService = grapeService;
+        this.userService = userService;
     }
 
     @Override
@@ -146,23 +159,40 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // feedbacks
         feedback1 = new Feedback();
-        feedback1.setAuthor("author1");
-        feedback1.setContent("content1");
-        feedback1.setDate(new Date());
+        feedback1.setAuthor("testAuthor1");
+        feedback1.setContent("testContent1");
+        feedback1.setDate(new GregorianCalendar(2020, Calendar.MARCH, 11).getTime());
         feedback1.setRating(5);
 
         feedback2 = new Feedback();
         feedback2.setAuthor("testAuthor2");
         feedback2.setContent("testContent2");
-        feedback2.setDate(new Date());
+        feedback2.setDate(new GregorianCalendar(2020, Calendar.APRIL, 20).getTime());
         feedback2.setRating(3);
 
         feedback3 = new Feedback();
         feedback3.setAuthor("testAuthor3");
         feedback3.setContent("testContent3");
-        feedback3.setDate(new Date());
+        feedback3.setDate(new GregorianCalendar(2020, Calendar.DECEMBER, 9).getTime());
         feedback3.setRating(8);
 
+        user1 = new User();
+        user1.setFirstName("Oto");
+        user1.setSurname("Fargas");
+        user1.setEmail("oto.fargas@winery.com");
+        user1.setAdmin(true);
+
+        user1 = new User();
+        user1.setFirstName("Vladimir");
+        user1.setSurname("Visnovsky");
+        user1.setEmail("vladimir.visnovsky@winery.com");
+        user1.setAdmin(false);
+
+        user1 = new User();
+        user1.setFirstName("Lukas");
+        user1.setSurname("Fudor");
+        user1.setEmail("lukas.fudor@winery.com");
+        user1.setAdmin(false);
 
         harvest1.setGrape(grape1);
         harvest1.setWine(wine1);
@@ -204,5 +234,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         feedbackService.createFeedback(feedback1);
         feedbackService.createFeedback(feedback2);
         feedbackService.createFeedback(feedback3);
+
+        userService.registerUser(user1, "admin");
+        userService.registerUser(user2, "dsc1d5c");
+        userService.registerUser(user3, "1234");
     }
 }
