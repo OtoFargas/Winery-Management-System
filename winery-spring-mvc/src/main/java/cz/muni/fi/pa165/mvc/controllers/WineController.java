@@ -105,7 +105,7 @@ public class WineController {
      * @param model data to be displayed
      * @return page name of the view of the wine
      */
-    @GetMapping("/view/{name}")
+    @GetMapping("/viewByName/{name}")
     public String viewByName(@PathVariable String name, Model model) {
         log.debug("viewByName({})", name);
         model.addAttribute("wine", wineFacade.findWineByName(name));
