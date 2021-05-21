@@ -137,9 +137,9 @@ public class HarvestController {
 
         try {
             harvestFacade.removeHarvest(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Harvest \"" + harvest.getId() + ":" + "\" was deleted.");
+            redirectAttributes.addFlashAttribute("alert_success", "Harvest " + harvest.getId() + " was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Harvest \"" + harvest.getId() + "\" cannot be deleted.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Harvest " + harvest.getId() + " cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/harvest/list").toUriString();
     }
