@@ -56,7 +56,7 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
     private BeanMappingService beanMappingService;
 
     @InjectMocks
-    private HarvestFacade harvestFacade = new HarvestFacadeImpl(harvestService, wineService, grapeService, beanMappingService);
+    private HarvestFacade harvestFacade = new HarvestFacadeImpl(harvestService, grapeService, beanMappingService);
 
     private Harvest testHarvest1;
     private Harvest testHarvest2;
@@ -75,7 +75,7 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void setupFacade() {
-        harvestFacade = new HarvestFacadeImpl(harvestService, wineService, grapeService, beanMappingService);
+        harvestFacade = new HarvestFacadeImpl(harvestService, grapeService, beanMappingService);
     }
 
     @BeforeMethod
@@ -157,14 +157,12 @@ public class HarvestFacadeTest extends AbstractTestNGSpringContextTests {
         testHarvestCreateDTO.setHarvestYear(2005);
         testHarvestCreateDTO.setGrapeId(grape1.getId());
         testHarvestCreateDTO.setQuality(Quality.HIGH);
-        testHarvestCreateDTO.setWineId(wine.getId());
         testHarvestCreateDTO.setQuantity(455);
     }
 
     @Test
     public void createHarvestTest(){
         when(grapeService.findGrapeById(testHarvestCreateDTO.getGrapeId())).thenReturn(grape1);
-        when(wineService.findWineById(testHarvestCreateDTO.getWineId())).thenReturn(wine);
         Harvest harvest = beanMappingService.mapTo(testHarvestCreateDTO, Harvest.class);
         Long id = harvestFacade.createHarvest(testHarvestCreateDTO);
         verify(harvestService).createHarvest(testCreateHarvest);
