@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
-import cz.muni.fi.pa165.dto.GrapeDiseaseDTO;
+import cz.muni.fi.pa165.dto.GrapeChangeDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.enums.GrapeColor;
@@ -158,18 +158,18 @@ public class GrapesController {
     }
 
     /**
-     * @param grapeDiseaseDTO to be cured of grapeDiseaseDTO.disease
+     * @param grapeChangeDTO to be cured of grapeChangeDTO.disease
      * @return of the cured Grape
-     * @throws InvalidParameterException when the grapeDiseaseDTO is invalid
+     * @throws InvalidParameterException when the grapeChangeDTO is invalid
      */
     @PutMapping("grape/cureDisease")
-    public final GrapeDTO cureDisease(@RequestBody GrapeDiseaseDTO grapeDiseaseDTO) throws InvalidParameterException {
+    public final GrapeDTO cureDisease(@RequestBody GrapeChangeDTO grapeChangeDTO) throws InvalidParameterException {
 
-        logger.debug("rest cureDisease({})", grapeDiseaseDTO.getId());
+        logger.debug("rest cureDisease({})", grapeChangeDTO.getId());
 
         try {
-            grapeFacade.cureDisease(grapeDiseaseDTO);
-            return grapeFacade.findGrapeById(grapeDiseaseDTO.getId());
+            grapeFacade.cureDisease(grapeChangeDTO);
+            return grapeFacade.findGrapeById(grapeChangeDTO.getId());
         } catch (Exception ex) {
             throw new InvalidParameterException();
         }

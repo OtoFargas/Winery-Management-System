@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
-import cz.muni.fi.pa165.dto.GrapeDiseaseDTO;
+import cz.muni.fi.pa165.dto.GrapeChangeDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.enums.GrapeColor;
 
@@ -61,14 +61,14 @@ public interface GrapeFacade {
     void addHarvest(Long harvestID, Long grapeID);
 
     /**
-     * @param grapeDiseaseDTO to be added grapeDiseaseDTO.disease
+     * @param grapeChangeDTO to be added grapeChangeDTO.disease
      */
-    void addDisease(GrapeDiseaseDTO grapeDiseaseDTO);
+    void addDisease(GrapeChangeDTO grapeChangeDTO);
 
     /**
-     * @param grapeDiseaseDTO to be cured of grapeDiseaseDTO.disease
+     * @param grapeChangeDTO to be cured of grapeChangeDTO.disease
      */
-    void cureDisease(GrapeDiseaseDTO grapeDiseaseDTO);
+    void cureDisease(GrapeChangeDTO grapeChangeDTO);
 
     /**
      * @param grapeID to be cured of all diseases
