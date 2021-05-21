@@ -10,5 +10,50 @@
 <my:pagetemplate title="New harvest">
 <jsp:attribute name="body">
 
+<form:form method="post" action="${pageContext.request.contextPath}/harvest/create"
+           modelAttribute="harvestCreate" cssClass="form-horizontal">
+
+        <div class="form-group">
+            <form:label path="harvestYear" cssClass="col-sm-2 control-label">Harvest year</form:label>
+            <div class="col-sm-10">
+                <form:input path="harvestYear" cssClass="form-control"/>
+                <form:errors path="harvestYear" cssClass="help-block"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <form:label path="grapeId" cssClass="col-sm-2 control-label">Grape</form:label>
+            <div class="col-sm-10">
+                <form:select path="grapeId" cssClass="form-control">
+                    <c:forEach items="${grapes}" var="grape">
+                        <form:option value="${grape.id}">${grape.name}</form:option>
+                    </c:forEach>
+                </form:select>
+                <form:errors path="grapeId" cssClass="error"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <form:label path="quality" cssClass="col-sm-2 control-label">Quality</form:label>
+            <div class="col-sm-10">
+                <form:select path="quality" cssClass="form-control">
+                    <form:option value="LOW">LOW</form:option>
+                    <form:option value="MEDIUM">MEDIUM</form:option>
+                    <form:option value="HIGH">HIGH</form:option>
+                </form:select>
+                <form:errors path="quality" cssClass="error"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <form:label path="quantity" cssClass="col-sm-2 control-label">Quantity</form:label>
+            <div class="col-sm-10">
+                <form:input path="quantity" cssClass="form-control"/>
+                <form:errors path="quantity" cssClass="help-block"/>
+            </div>
+        </div>
+
+    <button class="btn btn-success" type="submit">Create harvest</button>
+    </form:form>
 </jsp:attribute>
 </my:pagetemplate>
