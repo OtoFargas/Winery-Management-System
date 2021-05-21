@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-        <button class="btn btn-success" type="submit">Create grape</button>
+        <button class="btn btn-success" type="submit">Create</button>
     </form:form>
 </jsp:attribute>
 </my:pagetemplate>

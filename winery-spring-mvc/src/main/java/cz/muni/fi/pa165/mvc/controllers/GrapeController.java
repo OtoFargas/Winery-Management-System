@@ -45,10 +45,10 @@ public class GrapeController {
     private HarvestFacade harvestFacade;
 
     /**
-     * TODO
+     * Redirects to ../grape/new page.
      *
      * @param model to be displayed
-     * @return page name
+     * @return      page name
      */
     @GetMapping("/new")
     public String newGrape(Model model) {
@@ -58,14 +58,14 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Retrieves data from thew ../grape/new form and creates a new grape.
      *
      * @param formBean           data for grape creation
-     * @param bindingResult
-     * @param model
+     * @param bindingResult      -
+     * @param model              page data
      * @param redirectAttributes attributes for redirect scenario
      * @param uriBuilder         sets URI components
-     * @return page grape/new if failed, page grape/list else
+     * @return                   page grape/new if failed, page grape/list else
      */
     @PostMapping("/create")
     public String createGrape(@Valid @ModelAttribute("grapeCreate") GrapeCreateDTO formBean, BindingResult bindingResult,
@@ -91,11 +91,11 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Redirects to ../grape/view page based on the ID of the grape.
      *
      * @param id    of the grape to be viewed
      * @param model data to be displayed
-     * @return page name of the view of the grape
+     * @return      page name
      */
     @GetMapping("/view/{id}")
     public String viewById(@PathVariable long id, Model model) {
@@ -104,6 +104,13 @@ public class GrapeController {
         return "grape/view";
     }
 
+    /**
+     * Redirects to ../grape/edit based on the ID of the grape.
+     *
+     * @param id    of the i
+     * @param model page data
+     * @return      page name
+     */
     @GetMapping("/edit/{id}")
     public String editGrape(@PathVariable long id, Model model) {
         log.debug("editGrape({})", id);
@@ -117,8 +124,8 @@ public class GrapeController {
      * TODO
      *
      * @param name  of the grape to be viewed
-     * @param model data to be displayed
-     * @return page name of the view of the grape
+     * @param model page name
+     * @return      page name of the view of the grape
      */
     @GetMapping("/viewByName/{name}")
     public String viewByName(@PathVariable String name, Model model) {
@@ -128,10 +135,10 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Redirects to ../grape/list page.
      *
-     * @param model to be displayed
-     * @return page name of all the grapes
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/list")
     public String listAllGrapes(Model model) {
@@ -142,9 +149,9 @@ public class GrapeController {
     /**
      * TODO
      *
-     * @param model to be displayed
+     * @param model page data
      * @param color to be filtered by
-     * @return page name of all the grapes
+     * @return      page name
      */
     @GetMapping("/list/{color}")
     public String listGrapesWithColor(Model model, @PathVariable GrapeColor color) {
@@ -153,12 +160,12 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Removes grape with given ID.
      *
-     * @param id of the grape to be removed
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of all the other grapes
+     * @param id                 of the grape to be removed
+     * @param uriBuilder         sets URI components
+     * @param redirectAttributes attributes for redirect scenario
+     * @return                   page name
      */
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
@@ -177,52 +184,38 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Cures all diseases of the grape with given ID.
      *
-     * @param id of the grape to be added to
-     * @param harvestid of the harvest to be added
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of the view of the grape
-     */
-    @PostMapping("/addHarvest/{id}/{harvestid}")
-    public String addHarvest(@PathVariable long id, @PathVariable long harvestid,
-                             UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        try {
-            grapeFacade.addHarvest(harvestid, id);
-            redirectAttributes.addFlashAttribute("alert_success", "Harvest number " + harvestid
-                    + " was added to the grape number" + id + ".");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Harvest number " + harvestid
-                    + " was NOT added to the grape number" + id + "." + e.getMessage());
-        }
-
-        return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
-    }
-
-    /**
-     * TODO
-     *
-     * @param id of the grape to be cured
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of the view of the grape
+     * @param id                 of the grape to be cured
+     * @param uriBuilder         sets URI components
+     * @param redirectAttributes attributes for redirect scenario
+     * @return                   page name
      */
     @GetMapping("/cureAllDiseases/{id}")
     public String cureAll(@PathVariable long id, UriComponentsBuilder uriBuilder,
                           RedirectAttributes redirectAttributes) {
         try {
             grapeFacade.cureAllDiseases(id);
-            redirectAttributes.addFlashAttribute("alert_success", "Grape number was cured of all the diseases.");
+            redirectAttributes.addFlashAttribute("alert_success", "Grape with ID: " + id + " was cured of all the diseases.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Grape number " + id
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape with ID: " + id
                                                 + " was not cured. " + e.getMessage());
         }
 
-        return "redirect:" + uriBuilder.path("/grape/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
-
+    /**
+     * Cures the grape with given ID of formBean.disease
+     *
+     * @param formBean           data from the dropdown box
+     * @param bindingResult      -
+     * @param model              page data
+     * @param redirectAttributes attributes for redirect scenario
+     * @param uriBuilder         sets URI components
+     * @param id                 of the grape to be cured
+     * @return                   page name
+     */
     @PostMapping(value = "/setDisease/{id}", params = "cure")
     public String cureDisease(@Valid @ModelAttribute("setDisease") GrapeChangeDTO formBean,
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
@@ -248,6 +241,17 @@ public class GrapeController {
         return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
+    /**
+     * Add formBean.disease to the grape with given ID
+     *
+     * @param formBean           data from the dropdown box
+     * @param bindingResult      -
+     * @param model              page data
+     * @param redirectAttributes attributes for redirect scenario
+     * @param uriBuilder         sets URI components
+     * @param id                 to be added to
+     * @return                   page name
+     */
     @PostMapping(value = "/setDisease/{id}", params = "add")
     public String addDisease(@Valid @ModelAttribute("setDisease") GrapeChangeDTO formBean,
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
@@ -275,6 +279,17 @@ public class GrapeController {
         return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
+    /**
+     * Changes the quantity of the grape with given ID to formBean.quantity
+     *
+     * @param formBean           value from the textfield
+     * @param bindingResult      -
+     * @param model              page data
+     * @param redirectAttributes attributes for redirect scenario
+     * @param uriBuilder         sets URI components
+     * @param id                 of the grape to be changed
+     * @return                   page name
+     */
     @PostMapping(value = "/changeQuantity/{id}")
     public String changeQuantity(@Valid @ModelAttribute("changeQuantity") GrapeChangeDTO formBean,
                              BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,

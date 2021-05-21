@@ -32,9 +32,10 @@
                  <form:errors path="disease" cssClass="error"/>
              </div>
          </div>
-        <button class="btn btn-success" type="submit" name="cure">Cure</button>
+        <button class="btn btn-primary" type="submit" name="cure">Cure</button>
         <button class="btn btn-danger" type="submit" name="add">Add</button>
     </form:form>
+    <my:a href="/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>&emsp;
 
     <table class="table">
         <tbody>
@@ -48,7 +49,7 @@
     <form:form method="POST"
                action="${pageContext.request.contextPath}/grape/changeQuantity/${grape.id}" modelAttribute="changeQuantity">
          <div class="form-group">
-             <form:label path="quantity" cssClass="col-sm-2 control-label">Enter new quality:</form:label>
+             <form:label path="quantity" cssClass="col-sm-2 control-label">Enter new quantity:</form:label>
              <div class="col-sm-10">
                  <form:input path="quantity" cssClass="form-control"/>
                  <form:errors path="quantity" cssClass="help-block"/>
