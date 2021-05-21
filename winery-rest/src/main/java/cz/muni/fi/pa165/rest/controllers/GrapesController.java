@@ -158,18 +158,18 @@ public class GrapesController {
     }
 
     /**
-     * @param grapeCureDTO to be cured of grapeCureDTO.disease
+     * @param grapeDiseaseDTO to be cured of grapeDiseaseDTO.disease
      * @return of the cured Grape
-     * @throws InvalidParameterException when the grapeCureDTO is invalid
+     * @throws InvalidParameterException when the grapeDiseaseDTO is invalid
      */
     @PutMapping("grape/cureDisease")
-    public final GrapeDTO cureDisease(@RequestBody GrapeDiseaseDTO grapeCureDTO) throws InvalidParameterException {
+    public final GrapeDTO cureDisease(@RequestBody GrapeDiseaseDTO grapeDiseaseDTO) throws InvalidParameterException {
 
-        logger.debug("rest cureDisease({})", grapeCureDTO.getId());
+        logger.debug("rest cureDisease({})", grapeDiseaseDTO.getId());
 
         try {
-            grapeFacade.cureDisease(grapeCureDTO);
-            return grapeFacade.findGrapeById(grapeCureDTO.getId());
+            grapeFacade.cureDisease(grapeDiseaseDTO);
+            return grapeFacade.findGrapeById(grapeDiseaseDTO.getId());
         } catch (Exception ex) {
             throw new InvalidParameterException();
         }

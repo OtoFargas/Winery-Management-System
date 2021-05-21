@@ -84,9 +84,15 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public void cureDisease(GrapeDiseaseDTO grapeCureDTO) {
-        Grape grape = grapeService.findGrapeById(grapeCureDTO.getId());
-        grapeService.cureDisease(grape, grapeCureDTO.getDisease());
+    public void addDisease(GrapeDiseaseDTO grapeDiseaseDTO) {
+        Grape grape = grapeService.findGrapeById(grapeDiseaseDTO.getId());
+        grapeService.addDisease(grape, grapeDiseaseDTO.getDisease());
+    }
+
+    @Override
+    public void cureDisease(GrapeDiseaseDTO grapeDiseaseDTO) {
+        Grape grape = grapeService.findGrapeById(grapeDiseaseDTO.getId());
+        grapeService.cureDisease(grape, grapeDiseaseDTO.getDisease());
     }
 
     @Override

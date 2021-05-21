@@ -47,7 +47,7 @@ public class GrapeDiseaseDTO {
 
     @Override
     public String toString() {
-        return "GrapeCureDTO{" +
+        return "GrapeDiseaseDTO{" +
                 "id=" + id +
                 ", disease=" + disease +
                 '}';

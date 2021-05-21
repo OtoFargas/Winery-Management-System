@@ -69,7 +69,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
     private GrapeDTO grapeDto2;
     private GrapeDTO grapeDto3;
     private GrapeCreateDTO grapeCreateDto1;
-    private GrapeDiseaseDTO grapeCureDto1;
+    private GrapeDiseaseDTO grapeDiseaseDTO1;
 
     private AutoCloseable mocks;
 
@@ -127,7 +127,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
         grapeDto2 = beanMappingService.mapTo(testGrape2, GrapeDTO.class);
         grapeDto3 = beanMappingService.mapTo(testGrape3, GrapeDTO.class);
         grapeCreateDto1 = beanMappingService.mapTo(testGrape1, GrapeCreateDTO.class);
-        grapeCureDto1 = beanMappingService.mapTo(testGrape1, GrapeDiseaseDTO.class);
+        grapeDiseaseDTO1 = beanMappingService.mapTo(testGrape1, GrapeDiseaseDTO.class);
     }
 
     @Test
@@ -211,7 +211,7 @@ public class GrapeFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void cureDiseaseTest() {
-        grapeFacade.cureDisease(grapeCureDto1);
+        grapeFacade.cureDisease(grapeDiseaseDTO1);
         verify(grapeService).cureDisease(any(), any());
     }
 

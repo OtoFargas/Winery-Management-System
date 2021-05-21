@@ -61,9 +61,14 @@ public interface GrapeFacade {
     void addHarvest(Long harvestID, Long grapeID);
 
     /**
-     * @param grapeCureDTO to be cured of grapeCureDTO.disease
+     * @param grapeDiseaseDTO to be added grapeDiseaseDTO.disease
      */
-    void cureDisease(GrapeDiseaseDTO grapeCureDTO);
+    void addDisease(GrapeDiseaseDTO grapeDiseaseDTO);
+
+    /**
+     * @param grapeDiseaseDTO to be cured of grapeDiseaseDTO.disease
+     */
+    void cureDisease(GrapeDiseaseDTO grapeDiseaseDTO);
 
     /**
      * @param grapeID to be cured of all diseases
