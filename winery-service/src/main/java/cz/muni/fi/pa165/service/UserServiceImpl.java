@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.service;
 import cz.muni.fi.pa165.dao.UserDao;
 import cz.muni.fi.pa165.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
+    private final PasswordEncoder encoder = new Pbkdf2PasswordEncoder();
 
     @Override
     public void registerUser(User u, String unencryptedPassword) {

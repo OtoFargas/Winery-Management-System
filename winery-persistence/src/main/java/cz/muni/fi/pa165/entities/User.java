@@ -30,7 +30,7 @@ public class User {
 	@NotNull
 	private String email;
 	@NotNull
-	private String givenName;
+	private String FirstName;
 	@NotNull
 	private String surname;
 
@@ -61,13 +61,13 @@ public class User {
 	}
 
 	
-	public String getGivenName() {
-		return givenName;
+	public String getFirstName() {
+		return FirstName;
 	}
 
 
-	public void setGivenName(String givenName) {
-		this.givenName = givenName;
+	public void setFirstName(String FirstName) {
+		this.FirstName = FirstName;
 	}
 
 
@@ -106,7 +106,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", givenName='" + givenName + '\'' +
+                ", FirstName='" + FirstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", admin=" + admin +
                 '}';

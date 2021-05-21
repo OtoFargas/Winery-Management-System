@@ -11,7 +11,7 @@ public class UserDTO {
     private Long id;
     private String passwordHash;
     private String email;
-    private String givenName;
+    private String firstName;
     private String surname;
     private boolean admin;
 
@@ -39,12 +39,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getSurname() {
@@ -82,7 +82,7 @@ public class UserDTO {
                 "id=" + id +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", email='" + email + '\'' +
-                ", givenName='" + givenName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", admin=" + admin +
                 '}';

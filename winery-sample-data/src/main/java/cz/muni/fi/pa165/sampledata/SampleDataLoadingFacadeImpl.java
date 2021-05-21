@@ -182,17 +182,17 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user1.setEmail("oto.fargas@winery.com");
         user1.setAdmin(true);
 
-        user1 = new User();
-        user1.setFirstName("Vladimir");
-        user1.setSurname("Visnovsky");
-        user1.setEmail("vladimir.visnovsky@winery.com");
-        user1.setAdmin(false);
+        user2 = new User();
+        user2.setFirstName("Vladimir");
+        user2.setSurname("Visnovsky");
+        user2.setEmail("vladimir.visnovsky@winery.com");
+        user2.setAdmin(false);
 
-        user1 = new User();
-        user1.setFirstName("Lukas");
-        user1.setSurname("Fudor");
-        user1.setEmail("lukas.fudor@winery.com");
-        user1.setAdmin(false);
+        user3 = new User();
+        user3.setFirstName("Lukas");
+        user3.setSurname("Fudor");
+        user3.setEmail("lukas.fudor@winery.com");
+        user3.setAdmin(false);
 
         harvest1.setGrape(grape1);
         harvest1.setWine(wine1);
@@ -236,7 +236,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         feedbackService.createFeedback(feedback3);
 
         userService.registerUser(user1, "admin");
-        userService.registerUser(user2, "dsc1d5c");
+        userService.registerUser(user2, "tarantula");
         userService.registerUser(user3, "1234");
     }
 }
