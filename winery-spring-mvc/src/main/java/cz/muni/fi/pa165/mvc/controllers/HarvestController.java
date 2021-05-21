@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
+import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestCreateDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
+import cz.muni.fi.pa165.facade.GrapeFacade;
 import cz.muni.fi.pa165.facade.HarvestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,9 @@ public class HarvestController {
 
     @Autowired
     private HarvestFacade harvestFacade;
+
+    @Autowired
+    private GrapeFacade grapeFacade;
 
     /**
      * TODO
@@ -143,4 +148,11 @@ public class HarvestController {
         }
         return "redirect:" + uriBuilder.path("/harvest/list").toUriString();
     }
+
+    @ModelAttribute("grapes")
+    public GrapeDTO[] grapes() {
+        log.debug("grapes()");
+        return grapeFacade.findAllGrapes().toArray(new GrapeDTO[0]);
+    }
+
 }
