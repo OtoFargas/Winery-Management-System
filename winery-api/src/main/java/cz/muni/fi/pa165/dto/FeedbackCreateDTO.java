@@ -31,7 +31,7 @@ public class FeedbackCreateDTO {
 
     @NotNull
     @PastOrPresent
-    @DateTimeFormat(pattern = "MM.dd.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date date;
 
     private Long wineId;

@@ -12,14 +12,22 @@
         <thead>
         <tr>
             <th scope="col">Wine</th>
+            <th scope="col">Color</th>
+            <th scope="col">Taste</th>
+            <th scope="col">Year</th>
         </tr>
         </thead>
         <tbody>
             <c:forEach items="${wines}" var="wine">
                 <tr>
                     <td><c:out value="${wine.name}"/></td>
+                    <td><c:out value="${wine.color}"/></td>
+                    <td><c:out value="${wine.taste}"/></td>
+                    <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
                     <td align="right">
-                        <my:a href="/admin/wine/view/${wine.id}" class="btn btn-primary">View</my:a>&emsp;
+                        <my:a href="/admin/wine/view/${wine.id}" class="btn btn-primary">Buy Wine</my:a>&emsp;
+                        <my:a href="/feedback/new" class="btn btn-primary">Add Feedback</my:a>&emsp;
+                        <my:a href="/feedback/list/${wine.id}" class="btn btn-primary">View Feedbacks</my:a>&emsp;
                     </td>
                 </tr>
             </c:forEach>

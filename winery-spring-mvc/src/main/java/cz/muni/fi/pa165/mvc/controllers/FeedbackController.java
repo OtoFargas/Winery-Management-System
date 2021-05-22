@@ -43,52 +43,6 @@ public class FeedbackController {
     /**
      * TODO
      *
-     * @param model
-     * @return
-     */
-    @GetMapping("/new")
-    public String newFeedback(Model model) {
-        log.debug("new()");
-        model.addAttribute("feedbackCreate", new FeedbackCreateDTO());
-        return "feedback/new";
-    }
-
-    /**
-     * TODO
-     *
-     * @param formBean
-     * @param bindingResult
-     * @param model
-     * @param redirectAttributes
-     * @param uriBuilder
-     * @return
-     */
-    @PostMapping("/create")
-    public String createFeedback(@Valid @ModelAttribute("feedbackCreate") FeedbackCreateDTO formBean, BindingResult bindingResult,
-                              Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
-
-        log.debug("create(formBean={})", formBean);
-
-        if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.trace("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.trace("FieldError: {}", fe);
-            }
-            return "feedback/new";
-        }
-
-        Long id = feedbackFacade.createFeedback(formBean);
-
-        redirectAttributes.addFlashAttribute("alert_success", "Feedback " + id + " was created");
-        return "redirect:" + uriBuilder.path("/admin/feedback/list").toUriString();
-    }
-
-    /**
-     * TODO
-     *
      * @param id
      * @param model
      * @return
@@ -145,17 +99,5 @@ public class FeedbackController {
             redirectAttributes.addFlashAttribute("alert_danger", "Feedback " + feedback.getId() + " cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/admin/feedback/list").toUriString();
-    }
-
-    @ModelAttribute("rating")
-    public Integer[] rating() {
-        log.debug("rating()");
-        return new Integer[]{1,2,3,4,5,6,7,8,9,10};
-    }
-
-    @ModelAttribute("wines")
-    public WineDTO[] wines() {
-        log.debug("wines()");
-        return wineFacade.findAllWines().toArray(new WineDTO[0]);
     }
 }
