@@ -31,7 +31,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/feedback")
+@RequestMapping("/admin/feedback")
 public class FeedbackController {
     final static Logger log = LoggerFactory.getLogger(FeedbackController.class);
 
@@ -84,7 +84,7 @@ public class FeedbackController {
         Long id = feedbackFacade.createFeedback(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Feedback " + id + " was created");
-        return "redirect:" + uriBuilder.path("/feedback/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/feedback/list").toUriString();
     }
 
     /**
@@ -145,7 +145,7 @@ public class FeedbackController {
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Feedback " + feedback.getId() + " cannot be deleted.");
         }
-        return "redirect:" + uriBuilder.path("/feedback/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/feedback/list").toUriString();
     }
 
     @ModelAttribute("rating")

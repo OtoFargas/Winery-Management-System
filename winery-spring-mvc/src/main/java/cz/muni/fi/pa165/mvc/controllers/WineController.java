@@ -33,7 +33,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/wine")
+@RequestMapping("/admin/wine")
 public class WineController {
 
     final static Logger log = LoggerFactory.getLogger(WineController.class);
@@ -84,7 +84,7 @@ public class WineController {
         Long id = wineFacade.createWine(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Wine " + id + " was created");
-        return "redirect:" + uriBuilder.path("/wine/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/wine/list").toUriString();
     }
 
     /**
@@ -164,7 +164,7 @@ public class WineController {
             redirectAttributes.addFlashAttribute("alert_danger", "Wine " + wine.getId() + ": \"" + wine.getName()
                                                 + "\" cannot be deleted.");
         }
-        return "redirect:" + uriBuilder.path("/wine/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/wine/list").toUriString();
     }
 
     /**
@@ -188,7 +188,7 @@ public class WineController {
                     + " was NOT added to the wine number" + id + "." + e.getMessage());
         }
 
-        return "redirect:" + uriBuilder.path("/wine/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     /**
@@ -212,7 +212,7 @@ public class WineController {
                     + " was NOT added to the wine number" + id + "." + e.getMessage());
         }
 
-        return "redirect:" + uriBuilder.path("/wine/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     /**
@@ -241,7 +241,7 @@ public class WineController {
                     + " was not sold. " + e.getMessage());
         }
 
-        return "redirect:" + uriBuilder.path("/wine/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     @ModelAttribute("taste")

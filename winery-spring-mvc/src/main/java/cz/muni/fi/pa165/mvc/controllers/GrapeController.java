@@ -33,7 +33,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/grape")
+@RequestMapping("/admin/grape")
 public class GrapeController {
 
     final static Logger log = LoggerFactory.getLogger(GrapeController.class);
@@ -87,7 +87,7 @@ public class GrapeController {
         Long id = grapeFacade.createGrape(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was created");
-        return "redirect:" + uriBuilder.path("/grape/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/grape/list").toUriString();
     }
 
     /**
@@ -180,7 +180,7 @@ public class GrapeController {
             redirectAttributes.addFlashAttribute("alert_danger", "Grape " + grape.getId() + ": \"" + grape.getName()
                                                 + "\" cannot be deleted.");
         }
-        return "redirect:" + uriBuilder.path("/grape/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/grape/list").toUriString();
     }
 
     /**
@@ -202,7 +202,7 @@ public class GrapeController {
                                                 + " was not cured. " + e.getMessage());
         }
 
-        return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     /**
@@ -232,13 +232,13 @@ public class GrapeController {
                 log.trace("FieldError: {}", fe);
             }
             redirectAttributes.addFlashAttribute("alert_danger", "Grape " + id + " could not have been cured.");
-            return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
         grapeFacade.cureDisease(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was cured.");
-        return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     /**
@@ -269,14 +269,14 @@ public class GrapeController {
             }
             redirectAttributes.addFlashAttribute("alert_danger", "Disease " + formBean.getDisease()
                                                 + "could not have been added to grape with ID: " + id + ".");
-            return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
         grapeFacade.addDisease(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Disease " + formBean.getDisease()
                                             + "was added to grape with ID: " + id + ".");
-        return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     /**
@@ -307,13 +307,13 @@ public class GrapeController {
             }
             redirectAttributes.addFlashAttribute("alert_danger", "Quantity of grape " + id
                                                 + " could not have been changed.");
-            return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
         grapeFacade.changeQuantity(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Quantity of grape " + id + " was changed.");
-        return "redirect:" + uriBuilder.path("/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     @ModelAttribute("colors")

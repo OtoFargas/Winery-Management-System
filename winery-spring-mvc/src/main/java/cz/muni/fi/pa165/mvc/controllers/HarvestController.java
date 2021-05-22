@@ -30,7 +30,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/harvest")
+@RequestMapping("/admin/harvest")
 public class HarvestController {
 
     final static Logger log = LoggerFactory.getLogger(HarvestController.class);
@@ -84,7 +84,7 @@ public class HarvestController {
         Long id = harvestFacade.createHarvest(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Harvest " + id + " was created");
-        return "redirect:" + uriBuilder.path("/harvest/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/harvest/list").toUriString();
     }
 
     /**
@@ -146,7 +146,7 @@ public class HarvestController {
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Harvest " + harvest.getId() + " cannot be deleted.");
         }
-        return "redirect:" + uriBuilder.path("/harvest/list").toUriString();
+        return "redirect:" + uriBuilder.path("/admin/harvest/list").toUriString();
     }
 
     @ModelAttribute("grapes")
