@@ -9,8 +9,8 @@
 
 <my:pagetemplate title="Harvest">
 <jsp:attribute name="body">
-    <my:a href="/harvest/remove/${harvest.id}" class="btn btn-danger">Remove</my:a>&emsp;
-    <my:a href="/harvest/list" class="btn btn-danger">Back</my:a>&emsp;
+    <my:a href="/admin/harvest/remove/${harvest.id}" class="btn btn-danger">Remove</my:a>&emsp;
+    <my:a href="/admin/harvest/list" class="btn btn-danger">Back</my:a>&emsp;
     <p><br></p>
 
     <table class="table">

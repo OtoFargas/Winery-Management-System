@@ -10,9 +10,9 @@
 <my:pagetemplate title="Grape">
 <jsp:attribute name="body">
 
-    <my:a href="/grape/edit/${grape.id}" class="btn btn-primary">Edit</my:a>&emsp;
-    <my:a href="/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>&emsp;
-    <my:a href="/grape/list" class="btn btn-danger">Back</my:a>&emsp;
+    <my:a href="/admin/grape/edit/${grape.id}" class="btn btn-primary">Edit</my:a>&emsp;
+    <my:a href="/admin/grape/remove/${grape.id}" class="btn btn-danger">Remove</my:a>&emsp;
+    <my:a href="/admin/grape/list" class="btn btn-danger">Back</my:a>&emsp;
     <p><br></p>
 
     <table class="table">

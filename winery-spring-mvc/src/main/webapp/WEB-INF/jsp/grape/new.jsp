@@ -10,7 +10,7 @@
 <my:pagetemplate title="New grape">
 <jsp:attribute name="body">
 
-    <form:form method="post" action="${pageContext.request.contextPath}/grape/create"
+    <form:form method="post" action="${pageContext.request.contextPath}/admin/grape/create"
                modelAttribute="grapeCreate" cssClass="form-horizontal">
 
             <div class="form-group">

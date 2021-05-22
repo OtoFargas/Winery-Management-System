@@ -9,7 +9,7 @@
 
 <my:pagetemplate title="Feedbacks ">
 <jsp:attribute name="body">
-    <my:a href="/feedback/new" class="btn btn-success">New</my:a>
+    <my:a href="/admin/feedback/new" class="btn btn-success">New</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -23,7 +23,7 @@
                     <td><c:out value="${feedback.author}"/></td>
                     <td><c:out value="${feedback.wine.id}: ${feedback.wine.name}"/></td>
                     <td align="right">
-                        <my:a href="/feedback/view/${feedback.id}" class="btn btn-primary">View</my:a>&emsp;
+                        <my:a href="/admin/feedback/view/${feedback.id}" class="btn btn-primary">View</my:a>&emsp;
                     </td>
                 </tr>
             </c:forEach>

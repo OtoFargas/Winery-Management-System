@@ -10,7 +10,7 @@
 <my:pagetemplate title="New feedback">
 <jsp:attribute name="body">
 
-<form:form method="post" action="${pageContext.request.contextPath}/feedback/create"
+<form:form method="post" action="${pageContext.request.contextPath}/admin/feedback/create"
            modelAttribute="feedbackCreate" cssClass="form-horizontal">
 
         <div class="form-group">

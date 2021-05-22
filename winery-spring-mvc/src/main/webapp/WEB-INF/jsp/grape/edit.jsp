@@ -20,7 +20,7 @@
     </table>
 
     <form:form method="POST"
-               action="${pageContext.request.contextPath}/grape/setDisease/${grape.id}" modelAttribute="setDisease">
+               action="${pageContext.request.contextPath}/admin/grape/setDisease/${grape.id}" modelAttribute="setDisease">
          <div class="form-group">
              <form:label path="disease" cssClass="col-sm-2 control-label">Select a disease:</form:label>
              <div class="col-sm-10">
@@ -35,7 +35,7 @@
         <button class="btn btn-primary" type="submit" name="cure">Cure</button>
         <button class="btn btn-danger" type="submit" name="add">Add</button>
     </form:form>
-    <my:a href="/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>&emsp;
+    <my:a href="/admin/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>&emsp;
 
     <table class="table">
         <tbody>
@@ -47,7 +47,7 @@
     </table>
 
     <form:form method="POST"
-               action="${pageContext.request.contextPath}/grape/changeQuantity/${grape.id}" modelAttribute="changeQuantity">
+               action="${pageContext.request.contextPath}/admin/grape/changeQuantity/${grape.id}" modelAttribute="changeQuantity">
          <div class="form-group">
              <form:label path="quantity" cssClass="col-sm-2 control-label">Enter new quantity:</form:label>
              <div class="col-sm-10">
@@ -58,6 +58,6 @@
         <button class="btn btn-success" type="submit">Change</button>
     </form:form>
 
-    <my:a href="/grape/view/${grape.id}" class="btn btn-primary">Back</my:a>&emsp;
+    <my:a href="/admin/grape/view/${grape.id}" class="btn btn-primary">Back</my:a>&emsp;
 </jsp:attribute>
 </my:pagetemplate>

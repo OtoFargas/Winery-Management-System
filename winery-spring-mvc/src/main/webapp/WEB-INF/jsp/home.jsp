@@ -6,28 +6,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<my:pagetemplate title="Winery">
+<my:pagetemplate title="Wines">
 <jsp:attribute name="body">
-
-    <div class="jumbotron">
-        <h1>Winery management IS</h1>
-        <p>
-            <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/grape/list"
-              role="button">Grapes</a>
-        </p>
-        <p>
-            <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/wine/list"
-              role="button">Wines</a>
-        </p>
-        <p>
-            <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/harvest/list"
-               role="button">Harvests</a>
-        </p>
-        <p>
-            <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/feedback/list"
-               role="button">Feedbacks</a>
-        </p>
-    </div>
-
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Wine</th>
+        </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${wines}" var="wine">
+                <tr>
+                    <td><c:out value="${wine.name}"/></td>
+                    <td align="right">
+                        <my:a href="/admin/wine/view/${wine.id}" class="btn btn-primary">View</my:a>&emsp;
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </jsp:attribute>
 </my:pagetemplate>

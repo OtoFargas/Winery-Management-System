@@ -10,7 +10,7 @@
 <my:pagetemplate title="New harvest">
 <jsp:attribute name="body">
 
-<form:form method="post" action="${pageContext.request.contextPath}/harvest/create"
+<form:form method="post" action="${pageContext.request.contextPath}/admin/harvest/create"
            modelAttribute="harvestCreate" cssClass="form-horizontal">
 
         <div class="form-group">

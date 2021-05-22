@@ -9,8 +9,8 @@
 
 <my:pagetemplate title="Feedback">
 <jsp:attribute name="body">
-    <my:a href="/feedback/remove/${feedback.id}" class="btn btn-danger">Remove</my:a>&emsp;
-    <my:a href="/feedback/list" class="btn btn-danger">Back</my:a>&emsp;
+    <my:a href="/admin/feedback/remove/${feedback.id}" class="btn btn-danger">Remove</my:a>&emsp;
+    <my:a href="/admin/feedback/list" class="btn btn-danger">Back</my:a>&emsp;
     <p><br></p>
 
     <table class="table">

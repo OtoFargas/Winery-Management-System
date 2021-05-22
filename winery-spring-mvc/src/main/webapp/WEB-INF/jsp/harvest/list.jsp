@@ -9,7 +9,7 @@
 
 <my:pagetemplate title="Harvests">
 <jsp:attribute name="body">
-    <my:a href="/harvest/new" class="btn btn-success">New</my:a>
+    <my:a href="/admin/harvest/new" class="btn btn-success">New</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -25,7 +25,7 @@
                     <td><c:out value="${harvest.grape.name}"/></td>
                     <td><c:out value="${harvest.quantity}"/></td>
                     <td align="right">
-                        <my:a href="/harvest/view/${harvest.id}" class="btn btn-primary">View</my:a>&emsp;
+                        <my:a href="/admin/harvest/view/${harvest.id}" class="btn btn-primary">View</my:a>&emsp;
                     </td>
                 </tr>
             </c:forEach>
