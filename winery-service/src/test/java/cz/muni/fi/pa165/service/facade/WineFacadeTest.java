@@ -159,6 +159,7 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
         testWineCreateDTO.setStocked(888);
         testWineCreateDTO.setTaste(Taste.SEMI_SWEET);
         testWineCreateDTO.setStocked(1231);
+        testWineCreateDTO.setHarvestIDs(new ArrayList<>(List.of(21L)));
     }
 
     @Test

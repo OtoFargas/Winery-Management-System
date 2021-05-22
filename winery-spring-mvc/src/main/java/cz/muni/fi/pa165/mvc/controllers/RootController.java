@@ -2,8 +2,6 @@ package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
-import cz.muni.fi.pa165.dto.GrapeChangeDTO;
-import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import org.slf4j.Logger;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.facade.WineFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,8 @@ import javax.validation.Valid;
 import java.util.Set;
 
 /**
+ * MVC Controller for root home page.
+ *
  * @author Vladimir Visnovsky
  */
 @Controller
@@ -44,18 +43,25 @@ public class RootController {
     private FeedbackFacade feedbackFacade;
 
     /**
-     * TODO
+     * Redirects to the home page containing all the wines.
      *
-     * @param model
-     * @return
+     * @param model page data
+     * @return      page name
      */
-    @GetMapping(value = "/")
+    @GetMapping("/")
     public String admin(Model model) {
         model.addAttribute("wines", wineFacade.findAllWines());
         return "home";
     }
 
-    @GetMapping(value = "/wine/buy/{id}")
+    /**
+     * Redirects to ../wine/buy page with interface for buying wine.
+     *
+     * @param id    of the id to be bought
+     * @param model page data
+     * @return      page name
+     */
+    @GetMapping("/wine/buy/{id}")
     public String wineBuy(@PathVariable long id, Model model) {
         model.addAttribute("wine", wineFacade.findWineById(id));
         model.addAttribute("wineBuy", new WineBuyDTO());
@@ -63,11 +69,11 @@ public class RootController {
     }
 
     /**
-     * TODO
+     * Redirects to ../new page containing the form for the creation of the new feedback.
      *
-     * @param id
-     * @param model
-     * @return
+     * @param id    of the wine to be reviewed
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/feedback/new/{id}")
     public String newFeedback(@PathVariable long id, Model model) {
@@ -78,11 +84,12 @@ public class RootController {
     }
 
     /**
-     * TODO
+     * Redirects to ../listByWine displaying all feedbacks of the wine
+     * with given ID.
      *
-     * @param id
-     * @param model
-     * @return
+     * @param id    of the wine
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/feedback/listByWine/{id}")
     public String viewFeedbacksForWine(@PathVariable long id, Model model) {
@@ -95,14 +102,14 @@ public class RootController {
     }
 
     /**
-     * TODO
+     * Creates new feedback based on the information from the formBean.
      *
-     * @param formBean
-     * @param bindingResult
-     * @param model
-     * @param redirectAttributes
-     * @param uriBuilder
-     * @return
+     * @param formBean           data from the form
+     * @param bindingResult      -
+     * @param model              page data
+     * @param redirectAttributes attributes for redirect scenario
+     * @param uriBuilder         sets URI components
+     * @return                   page name
      */
     @PostMapping("/feedback/create/{id}")
     public String addFeedback(@Valid @ModelAttribute("feedbackCreate") FeedbackCreateDTO formBean, BindingResult bindingResult,
@@ -132,27 +139,27 @@ public class RootController {
     }
 
     /**
-     * TODO
+     * Redirects to ../about page.
      *
-     * @param model
-     * @return
+     * @return page name
      */
-    @GetMapping(value = "/about")
-    public String about(Model model) {
+    @GetMapping("/about")
+    public String about() {
         return "about";
     }
 
     /**
+     * Buys formBean.amount of wine with given ID.
      *
-     * @param formBean
-     * @param bindingResult
-     * @param model
-     * @param redirectAttributes
-     * @param uriBuilder
-     * @param id
-     * @return
+     * @param formBean           data from the form
+     * @param bindingResult      -
+     * @param model              page data
+     * @param redirectAttributes attributes for redirect scenario
+     * @param uriBuilder         sets URI components
+     * @param id                 of the wine to be bought
+     * @return                   page name
      */
-    @PostMapping(value = "/wine/buyAmount/{id}")
+    @PostMapping("/wine/buyAmount/{id}")
     public String buyWine(@Valid @ModelAttribute("wineBuy") WineBuyDTO formBean,
                                  BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
                                  UriComponentsBuilder uriBuilder, @PathVariable long id) {

@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
-import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
-import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import cz.muni.fi.pa165.facade.WineFacade;
 import org.slf4j.Logger;
@@ -35,11 +33,11 @@ public class FeedbackController {
     private WineFacade wineFacade;
 
     /**
-     * TODO
+     * Redirects to ../view, view page of the feedback.
      *
-     * @param id
-     * @param model
-     * @return
+     * @param id    of the feedback to be viewed
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/view/{id}")
     public String viewById(@PathVariable long id, Model model) {
@@ -49,10 +47,10 @@ public class FeedbackController {
     }
 
     /**
-     * TODO
+     * Redirects to ../list, page with all feedbacks.
      *
-     * @param model to be displayed
-     * @return
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/list")
     public String listAllFeedbacks(Model model) {
@@ -61,11 +59,11 @@ public class FeedbackController {
     }
 
     /**
-     * TODO
+     * Redirects to ../list, page with feedbacks from give author.
      *
-     * @param model
-     * @param author
-     * @return
+     * @param model  page data
+     * @param author author of searched for feedbacks
+     * @return       page name
      */
     @GetMapping("/list/{author}")
     public String listFeedbacksFromAuthor(Model model, @PathVariable String author) {
@@ -74,12 +72,12 @@ public class FeedbackController {
     }
 
     /**
-     * TODO
+     * Removes a feedback with given ID and redirects to ../list.
      *
-     * @param id
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return
+     * @param id                 of the feedback to be removed
+     * @param uriBuilder         sets URI components
+     * @param redirectAttributes attributes for redirect scenario
+     * @return                   page name
      */
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {

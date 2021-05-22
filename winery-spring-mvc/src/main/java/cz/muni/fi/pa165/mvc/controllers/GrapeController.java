@@ -121,7 +121,7 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Redirects to ../view page of the grape with given name.
      *
      * @param name  of the grape to be viewed
      * @param model page name
@@ -147,7 +147,7 @@ public class GrapeController {
     }
 
     /**
-     * TODO
+     * Redirects to ../list page with all the grapes with given color.
      *
      * @param model page data
      * @param color to be filtered by

@@ -44,6 +44,18 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <form:label path="harvestIDs" cssClass="col-sm-2 control-label">Harvests</form:label>
+            <div class="col-sm-10">
+                <form:select path="harvestIDs" cssClass="form-control">
+                    <c:forEach items="${harvests}" var="harvest">
+                        <form:option value="${harvest.id}">${harvest.harvestYear} : ${harvest.grape.name}</form:option>
+                    </c:forEach>
+                </form:select>
+                <form:errors path="harvestIDs" cssClass="error"/>
+            </div>
+        </div>
+
         <div class="form-group" >
             <form:label path="stocked" cssClass="col-sm-2 control-label">Stocked</form:label>
             <div class="col-sm-10">

@@ -1,11 +1,13 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
+import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.enums.Ingredient;
 import cz.muni.fi.pa165.enums.Taste;
 import cz.muni.fi.pa165.enums.WineColor;
+import cz.muni.fi.pa165.facade.HarvestFacade;
 import cz.muni.fi.pa165.facade.WineFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,13 +43,16 @@ public class WineController {
     @Autowired
     private WineFacade wineFacade;
 
+    @Autowired
+    private HarvestFacade harvestFacade;
     /**
-     * TODO
+     * Redirects to ../new page containing the form for the creation
+     * of new wine.
      *
      * @param model to be displayed
      * @return page name
      */
-    @GetMapping(value = "/new")
+    @GetMapping("/new")
     public String newWine(Model model) {
         log.debug("new()");
         model.addAttribute("wineCreate", new WineCreateDTO());
@@ -55,16 +60,16 @@ public class WineController {
     }
 
     /**
-     * TODO
+     * Creates a new wine based on the information from the formBean.
      *
-     * @param formBean data for wine creation
-     * @param bindingResult
-     * @param model
+     * @param formBean           data from the form
+     * @param bindingResult      -
+     * @param model              page data
      * @param redirectAttributes attributes for redirect scenario
-     * @param uriBuilder sets URI components
-     * @return page wine/new if failed, page wine/all else
+     * @param uriBuilder         sets URI components
+     * @return                   page name
      */
-    @PostMapping(value = "/create")
+    @PostMapping("/create")
     public String createWine(@Valid @ModelAttribute("wineCreate") WineCreateDTO formBean, BindingResult bindingResult,
                               Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 
@@ -88,39 +93,26 @@ public class WineController {
     }
 
     /**
-     * TODO
+     * Redirects to ../view page of the wine with the given ID.
      *
-     * @param id of the wine to be viewed
-     * @param model data to be displayed
-     * @return page name of the view of the wine
+     * @param id    of the wine to be viewed
+     * @param model page data
+     * @return      page name
      */
-    @GetMapping(value = "/view/{id}")
+    @GetMapping("/view/{id}")
     public String viewById(@PathVariable long id, Model model) {
         log.debug("viewById({})", id);
         model.addAttribute("wine", wineFacade.findWineById(id));
         return "wine/view";
     }
 
-    /**
-     * Redirects to ../wine/edit based on the ID of the wine.
-     *
-     * @param id    of the i
-     * @param model page data
-     * @return      page name
-     */
-    @GetMapping("/edit/{id}")
-    public String editWine(@PathVariable long id, Model model) {
-        log.debug("editWine({})", id);
-        model.addAttribute("wine", wineFacade.findWineById(id));
-        return "wine/edit";
-    }
 
     /**
-     * TODO
+     * Redirects to the ../viewByName page of the wine with given name.
      *
      * @param name  of the wine to be viewed
-     * @param model data to be displayed
-     * @return page name of the view of the wine
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/viewByName/{name}")
     public String viewByName(@PathVariable String name, Model model) {
@@ -130,10 +122,10 @@ public class WineController {
     }
 
     /**
-     * Redirects to ../wine/list page.
+     * Redirects to ../wine/list page with all the wines.
      *
-     * @param model to be displayed
-     * @return page name of all the wines
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/list")
     public String listAllWines(Model model) {
@@ -144,12 +136,12 @@ public class WineController {
     /**
      * Removes wine with given ID.
      *
-     * @param id of the wine to be removed
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of all the other wines
+     * @param id                 of the wine to be removed
+     * @param uriBuilder         sets URI components
+     * @param redirectAttributes attributes for redirect scenario
+     * @return                   page name
      */
-    @GetMapping(value = "/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         WineDTO wine = wineFacade.findWineById(id);
         log.debug("remove({})", id);
@@ -163,83 +155,6 @@ public class WineController {
                                                 + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/admin/wine/list").toUriString();
-    }
-
-    /**
-     * TODO
-     *
-     * @param id of the wine to be added to
-     * @param harvestid of the harvest to be added
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of the view of the wine
-     */
-    @PostMapping("/addHarvest/{id}/{harvestid}")
-    public String addHarvest(@PathVariable long id, @PathVariable long harvestid,
-                             UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        try {
-            wineFacade.addHarvest(harvestid, id);
-            redirectAttributes.addFlashAttribute("alert_success", "Harvest number " + harvestid
-                    + " was added to the wine number" + id + ".");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Harvest number " + harvestid
-                    + " was NOT added to the wine number" + id + "." + e.getMessage());
-        }
-
-        return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
-    }
-
-    /**
-     * TODO
-     *
-     * @param id of the wine to be added to
-     * @param feedbackid of the feedback to be added
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of the view of the wine
-     */
-    @PostMapping("/addFeedback/{id}/{feedbackid}")
-    public String addFeedback(@PathVariable long id, @PathVariable long feedbackid,
-                             UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        try {
-            wineFacade.addFeedback(feedbackid, id);
-            redirectAttributes.addFlashAttribute("alert_success", "Feedback number " + feedbackid
-                    + " was added to the wine number" + id + ".");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Feedback number " + feedbackid
-                    + " was NOT added to the wine number" + id + "." + e.getMessage());
-        }
-
-        return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
-    }
-
-    /**
-     * TODO
-     *
-     * @param id of the wine to be sold
-     * @param amount of wine to be sold
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of the view of the wine
-     */
-    @PutMapping("/sellWine/{id}/{amount}")
-    public String sellWine(@PathVariable long id, @PathVariable Integer amount,
-                              UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-
-        try {
-            WineBuyDTO wineBuyDTO = new WineBuyDTO();
-            wineBuyDTO.setId(id);
-            wineBuyDTO.setAmount(amount);
-
-            wineFacade.sellWine(wineBuyDTO);
-            redirectAttributes.addFlashAttribute("alert_success", "Wine with id " + id
-                    + " was sold. Amount: " + amount);
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Wine with id " + id
-                    + " was not sold. " + e.getMessage());
-        }
-
-        return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     @ModelAttribute("taste")
@@ -258,5 +173,11 @@ public class WineController {
     public Ingredient[] ingredients() {
         log.debug("ingredients()");
         return Ingredient.values();
+    }
+
+    @ModelAttribute("harvests")
+    public HarvestDTO[] harvests() {
+        log.debug("harvests()");
+        return harvestFacade.findAllHarvests().toArray(new HarvestDTO[0]);
     }
 }

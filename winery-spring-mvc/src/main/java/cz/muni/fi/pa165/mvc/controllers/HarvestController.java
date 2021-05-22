@@ -42,12 +42,12 @@ public class HarvestController {
     private GrapeFacade grapeFacade;
 
     /**
-     * TODO
+     * Redirects to ../new page with form for new harvest.
      *
-     * @param model to be displayed
-     * @return page name
+     * @param model page data
+     * @return      page name
      */
-    @GetMapping(value = "/new")
+    @GetMapping("/new")
     public String newHarvest(Model model) {
         log.debug("new()");
         model.addAttribute("harvestCreate", new HarvestCreateDTO());
@@ -55,16 +55,16 @@ public class HarvestController {
     }
 
     /**
-     * TODO
+     * Creates new harvest with the data from the formBean
      *
-     * @param formBean data for harvest creation
-     * @param bindingResult
-     * @param model
+     * @param formBean           data for harvest creation
+     * @param bindingResult      -
+     * @param model              page data
      * @param redirectAttributes attributes for redirect scenario
-     * @param uriBuilder sets URI components
-     * @return page harvest/new if failed, page harvest/all else
+     * @param uriBuilder         sets URI components
+     * @return                   page name
      */
-    @PostMapping(value = "/create")
+    @PostMapping("/create")
     public String createHarvest(@Valid @ModelAttribute("harvestCreate") HarvestCreateDTO formBean, BindingResult bindingResult,
                               Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
 
@@ -88,13 +88,13 @@ public class HarvestController {
     }
 
     /**
-     * TODO
+     * Redirects to ../view page of the harvest with given id.
      *
-     * @param id of the harvest to be viewed
-     * @param model data to be displayed
-     * @return page name of the view of the harvest
+     * @param id    of the harvest to be viewed
+     * @param model page data
+     * @return      page name
      */
-    @GetMapping(value = "/view/{id}")
+    @GetMapping("/view/{id}")
     public String viewById(@PathVariable long id, Model model) {
         log.debug("viewById({})", id);
         model.addAttribute("harvest", harvestFacade.findHarvestById(id));
@@ -102,24 +102,10 @@ public class HarvestController {
     }
 
     /**
-     * TODO
+     * Redirects to ../list page with all harvests.
      *
-     * @param year of the harvest to be viewed
-     * @param model data to be displayed
-     * @return page name of the view of the harvest
-     */
-    @GetMapping("/viewByName/{name}")
-    public String viewByName(@PathVariable Integer year, Model model) {
-        log.debug("viewByYear({})", year);
-        model.addAttribute("harvest", harvestFacade.findHarvestsByYear(year));
-        return "harvest/view";
-    }
-
-    /**
-     * TODO
-     *
-     * @param model to be displayed
-     * @return page name of all the harvests
+     * @param model page data
+     * @return      page name
      */
     @GetMapping("/list")
     public String listAllHarvests(Model model) {
@@ -128,14 +114,14 @@ public class HarvestController {
     }
 
     /**
-     * TODO
+     * Removes the harvest with given ID.
      *
-     * @param id of the harvest to be removed
-     * @param uriBuilder
-     * @param redirectAttributes
-     * @return page name of all the other harvests
+     * @param id                 of the harvest to be removed
+     * @param uriBuilder         sets URI components
+     * @param redirectAttributes attributes for redirect scenario
+     * @return                   page name
      */
-    @GetMapping(value = "/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String remove(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         HarvestDTO harvest = harvestFacade.findHarvestById(id);
         log.debug("remove({})", id);
