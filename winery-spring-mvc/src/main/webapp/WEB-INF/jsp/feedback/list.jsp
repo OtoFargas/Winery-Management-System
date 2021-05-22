@@ -9,7 +9,6 @@
 
 <my:pagetemplate title="Feedbacks ">
 <jsp:attribute name="body">
-    <my:a href="/admin/feedback/new" class="btn btn-success">New</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
