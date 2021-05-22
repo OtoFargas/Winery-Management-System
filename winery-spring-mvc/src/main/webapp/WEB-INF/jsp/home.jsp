@@ -15,6 +15,7 @@
             <th scope="col">Color</th>
             <th scope="col">Taste</th>
             <th scope="col">Year</th>
+            <th scope="col">Stocked</th>
         </tr>
         </thead>
         <tbody>
@@ -24,8 +25,9 @@
                     <td><c:out value="${wine.color}"/></td>
                     <td><c:out value="${wine.taste}"/></td>
                     <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
+                    <td><c:out value="${wine.stocked}"/></td>
                     <td align="right">
-                        <my:a href="/admin/wine/view/${wine.id}" class="btn btn-primary">Buy Wine</my:a>&emsp;
+                        <my:a href="/admin/wine/view/${wine.id}" class="btn btn-success">Buy Wine</my:a>&emsp;
                         <my:a href="/feedback/listByWine/${wine.id}" class="btn btn-primary">View Feedbacks</my:a>&emsp;
                     </td>
                 </tr>

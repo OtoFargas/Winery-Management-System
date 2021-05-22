@@ -56,12 +56,14 @@ public class RootController {
     /**
      * TODO
      *
+     * @param id
      * @param model
      * @return
      */
-    @GetMapping("/feedback/new")
-    public String newFeedback(Model model) {
+    @GetMapping("/feedback/new/{id}")
+    public String newFeedback(@PathVariable long id,Model model) {
         log.debug("new()");
+        model.addAttribute("wine", wineFacade.findWineById(id));
         model.addAttribute("feedbackCreate", new FeedbackCreateDTO());
         return "feedback/new";
     }
@@ -93,9 +95,10 @@ public class RootController {
      * @param uriBuilder
      * @return
      */
-    @PostMapping("/feedback/create")
+    @PostMapping("/feedback/create/{id}")
     public String addFeedback(@Valid @ModelAttribute("feedbackCreate") FeedbackCreateDTO formBean, BindingResult bindingResult,
-                                 Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+                                 Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder,
+                              @PathVariable long id) {
 
         log.debug("create(formBean={})", formBean);
 
@@ -110,12 +113,13 @@ public class RootController {
             return "feedback/new";
         }
 
+        formBean.setWineId(id);
         String wineName = wineFacade.findWineById(formBean.getWineId()).getName();
-        Long id = feedbackFacade.createFeedback(formBean);
+        feedbackFacade.createFeedback(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Feedback for wine \""
                                             + wineName + "\" was created.");
-        return "redirect:" + uriBuilder.path("/").toUriString();
+        return "redirect:" + uriBuilder.path("/feedback/listByWine/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     /**

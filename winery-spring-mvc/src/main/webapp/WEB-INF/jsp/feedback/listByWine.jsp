@@ -26,7 +26,8 @@
             <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
         </tr>
     </table>
-        <my:a href="/feedback/new" class="btn btn-primary">Add Feedback</my:a>&emsp;
+        <my:a href="/feedback/new/${wine.id}" class="btn btn-primary">Add Feedback</my:a>&emsp;
+        <my:a href="/" class="btn btn-danger">Back</my:a>&emsp;
     <table class="table table-hover">
         <thead>
         <tr>
@@ -44,7 +45,6 @@
                     <td><c:out value="${feedback.rating}"/></td>
                     <td><c:out value="${feedback.content}"/></td>
                     <td align="right">
-                        <my:a href="/admin/feedback/view/${feedback.id}" class="btn btn-primary">View</my:a>&emsp;
                     </td>
                 </tr>
             </c:forEach>

@@ -10,7 +10,7 @@
 <my:pagetemplate title="New feedback">
 <jsp:attribute name="body">
 
-<form:form method="post" action="${pageContext.request.contextPath}/feedback/create"
+<form:form method="post" action="${pageContext.request.contextPath}/feedback/create/${wine.id}"
            modelAttribute="feedbackCreate" cssClass="form-horizontal">
 
         <div class="form-group">
@@ -26,18 +26,6 @@
             <div class="col-sm-10">
                 <form:input path="date" cssClass="form-control"/>
                 <form:errors path="date" cssClass="help-block"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <form:label path="wineId" cssClass="col-sm-2 control-label">Wine</form:label>
-            <div class="col-sm-10">
-                <form:select path="wineId" cssClass="form-control">
-                    <c:forEach items="${wines}" var="wine">
-                        <form:option value="${wine.id}">${wine.name}</form:option>
-                    </c:forEach>
-                </form:select>
-                <form:errors path="wineId" cssClass="error"/>
             </div>
         </div>
 
