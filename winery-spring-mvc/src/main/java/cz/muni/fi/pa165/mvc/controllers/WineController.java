@@ -112,8 +112,6 @@ public class WineController {
     public String editWine(@PathVariable long id, Model model) {
         log.debug("editWine({})", id);
         model.addAttribute("wine", wineFacade.findWineById(id));
-//        model.addAttribute("setDisease", new GrapeChangeDTO());
-//        model.addAttribute("changeQuantity", new GrapeChangeDTO());
         return "wine/edit";
     }
 

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,6 +62,21 @@ public class RootController {
         log.debug("new()");
         model.addAttribute("feedbackCreate", new FeedbackCreateDTO());
         return "feedback/new";
+    }
+
+    /**
+     * TODO
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/feedback/listByWine/{id}")
+    public String viewFeedbacksForWine(@PathVariable long id, Model model) {
+        log.debug("viewFeedbacksForWine({})", id);
+        model.addAttribute("wine", wineFacade.findWineById(id));
+//        model.addAttribute("feedbacks", feedbackFacade.findFeedbacksByWine(id)); <- TODO
+        return "feedback/listByWine";
     }
 
     /**

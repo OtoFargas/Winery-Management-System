@@ -179,8 +179,10 @@ public class GrapeController {
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Grape " + grape.getId() + ": \"" + grape.getName()
                                                 + "\" cannot be deleted.");
+            return "redirect:" + uriBuilder.path("/admin/grape/view/{id}").buildAndExpand(id).encode().toUriString();
         }
         return "redirect:" + uriBuilder.path("/admin/grape/list").toUriString();
+
     }
 
     /**

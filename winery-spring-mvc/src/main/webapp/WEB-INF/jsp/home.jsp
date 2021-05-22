@@ -26,8 +26,7 @@
                     <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
                     <td align="right">
                         <my:a href="/admin/wine/view/${wine.id}" class="btn btn-primary">Buy Wine</my:a>&emsp;
-                        <my:a href="/feedback/new" class="btn btn-primary">Add Feedback</my:a>&emsp;
-                        <my:a href="/feedback/list/${wine.id}" class="btn btn-primary">View Feedbacks</my:a>&emsp;
+                        <my:a href="/feedback/listByWine/${wine.id}" class="btn btn-primary">View Feedbacks</my:a>&emsp;
                     </td>
                 </tr>
             </c:forEach>
