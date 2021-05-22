@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
+import cz.muni.fi.pa165.dto.FeedbackDTO;
+import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-
+import java.util.Set;
 
 /**
  * @author Vladimir Visnovsky
@@ -74,8 +76,10 @@ public class RootController {
     @GetMapping("/feedback/listByWine/{id}")
     public String viewFeedbacksForWine(@PathVariable long id, Model model) {
         log.debug("viewFeedbacksForWine({})", id);
-        model.addAttribute("wine", wineFacade.findWineById(id));
-//        model.addAttribute("feedbacks", feedbackFacade.findFeedbacksByWine(id)); <- TODO
+        WineDTO wineDTO = wineFacade.findWineById(id);
+        model.addAttribute("wine", wineDTO);
+        Set<FeedbackDTO> feedbacks = wineDTO.getFeedbacks();
+        model.addAttribute("feedbacks", feedbacks.toArray(new FeedbackDTO[0]));
         return "feedback/listByWine";
     }
 

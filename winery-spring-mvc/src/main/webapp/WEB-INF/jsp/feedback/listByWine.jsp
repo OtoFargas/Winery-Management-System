@@ -40,7 +40,9 @@
         <c:forEach items="${feedbacks}" var="feedback">
                 <tr>
                     <td><c:out value="${feedback.author}"/></td>
-                    <td><c:out value="${feedback.wine.id}: ${feedback.wine.name}"/></td>
+                    <td><c:out value="${feedback.date}"/></td>
+                    <td><c:out value="${feedback.rating}"/></td>
+                    <td><c:out value="${feedback.content}"/></td>
                     <td align="right">
                         <my:a href="/admin/feedback/view/${feedback.id}" class="btn btn-primary">View</my:a>&emsp;
                     </td>
