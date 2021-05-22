@@ -65,9 +65,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Harvest harvest2;
     private Harvest harvest3;
 
+    private Feedback feedback0;
     private Feedback feedback1;
     private Feedback feedback2;
     private Feedback feedback3;
+    private Feedback feedback4;
 
     private User user1;
     private User user2;
@@ -158,6 +160,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         harvest3.setQuantity(123);
 
         // feedbacks
+        feedback0 = new Feedback();
+        feedback0.setAuthor("testAuthor2");
+        feedback0.setContent("testContent0");
+        feedback0.setDate(new GregorianCalendar(2020, Calendar.AUGUST, 11).getTime());
+        feedback0.setRating(1);
+
         feedback1 = new Feedback();
         feedback1.setAuthor("testAuthor1");
         feedback1.setContent("testContent1");
@@ -175,6 +183,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         feedback3.setContent("testContent3");
         feedback3.setDate(new GregorianCalendar(2020, Calendar.DECEMBER, 9).getTime());
         feedback3.setRating(8);
+
+        feedback4 = new Feedback();
+        feedback4.setAuthor("testAuthor1");
+        feedback4.setContent("testContent4");
+        feedback4.setDate(new GregorianCalendar(2020, Calendar.MARCH, 19).getTime());
+        feedback4.setRating(10);
 
         user1 = new User();
         user1.setFirstName("Oto");
@@ -209,15 +223,20 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         grape3.addHarvest(harvest3);
         wine3.addHarvest(harvest3);
 
+        feedback0.setWine(wine1);
+        wine1.addFeedback(feedback0);
+
         feedback1.setWine(wine1);
         wine1.addFeedback(feedback1);
 
         feedback2.setWine(wine2);
         wine2.addFeedback(feedback2);
 
-        feedback3.setWine(wine1);
+        feedback3.setWine(wine3);
         wine3.addFeedback(feedback3);
 
+        feedback4.setWine(wine3);
+        wine3.addFeedback(feedback4);
 
         grapeService.createGrape(grape1);
         grapeService.createGrape(grape2);
