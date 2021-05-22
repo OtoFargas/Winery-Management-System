@@ -9,9 +9,11 @@
 
 <my:pagetemplate title="Feedbacks ">
 <jsp:attribute name="body">
+    <my:a href="/admin" class="btn btn-danger">Back</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">Author</th>
             <th scope="col">Wine</th>
         </tr>
@@ -19,6 +21,7 @@
         <tbody>
             <c:forEach items="${feedbacks}" var="feedback">
                 <tr>
+                    <td><c:out value="${feedback.id}"/></td>
                     <td><c:out value="${feedback.author}"/></td>
                     <td><c:out value="${feedback.wine.id}: ${feedback.wine.name}"/></td>
                     <td align="right">

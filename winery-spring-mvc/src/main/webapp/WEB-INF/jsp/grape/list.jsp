@@ -10,15 +10,18 @@
 <my:pagetemplate title="Grapes">
 <jsp:attribute name="body">
     <my:a href="/admin/grape/new" class="btn btn-success">New</my:a>
+    <my:a href="/admin" class="btn btn-danger">Back</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">Grape</th>
         </tr>
         </thead>
         <tbody>
             <c:forEach items="${grapes}" var="grape">
                 <tr>
+                    <td><c:out value="${grape.id}"/></td>
                     <td><c:out value="${grape.name}"/></td>
                     <td align="right">
                         <my:a href="/admin/grape/view/${grape.id}" class="btn btn-primary">View</my:a>&emsp;

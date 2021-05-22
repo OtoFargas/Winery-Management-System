@@ -10,9 +10,11 @@
 <my:pagetemplate title="Harvests">
 <jsp:attribute name="body">
     <my:a href="/admin/harvest/new" class="btn btn-success">New</my:a>
+    <my:a href="/admin" class="btn btn-danger">Back</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">Harvest year</th>
             <th scope="col">Grape</th>
             <th scope="col">Quantity</th>
@@ -21,6 +23,7 @@
         <tbody>
             <c:forEach items="${harvests}" var="harvest">
                 <tr>
+                    <td><c:out value="${harvest.id}"/></td>
                     <td><c:out value="${harvest.harvestYear}"/></td>
                     <td><c:out value="${harvest.grape.name}"/></td>
                     <td><c:out value="${harvest.quantity}"/></td>

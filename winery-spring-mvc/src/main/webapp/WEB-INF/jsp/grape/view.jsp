@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<my:pagetemplate title="Grape">
+<my:pagetemplate title="Grape ${grape.id}">
 <jsp:attribute name="body">
 
     <my:a href="/admin/grape/edit/${grape.id}" class="btn btn-primary">Edit</my:a>&emsp;

@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<my:pagetemplate title="Harvest">
+<my:pagetemplate title="Harvest ${harvest.id}">
 <jsp:attribute name="body">
     <my:a href="/admin/harvest/remove/${harvest.id}" class="btn btn-danger">Remove</my:a>&emsp;
     <my:a href="/admin/harvest/list" class="btn btn-danger">Back</my:a>&emsp;
