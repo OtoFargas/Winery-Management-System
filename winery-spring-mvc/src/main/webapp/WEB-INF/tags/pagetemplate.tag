@@ -34,8 +34,8 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <li><my:a href="/winery/admin"><f:message key="navigation.admin"/></my:a></li>
-                    <li><my:a href="https://www.is.muni.cz"><f:message key="navigation.about"/></my:a></li>
+                    <li><my:a href="/admin"><f:message key="navigation.admin"/></my:a></li>
+                    <li><my:a href="/about"><f:message key="navigation.about"/></my:a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
