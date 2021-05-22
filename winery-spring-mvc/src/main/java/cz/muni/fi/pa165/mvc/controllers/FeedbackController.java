@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.mvc.controllers;
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
-import cz.muni.fi.pa165.enums.GrapeColor;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import cz.muni.fi.pa165.facade.WineFacade;
 import org.slf4j.Logger;
