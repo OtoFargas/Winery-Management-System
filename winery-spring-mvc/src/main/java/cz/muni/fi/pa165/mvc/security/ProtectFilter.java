@@ -24,7 +24,7 @@ import java.util.Base64;
  *
  * @author Oto Fargas, taken from example project
  */
-//@WebFilter(urlPatterns = {"/wine/*", "/harvest/*", "/feedback/*", "/user/*"})
+@WebFilter(urlPatterns = {"/admin/*"})
 public class ProtectFilter implements Filter {
 
     private final static Logger log = LoggerFactory.getLogger(ProtectFilter.class);
