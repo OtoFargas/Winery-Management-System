@@ -42,7 +42,7 @@ public class WineCreateDTO {
     private List<Ingredient> ingredients = new ArrayList<>();
 
     private List<Long> harvestIDs;
-
+    
     private Integer wineYear;
 
     public String getName() {

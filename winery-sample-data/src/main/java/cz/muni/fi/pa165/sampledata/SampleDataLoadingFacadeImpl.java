@@ -90,7 +90,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // wines
         wine1 = new Wine();
-        wine1.setName("wine1");
+        wine1.setName("Cabernet Sauvignon");
         wine1.setSold(20);
         wine1.setStocked(30);
         wine1.setColor(WineColor.RED);
@@ -99,7 +99,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine1.setWineYear(2015);
 
         wine2 = new Wine();
-        wine2.setName("wine2");
+        wine2.setName("Pinot Blanc");
         wine2.setSold(10);
         wine2.setStocked(40);
         wine2.setColor(WineColor.DESSERT);
@@ -108,7 +108,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine2.setWineYear(2014);
 
         wine3 = new Wine();
-        wine3.setName("wine3");
+        wine3.setName("Merlot");
         wine3.setSold(15);
         wine3.setStocked(14);
         wine3.setColor(WineColor.WHITE);
@@ -118,7 +118,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // grapes
         grape1 = new Grape();
-        grape1.setName("Test1");
+        grape1.setName("Merlot");
         grape1.setColor(GrapeColor.RED);
         grape1.setQuantity(56);
 
@@ -128,7 +128,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         grape1.setDiseases(diseases);
 
         grape2 = new Grape();
-        grape2.setName("Test2");
+        grape2.setName("Cabernet Sauvignon");
         grape2.setColor(GrapeColor.WHITE);
         grape2.setQuantity(99);
 
@@ -138,7 +138,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         grape2.setDiseases(diseases);
 
         grape3 = new Grape();
-        grape3.setName("Test3");
+        grape3.setName("Riesling");
         grape3.setColor(GrapeColor.WHITE);
         grape3.setQuantity(12);
 
@@ -164,39 +164,39 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // feedbacks
         feedback0 = new Feedback();
-        feedback0.setAuthor("testAuthor2");
-        feedback0.setContent("testContent0");
+        feedback0.setAuthor("Lukas Fudor");
+        feedback0.setContent("Very good wine.");
         feedback0.setDate(new GregorianCalendar(2020, Calendar.AUGUST, 11).getTime());
-        feedback0.setRating(1);
+        feedback0.setRating(10);
 
         feedback1 = new Feedback();
-        feedback1.setAuthor("testAuthor1");
-        feedback1.setContent("testContent1");
+        feedback1.setAuthor("Vlado Visnovsky");
+        feedback1.setContent("Not good.");
         feedback1.setDate(new GregorianCalendar(2020, Calendar.MARCH, 11).getTime());
-        feedback1.setRating(5);
+        feedback1.setRating(1);
 
         feedback2 = new Feedback();
-        feedback2.setAuthor("testAuthor2");
-        feedback2.setContent("testContent2");
+        feedback2.setAuthor("Marko Biocina");
+        feedback2.setContent("Pretty nice taste, the touch of vanilla makes all the difference.");
         feedback2.setDate(new GregorianCalendar(2020, Calendar.APRIL, 20).getTime());
-        feedback2.setRating(3);
+        feedback2.setRating(7);
 
         feedback3 = new Feedback();
-        feedback3.setAuthor("testAuthor3");
-        feedback3.setContent("testContent3");
+        feedback3.setAuthor("Igor Orecic");
+        feedback3.setContent("Excellent wine, one of the best I ever had.");
         feedback3.setDate(new GregorianCalendar(2020, Calendar.DECEMBER, 9).getTime());
-        feedback3.setRating(8);
+        feedback3.setRating(9);
 
         feedback4 = new Feedback();
-        feedback4.setAuthor("testAuthor1");
-        feedback4.setContent("testContent4");
+        feedback4.setAuthor("Jakov Prorokovic");
+        feedback4.setContent("I don't usually like sweet wines, but you can tell this one is special.");
         feedback4.setDate(new GregorianCalendar(2020, Calendar.MARCH, 19).getTime());
         feedback4.setRating(10);
 
         user1 = new User();
-        user1.setFirstName("Oto");
-        user1.setSurname("Fargas");
-        user1.setEmail("oto.fargas@winery.com");
+        user1.setFirstName("admin");
+        user1.setSurname("admin");
+        user1.setEmail("admin.admin@winery.com");
         user1.setAdmin(true);
 
         user2 = new User();
@@ -253,9 +253,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         harvestService.createHarvest(harvest2);
         harvestService.createHarvest(harvest3);
 
+        feedbackService.createFeedback(feedback0);
         feedbackService.createFeedback(feedback1);
         feedbackService.createFeedback(feedback2);
         feedbackService.createFeedback(feedback3);
+        feedbackService.createFeedback(feedback4);
 
         userService.registerUser(user1, "admin");
         userService.registerUser(user2, "tarantula");
