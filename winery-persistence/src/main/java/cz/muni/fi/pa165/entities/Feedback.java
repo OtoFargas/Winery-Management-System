@@ -7,6 +7,7 @@ import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Entity class for feedback
@@ -113,12 +114,7 @@ public class Feedback {
 
     @Override
     public int hashCode() {
-        int result = getAuthor().hashCode();
-        result = 31 * result + getRating().hashCode();
-        result = 31 * result + getContent().hashCode();
-        result = 31 * result + getDate().hashCode();
-        result = 31 * result + getWine().hashCode();
-        return result;
+        return Objects.hash(getAuthor(), getRating(), getContent(), getDate(), getWine());
     }
 
     @Override
