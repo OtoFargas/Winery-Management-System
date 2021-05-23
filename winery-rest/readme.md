@@ -11,7 +11,7 @@ curl -i -X GET "http://localhost:8080/pa165/rest/harvests/list"
 
 
 ## Update one specific harvest
-curl -X PUT -i -H "Content-Type: application/json" --data '{"id":"1","harvestYear":"1000","quality":"LOW","quantity":"90"}' http://localhost:8080/pa165/rest/harvests/update
+curl -X PUT -i -H "Content-Type: application/json" --data '{"id":"1","harvestYear":"1000","quality":"LOW","quantity":"90"}' "http://localhost:8080/pa165/rest/harvests/update"
 
 
 ## Remove one specific harvest
