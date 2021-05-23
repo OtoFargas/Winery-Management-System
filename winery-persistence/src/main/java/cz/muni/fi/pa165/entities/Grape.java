@@ -47,7 +47,7 @@ public class Grape {
     @Enumerated(EnumType.STRING)
     private List<Disease> diseases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grape", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "grape")
     private Set<Harvest> harvests = new HashSet<>();
 
     public Grape() {}

@@ -35,10 +35,10 @@ public class Harvest {
     @Column(nullable = false)
     private Integer quantity;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne()
     private Wine wine;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne()
     private Grape grape;
 
     public Harvest() {}

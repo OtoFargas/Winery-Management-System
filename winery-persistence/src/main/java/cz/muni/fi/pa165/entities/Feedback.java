@@ -39,7 +39,7 @@ public class Feedback {
     @Column(nullable = false)
     private Date date;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne()
     private Wine wine;
 
     public Feedback() {
