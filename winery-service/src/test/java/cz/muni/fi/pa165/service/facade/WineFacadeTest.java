@@ -164,6 +164,7 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void createWineTest() {
+        when(harvestService.findHarvestById(testHarvest1.getId())).thenReturn(testHarvest1);
         Wine wine = beanMappingService.mapTo(testWineCreateDTO, Wine.class);
         Long id = wineFacade.createWine(testWineCreateDTO);
 

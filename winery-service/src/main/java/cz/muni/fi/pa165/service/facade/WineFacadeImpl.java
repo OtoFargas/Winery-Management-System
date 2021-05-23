@@ -49,9 +49,7 @@ public class WineFacadeImpl implements WineFacade {
             Harvest harvestById = harvestService.findHarvestById(id);
             harvestById.setWine(wine);
             wine.addHarvest(harvestById);
-
         }
-
         return wine.getId();
     }
 
