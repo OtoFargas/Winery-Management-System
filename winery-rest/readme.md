@@ -1,12 +1,12 @@
-## Creates harvest
+## Create harvest
 curl -X POST -i -H "Content-Type: application/json" --data '{"harvestYear":"2020","quality":"LOW","quantity":"20","grapeId":"1"}' http://localhost:8080/pa165/rest/harvests/create
 
 
-## Gets harvest with specified id
+## Get harvest with specified id
 curl -i -X GET "http://localhost:8080/pa165/rest/harvests/1"
 
 
-## Gets list of all harvests
+## Get list of all harvests
 curl -i -X GET "http://localhost:8080/pa165/rest/harvests/list"
 
 
