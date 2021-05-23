@@ -26,10 +26,7 @@ public class MainController {
 
         Map<String,String> resourcesMap = new HashMap<>();
         
-        resourcesMap.put("feedbacks_uri", ApiUris.ROOT_URI_FEEDBACKS);
-        resourcesMap.put("grapes_uri", ApiUris.ROOT_URI_GRAPES);
         resourcesMap.put("harvests_uri", ApiUris.ROOT_URI_HARVESTS);
-        resourcesMap.put("wines_uri", ApiUris.ROOT_URI_WINES);
         
         return Collections.unmodifiableMap(resourcesMap);
     }
