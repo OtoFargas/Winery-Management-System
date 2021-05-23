@@ -151,8 +151,10 @@ public class WineController {
             redirectAttributes.addFlashAttribute("alert_success", "Wine " + wine.getId() + ": \"" + wine.getName()
                                                 + "\" was deleted.");
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Wine " + wine.getId() + ": \"" + wine.getName()
-                                                + "\" cannot be deleted.");
+            Long harvestId = wine.getHarvests().iterator().next().getId();
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape " + wine.getId() + ": \"" + wine.getName()
+                    + "\" cannot be deleted. Delete harvest with ID: " + harvestId + " first.");
+            return "redirect:" + uriBuilder.path("/admin/wine/view/{id}").buildAndExpand(id).encode().toUriString();
         }
         return "redirect:" + uriBuilder.path("/admin/wine/list").toUriString();
     }
