@@ -58,6 +58,8 @@ public class FeedbackDaoTest extends AbstractTestNGSpringContextTests{
         List<Ingredient> ingredients2 = new ArrayList<>(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS));
         testWine1 = createWine(3, 250, ingredients1, "Muskat", WineColor.RED, Taste.SWEET);
         testWine2 = createWine(25, 100, ingredients2, "Orech", WineColor.ROSE, Taste.SEMI_SWEET);
+        testWine1.setWineYear(2013);
+        testWine2.setWineYear(2015);
 
         // Create test feedbacks
         testFeedback1 = createFeedback("Oto Fargas", "Very good wine", new Date(), 7, testWine1);

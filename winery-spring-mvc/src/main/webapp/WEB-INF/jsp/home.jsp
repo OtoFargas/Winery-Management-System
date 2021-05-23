@@ -24,7 +24,7 @@
                     <td><c:out value="${wine.name}"/></td>
                     <td><c:out value="${wine.color}"/></td>
                     <td><c:out value="${wine.taste}"/></td>
-                    <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
+                    <td><c:out value="${wine.wineYear}"/></td>
                     <td><c:out value="${wine.stocked}"/></td>
                     <td align="right">
                         <my:a href="/wine/buy/${wine.id}" class="btn btn-success">Buy Wine</my:a>&emsp;

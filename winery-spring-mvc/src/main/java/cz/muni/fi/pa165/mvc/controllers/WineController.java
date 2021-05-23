@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.HarvestDTO;
-import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.dto.WineCreateDTO;
 import cz.muni.fi.pa165.dto.WineDTO;
 import cz.muni.fi.pa165.enums.Ingredient;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,6 +43,8 @@ public class WineController {
 
     @Autowired
     private HarvestFacade harvestFacade;
+
+
     /**
      * Redirects to ../new page containing the form for the creation
      * of new wine.
@@ -86,6 +86,7 @@ public class WineController {
             return "wine/new";
         }
 
+        formBean.setWineYear(harvestFacade.findHarvestById(formBean.getHarvestIDs().iterator().next()).getHarvestYear());
         Long id = wineFacade.createWine(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Wine " + id + " was created");

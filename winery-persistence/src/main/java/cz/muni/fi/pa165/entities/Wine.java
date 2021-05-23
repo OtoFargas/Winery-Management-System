@@ -33,6 +33,10 @@ public class Wine {
     private String name;
 
     @NotNull
+    @Column(nullable = false)
+    private Integer wineYear;
+
+    @NotNull
     @PositiveOrZero
     @Column(nullable = false)
     private Integer stocked;
@@ -142,6 +146,13 @@ public class Wine {
         this.harvests.add(harvest);
     }
 
+    public Integer getWineYear() {
+        return wineYear;
+    }
+
+    public void setWineYear(Integer wineYear) {
+        this.wineYear = wineYear;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -163,10 +174,14 @@ public class Wine {
         return "Wine{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", wineYear=" + wineYear +
                 ", stocked=" + stocked +
                 ", sold=" + sold +
                 ", color=" + color +
                 ", taste=" + taste +
+                ", ingredients=" + ingredients +
+                ", feedbacks=" + feedbacks +
+                ", harvests=" + harvests +
                 '}';
     }
 }

@@ -43,6 +43,8 @@ public class WineCreateDTO {
 
     private List<Long> harvestIDs;
 
+    private Integer wineYear;
+
     public String getName() {
         return name;
     }
@@ -99,6 +101,14 @@ public class WineCreateDTO {
         this.harvestIDs = harvestIDs;
     }
 
+    public Integer getWineYear() {
+        return wineYear;
+    }
+
+    public void setWineYear(Integer wineYear) {
+        this.wineYear = wineYear;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,6 +132,7 @@ public class WineCreateDTO {
                 ", taste=" + taste +
                 ", ingredients=" + ingredients +
                 ", harvestIDs=" + harvestIDs +
+                ", wineYear=" + wineYear +
                 '}';
     }
 }

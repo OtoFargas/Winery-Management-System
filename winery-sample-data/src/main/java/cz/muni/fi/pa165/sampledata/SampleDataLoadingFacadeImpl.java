@@ -96,6 +96,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine1.setColor(WineColor.RED);
         wine1.setTaste(Taste.SWEET);
         wine1.setIngredients(new ArrayList<>(List.of(Ingredient.OAK, Ingredient.SULFUR, Ingredient.TANNINS)));
+        wine1.setWineYear(2015);
 
         wine2 = new Wine();
         wine2.setName("wine2");
@@ -104,6 +105,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine2.setColor(WineColor.DESSERT);
         wine2.setTaste(Taste.DRY);
         wine2.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.SULFUR)));
+        wine2.setWineYear(2014);
 
         wine3 = new Wine();
         wine3.setName("wine3");
@@ -112,6 +114,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine3.setColor(WineColor.WHITE);
         wine3.setTaste(Taste.SEMI_DRY);
         wine3.setIngredients(new ArrayList<>(List.of(Ingredient.GRAPE_JUICE, Ingredient.TANNINS)));
+        wine3.setWineYear(2014);
 
         // grapes
         grape1 = new Grape();
