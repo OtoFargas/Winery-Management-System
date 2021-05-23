@@ -159,10 +159,12 @@ public class WineFacadeTest extends AbstractTestNGSpringContextTests {
         testWineCreateDTO.setStocked(888);
         testWineCreateDTO.setTaste(Taste.SEMI_SWEET);
         testWineCreateDTO.setStocked(1231);
+        testWineCreateDTO.setHarvestIDs(new ArrayList<>(List.of(21L)));
     }
 
     @Test
     public void createWineTest() {
+        when(harvestService.findHarvestById(testHarvest1.getId())).thenReturn(testHarvest1);
         Wine wine = beanMappingService.mapTo(testWineCreateDTO, Wine.class);
         Long id = wineFacade.createWine(testWineCreateDTO);
 

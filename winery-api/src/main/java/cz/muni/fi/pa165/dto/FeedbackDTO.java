@@ -1,14 +1,19 @@
 package cz.muni.fi.pa165.dto;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * DTO class for Feedback
  *
  * @author Oto Fargas
  */
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class FeedbackDTO {
     private Long id;
     private String author;

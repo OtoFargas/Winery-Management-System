@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -30,6 +31,10 @@ public class Wine {
     @NotEmpty
     @Column(nullable = false, unique = true)
     private String name;
+
+    @NotNull
+    @Column(nullable = false)
+    private Integer wineYear;
 
     @NotNull
     @PositiveOrZero
@@ -57,10 +62,10 @@ public class Wine {
     @Enumerated(EnumType.STRING)
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    @OneToMany(mappedBy = "wine", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "wine", cascade = {CascadeType.REMOVE})
     private Set<Feedback> feedbacks = new HashSet<>();
 
-    @OneToMany(mappedBy = "wine", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "wine")
     private Set<Harvest> harvests = new HashSet<>();
 
     public Wine() {}
@@ -141,6 +146,13 @@ public class Wine {
         this.harvests.add(harvest);
     }
 
+    public Integer getWineYear() {
+        return wineYear;
+    }
+
+    public void setWineYear(Integer wineYear) {
+        this.wineYear = wineYear;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -154,7 +166,7 @@ public class Wine {
 
     @Override
     public int hashCode() {
-        return getName().hashCode();
+        return Objects.hash(getName());
     }
 
     @Override
@@ -162,10 +174,14 @@ public class Wine {
         return "Wine{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", wineYear=" + wineYear +
                 ", stocked=" + stocked +
                 ", sold=" + sold +
                 ", color=" + color +
                 ", taste=" + taste +
+                ", ingredients=" + ingredients +
+                ", feedbacks=" + feedbacks +
+                ", harvests=" + harvests +
                 '}';
     }
 }

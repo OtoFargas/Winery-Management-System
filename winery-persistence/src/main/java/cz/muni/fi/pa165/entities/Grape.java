@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -46,7 +47,7 @@ public class Grape {
     @Enumerated(EnumType.STRING)
     private List<Disease> diseases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grape", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "grape")
     private Set<Harvest> harvests = new HashSet<>();
 
     public Grape() {}
@@ -115,7 +116,7 @@ public class Grape {
 
     @Override
     public int hashCode() {
-        return getName().hashCode();
+        return Objects.hash(getName());
     }
 
     @Override

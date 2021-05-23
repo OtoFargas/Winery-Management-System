@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cz.muni.fi.pa165</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <artifactId>Winery-Management-System</artifactId>
+    </parent>
+
+    <artifactId>Winery-spring-mvc</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>MVC</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>Winery-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>Winery-sample-data</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-api</artifactId>
+            <version>9.0.36</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-spec</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-impl</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.0.8.RELEASE</version>
+        </dependency>
+
+    </dependencies>
+
+    <!--
+      Start tomcat with "mvn cargo:run" and visit http://localhost:8080/pa165/
+    -->
+    <build>
+        <!-- what to do when only "mvn" is run -->
+        <defaultGoal>cargo:run</defaultGoal>
+        <!-- name of the produced war -->
+        <finalName>pa165</finalName>
+        <plugins>
+            <!--  embedded Tomcat -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

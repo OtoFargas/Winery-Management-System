@@ -145,6 +145,22 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void testAddDisease() {
+        when(grapeDao.findById(1L)).thenReturn(grape1);
+        // add a disease
+        grapeService.addDisease(grape1, Disease.POWDERY_MILDEW);
+        List<Disease> diseases = grapeDao.findById(1L).getDiseases();
+        assertThat(diseases).contains(Disease.POWDERY_MILDEW);
+        verify(grapeDao, times(1)).update(grape1);
+    }
+
+    @Test
+    public void testAddExistingDisease() {
+        assertThatThrownBy(() -> grapeService.addDisease(grape1, Disease.GREY_MOLD))
+                .isInstanceOf(WineryServiceException.class);
+    }
+
+    @Test
     public void testCureDisease() {
         when(grapeDao.findById(1L)).thenReturn(grape1);
         // cure first disease
@@ -177,6 +193,15 @@ public class GrapeServiceTest extends AbstractTestNGSpringContextTests {
         grapeService.cureAllDiseases(grape2);
         List<Disease> diseases = grapeDao.findById(2L).getDiseases();
         assertThat(diseases).isEmpty();
+        verify(grapeDao, times(1)).update(grape2);
+    }
+
+    @Test
+    public void testChangeQuantity() {
+        when(grapeDao.findById(2L)).thenReturn(grape2);
+        grapeService.changeQuantity(grape2, 17);
+        Integer quantity = grapeDao.findById(2L).getQuantity();
+        assertThat(quantity).isEqualTo(17);
         verify(grapeDao, times(1)).update(grape2);
     }
 }

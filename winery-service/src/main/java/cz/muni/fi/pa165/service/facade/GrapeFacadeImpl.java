@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.service.facade;
 
 import cz.muni.fi.pa165.dto.GrapeCreateDTO;
-import cz.muni.fi.pa165.dto.GrapeCureDTO;
+import cz.muni.fi.pa165.dto.GrapeChangeDTO;
 import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.entities.Grape;
 import cz.muni.fi.pa165.enums.GrapeColor;
@@ -84,14 +84,26 @@ public class GrapeFacadeImpl implements GrapeFacade {
     }
 
     @Override
-    public void cureDisease(GrapeCureDTO grapeCureDTO) {
-        Grape grape = grapeService.findGrapeById(grapeCureDTO.getId());
-        grapeService.cureDisease(grape, grapeCureDTO.getDisease());
+    public void addDisease(GrapeChangeDTO grapeChangeDTO) {
+        Grape grape = grapeService.findGrapeById(grapeChangeDTO.getId());
+        grapeService.addDisease(grape, grapeChangeDTO.getDisease());
+    }
+
+    @Override
+    public void cureDisease(GrapeChangeDTO grapeChangeDTO) {
+        Grape grape = grapeService.findGrapeById(grapeChangeDTO.getId());
+        grapeService.cureDisease(grape, grapeChangeDTO.getDisease());
     }
 
     @Override
     public void cureAllDiseases(Long grapeID) {
         Grape grape = grapeService.findGrapeById(grapeID);
         grapeService.cureAllDiseases(grape);
+    }
+
+    @Override
+    public void changeQuantity(GrapeChangeDTO grapeChangeDTO) {
+        Grape grape = grapeService.findGrapeById(grapeChangeDTO.getId());
+        grapeService.changeQuantity(grape, grapeChangeDTO.getQuantity());
     }
 }

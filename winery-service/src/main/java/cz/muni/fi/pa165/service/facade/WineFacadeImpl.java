@@ -44,6 +44,12 @@ public class WineFacadeImpl implements WineFacade {
     public Long createWine(WineCreateDTO wineCreateDTO) {
         Wine wine = beanMappingService.mapTo(wineCreateDTO, Wine.class);
         wineService.createWine(wine);
+
+        for (Long id : wineCreateDTO.getHarvestIDs()) {
+            Harvest harvestById = harvestService.findHarvestById(id);
+            harvestById.setWine(wine);
+            wine.addHarvest(harvestById);
+        }
         return wine.getId();
     }
 

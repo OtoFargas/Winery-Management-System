@@ -63,9 +63,9 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         grape1.setColor(GrapeColor.RED);
         harvest1.setGrape(grape1);
         grape1.addHarvest(harvest1);
+
+        em.persist(harvest1);
         em.persist(grape1);
-
-
 
         grape2 = new Grape();
         grape2.setName("Cabernet Sauvignon");
@@ -74,6 +74,7 @@ public class GrapeDaoTest extends AbstractTestNGSpringContextTests {
         harvest2.setGrape(grape2);
         grape2.addHarvest(harvest2);
         em.persist(grape2);
+        em.persist(harvest2);
     }
 
     @Test

@@ -108,6 +108,13 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w4.setIngredients(w4IngredientList);
         w5.setIngredients(w5IngredientList);
 
+        w1.setWineYear(2015);
+        w2.setWineYear(2016);
+        w3.setWineYear(2017);
+        w4.setWineYear(2018);
+        w5.setWineYear(2019);
+
+        System.out.println(w1);
         em.persist(w1);
         em.persist(w2);
         em.persist(w3);
@@ -123,6 +130,7 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         w.setSold(84);
         w.setColor(WineColor.DESSERT);
         w.setTaste(Taste.SEMI_SWEET);
+        w.setWineYear(2012);
         List<Ingredient> wIngredientList = new ArrayList<>();
         wIngredientList.add(Ingredient.POTASSIUM);
         wIngredientList.add(Ingredient.SUGAR);
@@ -177,6 +185,7 @@ public class WineDaoTest extends AbstractTestNGSpringContextTests {
         newWine.setName("Riesling");
         newWine.setStocked(86);
         newWine.setSold(69);
+        newWine.setWineYear(2013);
         newWine.setColor(WineColor.DESSERT);
         newWine.setTaste(Taste.SEMI_SWEET);
         List<Ingredient> newWineIngredientList = new ArrayList<>();
