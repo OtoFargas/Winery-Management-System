@@ -1,14 +1,10 @@
 package cz.muni.fi.pa165.service.facade;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import javax.inject.Inject;
-
 import cz.muni.fi.pa165.dto.HarvestCreateDTO;
 import cz.muni.fi.pa165.service.GrapeService;
-import cz.muni.fi.pa165.service.WineService;
 import org.springframework.stereotype.Service;
 
 import cz.muni.fi.pa165.dto.HarvestDTO;
@@ -26,16 +22,14 @@ import cz.muni.fi.pa165.service.HarvestService;
 public class HarvestFacadeImpl implements HarvestFacade {
 
     private final HarvestService harvestService;
-    private final WineService wineService;
+
     private final GrapeService grapeService;
 
     private final BeanMappingService beanMappingService;
 
     @Inject
-    public HarvestFacadeImpl(HarvestService harvestService, WineService wineService,
-                             GrapeService grapeService, BeanMappingService beanMappingService) {
+    public HarvestFacadeImpl(HarvestService harvestService, GrapeService grapeService, BeanMappingService beanMappingService) {
         this.harvestService = harvestService;
-        this.wineService = wineService;
         this.grapeService = grapeService;
         this.beanMappingService = beanMappingService;
     }
@@ -43,7 +37,6 @@ public class HarvestFacadeImpl implements HarvestFacade {
     @Override
     public Long createHarvest(HarvestCreateDTO harvestCreateDTO) {
         Harvest harvest = beanMappingService.mapTo(harvestCreateDTO, Harvest.class);
-        harvest.setWine(wineService.findWineById(harvestCreateDTO.getWineId()));
         harvest.setGrape(grapeService.findGrapeById(harvestCreateDTO.getGrapeId()));
         harvestService.createHarvest(harvest);
         return harvest.getId();
@@ -76,6 +69,4 @@ public class HarvestFacadeImpl implements HarvestFacade {
     public void removeHarvest(Long id) {
         harvestService.removeHarvest(harvestService.findHarvestById(id));
     }
-
-    
 }

@@ -9,12 +9,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * DTO class for Wine entity.
  *
  * @author Lukáš Fudor
  */
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class WineDTO {
 
     private Long id;
@@ -23,6 +29,7 @@ public class WineDTO {
     private Integer sold;
     private WineColor color;
     private Taste taste;
+    private Integer wineYear;
 
     private List<Ingredient> ingredients = new ArrayList<>();
     private Set<FeedbackDTO> feedbacks = new HashSet<>();
@@ -100,6 +107,14 @@ public class WineDTO {
         this.harvests = harvests;
     }
 
+    public Integer getWineYear() {
+        return wineYear;
+    }
+
+    public void setWineYear(Integer wineYear) {
+        this.wineYear = wineYear;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -116,12 +131,16 @@ public class WineDTO {
     @Override
     public String toString() {
         return "WineDTO{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", stocked=" + stocked +
-                    ", sold=" + sold +
-                    ", color=" + color +
-                    ", taste=" + taste +
-                    '}';
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", stocked=" + stocked +
+                ", sold=" + sold +
+                ", color=" + color +
+                ", taste=" + taste +
+                ", wineYear=" + wineYear +
+                ", ingredients=" + ingredients +
+                ", feedbacks=" + feedbacks +
+                ", harvests=" + harvests +
+                '}';
     }
 }

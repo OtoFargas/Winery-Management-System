@@ -1,10 +1,18 @@
 package cz.muni.fi.pa165.dto;
 
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import cz.muni.fi.pa165.enums.Quality;
 
 /**
  * @author Vladimir Visnovsky
  */
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class HarvestDTO {
 
     private Long id;
@@ -80,9 +88,7 @@ public class HarvestDTO {
 
     @Override
     public int hashCode() {
-        int result = getHarvestYear().hashCode();
-        result = 31 * result + getGrape().hashCode();
-        return result;
+        return Objects.hash(getHarvestYear(), getGrape());
     }
 
     @Override

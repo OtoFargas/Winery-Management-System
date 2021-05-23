@@ -2,6 +2,8 @@ package cz.muni.fi.pa165.entities;
 
 import cz.muni.fi.pa165.enums.Quality;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -33,10 +35,10 @@ public class Harvest {
     @Column(nullable = false)
     private Integer quantity;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     private Wine wine;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     private Grape grape;
 
     public Harvest() {}
@@ -106,9 +108,7 @@ public class Harvest {
 
     @Override
     public int hashCode() {
-        int result = getHarvestYear().hashCode();
-        result = 31 * result + getGrape().hashCode();
-        return result;
+        return Objects.hash(getHarvestYear(), getGrape());
     }
 
     @Override

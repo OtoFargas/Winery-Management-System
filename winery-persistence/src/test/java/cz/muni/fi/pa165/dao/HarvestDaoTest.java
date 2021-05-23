@@ -99,6 +99,10 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h4.setGrape(g2);
         h5.setGrape(g3);
 
+        em.persist(g1);
+        em.persist(g2);
+        em.persist(g3);
+
         em.persist(h1);
         em.persist(h2);
         em.persist(h3);
@@ -112,12 +116,6 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h.setHarvestYear(2013);
         h.setQuantity(350);
         h.setQuality(Quality.LOW);
-        Grape g = new Grape();
-        g.setName("CreateTestGrape");
-        g.setQuantity(150);
-        g.setDiseases(new ArrayList<>());
-        g.setColor(GrapeColor.RED);
-        h.setGrape(g);
         harvestDao.create(h);
 
         List<Harvest> harvestList = em.createQuery("select h from Harvest h", Harvest.class).getResultList();

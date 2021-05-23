@@ -41,6 +41,10 @@ public class WineCreateDTO {
     @NotNull
     private List<Ingredient> ingredients = new ArrayList<>();
 
+    private List<Long> harvestIDs;
+    
+    private Integer wineYear;
+
     public String getName() {
         return name;
     }
@@ -89,6 +93,22 @@ public class WineCreateDTO {
         this.ingredients = ingredients;
     }
 
+    public List<Long> getHarvestIDs() {
+        return harvestIDs;
+    }
+
+    public void setHarvestIDs(List<Long> harvestIDs) {
+        this.harvestIDs = harvestIDs;
+    }
+
+    public Integer getWineYear() {
+        return wineYear;
+    }
+
+    public void setWineYear(Integer wineYear) {
+        this.wineYear = wineYear;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,12 +124,15 @@ public class WineCreateDTO {
 
     @Override
     public String toString() {
-        return "WineDTO{" +
-                ", name='" + name + '\'' +
+        return "WineCreateDTO{" +
+                "name='" + name + '\'' +
                 ", stocked=" + stocked +
                 ", sold=" + sold +
                 ", color=" + color +
                 ", taste=" + taste +
+                ", ingredients=" + ingredients +
+                ", harvestIDs=" + harvestIDs +
+                ", wineYear=" + wineYear +
                 '}';
     }
 }

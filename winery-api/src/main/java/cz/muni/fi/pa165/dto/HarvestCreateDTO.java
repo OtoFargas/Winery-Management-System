@@ -1,9 +1,8 @@
 package cz.muni.fi.pa165.dto;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-
 import cz.muni.fi.pa165.enums.Quality;
-
 import java.util.Objects;
 
 /**
@@ -11,14 +10,15 @@ import java.util.Objects;
  */
 public class HarvestCreateDTO {
 
+    @NotNull
     private Integer harvestYear;
 
+    @NotNull
     private Quality quality;
 
+    @NotNull
     @PositiveOrZero
     private Integer quantity;
-
-    private Long wineId;
 
     private Long grapeId;
 
@@ -44,14 +44,6 @@ public class HarvestCreateDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Long getWineId() {
-        return wineId;
-    }
-
-    public void setWineId(Long wineId) {
-        this.wineId = wineId;
     }
 
     public Long getGrapeId() {
@@ -81,7 +73,6 @@ public class HarvestCreateDTO {
                 "harvestYear=" + harvestYear +
                 ", quality=" + quality +
                 ", quantity=" + quantity +
-                ", wineId=" + wineId +
                 ", grapeId=" + grapeId +
                 '}';
     }

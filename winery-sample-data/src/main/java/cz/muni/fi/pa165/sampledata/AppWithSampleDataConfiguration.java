@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.io.IOException;
 
@@ -19,16 +23,14 @@ import java.io.IOException;
 @ComponentScan(basePackageClasses = {SampleDataLoadingFacadeImpl.class})
 public class AppWithSampleDataConfiguration {
 
+    final static Logger log = LoggerFactory.getLogger(AppWithSampleDataConfiguration.class);
 
-    private final SampleDataLoadingFacade sampleDataLoadingFacade;
-
-    @Inject
-    public AppWithSampleDataConfiguration(SampleDataLoadingFacade sampleDataLoadingFacade) {
-        this.sampleDataLoadingFacade = sampleDataLoadingFacade;
-    }
+    @Autowired
+    SampleDataLoadingFacade sampleDataLoadingFacade;
 
     @PostConstruct
     public void dataLoading() throws IOException {
+        log.debug("dataLoading()");
         sampleDataLoadingFacade.loadData();
     }
 }
