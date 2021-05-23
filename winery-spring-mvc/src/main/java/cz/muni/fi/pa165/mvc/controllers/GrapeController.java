@@ -177,8 +177,9 @@ public class GrapeController {
             redirectAttributes.addFlashAttribute("alert_success", "Grape " + grape.getId() + ": \"" + grape.getName()
                                                 + "\" was deleted.");
         } catch (Exception ex) {
+            Long harvestId = grape.getHarvests().iterator().next().getId();
             redirectAttributes.addFlashAttribute("alert_danger", "Grape " + grape.getId() + ": \"" + grape.getName()
-                                                + "\" cannot be deleted.");
+                                                + "\" cannot be deleted. Delete harvest with ID: " + harvestId + " first.");
             return "redirect:" + uriBuilder.path("/admin/grape/view/{id}").buildAndExpand(id).encode().toUriString();
         }
         return "redirect:" + uriBuilder.path("/admin/grape/list").toUriString();
