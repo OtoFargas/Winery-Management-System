@@ -26,7 +26,7 @@ public class FeedbackCreateDTO {
     private Integer rating;
 
     @NotEmpty
-    @Size(min = 3, max = 255)
+    @Size(min = 3, max = 200)
     private String content;
 
     @NotNull
