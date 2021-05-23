@@ -116,12 +116,6 @@ public class HarvestDaoTest extends AbstractTestNGSpringContextTests {
         h.setHarvestYear(2013);
         h.setQuantity(350);
         h.setQuality(Quality.LOW);
-//        Grape g = new Grape();
-//        g.setName("CreateTestGrape");
-//        g.setQuantity(150);
-//        g.setDiseases(new ArrayList<>());
-//        g.setColor(GrapeColor.RED);
-//        h.setGrape(g);
         harvestDao.create(h);
 
         List<Harvest> harvestList = em.createQuery("select h from Harvest h", Harvest.class).getResultList();
