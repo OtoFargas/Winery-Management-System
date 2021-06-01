@@ -7,7 +7,8 @@ package cz.muni.fi.pa165.dto;
  */
 public class UserAuthenticateDTO {
     private Long id;
-    private String passwordHash;
+    private String password;
+    private String email;
 
     public Long getId() {
         return id;
@@ -17,11 +18,28 @@ public class UserAuthenticateDTO {
         this.id = id;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAuthenticateDTO{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
