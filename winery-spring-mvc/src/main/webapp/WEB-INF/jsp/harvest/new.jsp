@@ -53,7 +53,8 @@
             </div>
         </div>
 
-    <button class="btn btn-success" type="submit">Create</button>
+    <button class="btn btn-success" type="submit">Create</button>&emsp;
+    <my:a href="/admin/harvest/list" class="btn btn-danger">Back</my:a>
     </form:form>
 </jsp:attribute>
 </my:pagetemplate>

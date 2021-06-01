@@ -84,7 +84,8 @@
             </div>
         </div>
 
-        <button class="btn btn-success" type="submit">Create wine</button>
+        <button class="btn btn-success" type="submit">Create wine</button>&emsp;
+        <my:a href="/admin/wine/list" class="btn btn-danger">Back</my:a>
     </form:form>
 </jsp:attribute>
 </my:pagetemplate>
