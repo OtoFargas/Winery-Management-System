@@ -33,12 +33,13 @@
                action="${pageContext.request.contextPath}/wine/buyAmount/${wine.id}" modelAttribute="wineBuy">
          <div class="form-group">
              <form:label path="amount" cssClass="col-sm-2 control-label">Enter desired amount:</form:label>
-             <div class="col-sm-10">
+             <div class="col-sm-2">
                  <form:input path="amount" cssClass="form-control"/>
                  <form:errors path="amount" cssClass="help-block"/>
              </div>
+             <button class="btn btn-success" type="submit">Buy</button>
          </div>
-        <button class="btn btn-success" type="submit">Buy</button>
+
         <my:a href="/" class="btn btn-danger">Back</my:a>&emsp;
     </form:form>
 </jsp:attribute>

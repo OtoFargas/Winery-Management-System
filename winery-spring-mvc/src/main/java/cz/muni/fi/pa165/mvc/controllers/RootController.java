@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.mvc.controllers;
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
+import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,14 +176,25 @@ public class RootController {
                 model.addAttribute(fe.getField() + "_error", true);
                 log.trace("FieldError: {}", fe);
             }
-            redirectAttributes.addFlashAttribute("alert_danger", wineName + "could not have been sold.");
-            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+            redirectAttributes.addFlashAttribute("alert_danger", wineName + " could not have been sold.");
+            return "redirect:" + uriBuilder.path("/wine/buy/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
-        wineFacade.sellWine(formBean);
+        try {
+            wineFacade.sellWine(formBean);
+        } catch (WineryServiceException e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "No sufficient amount of stocked wine.");
+            return "redirect:" + uriBuilder.path("/wine/buy/{id}").buildAndExpand(id).encode().toUriString();
+        }
 
-        redirectAttributes.addFlashAttribute("alert_success", "Congratulations, you bought "
-                                            + formBean.getAmount() + " of " + wineName + ".");
+        StringBuilder message = new StringBuilder();
+        message.append("Congratulations, you bought ");
+        message.append(formBean.getAmount()).append(" bottle");
+        if (formBean.getAmount() > 1)
+            message.append("s");
+        message.append(" of ").append(wineName).append(".");
+
+        redirectAttributes.addFlashAttribute("alert_success", message.toString());
         return "redirect:" + uriBuilder.path("/wine/buy/{id}").buildAndExpand(id).encode().toUriString();
     }
 
