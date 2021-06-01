@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.FeedbackDTO;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
-import cz.muni.fi.pa165.facade.WineFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
-
 
 /**
  * SpringMVC controller for feedback entities
@@ -28,9 +26,6 @@ public class FeedbackController {
 
     @Autowired
     private FeedbackFacade feedbackFacade;
-
-    @Autowired
-    private WineFacade wineFacade;
 
     /**
      * Redirects to ../view, view page of the feedback.
