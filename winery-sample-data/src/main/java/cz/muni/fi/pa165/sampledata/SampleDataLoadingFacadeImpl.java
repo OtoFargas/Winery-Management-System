@@ -71,6 +71,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Feedback feedback3;
     private Feedback feedback4;
 
+    private User user0;
     private User user1;
     private User user2;
     private User user3;
@@ -193,10 +194,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         feedback4.setDate(new GregorianCalendar(2020, Calendar.MARCH, 19).getTime());
         feedback4.setRating(10);
 
+        user0 = new User();
+        user0.setFirstName("user");
+        user0.setSurname("user");
+        user0.setEmail("user");
+        user0.setAdmin(false);
+
         user1 = new User();
         user1.setFirstName("admin");
         user1.setSurname("admin");
-        user1.setEmail("admin.admin@winery.com");
+        user1.setEmail("admin");
         user1.setAdmin(true);
 
         user2 = new User();
@@ -259,6 +266,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         feedbackService.createFeedback(feedback3);
         feedbackService.createFeedback(feedback4);
 
+        userService.registerUser(user0, "user");
         userService.registerUser(user1, "admin");
         userService.registerUser(user2, "tarantula");
         userService.registerUser(user3, "1234");
