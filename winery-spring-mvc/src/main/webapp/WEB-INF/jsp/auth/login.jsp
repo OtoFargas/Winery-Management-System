@@ -62,7 +62,7 @@
         </c:if>
 
         <div class="form-floating">
-            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input name="email" type="text" class="form-control" id="floatingInput" placeholder="name@example.com" required>
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
