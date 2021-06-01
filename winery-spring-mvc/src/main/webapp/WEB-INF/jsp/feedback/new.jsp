@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-group">
-            <form:label path="date" cssClass="col-sm-2 control-label">Date</form:label>
+            <form:label path="date" cssClass="col-sm-2 control-label">Date (dd.mm.yyyy)</form:label>
             <div class="col-sm-10">
                 <form:input path="date" cssClass="form-control"/>
                 <form:errors path="date" cssClass="help-block"/>
