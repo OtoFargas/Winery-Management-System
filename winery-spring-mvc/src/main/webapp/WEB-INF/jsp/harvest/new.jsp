@@ -15,7 +15,7 @@
 
         <div class="form-group">
             <form:label path="harvestYear" cssClass="col-sm-2 control-label">Harvest year</form:label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <form:input path="harvestYear" cssClass="form-control"/>
                 <form:errors path="harvestYear" cssClass="help-block"/>
             </div>
@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <form:label path="grapeId" cssClass="col-sm-2 control-label">Grape</form:label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <form:select path="grapeId" cssClass="form-control">
                     <c:forEach items="${grapes}" var="grape">
                         <form:option value="${grape.id}">${grape.name}</form:option>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <form:label path="quality" cssClass="col-sm-2 control-label">Quality</form:label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <form:select path="quality" cssClass="form-control">
                     <form:option value="LOW">LOW</form:option>
                     <form:option value="MEDIUM">MEDIUM</form:option>
@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <form:label path="quantity" cssClass="col-sm-2 control-label">Quantity</form:label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <form:input path="quantity" cssClass="form-control"/>
                 <form:errors path="quantity" cssClass="help-block"/>
             </div>
