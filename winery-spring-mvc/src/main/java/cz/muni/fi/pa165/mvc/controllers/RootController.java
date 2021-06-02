@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.mvc.controllers;
 
 import cz.muni.fi.pa165.dto.FeedbackCreateDTO;
 import cz.muni.fi.pa165.dto.FeedbackDTO;
+import cz.muni.fi.pa165.dto.UserDTO;
 import cz.muni.fi.pa165.dto.WineBuyDTO;
 import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import cz.muni.fi.pa165.facade.FeedbackFacade;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Set;
 
@@ -115,9 +118,14 @@ public class RootController {
     @PostMapping("/feedback/create/{id}")
     public String addFeedback(@Valid @ModelAttribute("feedbackCreate") FeedbackCreateDTO formBean, BindingResult bindingResult,
                                  Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder,
-                              @PathVariable long id) {
+                              @PathVariable long id, HttpSession session) {
 
         log.debug("create(formBean={})", formBean);
+
+        UserDTO user = (UserDTO) session.getAttribute("authenticatedUser");
+        formBean.setWineId(id);
+        formBean.setAuthor(user.getEmail());
+        formBean.setDate(new java.util.Date());
 
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
@@ -127,12 +135,11 @@ public class RootController {
                 model.addAttribute(fe.getField() + "_error", true);
                 log.trace("FieldError: {}", fe);
             }
-            
+
             model.addAttribute("wine", wineFacade.findWineById(id));
             return "feedback/new";
         }
 
-        formBean.setWineId(id);
         String wineName = wineFacade.findWineById(id).getName();
         feedbackFacade.createFeedback(formBean);
 

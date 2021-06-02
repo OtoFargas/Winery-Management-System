@@ -14,22 +14,6 @@
            modelAttribute="feedbackCreate" cssClass="form-horizontal">
 
         <div class="form-group">
-            <form:label path="author" cssClass="col-sm-2 control-label">Author</form:label>
-            <div class="col-sm-6">
-                <form:input path="author" cssClass="form-control"/>
-                <form:errors path="author" cssClass="help-block"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <form:label path="date" cssClass="col-sm-2 control-label">Date (dd.mm.yyyy)</form:label>
-            <div class="col-sm-6">
-                <form:input path="date" cssClass="form-control"/>
-                <form:errors path="date" cssClass="help-block"/>
-            </div>
-        </div>
-
-        <div class="form-group">
             <form:label path="rating" cssClass="col-sm-2 control-label">Rating</form:label>
             <div class="col-sm-6">
                 <form:select path="rating" cssClass="form-control">

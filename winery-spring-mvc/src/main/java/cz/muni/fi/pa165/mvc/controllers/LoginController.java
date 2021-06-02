@@ -56,6 +56,8 @@ public class LoginController {
             return "redirect:/auth/login";
         }
 
+
+        
         session.setAttribute("authenticatedUser", userDTO);
         return "redirect:/";
     }
