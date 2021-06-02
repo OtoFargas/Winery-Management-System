@@ -127,6 +127,8 @@ public class RootController {
                 model.addAttribute(fe.getField() + "_error", true);
                 log.trace("FieldError: {}", fe);
             }
+            
+            model.addAttribute("wine", wineFacade.findWineById(id));
             return "feedback/new";
         }
 
