@@ -56,10 +56,10 @@ public class LoginController {
             return "redirect:/auth/login";
         }
 
-
+        userDTO.setAdmin(userAuthDTO.getUserName().equals("admin"));
         
         session.setAttribute("authenticatedUser", userDTO);
-        return "redirect:/";
+        return userDTO.isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
     @GetMapping(value = "/logout")

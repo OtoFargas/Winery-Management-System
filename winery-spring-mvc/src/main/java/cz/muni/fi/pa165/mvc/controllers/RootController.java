@@ -53,9 +53,15 @@ public class RootController {
      * @return      page name
      */
     @GetMapping("/")
-    public String admin(Model model) {
+    public String admin(Model model, HttpSession session) {
         model.addAttribute("wines", wineFacade.findAllWines());
-        return "home";
+
+        UserDTO user = (UserDTO) session.getAttribute("authenticatedUser");
+        if (user == null) {
+            return "home";
+        }
+
+        return user.isAdmin() ? "redirect:/admin" : "home";
     }
 
     /**
