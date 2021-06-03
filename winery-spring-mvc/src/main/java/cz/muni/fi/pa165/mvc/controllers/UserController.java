@@ -184,7 +184,7 @@ public class UserController {
         try {
             wineFacade.sellWine(formBean);
         } catch (WineryServiceException e) {
-            redirectAttributes.addFlashAttribute("alert_danger", "No sufficient amount of stocked wine.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Not sufficient amount of stocked wine.");
             return "redirect:" + uriBuilder.path("/user/wine/buy/{id}").buildAndExpand(id).encode().toUriString();
         }
 
