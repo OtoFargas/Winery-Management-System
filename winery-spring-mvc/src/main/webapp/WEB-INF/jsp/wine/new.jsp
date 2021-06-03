@@ -59,7 +59,7 @@
         <div class="form-group" >
             <form:label path="stocked" cssClass="col-sm-2 control-label">Stocked</form:label>
             <div class="col-sm-6">
-                <form:input path="stocked" cssClass="form-control"/>
+                <form:input path="stocked" cssClass="form-control" form:type="number"/>
                 <form:errors path="stocked" cssClass="help-block"/>
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="form-group" >
             <form:label path="sold" cssClass="col-sm-2 control-label">Sold</form:label>
             <div class="col-sm-6">
-                <form:input path="sold" cssClass="form-control"/>
+                <form:input path="sold" cssClass="form-control" form:type="number"/>
                 <form:errors path="sold" cssClass="help-block"/>
             </div>
         </div>

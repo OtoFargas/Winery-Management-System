@@ -34,7 +34,7 @@
          <div class="form-group">
              <form:label path="amount" cssClass="col-sm-2 control-label">Enter desired amount:</form:label>
              <div class="col-sm-2">
-                 <form:input path="amount" cssClass="form-control"/>
+                 <form:input path="amount" cssClass="form-control" form:type="number"/>
                  <form:errors path="amount" cssClass="help-block"/>
              </div>
              <button class="btn btn-success" type="submit">Buy</button>

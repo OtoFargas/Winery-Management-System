@@ -48,7 +48,7 @@
         <div class="form-group">
             <form:label path="quantity" cssClass="col-sm-2 control-label">Quantity</form:label>
             <div class="col-sm-6">
-                <form:input path="quantity" cssClass="form-control"/>
+                <form:input path="quantity" cssClass="form-control" form:type="number"/>
                 <form:errors path="quantity" cssClass="help-block"/>
             </div>
         </div>

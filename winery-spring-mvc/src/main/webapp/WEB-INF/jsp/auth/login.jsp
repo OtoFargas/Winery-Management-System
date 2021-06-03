@@ -31,10 +31,6 @@
             margin: auto;
         }
 
-        .form-signin .checkbox {
-            font-weight: 400;
-        }
-
         .form-signin .form-floating:focus-within {
             z-index: 2;
         }
@@ -55,7 +51,7 @@
 <body class="text-center">
 <main class="form-signin">
     <form method="post" action="${pageContext.request.contextPath}/auth/login">
-        <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
+        <h1 class="h3 mb-3 fw-normal">Winery</h1>
 
         <c:if test="${not empty login_failure}">
             <div class="alert alert-danger" role="alert"><c:out value="${login_failure}"/></div>
@@ -70,7 +66,7 @@
             <label for="floatingPassword">Password</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+        <button class="w-100 btn btn-lg btn-success" type="submit">Log in</button>
     </form>
 </main>
 
