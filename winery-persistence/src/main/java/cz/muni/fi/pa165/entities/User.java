@@ -27,7 +27,7 @@ public class User {
 	
 	@Column(nullable=false,unique=true)
 	@NotNull
-	private String email;
+	private String userName;
 	@NotNull
 	private String FirstName;
 	@NotNull
@@ -51,12 +51,12 @@ public class User {
 		this.passwordHash = passwordHash;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	
@@ -92,19 +92,19 @@ public class User {
 		if (this == o) return true;
 		if (!(o instanceof User)) return false;
 		User user = (User) o;
-		return Objects.equals(getEmail(), user.getEmail());
+		return Objects.equals(getUserName(), user.getUserName());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getEmail());
+		return Objects.hash(getUserName());
 	}
 
 	@Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
                 ", FirstName='" + FirstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", admin=" + admin +

@@ -62,8 +62,8 @@
         </c:if>
 
         <div class="form-floating">
-            <input name="email" type="text" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-            <label for="floatingInput">Email address</label>
+            <input name="userName" type="text" class="form-control" id="floatingInput" placeholder="Username" required>
+            <label for="floatingInput">User name</label>
         </div>
         <div class="form-floating">
             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>

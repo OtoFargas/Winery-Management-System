@@ -197,25 +197,25 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user0 = new User();
         user0.setFirstName("user");
         user0.setSurname("user");
-        user0.setEmail("user");
+        user0.setUserName("user");
         user0.setAdmin(false);
 
         user1 = new User();
         user1.setFirstName("admin");
         user1.setSurname("admin");
-        user1.setEmail("admin");
+        user1.setUserName("admin");
         user1.setAdmin(true);
 
         user2 = new User();
         user2.setFirstName("Vladimir");
         user2.setSurname("Visnovsky");
-        user2.setEmail("vladimir.visnovsky@winery.com");
+        user2.setUserName("vladimir.visnovsky@winery.com");
         user2.setAdmin(false);
 
         user3 = new User();
         user3.setFirstName("Lukas");
         user3.setSurname("Fudor");
-        user3.setEmail("lukas.fudor@winery.com");
+        user3.setUserName("lukas.fudor@winery.com");
         user3.setAdmin(false);
 
         harvest1.setGrape(grape1);

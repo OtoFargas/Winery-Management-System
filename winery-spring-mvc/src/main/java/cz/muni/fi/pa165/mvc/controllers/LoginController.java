@@ -43,10 +43,10 @@ public class LoginController {
             return "auth/login";
         }
 
-        UserDTO userDTO = userFacade.findUserByEmail(userAuthDTO.getEmail());
+        UserDTO userDTO = userFacade.findUserByUserName(userAuthDTO.getUserName());
 
         if (userDTO == null) {
-            redirectAttributes.addFlashAttribute("login_failure", "User with this email does not exist");
+            redirectAttributes.addFlashAttribute("login_failure", "User with this user name does not exist");
             return "redirect:/auth/login";
         }
         userAuthDTO.setId(userDTO.getId());

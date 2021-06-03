@@ -33,7 +33,19 @@ public interface UserService {
 	 */
 	boolean isAdmin(User u);
 
+	/**
+	 * Finds user with given id.
+	 *
+	 * @param userId to be looked for
+	 * @return user with given id
+	 */
 	User findUserById(Long userId);
 
-	User findUserByEmail(String email);
+	/**
+	 * Finds user with given name.
+	 *
+	 * @param userName to be looked for
+	 * @return user with given name
+	 */
+	User findUserByUserName(String userName);
 }

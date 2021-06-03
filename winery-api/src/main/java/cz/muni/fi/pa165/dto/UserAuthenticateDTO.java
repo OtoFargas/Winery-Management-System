@@ -8,7 +8,7 @@ package cz.muni.fi.pa165.dto;
 public class UserAuthenticateDTO {
     private Long id;
     private String password;
-    private String email;
+    private String userName;
 
     public Long getId() {
         return id;
@@ -18,12 +18,12 @@ public class UserAuthenticateDTO {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -39,7 +39,7 @@ public class UserAuthenticateDTO {
         return "UserAuthenticateDTO{" +
                 "id=" + id +
                 ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }

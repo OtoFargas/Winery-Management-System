@@ -63,19 +63,19 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         user1 = new User();
         user1.setFirstName("Oto");
         user1.setSurname("Fargas");
-        user1.setEmail("oto.fargas@winery.com");
+        user1.setUserName("oto.fargas@winery.com");
         user1.setAdmin(true);
 
         user2 = new User();
         user2.setFirstName("Vladimir");
         user2.setSurname("Visnovsky");
-        user2.setEmail("vladimir.visnovsky@winery.com");
+        user2.setUserName("vladimir.visnovsky@winery.com");
         user2.setAdmin(false);
 
         user3 = new User();
         user3.setFirstName("Lukas");
         user3.setSurname("Fudor");
-        user3.setEmail("lukas.fudor@winery.com");
+        user3.setUserName("lukas.fudor@winery.com");
         user3.setAdmin(false);
     }
 

@@ -124,7 +124,7 @@ public class RootController {
 
         UserDTO user = (UserDTO) session.getAttribute("authenticatedUser");
         formBean.setWineId(id);
-        formBean.setAuthor(user.getEmail());
+        formBean.setAuthor(user.getUserName());
         formBean.setDate(new java.util.Date());
 
         if (bindingResult.hasErrors()) {
