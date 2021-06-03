@@ -10,7 +10,7 @@
 <my:pagetemplate title="New feedback">
 <jsp:attribute name="body">
 
-<form:form method="post" action="${pageContext.request.contextPath}/feedback/create/${wine.id}"
+<form:form method="post" action="${pageContext.request.contextPath}/user/feedback/create/${wine.id}"
            modelAttribute="feedbackCreate" cssClass="form-horizontal">
 
         <div class="form-group">
@@ -34,7 +34,7 @@
         </div>
 
     <button class="btn btn-success" type="submit">Create</button>&emsp;
-    <my:a href="/feedback/listByWine/${wine.id}" class="btn btn-danger">Back</my:a>
+    <my:a href="/user/feedback/listByWine/${wine.id}" class="btn btn-danger">Back</my:a>
     </form:form>
 </jsp:attribute>
 </my:pagetemplate>

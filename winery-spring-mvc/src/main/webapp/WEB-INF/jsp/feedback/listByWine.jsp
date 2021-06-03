@@ -26,7 +26,7 @@
             <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
         </tr>
     </table>
-        <my:a href="/feedback/new/${wine.id}" class="btn btn-primary">Add Feedback</my:a>
+        <my:a href="/user/feedback/new/${wine.id}" class="btn btn-primary">Add Feedback</my:a>
 
     <table class="table table-hover">
         <thead>
