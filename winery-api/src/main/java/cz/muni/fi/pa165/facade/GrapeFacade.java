@@ -40,7 +40,7 @@ public interface GrapeFacade {
 
     /**
      * @param name of the grape
-     * @return a list of grapes with the name
+     * @return grape with the given name
      */
     GrapeDTO findGrapeByName(String name);
 
