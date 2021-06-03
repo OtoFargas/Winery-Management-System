@@ -22,6 +22,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/auth")
 public class LoginController {
+
     @Autowired
     private UserFacade userFacade;
 
@@ -36,7 +37,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "login")
-    public String postLogin(Model model, HttpSession session,
+    public String postLogin(HttpSession session,
                             @Valid @ModelAttribute("user") UserAuthenticateDTO userAuthDTO,
                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

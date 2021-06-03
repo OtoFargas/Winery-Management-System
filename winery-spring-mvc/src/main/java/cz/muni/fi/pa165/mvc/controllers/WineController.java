@@ -49,7 +49,7 @@ public class WineController {
      * Redirects to ../new page containing the form for the creation
      * of new wine.
      *
-     * @param model to be displayed
+     * @param model page data
      * @return page name
      */
     @GetMapping("/new")

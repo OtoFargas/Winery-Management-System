@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-    final static Logger log = LoggerFactory.getLogger(AdminController.class);
-
+    
     /**
      * Redirects to ../admin/home page.
      * @return page name

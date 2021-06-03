@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 @RequestMapping("/admin/feedback")
 public class FeedbackController {
+
     final static Logger log = LoggerFactory.getLogger(FeedbackController.class);
 
     @Autowired

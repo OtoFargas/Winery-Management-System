@@ -38,8 +38,6 @@ import java.util.Set;
 @RequestMapping("/")
 public class RootController {
 
-    final static Logger log = LoggerFactory.getLogger(AdminController.class);
-
     @Autowired
     private WineFacade wineFacade;
 

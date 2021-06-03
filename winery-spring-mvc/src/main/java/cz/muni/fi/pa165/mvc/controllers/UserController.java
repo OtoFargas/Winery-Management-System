@@ -54,7 +54,7 @@ public class UserController {
      * @return      page name
      */
     @GetMapping({"/", ""})
-    public String admin(Model model, HttpSession session) {
+    public String admin(Model model) {
         model.addAttribute("wines", wineFacade.findAllWines());
 
         return "home";
@@ -115,6 +115,7 @@ public class UserController {
      * @param model              page data
      * @param redirectAttributes attributes for redirect scenario
      * @param uriBuilder         sets URI components
+     * @param session            to get authenticated user
      * @return                   page name
      */
     @PostMapping("/feedback/create/{id}")
