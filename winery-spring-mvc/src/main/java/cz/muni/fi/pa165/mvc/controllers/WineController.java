@@ -25,6 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * SpringMVC controller for wine entities
@@ -86,7 +89,13 @@ public class WineController {
             return "wine/new";
         }
 
-        formBean.setWineYear(harvestFacade.findHarvestById(formBean.getHarvestIDs().iterator().next()).getHarvestYear());
+        try {
+            formBean.setWineYear(harvestFacade.findHarvestById(formBean.getHarvestIDs().iterator().next()).getHarvestYear());
+        } catch (NoSuchElementException e) {
+            redirectAttributes.addFlashAttribute("alert_danger","No harvest selected.");
+            return "redirect:" + uriBuilder.path("/admin/wine/new").encode().toUriString();
+        }
+
         Long id = wineFacade.createWine(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Wine " + id + " was created");
@@ -181,6 +190,16 @@ public class WineController {
     @ModelAttribute("harvests")
     public HarvestDTO[] harvests() {
         log.debug("harvests()");
-        return harvestFacade.findAllHarvests().toArray(new HarvestDTO[0]);
+
+        List<HarvestDTO> availableHarvests = new ArrayList<>();
+        List<HarvestDTO> allHarvests = harvestFacade.findAllHarvests();
+
+        for (HarvestDTO harvest : allHarvests) {
+            if (harvest.getWine() == null) {
+                availableHarvests.add(harvest);
+            }
+        }
+
+        return availableHarvests.toArray(new HarvestDTO[0]);
     }
 }

@@ -239,6 +239,7 @@ public class GrapeController {
             return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
+
         try {
             grapeFacade.cureDisease(formBean);
         } catch (WineryServiceException e) {

@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <form:label path="harvestIDs" cssClass="col-sm-2 control-label">Harvests</form:label>
+            <form:label path="harvestIDs" cssClass="col-sm-2 control-label">Available Harvests</form:label>
             <div class="col-sm-6">
                 <form:select path="harvestIDs" cssClass="form-control">
                     <c:forEach items="${harvests}" var="harvest">
