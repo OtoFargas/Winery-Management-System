@@ -87,7 +87,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // wines
         wine1 = new Wine();
-        wine1.setName("Cabernet Sauvignon");
+        wine1.setName("Airen)");
         wine1.setSold(20);
         wine1.setStocked(30);
         wine1.setColor(WineColor.RED);
@@ -105,7 +105,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine2.setWineYear(2014);
 
         wine3 = new Wine();
-        wine3.setName("Merlot");
+        wine3.setName("Chardonnay");
         wine3.setSold(15);
         wine3.setStocked(14);
         wine3.setColor(WineColor.WHITE);
