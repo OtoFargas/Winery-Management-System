@@ -96,7 +96,13 @@ public class WineController {
             return "redirect:" + uriBuilder.path("/admin/wine/new").encode().toUriString();
         }
 
-        Long id = wineFacade.createWine(formBean);
+        Long id;
+        try {
+            id = wineFacade.createWine(formBean);
+        } catch (Exception exception) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Wine with given name already exists.");
+            return "redirect:" + uriBuilder.path("/admin/wine/new").toUriString();
+        }
 
         redirectAttributes.addFlashAttribute("alert_success", "Wine " + id + " was created");
         return "redirect:" + uriBuilder.path("/admin/wine/list").toUriString();

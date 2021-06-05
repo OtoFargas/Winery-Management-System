@@ -85,7 +85,14 @@ public class GrapeController {
             return "grape/new";
         }
 
-        Long id = grapeFacade.createGrape(formBean);
+        Long id;
+        try {
+            id = grapeFacade.createGrape(formBean);
+        } catch (Exception exception) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape with given name already exists.");
+            return "redirect:" + uriBuilder.path("/admin/grape/new").toUriString();
+        }
+
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was created");
         return "redirect:" + uriBuilder.path("/admin/grape/list").toUriString();
