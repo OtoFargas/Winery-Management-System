@@ -16,7 +16,7 @@
         <div class="form-group">
             <form:label path="harvestYear" cssClass="col-sm-2 control-label">Harvest year</form:label>
             <div class="col-sm-6">
-                <form:input path="harvestYear" cssClass="form-control"/>
+                <form:input path="harvestYear" cssClass="form-control" form:type="number"/>
                 <form:errors path="harvestYear" cssClass="help-block"/>
             </div>
         </div>

@@ -33,11 +33,10 @@
              </div>&emsp;
              <button class="btn btn-primary" type="submit" name="cure">Cure</button>&emsp;
              <button class="btn btn-danger" type="submit" name="add">Add</button>
+             <my:a href="/admin/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>
          </div>
-
     </form:form>
 
-    <my:a href="/admin/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>&emsp;
     <table class="table">
         <tbody>
             <tr>
@@ -51,7 +50,7 @@
                action="${pageContext.request.contextPath}/admin/grape/changeQuantity/${grape.id}" modelAttribute="changeQuantity">
          <div class="form-group">
              <form:label path="quantity" cssClass="col-sm-2 control-label">Enter new quantity:</form:label>
-             <div class="col-sm-4">
+             <div class="col-sm-2">
                  <form:input path="quantity" cssClass="form-control"/>
                  <form:errors path="quantity" cssClass="help-block"/>
              </div>&emsp;
