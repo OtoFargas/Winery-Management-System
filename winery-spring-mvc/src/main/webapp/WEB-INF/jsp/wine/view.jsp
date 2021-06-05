@@ -41,7 +41,7 @@
                 <td>
                     <c:forEach items="${wine.ingredients}" var="ingredient" varStatus="loopStatus">
                         <c:out value="${ingredient}" />
-                        <c:if test="${!loopStatus.last}"> | </c:if>
+                        <c:if test="${!loopStatus.last}">, </c:if>
                     </c:forEach>
                 </td>
             </tr>

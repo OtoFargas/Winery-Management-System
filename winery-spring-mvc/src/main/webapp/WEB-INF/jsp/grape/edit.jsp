@@ -14,7 +14,12 @@
         <tbody>
             <tr>
                 <th>Diseases</th>
-                <td><c:out value="${grape.diseases}"/></td>
+                <td>
+                    <c:forEach items="${grape.diseases}" var="disease" varStatus="loopStatus">
+                        <c:out value="${disease}" />
+                        <c:if test="${!loopStatus.last}">, </c:if>
+                    </c:forEach>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -26,7 +31,7 @@
              <div class="col-sm-4">
                     <form:select path="disease" cssClass="form-control">
                         <c:forEach items="${diseases}" var="disease">
-                            <form:option value="${disease.name()}">${disease}</form:option>
+                            <form:option value="${disease}">${disease.toString()}</form:option>
                         </c:forEach>
                     </form:select>
                  <form:errors path="disease" cssClass="error"/>

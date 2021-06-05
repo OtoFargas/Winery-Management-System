@@ -26,7 +26,7 @@
                 <div class="col-sm-6">
                     <form:select path="color" cssClass="form-control">
                         <c:forEach items="${colors}" var="c">
-                            <form:option value="${c}">${c}</form:option>
+                            <form:option value="${c}">${c.toString()}</form:option>
                         </c:forEach>
                     </form:select>
                     <form:errors path="color" cssClass="error"/>
@@ -46,7 +46,7 @@
                 <div class="col-sm-6">
                     <form:select path="diseases" cssClass="form-control">
                         <c:forEach items="${diseases}" var="c">
-                            <form:option value="${c}">${c}</form:option>
+                            <form:option value="${c.name()}">${c.toString()}</form:option>
                         </c:forEach>
                     </form:select>
                     <form:errors path="diseases" cssClass="error"/>

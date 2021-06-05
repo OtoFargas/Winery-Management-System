@@ -37,7 +37,7 @@
             <td>
                 <c:forEach items="${grape.diseases}" var="disease" varStatus="loopStatus">
                     <c:out value="${disease}" />
-                    <c:if test="${!loopStatus.last}"> | </c:if>
+                    <c:if test="${!loopStatus.last}">, </c:if>
                 </c:forEach>
             </td>
         </tr>
@@ -46,7 +46,7 @@
             <th>Harvests</th>
             <td>
                 <c:forEach items="${grape.harvests}" var="harvest" varStatus="loopStatus">
-                    <c:out value="Harvest: ${harvest.id}, Year: ${harvest.harvestYear}, Quality: ${harvest.quality}, Quantity: ${harvest.quantity}"/>
+                    <c:out value="Harvest: ${harvest.id}, Year: ${harvest.harvestYear}, Quality: ${harvest.quality.toString()}, Quantity: ${harvest.quantity}"/>
                     <c:if test="${!loopStatus.last}"> | </c:if>
                 </c:forEach>
             </td>

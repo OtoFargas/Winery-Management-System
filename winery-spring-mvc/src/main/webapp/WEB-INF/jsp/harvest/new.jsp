@@ -37,9 +37,9 @@
             <form:label path="quality" cssClass="col-sm-2 control-label">Quality</form:label>
             <div class="col-sm-6">
                 <form:select path="quality" cssClass="form-control">
-                    <form:option value="LOW">LOW</form:option>
-                    <form:option value="MEDIUM">MEDIUM</form:option>
-                    <form:option value="HIGH">HIGH</form:option>
+                    <form:option value="LOW">Low</form:option>
+                    <form:option value="MEDIUM">Medium</form:option>
+                    <form:option value="HIGH">High</form:option>
                 </form:select>
                 <form:errors path="quality" cssClass="error"/>
             </div>

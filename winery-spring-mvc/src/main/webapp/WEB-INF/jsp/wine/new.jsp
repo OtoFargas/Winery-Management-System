@@ -25,7 +25,7 @@
             <div class="col-sm-6">
                 <form:select path="color" cssClass="form-control">
                     <c:forEach items="${colors}" var="c">
-                        <form:option value="${c}">${c}</form:option>
+                        <form:option value="${c}">${c.toString()}</form:option>
                     </c:forEach>
                 </form:select>
                 <form:errors path="color" cssClass="error"/>
@@ -37,7 +37,7 @@
             <div class="col-sm-6">
                 <form:select path="taste" cssClass="form-control">
                     <c:forEach items="${taste}" var="t">
-                        <form:option value="${t}">${t}</form:option>
+                        <form:option value="${t}">${t.toString()}</form:option>
                     </c:forEach>
                 </form:select>
                 <form:errors path="taste" cssClass="error"/>
@@ -76,10 +76,10 @@
             <form:label path="ingredients" cssClass="col-sm-2 control-label">Ingredient</form:label>
             <div class="col-sm-6">
                 <form:select path="ingredients" cssClass="form-control">
-                    <c:forEach items="${ingredients}" var="c">
-                        <form:option value="${c}">${c}</form:option>
-                    </c:forEach>
-                </form:select>
+                        <c:forEach items="${ingredients}" var="ingredient">
+                            <form:option value="${ingredient.name()}">${ingredient.toString()}</form:option>
+                        </c:forEach>
+                    </form:select>
                 <form:errors path="ingredients" cssClass="error"/>
             </div>
         </div>
