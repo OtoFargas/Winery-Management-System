@@ -32,7 +32,7 @@
                  <form:errors path="disease" cssClass="error"/>
              </div>&emsp;
              <button class="btn btn-primary" type="submit" name="cure">Cure</button>&emsp;
-             <button class="btn btn-danger" type="submit" name="add">Add</button>
+             <button class="btn btn-danger" type="submit" name="add">Add</button> &emsp;
              <my:a href="/admin/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>
          </div>
     </form:form>
