@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.User;
-import cz.muni.fi.pa165.entities.Wine;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

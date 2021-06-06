@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.enums.GrapeColor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,6 @@ public class GrapeCreateDTO {
     private GrapeColor color;
 
     @NotNull
-    @PositiveOrZero
     private Integer quantity;
 
     @NotNull

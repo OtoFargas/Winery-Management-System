@@ -1,14 +1,7 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.dao.UserDao;
-import cz.muni.fi.pa165.entities.Grape;
-import cz.muni.fi.pa165.entities.Harvest;
 import cz.muni.fi.pa165.entities.User;
-import cz.muni.fi.pa165.entities.Wine;
-import cz.muni.fi.pa165.enums.GrapeColor;
-import cz.muni.fi.pa165.enums.Quality;
-import cz.muni.fi.pa165.enums.Taste;
-import cz.muni.fi.pa165.enums.WineColor;
 import cz.muni.fi.pa165.service.config.ServiceConfiguration;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -21,8 +14,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
