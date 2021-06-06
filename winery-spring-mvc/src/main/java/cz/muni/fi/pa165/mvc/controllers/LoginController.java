@@ -26,6 +26,13 @@ public class LoginController {
     @Autowired
     private UserFacade userFacade;
 
+    /**
+     * GET method for user login.
+     *
+     * @param model   page data
+     * @param session to check authenticatedUser
+     * @return        page name
+     */
     @GetMapping(value = "login")
     public String getLogin(Model model, HttpSession session) {
         if (session.getAttribute("authenticatedUser") != null) {
@@ -36,6 +43,15 @@ public class LoginController {
         return "/auth/login";
     }
 
+    /**
+     * POST method for user login.
+     *
+     * @param session             to set the authenticatedUser
+     * @param userAuthDTO         transfers data from login form
+     * @param bindingResult       -
+     * @param redirectAttributes  attributes for redirect scenario
+     * @return                    page name
+     */
     @PostMapping(value = "login")
     public String postLogin(HttpSession session,
                             @Valid @ModelAttribute("user") UserAuthenticateDTO userAuthDTO,
@@ -63,6 +79,12 @@ public class LoginController {
         return userDTO.isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
+    /**
+     * Logouts the active user (authenticatedUser).
+     *
+     * @param session to check and remove authenticatedUser
+     * @return        page name
+     */
     @GetMapping(value = "/logout")
     public String logout(HttpSession session) {
         if (session.getAttribute("authenticatedUser") == null) {
