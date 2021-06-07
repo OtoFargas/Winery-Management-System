@@ -15,15 +15,15 @@
 
         <div class="form-group">
             <form:label path="harvestYear" cssClass="col-sm-2 control-label">Harvest year</form:label>
-            <div class="col-sm-10">
-                <form:input path="harvestYear" cssClass="form-control"/>
+            <div class="col-sm-6">
+                <form:input path="harvestYear" cssClass="form-control" form:type="number"/>
                 <form:errors path="harvestYear" cssClass="help-block"/>
             </div>
         </div>
 
         <div class="form-group">
             <form:label path="grapeId" cssClass="col-sm-2 control-label">Grape</form:label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <form:select path="grapeId" cssClass="form-control">
                     <c:forEach items="${grapes}" var="grape">
                         <form:option value="${grape.id}">${grape.name}</form:option>
@@ -35,11 +35,11 @@
 
         <div class="form-group">
             <form:label path="quality" cssClass="col-sm-2 control-label">Quality</form:label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <form:select path="quality" cssClass="form-control">
-                    <form:option value="LOW">LOW</form:option>
-                    <form:option value="MEDIUM">MEDIUM</form:option>
-                    <form:option value="HIGH">HIGH</form:option>
+                    <form:option value="LOW">Low</form:option>
+                    <form:option value="MEDIUM">Medium</form:option>
+                    <form:option value="HIGH">High</form:option>
                 </form:select>
                 <form:errors path="quality" cssClass="error"/>
             </div>
@@ -47,13 +47,14 @@
 
         <div class="form-group">
             <form:label path="quantity" cssClass="col-sm-2 control-label">Quantity</form:label>
-            <div class="col-sm-10">
-                <form:input path="quantity" cssClass="form-control"/>
+            <div class="col-sm-6">
+                <form:input path="quantity" cssClass="form-control" form:type="number"/>
                 <form:errors path="quantity" cssClass="help-block"/>
             </div>
         </div>
 
-    <button class="btn btn-success" type="submit">Create</button>
+    <button class="btn btn-success" type="submit">Create</button>&emsp;
+    <my:a href="/admin/harvest/list" class="btn btn-danger">Back</my:a>
     </form:form>
 </jsp:attribute>
 </my:pagetemplate>

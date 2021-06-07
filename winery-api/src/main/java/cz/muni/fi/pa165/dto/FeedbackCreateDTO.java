@@ -17,7 +17,6 @@ import java.util.Objects;
  */
 public class FeedbackCreateDTO {
 
-    @NotEmpty
     @Size(min = 3, max = 50)
     private String author;
 
@@ -29,7 +28,6 @@ public class FeedbackCreateDTO {
     @Size(min = 3, max = 200)
     private String content;
 
-    @NotNull
     @PastOrPresent
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date date;

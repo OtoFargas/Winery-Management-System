@@ -98,8 +98,6 @@ public class HarvestDTO {
                 ", harvestYear=" + harvestYear +
                 ", quality=" + quality +
                 ", quantity=" + quantity +
-                ", wineDTO=" + wine +
-                ", grapeDTO=" + grape +
                 '}';
     }
 }

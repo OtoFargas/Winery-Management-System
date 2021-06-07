@@ -32,9 +32,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <li><my:a href="/admin"><f:message key="navigation.admin"/></my:a></li>
-                    <li><my:a href="/about"><f:message key="navigation.about"/></my:a></li>
+                <li><my:a href="/about"><f:message key="navigation.about"/></my:a></li>
+                <li><my:a href="/auth/logout">Log out</my:a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

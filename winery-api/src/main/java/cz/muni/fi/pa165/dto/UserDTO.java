@@ -10,7 +10,7 @@ import java.util.Objects;
 public class UserDTO {
     private Long id;
     private String passwordHash;
-    private String email;
+    private String userName;
     private String firstName;
     private String surname;
     private boolean admin;
@@ -31,12 +31,12 @@ public class UserDTO {
         this.passwordHash = passwordHash;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -68,12 +68,12 @@ public class UserDTO {
         if (this == o) return true;
         if (!(o instanceof UserDTO)) return false;
         UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(getEmail(), userDTO.getEmail());
+        return Objects.equals(getUserName(), userDTO.getUserName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getEmail());
+        return Objects.hash(getUserName());
     }
 
     @Override
@@ -81,7 +81,7 @@ public class UserDTO {
         return "UserDTO{" +
                 "id=" + id +
                 ", passwordHash='" + passwordHash + '\'' +
-                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", admin=" + admin +

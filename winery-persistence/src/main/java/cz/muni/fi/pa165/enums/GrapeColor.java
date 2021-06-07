@@ -7,5 +7,13 @@ package cz.muni.fi.pa165.enums;
  */
 
 public enum GrapeColor {
-    RED, WHITE
+    RED, WHITE;
+
+    @Override
+    public String toString() {
+        switch (this) {
+            case RED: return "Red";
+            default: return "White";
+        }
+    }
 }

@@ -26,8 +26,8 @@
             <td><c:out value="${wine.harvests.iterator().next().harvestYear}"/></td>
         </tr>
     </table>
-        <my:a href="/feedback/new/${wine.id}" class="btn btn-primary">Add Feedback</my:a>&emsp;
-        <my:a href="/" class="btn btn-danger">Back</my:a>&emsp;
+        <my:a href="/user/feedback/new/${wine.id}" class="btn btn-primary">Add Feedback</my:a>
+
     <table class="table table-hover">
         <thead>
         <tr>
@@ -50,5 +50,6 @@
             </c:forEach>
         </tbody>
     </table>
+    <my:a href="/" class="btn btn-danger">Back</my:a>
 </jsp:attribute>
 </my:pagetemplate>

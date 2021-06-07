@@ -38,15 +38,30 @@
             </tr>
             <tr>
                 <th>Ingredients</th>
-                <td><c:out value="${wine.ingredients}"/></td>
+                <td>
+                    <c:forEach items="${wine.ingredients}" var="ingredient" varStatus="loopStatus">
+                        <c:out value="${ingredient}" />
+                        <c:if test="${!loopStatus.last}">, </c:if>
+                    </c:forEach>
+                </td>
             </tr>
             <tr>
                 <th>Feedbacks</th>
-                <td><c:out value="${wine.feedbacks}"/></td>
+                <td>
+                    <c:forEach items="${wine.feedbacks}" var="feedback" varStatus="loopStatus">
+                        <c:out value="Feedback: ${feedback.id}, Author: ${feedback.author}, Rating: ${feedback.rating}"/>
+                        <c:if test="${!loopStatus.last}"> | </c:if>
+                    </c:forEach>
+                </td>
             </tr>
             <tr>
                 <th>Harvests</th>
-                <td><c:out value="${wine.harvests}"/></td>
+                <td>
+                    <c:forEach items="${wine.harvests}" var="harvest" varStatus="loopStatus">
+                        <c:out value="Harvest: ${harvest.id}, Year: ${harvest.harvestYear}" />
+                        <c:if test="${!loopStatus.last}"> | </c:if>
+                    </c:forEach>
+                </td>
             </tr>
         </tbody>
     </table>

@@ -16,16 +16,14 @@ import cz.muni.fi.pa165.service.GrapeService;
 import cz.muni.fi.pa165.service.HarvestService;
 import cz.muni.fi.pa165.service.UserService;
 import cz.muni.fi.pa165.service.WineService;
-import org.springframework.stereotype.Component;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -71,9 +69,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Feedback feedback3;
     private Feedback feedback4;
 
+    private User user0;
     private User user1;
-    private User user2;
-    private User user3;
 
     @Inject
     public SampleDataLoadingFacadeImpl(FeedbackService feedbackService, WineService wineService, HarvestService harvestService,
@@ -90,7 +87,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // wines
         wine1 = new Wine();
-        wine1.setName("Cabernet Sauvignon");
+        wine1.setName("Airen)");
         wine1.setSold(20);
         wine1.setStocked(30);
         wine1.setColor(WineColor.RED);
@@ -108,7 +105,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         wine2.setWineYear(2014);
 
         wine3 = new Wine();
-        wine3.setName("Merlot");
+        wine3.setName("Chardonnay");
         wine3.setSold(15);
         wine3.setStocked(14);
         wine3.setColor(WineColor.WHITE);
@@ -164,52 +161,46 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // feedbacks
         feedback0 = new Feedback();
-        feedback0.setAuthor("Lukas Fudor");
+        feedback0.setAuthor("tasunke18");
         feedback0.setContent("Very good wine.");
         feedback0.setDate(new GregorianCalendar(2020, Calendar.AUGUST, 11).getTime());
         feedback0.setRating(10);
 
         feedback1 = new Feedback();
-        feedback1.setAuthor("Vlado Visnovsky");
+        feedback1.setAuthor("hereo258");
         feedback1.setContent("Not good.");
         feedback1.setDate(new GregorianCalendar(2020, Calendar.MARCH, 11).getTime());
         feedback1.setRating(1);
 
         feedback2 = new Feedback();
-        feedback2.setAuthor("Marko Biocina");
+        feedback2.setAuthor("rybana83");
         feedback2.setContent("Pretty nice taste, the touch of vanilla makes all the difference.");
         feedback2.setDate(new GregorianCalendar(2020, Calendar.APRIL, 20).getTime());
         feedback2.setRating(7);
 
         feedback3 = new Feedback();
-        feedback3.setAuthor("Igor Orecic");
+        feedback3.setAuthor("lukas1997");
         feedback3.setContent("Excellent wine, one of the best I ever had.");
         feedback3.setDate(new GregorianCalendar(2020, Calendar.DECEMBER, 9).getTime());
         feedback3.setRating(9);
 
         feedback4 = new Feedback();
-        feedback4.setAuthor("Jakov Prorokovic");
+        feedback4.setAuthor("twisterko");
         feedback4.setContent("I don't usually like sweet wines, but you can tell this one is special.");
         feedback4.setDate(new GregorianCalendar(2020, Calendar.MARCH, 19).getTime());
         feedback4.setRating(10);
 
+        user0 = new User();
+        user0.setFirstName("user");
+        user0.setSurname("user");
+        user0.setUserName("user");
+        user0.setAdmin(false);
+
         user1 = new User();
         user1.setFirstName("admin");
         user1.setSurname("admin");
-        user1.setEmail("admin.admin@winery.com");
+        user1.setUserName("admin");
         user1.setAdmin(true);
-
-        user2 = new User();
-        user2.setFirstName("Vladimir");
-        user2.setSurname("Visnovsky");
-        user2.setEmail("vladimir.visnovsky@winery.com");
-        user2.setAdmin(false);
-
-        user3 = new User();
-        user3.setFirstName("Lukas");
-        user3.setSurname("Fudor");
-        user3.setEmail("lukas.fudor@winery.com");
-        user3.setAdmin(false);
 
         harvest1.setGrape(grape1);
         harvest1.setWine(wine1);
@@ -259,8 +250,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         feedbackService.createFeedback(feedback3);
         feedbackService.createFeedback(feedback4);
 
+        userService.registerUser(user0, "user");
         userService.registerUser(user1, "admin");
-        userService.registerUser(user2, "tarantula");
-        userService.registerUser(user3, "1234");
     }
 }

@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.User;
-import cz.muni.fi.pa165.entities.Wine;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -31,13 +30,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        if (email == null || email.isEmpty())
-            throw new IllegalArgumentException("Cannot search for null e-mail");
-        System.out.println(email);
+    public User findUserByUserName(String userName) {
+        if (userName == null || userName.isEmpty())
+            throw new IllegalArgumentException("Cannot search for null user name.");
+        System.out.println(userName);
         try {
-        return em.createQuery("select u from User u where email=:email", User.class)
-                .setParameter("email", email)
+        return em.createQuery("select u from User u where userName=:userName", User.class)
+                .setParameter("userName", userName)
                 .getSingleResult();
         } catch (NoResultException nre) {
             return null;

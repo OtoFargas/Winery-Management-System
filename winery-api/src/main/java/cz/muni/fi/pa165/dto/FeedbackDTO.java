@@ -78,7 +78,6 @@ public class FeedbackDTO {
                 ", rating=" + rating +
                 ", content='" + content + '\'' +
                 ", date=" + date +
-                ", wine=" + wine +
                 '}';
     }
 

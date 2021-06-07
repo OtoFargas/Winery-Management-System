@@ -25,6 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * SpringMVC controller for wine entities
@@ -49,7 +52,7 @@ public class WineController {
      * Redirects to ../new page containing the form for the creation
      * of new wine.
      *
-     * @param model to be displayed
+     * @param model page data
      * @return page name
      */
     @GetMapping("/new")
@@ -86,8 +89,20 @@ public class WineController {
             return "wine/new";
         }
 
-        formBean.setWineYear(harvestFacade.findHarvestById(formBean.getHarvestIDs().iterator().next()).getHarvestYear());
-        Long id = wineFacade.createWine(formBean);
+        try {
+            formBean.setWineYear(harvestFacade.findHarvestById(formBean.getHarvestIDs().iterator().next()).getHarvestYear());
+        } catch (NoSuchElementException e) {
+            redirectAttributes.addFlashAttribute("alert_danger","No harvest selected.");
+            return "redirect:" + uriBuilder.path("/admin/wine/new").encode().toUriString();
+        }
+
+        Long id;
+        try {
+            id = wineFacade.createWine(formBean);
+        } catch (Exception exception) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Wine with given name already exists.");
+            return "redirect:" + uriBuilder.path("/admin/wine/new").toUriString();
+        }
 
         redirectAttributes.addFlashAttribute("alert_success", "Wine " + id + " was created");
         return "redirect:" + uriBuilder.path("/admin/wine/list").toUriString();
@@ -181,6 +196,16 @@ public class WineController {
     @ModelAttribute("harvests")
     public HarvestDTO[] harvests() {
         log.debug("harvests()");
-        return harvestFacade.findAllHarvests().toArray(new HarvestDTO[0]);
+
+        List<HarvestDTO> availableHarvests = new ArrayList<>();
+        List<HarvestDTO> allHarvests = harvestFacade.findAllHarvests();
+
+        for (HarvestDTO harvest : allHarvests) {
+            if (harvest.getWine() == null) {
+                availableHarvests.add(harvest);
+            }
+        }
+
+        return availableHarvests.toArray(new HarvestDTO[0]);
     }
 }

@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <form:label path="name" cssClass="col-sm-2 control-label">Name</form:label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                     <form:input path="name" cssClass="form-control"/>
                     <form:errors path="name" cssClass="help-block"/>
                 </div>
@@ -23,10 +23,10 @@
 
             <div class="form-group">
                 <form:label path="color" cssClass="col-sm-2 control-label">Color</form:label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                     <form:select path="color" cssClass="form-control">
                         <c:forEach items="${colors}" var="c">
-                            <form:option value="${c}">${c}</form:option>
+                            <form:option value="${c}">${c.toString()}</form:option>
                         </c:forEach>
                     </form:select>
                     <form:errors path="color" cssClass="error"/>
@@ -35,25 +35,26 @@
 
             <div class="form-group" >
                 <form:label path="quantity" cssClass="col-sm-2 control-label">Quantity</form:label>
-                <div class="col-sm-10">
-                    <form:input path="quantity" cssClass="form-control"/>
+                <div class="col-sm-6">
+                    <form:input path="quantity" cssClass="form-control" form:type="number"/>
                     <form:errors path="quantity" cssClass="help-block"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <form:label path="diseases" cssClass="col-sm-2 control-label">Disease</form:label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                     <form:select path="diseases" cssClass="form-control">
                         <c:forEach items="${diseases}" var="c">
-                            <form:option value="${c}">${c}</form:option>
+                            <form:option value="${c.name()}">${c.toString()}</form:option>
                         </c:forEach>
                     </form:select>
                     <form:errors path="diseases" cssClass="error"/>
                 </div>
             </div>
 
-        <button class="btn btn-success" type="submit">Create</button>
+        <button class="btn btn-success" type="submit">Create</button>&emsp;
+        <my:a href="/admin/grape/list" class="btn btn-danger">Back</my:a>
     </form:form>
 </jsp:attribute>
 </my:pagetemplate>

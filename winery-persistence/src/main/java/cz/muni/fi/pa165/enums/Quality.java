@@ -7,5 +7,14 @@ package cz.muni.fi.pa165.enums;
  */
 
 public enum Quality {
-    HIGH, MEDIUM, LOW
+    HIGH, MEDIUM, LOW;
+
+    @Override
+    public String toString() {
+        switch (this) {
+            case HIGH: return "High";
+            case MEDIUM: return "Medium";
+            default: return "Low";
+        }
+    }
 }
