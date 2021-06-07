@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.dto.GrapeDTO;
 import cz.muni.fi.pa165.dto.HarvestDTO;
 import cz.muni.fi.pa165.enums.Disease;
 import cz.muni.fi.pa165.enums.GrapeColor;
+import cz.muni.fi.pa165.exceptions.WineryServiceException;
 import cz.muni.fi.pa165.facade.GrapeFacade;
 import cz.muni.fi.pa165.facade.HarvestFacade;
 import org.slf4j.Logger;
@@ -84,7 +85,14 @@ public class GrapeController {
             return "grape/new";
         }
 
-        Long id = grapeFacade.createGrape(formBean);
+        Long id;
+        try {
+            id = grapeFacade.createGrape(formBean);
+        } catch (Exception exception) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Grape with given name already exists.");
+            return "redirect:" + uriBuilder.path("/admin/grape/new").toUriString();
+        }
+
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was created");
         return "redirect:" + uriBuilder.path("/admin/grape/list").toUriString();
@@ -238,7 +246,13 @@ public class GrapeController {
             return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
-        grapeFacade.cureDisease(formBean);
+
+        try {
+            grapeFacade.cureDisease(formBean);
+        } catch (WineryServiceException e) {
+            redirectAttributes.addFlashAttribute("alert_danger", e.getMessage());
+            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
 
         redirectAttributes.addFlashAttribute("alert_success", "Grape " + id + " was cured.");
         return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
@@ -271,11 +285,16 @@ public class GrapeController {
                 log.trace("FieldError: {}", fe);
             }
             redirectAttributes.addFlashAttribute("alert_danger", "Disease " + formBean.getDisease()
-                                                + "could not have been added to grape with ID: " + id + ".");
+                                                + " could not have been added to grape with ID: " + id + ".");
             return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
-        grapeFacade.addDisease(formBean);
+        try {
+            grapeFacade.addDisease(formBean);
+        } catch (WineryServiceException e) {
+            redirectAttributes.addFlashAttribute("alert_danger", e.getMessage());
+            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
 
         redirectAttributes.addFlashAttribute("alert_success", "Disease " + formBean.getDisease()
                                             + "was added to grape with ID: " + id + ".");
@@ -313,7 +332,13 @@ public class GrapeController {
             return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
         formBean.setId(id);
-        grapeFacade.changeQuantity(formBean);
+        try {
+            grapeFacade.changeQuantity(formBean);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Quantity of grape " + id
+                    + " could not have been changed.");
+            return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
 
         redirectAttributes.addFlashAttribute("alert_success", "Quantity of grape " + id + " was changed.");
         return "redirect:" + uriBuilder.path("/admin/grape/edit/{id}").buildAndExpand(id).encode().toUriString();

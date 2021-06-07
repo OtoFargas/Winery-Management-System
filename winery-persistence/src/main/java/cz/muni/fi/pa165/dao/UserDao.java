@@ -27,10 +27,10 @@ public interface UserDao {
 	/**
 	 * Finds wine by name
 	 *
-	 * @param email of desired user
+	 * @param userName of desired user
 	 * @return found user
 	 */
-	 User findUserByEmail(String email);
+	 User findUserByUserName(String userName);
 
 	/**
 	 * Finds all users in database

@@ -27,8 +27,8 @@
                     <td><c:out value="${wine.wineYear}"/></td>
                     <td><c:out value="${wine.stocked}"/></td>
                     <td align="right">
-                        <my:a href="/wine/buy/${wine.id}" class="btn btn-success">Buy Wine</my:a>&emsp;
-                        <my:a href="/feedback/listByWine/${wine.id}" class="btn btn-primary">View Feedbacks</my:a>&emsp;
+                        <my:a href="/user/wine/buy/${wine.id}" class="btn btn-success">Buy Wine</my:a>&emsp;
+                        <my:a href="/user/feedback/listByWine/${wine.id}" class="btn btn-primary">View Feedbacks</my:a>&emsp;
                     </td>
                 </tr>
             </c:forEach>

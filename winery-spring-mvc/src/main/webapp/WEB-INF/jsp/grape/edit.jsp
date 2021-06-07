@@ -14,7 +14,12 @@
         <tbody>
             <tr>
                 <th>Diseases</th>
-                <td><c:out value="${grape.diseases}"/></td>
+                <td>
+                    <c:forEach items="${grape.diseases}" var="disease" varStatus="loopStatus">
+                        <c:out value="${disease}" />
+                        <c:if test="${!loopStatus.last}">, </c:if>
+                    </c:forEach>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -23,19 +28,19 @@
                action="${pageContext.request.contextPath}/admin/grape/setDisease/${grape.id}" modelAttribute="setDisease">
          <div class="form-group">
              <form:label path="disease" cssClass="col-sm-2 control-label">Select a disease:</form:label>
-             <div class="col-sm-10">
+             <div class="col-sm-4">
                     <form:select path="disease" cssClass="form-control">
                         <c:forEach items="${diseases}" var="disease">
-                            <form:option value="${disease.name()}">${disease}</form:option>
+                            <form:option value="${disease}">${disease.toString()}</form:option>
                         </c:forEach>
                     </form:select>
                  <form:errors path="disease" cssClass="error"/>
-             </div>
+             </div>&emsp;
+             <button class="btn btn-primary" type="submit" name="cure">Cure</button>&emsp;
+             <button class="btn btn-danger" type="submit" name="add">Add</button> &emsp;
+             <my:a href="/admin/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>
          </div>
-        <button class="btn btn-primary" type="submit" name="cure">Cure</button>
-        <button class="btn btn-danger" type="submit" name="add">Add</button>
     </form:form>
-    <my:a href="/admin/grape/cureAllDiseases/${grape.id}" class="btn btn-success">Cure All Diseases</my:a>&emsp;
 
     <table class="table">
         <tbody>
@@ -50,14 +55,13 @@
                action="${pageContext.request.contextPath}/admin/grape/changeQuantity/${grape.id}" modelAttribute="changeQuantity">
          <div class="form-group">
              <form:label path="quantity" cssClass="col-sm-2 control-label">Enter new quantity:</form:label>
-             <div class="col-sm-10">
+             <div class="col-sm-2">
                  <form:input path="quantity" cssClass="form-control"/>
                  <form:errors path="quantity" cssClass="help-block"/>
-             </div>
+             </div>&emsp;
+             <button class="btn btn-success" type="submit">Change</button>
          </div>
-        <button class="btn btn-success" type="submit">Change</button>
     </form:form>
-
-    <my:a href="/admin/grape/view/${grape.id}" class="btn btn-primary">Back</my:a>&emsp;
+    <my:a href="/admin/grape/view/${grape.id}" class="btn btn-danger">Back</my:a>
 </jsp:attribute>
 </my:pagetemplate>

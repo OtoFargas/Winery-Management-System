@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Objects;
 
 /**
@@ -11,6 +13,8 @@ public class WineBuyDTO {
 
     private Long id;
 
+    @NotNull
+    @Positive
     private Integer amount;
 
     public Long getId() {

@@ -5,11 +5,14 @@ import cz.muni.fi.pa165.dto.UserDTO;
 
 import java.util.Collection;
 
+/**
+ * @author Oto Fargaš
+ */
 public interface UserFacade {
 	
 	UserDTO findUserById(Long userId);
 
-	UserDTO findUserByEmail(String email);
+	UserDTO findUserByUserName(String userName);
 	
 	/**
 	 * Register the given user with the given unencrypted password.

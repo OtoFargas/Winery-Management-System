@@ -9,7 +9,6 @@
 
 <my:pagetemplate title="Feedbacks ">
 <jsp:attribute name="body">
-    <my:a href="/admin" class="btn btn-danger">Back</my:a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -31,5 +30,6 @@
             </c:forEach>
         </tbody>
     </table>
+    <my:a href="/admin" class="btn btn-danger">Back</my:a>
 </jsp:attribute>
 </my:pagetemplate>
