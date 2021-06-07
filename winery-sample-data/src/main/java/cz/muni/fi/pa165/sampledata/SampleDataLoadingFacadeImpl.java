@@ -87,7 +87,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         // wines
         wine1 = new Wine();
-        wine1.setName("Airen)");
+        wine1.setName("Airen");
         wine1.setSold(20);
         wine1.setStocked(30);
         wine1.setColor(WineColor.RED);
